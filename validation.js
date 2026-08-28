@@ -1,15 +1,13 @@
 /**
  * ============================================================
- * HOKM MASTER - Game Validation Engine
- * موتور اعتبارسنجی و Anti-Cheat بازی حکم
+ * HOKM MASTER - Security Validation Manager
+ * سیستم اعتبارسنجی امنیتی
  * ============================================================
  * 
- * این فایل مسئول اعتبارسنجی تمام حرکات و اقدامات بازیکنان
- * در بازی است. شامل بررسی کارت‌های بازی شده، Follow Suit،
- * Trump، نوبت، وضعیت بازی، و تشخیص تقلب.
- * 
- * این موتور با RulesEngine و CardEngine همکاری می‌کند تا
- * تمام قوانین بازی به درستی رعایت شوند.
+ * این فایل مسئول مدیریت کامل اعتبارسنجی امنیتی در بازی است.
+ * شامل اعتبارسنجی ورودی‌ها، جلوگیری از XSS، CSRF، SQL Injection،
+ * Rate Limiting، اعتبارسنجی فایل، URL، ایمیل، تلفن، نام کاربری،
+ * رمز عبور، و محافظت از داده‌های حساس.
  * 
  * نسخه: 1.0.0
  * آخرین به‌روزرسانی: 2026-08-28
@@ -18,38 +16,52 @@
  * - CONFIG (از فایل config.js)
  * - Utils (از فایل utils.js)
  * - eventBus, EVENTS (از فایل events.js)
- * - cardEngine (از فایل cards.js)
- * - rulesEngine (از فایل rules.js)
+ * - storage (از فایل storage.js)
  * 
  * ============================================================
  */
 
-class ValidationEngine {
+class SecurityValidationManager {
 
     constructor() {
         /**
-         * مرجع CardEngine
-         * @type {CardEngine}
+         * قوانین اعتبارسنجی
+         * @type {Object}
          */
-        this.cardEngine = null;
+        this.rules = this._defineValidationRules();
 
         /**
-         * مرجع RulesEngine
-         * @type {RulesEngine}
+         * Rate Limiter
+         * @type {Map<string, Array<number>>}
          */
-        this.rulesEngine = null;
+        this.rateLimits = new Map();
 
         /**
-         * لیست تخلفات ثبت شده
-         * @type {Array}
+         * CSRF Token
+         * @type {string}
          */
-        this.violations = [];
+        this.csrfToken = null;
 
         /**
-         * لیست بازیکنان متخلف
-         * @type {Map}
+         * لیست IP های مسدود
+         * @type {Set<string>}
          */
-        this.suspiciousPlayers = new Map();
+        this.blockedIPs = new Set();
+
+        /**
+         * لیست User Agent های مشکوک
+         * @type {Array<string>}
+         */
+        this.suspiciousUserAgents = [
+            'bot',
+            'crawler',
+            'spider',
+            'scraper',
+            'curl',
+            'wget',
+            'python-requests',
+            'go-http-client'
+        ];
 
         /**
          * شنوندگان رویداد
@@ -69,18 +81,29 @@ class ValidationEngine {
          */
         this.stats = {
             totalValidations: 0,
-            validMoves: 0,
-            invalidMoves: 0,
-            violationsDetected: 0,
-            playersKicked: 0,
-            falsePositives: 0
+            passedValidations: 0,
+            failedValidations: 0,
+            xssAttempts: 0,
+            injectionAttempts: 0,
+            rateLimitHits: 0,
+            csrfFailures: 0,
+            invalidInputs: 0,
+            lastValidationAt: null
         };
 
         /**
-         * سطح سخت‌گیری Anti-Cheat
-         * @type {string} 'low' | 'medium' | 'high' | 'strict'
+         * محدودیت‌های Rate Limiting
+         * @type {Object}
          */
-        this.securityLevel = 'high';
+        this.rateLimitConfig = {
+            api: { maxRequests: 60, windowMs: 60000 },
+            login: { maxAttempts: 10, windowMs: 3600000 },
+            otp: { maxAttempts: 5, windowMs: 600000 },
+            chat: { maxMessages: 20, windowMs: 60000 },
+            report: { maxReports: 5, windowMs: 86400000 },
+            passwordReset: { maxAttempts: 3, windowMs: 3600000 },
+            fileUpload: { maxUploads: 10, windowMs: 3600000 }
+        };
 
         // راه‌اندازی اولیه
         this._init();
@@ -91,969 +114,1330 @@ class ValidationEngine {
      * @private
      */
     _init() {
-        if (typeof cardEngine !== 'undefined') {
-            this.cardEngine = cardEngine;
-        }
+        // تولید CSRF Token
+        this.csrfToken = this._generateCSRFToken();
 
-        if (typeof rulesEngine !== 'undefined') {
-            this.rulesEngine = rulesEngine;
-        }
+        // بارگذاری داده‌ها
+        this._loadData();
 
         if (this.debug) {
-            console.log('🛡️ ValidationEngine initialized');
-            console.log('  Security Level:', this.securityLevel);
+            console.log('️ SecurityValidationManager initialized');
+            console.log('  CSRF Token:', this.csrfToken.substring(0, 10) + '...');
+            console.log('  Rate Limit Rules:', Object.keys(this.rateLimitConfig).length);
         }
     }
 
     // ============================================================
-    // بخش ۱: اعتبارسنجی کارت
+    // بخش ۱: تعریف قوانین اعتبارسنجی
     // ============================================================
 
     /**
-     * اعتبارسنجی کامل یک کارت
-     * @param {Object} card - کارت
-     * @param {Array} hand - دست بازیکن
-     * @param {Object} gameState - وضعیت بازی
-     * @returns {Object} نتیجه اعتبارسنجی
-     */
-    validateCard(card, hand, gameState) {
-        this.stats.totalValidations++;
-
-        const errors = [];
-        const warnings = [];
-
-        // ۱. بررسی وجود کارت
-        if (!card) {
-            errors.push({
-                code: 'NO_CARD',
-                severity: 'critical',
-                message: 'کارت مشخص نشده است'
-            });
-            return this._createValidationResult(false, errors, warnings);
-        }
-
-        // ۲. بررسی ساختار کارت
-        if (!card.id || !card.suit || !card.rank) {
-            errors.push({
-                code: 'INVALID_CARD_STRUCTURE',
-                severity: 'critical',
-                message: 'ساختار کارت نامعتبر است'
-            });
-            return this._createValidationResult(false, errors, warnings);
-        }
-
-        // ۳. بررسی خال معتبر
-        if (!this._isValidSuit(card.suit)) {
-            errors.push({
-                code: 'INVALID_SUIT',
-                severity: 'critical',
-                message: `خال نامعتبر: ${card.suit}`
-            });
-        }
-
-        // ۴. بررسی رتبه معتبر
-        if (!this._isValidRank(card.rank)) {
-            errors.push({
-                code: 'INVALID_RANK',
-                severity: 'critical',
-                message: `رتبه نامعتبر: ${card.rank}`
-            });
-        }
-
-        // ۵. بررسی وجود کارت در دست
-        if (!this._isCardInHand(card, hand)) {
-            errors.push({
-                code: 'CARD_NOT_IN_HAND',
-                severity: 'critical',
-                message: 'این کارت در دست بازیکن نیست'
-            });
-        }
-
-        // ۶. بررسی تکراری نبودن کارت بازی شده
-        if (this._isCardAlreadyPlayed(card, gameState)) {
-            errors.push({
-                code: 'CARD_ALREADY_PLAYED',
-                severity: 'critical',
-                message: 'این کارت قبلاً بازی شده است'
-            });
-        }
-
-        // ۷. بررسی Follow Suit
-        const followSuitResult = this._validateFollowSuit(card, hand, gameState);
-        if (!followSuitResult.valid) {
-            errors.push({
-                code: followSuitResult.code,
-                severity: 'high',
-                message: followSuitResult.message
-            });
-        }
-
-        // ۸. بررسی Trump Rules
-        const trumpResult = this._validateTrumpRules(card, hand, gameState);
-        if (!trumpResult.valid) {
-            errors.push({
-                code: trumpResult.code,
-                severity: 'high',
-                message: trumpResult.message
-            });
-        }
-
-        const isValid = errors.length === 0;
-
-        if (isValid) {
-            this.stats.validMoves++;
-        } else {
-            this.stats.invalidMoves++;
-        }
-
-        return this._createValidationResult(isValid, errors, warnings);
-    }
-
-    /**
-     * بررسی اعتبار خال
-     * @param {string} suit - خال
-     * @returns {boolean}
+     * تعریف قوانین اعتبارسنجی
+     * @returns {Object}
      * @private
      */
-    _isValidSuit(suit) {
-        const validSuits = Object.values(CONFIG.GAME.CARDS.SUITS);
-        return validSuits.includes(suit);
+    _defineValidationRules() {
+        return {
+            email: {
+                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                minLength: 5,
+                maxLength: 254,
+                message: 'ایمیل نامعتبر است'
+            },
+            phone: {
+                pattern: /^09\d{9}$/,
+                internationalPattern: /^\+989\d{9}$/,
+                minLength: 10,
+                maxLength: 13,
+                message: 'شماره موبایل نامعتبر است'
+            },
+            username: {
+                pattern: /^[a-zA-Z0-9_\u0600-\u06FF]{3,30}$/,
+                minLength: 3,
+                maxLength: 30,
+                reserved: ['admin', 'system', 'support', 'hokm', 'master', 'moderator'],
+                message: 'نام کاربری نامعتبر است (3-30 کاراکتر، فقط حروف، اعداد و _)'
+            },
+            password: {
+                minLength: 8,
+                maxLength: 128,
+                requireUppercase: true,
+                requireLowercase: true,
+                requireNumber: true,
+                requireSpecial: false,
+                message: 'رمز عبور باید حداقل 8 کاراکتر و شامل حرف بزرگ، کوچک و عدد باشد'
+            },
+            otp: {
+                pattern: /^\d{6}$/,
+                length: 6,
+                message: 'کد OTP باید 6 رقم باشد'
+            },
+            roomCode: {
+                pattern: /^\d{5}$/,
+                length: 5,
+                message: 'کد اتاق باید 5 رقم باشد'
+            },
+            url: {
+                pattern: /^https?:\/\/[^\s]+$/,
+                maxLength: 2048,
+                allowedProtocols: ['http:', 'https:'],
+                message: 'URL نامعتبر است'
+            },
+            chatMessage: {
+                minLength: 1,
+                maxLength: 250,
+                message: 'پیام باید بین 1 تا 250 کاراکتر باشد'
+            },
+            displayName: {
+                pattern: /^[\u0600-\u06FFa-zA-Z0-9\s]{2,30}$/,
+                minLength: 2,
+                maxLength: 30,
+                message: 'نام نمایشی نامعتبر است'
+            },
+            bio: {
+                minLength: 0,
+                maxLength: 500,
+                message: 'بیوگرافی باید حداکثر 500 کاراکتر باشد'
+            },
+            reportReason: {
+                minLength: 10,
+                maxLength: 1000,
+                message: 'دلیل گزارش باید بین 10 تا 1000 کاراکتر باشد'
+            }
+        };
     }
 
-    /**
-     * بررسی اعتبار رتبه
-     * @param {string} rank - رتبه
-     * @returns {boolean}
-     * @private
-     */
-    _isValidRank(rank) {
-        const validRanks = CONFIG.GAME.CARDS.RANKS;
-        return validRanks.includes(rank);
-    }
+    // ============================================================
+    // بخش ۲: اعتبارسنجی عمومی
+    // ============================================================
 
     /**
-     * بررسی وجود کارت در دست
-     * @param {Object} card - کارت
-     * @param {Array} hand - دست
-     * @returns {boolean}
-     * @private
-     */
-    _isCardInHand(card, hand) {
-        if (!Array.isArray(hand)) return false;
-        return hand.some(c => c.id === card.id);
-    }
-
-    /**
-     * بررسی تکراری نبودن کارت بازی شده
-     * @param {Object} card - کارت
-     * @param {Object} gameState - وضعیت بازی
-     * @returns {boolean}
-     * @private
-     */
-    _isCardAlreadyPlayed(card, gameState) {
-        if (!gameState || !gameState.playedCards) return false;
-
-        return gameState.playedCards.some(played => 
-            played.card && played.card.id === card.id
-        );
-    }
-
-    /**
-     * اعتبارسنجی Follow Suit
-     * @param {Object} card - کارت
-     * @param {Array} hand - دست
-     * @param {Object} gameState - وضعیت بازی
+     * اعتبارسنجی یک مقدار
+     * @param {*} value - مقدار
+     * @param {string} type - نوع اعتبارسنجی
      * @returns {Object} نتیجه
-     * @private
      */
-    _validateFollowSuit(card, hand, gameState) {
-        // اگر RulesEngine در دسترس است، از آن استفاده کن
-        if (this.rulesEngine) {
-            const leadSuit = gameState.leadSuit || gameState.currentTrickLeadSuit;
-            return this.rulesEngine.checkFollowSuit(card, hand, leadSuit);
-        }
-
-        // اعتبارسنجی پایه
-        const leadSuit = gameState.leadSuit || gameState.currentTrickLeadSuit;
-
-        if (!leadSuit) {
-            return { valid: true, code: null, message: null };
-        }
-
-        const hasLeadSuit = hand.some(c => c.suit === leadSuit);
-
-        if (!hasLeadSuit) {
-            return { valid: true, code: 'NO_LEAD_SUIT', message: 'کارتی از خال شروع ندارید' };
-        }
-
-        if (card.suit !== leadSuit) {
+    validate(value, type) {
+        const rule = this.rules[type];
+        if (!rule) {
             return {
                 valid: false,
-                code: 'MUST_FOLLOW_SUIT',
-                message: `باید از خال ${this._getSuitNameFa(leadSuit)} بازی کنید`
+                error: 'UNKNOWN_RULE',
+                message: 'قانون اعتبارسنجی نامشخص است'
             };
         }
 
-        return { valid: true, code: null, message: null };
+        this.stats.totalValidations++;
+
+        const result = this._applyRule(value, rule);
+
+        if (result.valid) {
+            this.stats.passedValidations++;
+        } else {
+            this.stats.failedValidations++;
+            this.stats.invalidInputs++;
+        }
+
+        this.stats.lastValidationAt = Date.now();
+
+        return result;
     }
 
     /**
-     * اعتبارسنجی قوانین Trump
-     * @param {Object} card - کارت
-     * @param {Array} hand - دست
-     * @param {Object} gameState - وضعیت بازی
-     * @returns {Object} نتیجه
+     * اعمال یک قانون اعتبارسنجی
+     * @param {*} value - مقدار
+     * @param {Object} rule - قانون
+     * @returns {Object}
      * @private
      */
-    _validateTrumpRules(card, hand, gameState) {
-        if (this.rulesEngine) {
-            const trump = gameState.trump;
-            const leadSuit = gameState.leadSuit || gameState.currentTrickLeadSuit;
-            return this.rulesEngine.checkTrumpRules(card, trump, leadSuit, hand);
+    _applyRule(value, rule) {
+        // بررسی خالی نبودن
+        if (value === null || value === undefined) {
+            return {
+                valid: false,
+                error: 'EMPTY_VALUE',
+                message: 'مقدار خالی است'
+            };
         }
 
-        return { valid: true, code: null, message: null };
-    }
+        // تبدیل به رشته
+        const strValue = String(value).trim();
 
-    // ============================================================
-    // بخش ۲: اعتبارسنجی نوبت
-    // ============================================================
-
-    /**
-     * اعتبارسنجی نوبت بازیکن
-     * @param {number} playerIndex - ایندکس بازیکن
-     * @param {Object} gameState - وضعیت بازی
-     * @returns {Object} نتیجه
-     */
-    validateTurn(playerIndex, gameState) {
-        const errors = [];
-
-        // بررسی وجود بازیکن
-        if (playerIndex === undefined || playerIndex === null) {
-            errors.push({
-                code: 'NO_PLAYER_INDEX',
-                severity: 'critical',
-                message: 'ایندکس بازیکن مشخص نشده است'
-            });
-            return this._createValidationResult(false, errors, []);
+        // بررسی طول
+        if (rule.minLength !== undefined && strValue.length < rule.minLength) {
+            return {
+                valid: false,
+                error: 'TOO_SHORT',
+                message: `${rule.message} (حداقل ${rule.minLength} کاراکتر)`
+            };
         }
 
-        // بررسی محدوده ایندکس
-        if (playerIndex < 0 || playerIndex >= (gameState.players?.length || 0)) {
-            errors.push({
-                code: 'INVALID_PLAYER_INDEX',
-                severity: 'critical',
-                message: 'ایندکس بازیکن نامعتبر است'
-            });
+        if (rule.maxLength !== undefined && strValue.length > rule.maxLength) {
+            return {
+                valid: false,
+                error: 'TOO_LONG',
+                message: `${rule.message} (حداکثر ${rule.maxLength} کاراکتر)`
+            };
         }
 
-        // بررسی نوبت فعلی
-        if (gameState.currentPlayerIndex !== undefined && 
-            playerIndex !== gameState.currentPlayerIndex) {
-            errors.push({
-                code: 'NOT_YOUR_TURN',
-                severity: 'high',
-                message: 'نوبت شما نیست'
-            });
+        // بررسی طول دقیق
+        if (rule.length !== undefined && strValue.length !== rule.length) {
+            return {
+                valid: false,
+                error: 'INVALID_LENGTH',
+                message: `${rule.message} (دقیقاً ${rule.length} کاراکتر)`
+            };
         }
 
-        // بررسی وضعیت بازی
-        if (gameState.status !== 'playing') {
-            errors.push({
-                code: 'GAME_NOT_PLAYING',
-                severity: 'high',
-                message: `بازی در وضعیت "${gameState.status}" است و در حال انجام نیست`
-            });
+        // بررسی الگو
+        if (rule.pattern && !rule.pattern.test(strValue)) {
+            return {
+                valid: false,
+                error: 'INVALID_PATTERN',
+                message: rule.message
+            };
         }
 
-        // بررسی AFK
-        if (gameState.players && gameState.players[playerIndex]) {
-            const player = gameState.players[playerIndex];
-            if (player.isAfk || player.disconnected) {
-                errors.push({
-                    code: 'PLAYER_AFK',
-                    severity: 'high',
-                    message: 'بازیکن AFK است'
-                });
-            }
+        // بررسی الگوی بین‌المللی (برای تلفن)
+        if (rule.internationalPattern && !rule.pattern.test(strValue) && !rule.internationalPattern.test(strValue)) {
+            return {
+                valid: false,
+                error: 'INVALID_PATTERN',
+                message: rule.message
+            };
         }
 
-        const isValid = errors.length === 0;
-
-        return this._createValidationResult(isValid, errors, []);
-    }
-
-    // ============================================================
-    // بخش ۳: اعتبارسنجی وضعیت بازی
-    // ============================================================
-
-    /**
-     * اعتبارسنجی کامل وضعیت بازی
-     * @param {Object} gameState - وضعیت بازی
-     * @returns {Object} نتیجه
-     */
-    validateGameState(gameState) {
-        const errors = [];
-        const warnings = [];
-
-        // بررسی وجود gameState
-        if (!gameState) {
-            errors.push({
-                code: 'NO_GAME_STATE',
-                severity: 'critical',
-                message: 'وضعیت بازی مشخص نشده است'
-            });
-            return this._createValidationResult(false, errors, warnings);
+        // بررسی مقادیر رزرو شده
+        if (rule.reserved && rule.reserved.includes(strValue.toLowerCase())) {
+            return {
+                valid: false,
+                error: 'RESERVED_VALUE',
+                message: 'این مقدار رزرو شده است'
+            };
         }
 
-        // بررسی شناسه بازی
-        if (!gameState.gameId) {
-            errors.push({
-                code: 'NO_GAME_ID',
-                severity: 'high',
-                message: 'شناسه بازی مشخص نشده است'
-            });
+        // بررسی الزامات رمز عبور
+        if (rule.requireUppercase && !/[A-Z]/.test(strValue)) {
+            return {
+                valid: false,
+                error: 'NO_UPPERCASE',
+                message: 'رمز عبور باید شامل حداقل یک حرف بزرگ باشد'
+            };
         }
 
-        // بررسی بازیکنان
-        if (!gameState.players || gameState.players.length !== 4) {
-            errors.push({
-                code: 'INVALID_PLAYER_COUNT',
-                severity: 'critical',
-                message: `تعداد بازیکنان باید 4 باشد، اما ${gameState.players?.length || 0} است`
-            });
+        if (rule.requireLowercase && !/[a-z]/.test(strValue)) {
+            return {
+                valid: false,
+                error: 'NO_LOWERCASE',
+                message: 'رمز عبور باید شامل حداقل یک حرف کوچک باشد'
+            };
         }
 
-        // بررسی تیم‌ها
-        if (gameState.players && gameState.players.length === 4) {
-            const team1 = gameState.players.filter(p => p.team === 'team1');
-            const team2 = gameState.players.filter(p => p.team === 'team2');
-
-            if (team1.length !== 2 || team2.length !== 2) {
-                errors.push({
-                    code: 'INVALID_TEAMS',
-                    severity: 'critical',
-                    message: 'تیم‌ها باید 2 نفره باشند'
-                });
-            }
+        if (rule.requireNumber && !/[0-9]/.test(strValue)) {
+            return {
+                valid: false,
+                error: 'NO_NUMBER',
+                message: 'رمز عبور باید شامل حداقل یک عدد باشد'
+            };
         }
 
-        // بررسی حکم
-        if (gameState.status === 'playing' && !gameState.trump) {
-            warnings.push({
-                code: 'NO_TRUMP',
-                severity: 'medium',
-                message: 'حکم مشخص نشده است'
-            });
+        if (rule.requireSpecial && !/[!@#$%^&*(),.?":{}|<>]/.test(strValue)) {
+            return {
+                valid: false,
+                error: 'NO_SPECIAL',
+                message: 'رمز عبور باید شامل حداقل یک کاراکتر خاص باشد'
+            };
         }
 
-        // بررسی کارت‌های هر بازیکن
-        if (gameState.players) {
-            gameState.players.forEach((player, index) => {
-                if (!player.hand || !Array.isArray(player.hand)) {
-                    errors.push({
-                        code: 'INVALID_HAND',
-                        severity: 'critical',
-                        message: `دست بازیکن ${index} نامعتبر است`
-                    });
-                } else if (player.hand.length > 13) {
-                    errors.push({
-                        code: 'TOO_MANY_CARDS',
-                        severity: 'high',
-                        message: `بازیکن ${index} بیش از 13 کارت دارد`
-                    });
-                }
-            });
+        // بررسی XSS
+        if (this._containsXSS(strValue)) {
+            this.stats.xssAttempts++;
+            return {
+                valid: false,
+                error: 'XSS_DETECTED',
+                message: 'محتوای مشکوک شناسایی شد'
+            };
         }
 
-        const isValid = errors.length === 0;
-
-        return this._createValidationResult(isValid, errors, warnings);
-    }
-
-    // ============================================================
-    // بخش ۴: Anti-Cheat - تشخیص تقلب
-    // ============================================================
-
-    /**
-     * بررسی رفتار مشکوک بازیکن
-     * @param {Object} action - اقدام بازیکن
-     * @param {Object} gameState - وضعیت بازی
-     * @returns {Object} نتیجه
-     */
-    checkSuspiciousBehavior(action, gameState) {
-        const suspicions = [];
-
-        // ۱. بررسی سرعت غیرعادی
-        if (action.timestamp && gameState.lastActionTimestamp) {
-            const timeDiff = action.timestamp - gameState.lastActionTimestamp;
-            
-            if (timeDiff < 100) { // کمتر از 100 میلی‌ثانیه
-                suspicions.push({
-                    type: 'TOO_FAST',
-                    severity: 'high',
-                    message: 'بازیکن بیش از حد سریع عمل کرده است',
-                    timeDiff
-                });
-            }
-        }
-
-        // ۲. بررسی الگوی غیرعادی
-        if (action.type === 'play_card' && gameState.playerActions) {
-            const playerActions = gameState.playerActions[action.playerIndex] || [];
-            const recentActions = playerActions.slice(-5);
-
-            // اگر همه کارت‌ها یکسان هستند (مثلاً همه حکم)
-            if (recentActions.length >= 3) {
-                const allTrump = recentActions.every(a => 
-                    a.card && a.card.suit === gameState.trump
-                );
-
-                if (allTrump) {
-                    suspicions.push({
-                        type: 'SUSPICIOUS_PATTERN',
-                        severity: 'medium',
-                        message: 'بازیکن الگوی غیرعادی دارد (فقط حکم بازی می‌کند)'
-                    });
-                }
-            }
-        }
-
-        // ۳. بررسی تغییر ناگهانی رفتار
-        if (action.type === 'play_card' && gameState.playerStats) {
-            const playerStats = gameState.playerStats[action.playerIndex];
-            
-            if (playerStats) {
-                const avgResponseTime = playerStats.averageResponseTime || 0;
-                const currentResponseTime = action.responseTime || 0;
-
-                if (avgResponseTime > 0 && currentResponseTime < avgResponseTime * 0.1) {
-                    suspicions.push({
-                        type: 'SUDDEN_SPEED_CHANGE',
-                        severity: 'medium',
-                        message: 'تغییر ناگهانی در سرعت پاسخ‌دهی'
-                    });
-                }
-            }
-        }
-
-        // ثبت تخلف اگر مشکوک است
-        if (suspicions.length > 0) {
-            this._recordSuspicion(action.playerIndex, suspicions);
+        // بررسی Injection
+        if (this._containsInjection(strValue)) {
+            this.stats.injectionAttempts++;
+            return {
+                valid: false,
+                error: 'INJECTION_DETECTED',
+                message: 'الگوی Injection شناسایی شد'
+            };
         }
 
         return {
-            suspicious: suspicions.length > 0,
-            suspicions,
-            playerIndex: action.playerIndex
+            valid: true,
+            sanitized: this.sanitize(strValue)
         };
     }
 
+    // ============================================================
+    // بخش ۳: اعتبارسنجی‌های خاص
+    // ============================================================
+
     /**
-     * ثبت رفتار مشکوک
-     * @param {number} playerIndex - ایندکس بازیکن
-     * @param {Array} suspicions - لیست شک‌ها
-     * @private
+     * اعتبارسنجی ایمیل
+     * @param {string} email - ایمیل
+     * @returns {Object}
      */
-    _recordSuspicion(playerIndex, suspicions) {
-        if (!this.suspiciousPlayers.has(playerIndex)) {
-            this.suspiciousPlayers.set(playerIndex, {
-                count: 0,
-                suspicions: [],
-                firstSuspicion: Date.now(),
-                lastSuspicion: Date.now()
-            });
-        }
-
-        const record = this.suspiciousPlayers.get(playerIndex);
-        record.count++;
-        record.lastSuspicion = Date.now();
-        record.suspicions.push(...suspicions);
-
-        // بررسی نیاز به اخراج
-        if (record.count >= this._getMaxSuspicionThreshold()) {
-            this._handlePlayerViolation(playerIndex, record);
-        }
-
-        if (this.debug) {
-            console.log(`⚠️ Suspicious behavior detected for player ${playerIndex}:`, suspicions.length);
-        }
+    validateEmail(email) {
+        return this.validate(email, 'email');
     }
 
     /**
-     * دریافت حداکثر آستانه شک
-     * @returns {number}
-     * @private
+     * اعتبارسنجی شماره موبایل
+     * @param {string} phone - شماره موبایل
+     * @returns {Object}
      */
-    _getMaxSuspicionThreshold() {
-        const thresholds = {
-            low: 10,
-            medium: 7,
-            high: 5,
-            strict: 3
-        };
-        return thresholds[this.securityLevel] || 5;
+    validatePhone(phone) {
+        return this.validate(phone, 'phone');
     }
 
     /**
-     * مدیریت تخلف بازیکن
-     * @param {number} playerIndex - ایندکس بازیکن
-     * @param {Object} record - رکورد تخلف
-     * @private
+     * اعتبارسنجی نام کاربری
+     * @param {string} username - نام کاربری
+     * @returns {Object}
      */
-    _handlePlayerViolation(playerIndex, record) {
-        this.stats.violationsDetected++;
-        this.stats.playersKicked++;
-
-        const violation = {
-            playerIndex,
-            count: record.count,
-            suspicions: record.suspicions,
-            timestamp: Date.now(),
-            action: 'kick'
-        };
-
-        this.violations.push(violation);
-
-        // محدود کردن لیست تخلفات
-        if (this.violations.length > 100) {
-            this.violations.shift();
-        }
-
-        this._emit('player-violation', violation);
-
-        if (this.debug) {
-            console.log(`🚫 Player ${playerIndex} kicked for violations:`, record.count);
-        }
+    validateUsername(username) {
+        return this.validate(username, 'username');
     }
 
     /**
-     * بررسی تقلب در کارت
-     * @param {Object} card - کارت
-     * @param {Object} gameState - وضعیت بازی
-     * @returns {Object} نتیجه
+     * اعتبارسنجی رمز عبور
+     * @param {string} password - رمز عبور
+     * @returns {Object}
      */
-    checkCardCheat(card, gameState) {
-        const cheats = [];
+    validatePassword(password) {
+        return this.validate(password, 'password');
+    }
 
-        // ۱. بررسی کارت نامرئی (کارتی که نباید وجود داشته باشد)
-        if (card.id && !this._isValidCardId(card.id)) {
-            cheats.push({
-                type: 'INVALID_CARD_ID',
-                severity: 'critical',
-                message: 'شناسه کارت نامعتبر است'
-            });
-        }
+    /**
+     * اعتبارسنجی OTP
+     * @param {string} otp - کد OTP
+     * @returns {Object}
+     */
+    validateOTP(otp) {
+        return this.validate(otp, 'otp');
+    }
 
-        // ۲. بررسی کارت تکراری در دست
-        if (gameState.players) {
-            const allCards = [];
-            gameState.players.forEach(player => {
-                if (player.hand) {
-                    allCards.push(...player.hand);
+    /**
+     * اعتبارسنجی کد اتاق
+     * @param {string} code - کد اتاق
+     * @returns {Object}
+     */
+    validateRoomCode(code) {
+        return this.validate(code, 'roomCode');
+    }
+
+    /**
+     * اعتبارسنجی URL
+     * @param {string} url - URL
+     * @returns {Object}
+     */
+    validateURL(url) {
+        return this.validate(url, 'url');
+    }
+
+    /**
+     * اعتبارسنجی پیام چت
+     * @param {string} message - پیام
+     * @returns {Object}
+     */
+    validateChatMessage(message) {
+        return this.validate(message, 'chatMessage');
+    }
+
+    /**
+     * اعتبارسنجی نام نمایشی
+     * @param {string} name - نام
+     * @returns {Object}
+     */
+    validateDisplayName(name) {
+        return this.validate(name, 'displayName');
+    }
+
+    /**
+     * اعتبارسنجی بیوگرافی
+     * @param {string} bio - بیوگرافی
+     * @returns {Object}
+     */
+    validateBio(bio) {
+        return this.validate(bio, 'bio');
+    }
+
+    /**
+     * اعتبارسنجی دلیل گزارش
+     * @param {string} reason - دلیل
+     * @returns {Object}
+     */
+    validateReportReason(reason) {
+        return this.validate(reason, 'reportReason');
+    }
+
+    // ============================================================
+    // بخش ۴: پاکسازی ورودی‌ها (Sanitization)
+    // ============================================================
+
+    /**
+     * پاکسازی ورودی
+     * @param {string} input - ورودی
+     * @returns {string} ورودی پاکسازی شده
+     */
+    sanitize(input) {
+        if (typeof input !== 'string') return input;
+
+        return input
+            // حذف تگ‌های HTML
+            .replace(/<[^>]*>/g, '')
+            // حذف event handler ها
+            .replace(/on\w+\s*=\s*["'][^"']*["']/gi, '')
+            // حذف javascript:
+            .replace(/javascript\s*:/gi, '')
+            // حذف data:
+            .replace(/data\s*:[^,]*;base64/gi, '')
+            // حذف expression()
+            .replace(/expression\s*\([^)]*\)/gi, '')
+            // حذف url()
+            .replace(/url\s*\([^)]*\)/gi, '')
+            // حذف تگ‌های اسکریپت
+            .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
+            // حذف تگ‌های style
+            .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+            // حذف تگ‌های iframe
+            .replace(/<iframe[^>]*>[\s\S]*?<\/iframe>/gi, '')
+            // حذف تگ‌های object
+            .replace(/<object[^>]*>[\s\S]*?<\/object>/gi, '')
+            // حذف تگ‌های embed
+            .replace(/<embed[^>]*>/gi, '')
+            // حذف تگ‌های applet
+            .replace(/<applet[^>]*>[\s\S]*?<\/applet>/gi, '')
+            // حذف تگ‌های form
+            .replace(/<form[^>]*>[\s\S]*?<\/form>/gi, '')
+            // حذف تگ‌های input
+            .replace(/<input[^>]*>/gi, '')
+            // حذف تگ‌های textarea
+            .replace(/<textarea[^>]*>[\s\S]*?<\/textarea>/gi, '')
+            // حذف تگ‌های select
+            .replace(/<select[^>]*>[\s\S]*?<\/select>/gi, '')
+            // حذف تگ‌های button
+            .replace(/<button[^>]*>[\s\S]*?<\/button>/gi, '')
+            // حذف تگ‌های link
+            .replace(/<link[^>]*>/gi, '')
+            // حذف تگ‌های meta
+            .replace(/<meta[^>]*>/gi, '')
+            // حذف تگ‌های base
+            .replace(/<base[^>]*>/gi, '')
+            // حذف کامنت‌های HTML
+            .replace(/<!--[\s\S]*?-->/g, '')
+            // حذف کاراکترهای کنترل
+            .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '')
+            // حذف فاصله‌های اضافی
+            .trim()
+            // محدود کردن طول
+            .substring(0, 10000);
+    }
+
+    /**
+     * پاکسازی HTML (اجازه تگ‌های محدود)
+     * @param {string} input - ورودی
+     * @returns {string}
+     */
+    sanitizeHTML(input) {
+        if (typeof input !== 'string') return input;
+
+        const allowedTags = ['b', 'i', 'u', 'em', 'strong', 'br', 'p'];
+        const allowedAttrs = ['class'];
+
+        let sanitized = input;
+
+        // حذف تگ‌های غیرمجاز
+        sanitized = sanitized.replace(/<\/?([a-zA-Z]+)([^>]*)>/g, (match, tag, attrs) => {
+            if (allowedTags.includes(tag.toLowerCase())) {
+                // فقط اجازه attribute های مجاز
+                let cleanAttrs = '';
+                if (attrs) {
+                    const attrMatches = attrs.match(/([a-zA-Z-]+)\s*=\s*["']([^"']*)["']/g);
+                    if (attrMatches) {
+                        attrMatches.forEach(attr => {
+                            const attrName = attr.split('=')[0].trim().toLowerCase();
+                            if (allowedAttrs.includes(attrName)) {
+                                cleanAttrs += ' ' + attr;
+                            }
+                        });
+                    }
+                }
+                return `<${tag}${cleanAttrs}>`;
+            }
+            return '';
+        });
+
+        return sanitized;
+    }
+
+    /**
+     * پاکسازی URL
+     * @param {string} url - URL
+     * @returns {string}
+     */
+    sanitizeURL(url) {
+        if (typeof url !== 'string') return url;
+
+        try {
+            const urlObj = new URL(url);
+
+            // فقط اجازه پروتکل‌های مجاز
+            if (!this.rules.url.allowedProtocols.includes(urlObj.protocol)) {
+                return '';
+            }
+
+            // حذف پارامترهای مشکوک
+            urlObj.searchParams.forEach((value, key) => {
+                if (key.toLowerCase().includes('script') ||
+                    key.toLowerCase().includes('eval') ||
+                    key.toLowerCase().includes('exec')) {
+                    urlObj.searchParams.delete(key);
                 }
             });
 
-            const duplicateCards = allCards.filter((c, index) => 
-                allCards.findIndex(other => other.id === c.id) !== index
-            );
-
-            if (duplicateCards.length > 0) {
-                cheats.push({
-                    type: 'DUPLICATE_CARDS',
-                    severity: 'critical',
-                    message: 'کارت تکراری در دست بازیکنان یافت شد',
-                    cards: duplicateCards
-                });
-            }
+            return urlObj.toString();
+        } catch (error) {
+            return '';
         }
-
-        // ۳. بررسی کارت غیرممکن (مثلاً 5 خال پیک وقتی فقط 13 کارت از هر خال داریم)
-        // این بررسی در CardEngine انجام می‌شود
-
-        return {
-            cheating: cheats.length > 0,
-            cheats
-        };
     }
 
+    // ============================================================
+    // بخش ۵: تشخیص حملات
+    // ============================================================
+
     /**
-     * بررسی اعتبار شناسه کارت
-     * @param {string} cardId - شناسه کارت
+     * بررسی وجود XSS
+     * @param {string} input - ورودی
      * @returns {boolean}
      * @private
      */
-    _isValidCardId(cardId) {
-        if (!cardId || typeof cardId !== 'string') return false;
+    _containsXSS(input) {
+        const xssPatterns = [
+            /<script[^>]*>[\s\S]*?<\/script>/gi,
+            /<script[^>]*>/gi,
+            /javascript\s*:/gi,
+            /on\w+\s*=\s*["'][^"']*["']/gi,
+            /on\w+\s*=\s*[^\s>]+/gi,
+            /<img[^>]+onerror/gi,
+            /<svg[^>]+onload/gi,
+            /<body[^>]+onload/gi,
+            /<iframe[^>]*>/gi,
+            /<object[^>]*>/gi,
+            /<embed[^>]*>/gi,
+            /<applet[^>]*>/gi,
+            /expression\s*\([^)]*\)/gi,
+            /url\s*\([^)]*\)/gi,
+            /vbscript\s*:/gi,
+            /data\s*:[^,]*;base64/gi,
+            /<link[^>]*>/gi,
+            /<meta[^>]*>/gi,
+            /<base[^>]*>/gi,
+            /<form[^>]*>/gi,
+            /<input[^>]*>/gi,
+            /alert\s*\(/gi,
+            /confirm\s*\(/gi,
+            /prompt\s*\(/gi,
+            /document\.cookie/gi,
+            /document\.write/gi,
+            /document\.location/gi,
+            /window\.location/gi,
+            /eval\s*\(/gi,
+            /setTimeout\s*\(/gi,
+            /setInterval\s*\(/gi,
+            /Function\s*\(/gi,
+            /String\.fromCharCode/gi,
+            /unescape\s*\(/gi,
+            /decodeURIComponent\s*\(/gi
+        ];
 
-        const parts = cardId.split('_');
-        if (parts.length !== 2) return false;
-
-        const [suit, rank] = parts;
-        return this._isValidSuit(suit) && this._isValidRank(rank);
-    }
-
-    // ============================================================
-    // بخش ۵: اعتبارسنجی امتیاز
-    // ============================================================
-
-    /**
-     * اعتبارسنجی امتیاز Round
-     * @param {Object} roundResult - نتیجه Round
-     * @returns {Object} نتیجه
-     */
-    validateRoundScore(roundResult) {
-        const errors = [];
-
-        // بررسی مجموع Trick ها
-        const totalTricks = (roundResult.team1Tricks || 0) + (roundResult.team2Tricks || 0);
-        const expectedTricks = 26; // 13 کارت × 2 تیم
-
-        if (totalTricks !== expectedTricks) {
-            errors.push({
-                code: 'INVALID_TRICK_COUNT',
-                severity: 'critical',
-                message: `مجموع Trick ها باید ${expectedTricks} باشد، اما ${totalTricks} است`
-            });
-        }
-
-        // بررسی Kot
-        if (roundResult.isKot) {
-            const winningTeam = roundResult.winner;
-            const winningTricks = winningTeam === 'team1' ? 
-                roundResult.team1Tricks : roundResult.team2Tricks;
-
-            if (winningTricks !== expectedTricks) {
-                errors.push({
-                    code: 'INVALID_KOT',
-                    severity: 'high',
-                    message: 'Kot اعلام شده اما تعداد Trick ها صحیح نیست'
-                });
-            }
-        }
-
-        const isValid = errors.length === 0;
-
-        return this._createValidationResult(isValid, errors, []);
+        return xssPatterns.some(pattern => pattern.test(input));
     }
 
     /**
-     * اعتبارسنجی امتیاز Match
-     * @param {Object} matchResult - نتیجه Match
-     * @returns {Object} نتیجه
+     * بررسی وجود Injection
+     * @param {string} input - ورودی
+     * @returns {boolean}
+     * @private
      */
-    validateMatchScore(matchResult) {
-        const errors = [];
+    _containsInjection(input) {
+        const injectionPatterns = [
+            // SQL Injection
+            /(\b(SELECT|INSERT|UPDATE|DELETE|DROP|ALTER|CREATE|EXEC|UNION|FROM|WHERE|AND|OR|NOT|IN|LIKE|BETWEEN|HAVING|GROUP|ORDER|LIMIT|OFFSET)\b)/gi,
+            /(\b(OR|AND)\s+\d+\s*=\s*\d+)/gi,
+            /(\b(OR|AND)\s+['"]\w+['"]\s*=\s*['"]\w+['"])/gi,
+            /(--|\/\*|\*\/|;)/g,
+            /(\b(UNION\s+(ALL\s+)?SELECT)\b)/gi,
+            /(\b(WAITFOR\s+DELAY)\b)/gi,
+            /(\b(BENCHMARK|SLEEP)\s*\()/gi,
+            /(\b(LOAD_FILE|INTO\s+OUTFILE|INTO\s+DUMPFILE)\b)/gi,
 
-        // بررسی تعداد Round های برده شده
-        const team1Wins = matchResult.team1RoundsWon || 0;
-        const team2Wins = matchResult.team2RoundsWon || 0;
-        const roundsToWin = matchResult.roundsToWin || 2;
+            // NoSQL Injection
+            /(\$gt|\$lt|\$gte|\$lte|\$ne|\$in|\$nin|\$or|\$and|\$not|\$where|\$regex)/gi,
 
-        if (team1Wins < roundsToWin && team2Wins < roundsToWin) {
-            errors.push({
-                code: 'MATCH_NOT_COMPLETE',
-                severity: 'high',
-                message: 'هیچ تیمی به تعداد Round لازم برای پیروزی نرسیده است'
-            });
-        }
+            // Command Injection
+            /(\b(cat|ls|dir|pwd|whoami|id|uname|ifconfig|ipconfig|netstat|ps|kill|rm|cp|mv|mkdir|chmod|chown|wget|curl|nc|bash|sh|cmd|powershell)\b)/gi,
+            /[;|&`$(){}[\]]/g,
+            /\.\.\//g,
+            /\.\.\\/g,
 
-        if (team1Wins >= roundsToWin && team2Wins >= roundsToWin) {
-            errors.push({
-                code: 'BOTH_TEAMS_WON',
-                severity: 'critical',
-                message: 'هر دو تیم به تعداد Round لازم رسیده‌اند (غیرممکن)'
-            });
-        }
+            // LDAP Injection
+            /(\(|\)|\||\&|\!|\*)/g,
 
-        const isValid = errors.length === 0;
+            // XPath Injection
+            /(\b(or|and|not)\b\s+['"])/gi,
 
-        return this._createValidationResult(isValid, errors, []);
+            // Path Traversal
+            /(\.\.\/|\.\.\\)/g,
+            /(%2e%2e%2f|%2e%2e\/|\.\.%2f|%2e%2e%5c)/gi
+        ];
+
+        return injectionPatterns.some(pattern => pattern.test(input));
     }
 
     // ============================================================
-    // بخش ۶: اعتبارسنجی پاداش
+    // بخش ۶: Rate Limiting
     // ============================================================
 
     /**
-     * اعتبارسنجی پاداش بازی
-     * @param {Object} reward - پاداش
-     * @param {Object} gameResult - نتیجه بازی
+     * بررسی Rate Limit
+     * @param {string} key - کلید (مثلاً IP یا userId)
+     * @param {string} type - نوع (api, login, otp, chat, ...)
      * @returns {Object} نتیجه
      */
-    validateReward(reward, gameResult) {
-        const errors = [];
-        const warnings = [];
-
-        // بررسی سکه
-        if (reward.coins !== undefined) {
-            if (reward.coins < 0) {
-                errors.push({
-                    code: 'NEGATIVE_COINS',
-                    severity: 'critical',
-                    message: 'تعداد سکه نمی‌تواند منفی باشد'
-                });
-            }
-
-            if (reward.coins > 100000) {
-                warnings.push({
-                    code: 'HIGH_COINS',
-                    severity: 'medium',
-                    message: 'تعداد سکه غیرعادی بالاست'
-                });
-            }
+    checkRateLimit(key, type = 'api') {
+        const config = this.rateLimitConfig[type];
+        if (!config) {
+            return {
+                allowed: true,
+                message: 'پیکربندی Rate Limit یافت نشد'
+            };
         }
 
-        // بررسی XP
-        if (reward.xp !== undefined) {
-            if (reward.xp < 0) {
-                errors.push({
-                    code: 'NEGATIVE_XP',
-                    severity: 'critical',
-                    message: 'تعداد XP نمی‌تواند منفی باشد'
-                });
-            }
+        const now = Date.now();
+        const limitKey = `${type}:${key}`;
+
+        // دریافت یا ایجاد لیست درخواست‌ها
+        if (!this.rateLimits.has(limitKey)) {
+            this.rateLimits.set(limitKey, []);
         }
 
-        // بررسی Rating
-        if (reward.ratingChange !== undefined) {
-            if (Math.abs(reward.ratingChange) > 100) {
-                warnings.push({
-                    code: 'HIGH_RATING_CHANGE',
-                    severity: 'medium',
-                    message: 'تغییر Rating غیرعادی بالاست'
-                });
+        const requests = this.rateLimits.get(limitKey);
+
+        // حذف درخواست‌های قدیمی
+        const validRequests = requests.filter(t => now - t < config.windowMs);
+        this.rateLimits.set(limitKey, validRequests);
+
+        // بررسی محدودیت
+        if (validRequests.length >= config.maxRequests) {
+            this.stats.rateLimitHits++;
+
+            const oldestRequest = validRequests[0];
+            const retryAfter = Math.ceil((config.windowMs - (now - oldestRequest)) / 1000);
+
+            this._emit('rate-limit-hit', { key, type, retryAfter });
+
+            if (this.debug) {
+                console.log(`⚠️ Rate limit hit: ${type} for ${key}, retry after ${retryAfter}s`);
             }
+
+            return {
+                allowed: false,
+                error: 'RATE_LIMIT_EXCEEDED',
+                message: `تعداد درخواست‌ها بیش از حد است. لطفاً ${retryAfter} ثانیه صبر کنید`,
+                retryAfter,
+                maxRequests: config.maxRequests,
+                windowMs: config.windowMs
+            };
         }
 
-        const isValid = errors.length === 0;
+        // ثبت درخواست جدید
+        validRequests.push(now);
+        this.rateLimits.set(limitKey, validRequests);
 
-        return this._createValidationResult(isValid, errors, warnings);
-    }
-
-    // ============================================================
-    // بخش ۷: سیستم Penalty
-    // ============================================================
-
-    /**
-     * اعمال Penalty بر بازیکن
-     * @param {number} playerIndex - ایندکس بازیکن
-     * @param {string} reason - دلیل
-     * @param {Object} penalty - جزئیات Penalty
-     * @returns {Object} نتیجه
-     */
-    applyPenalty(playerIndex, reason, penalty = {}) {
-        const {
-            type = 'warning',
-            coins = 0,
-            xp = 0,
-            temporaryBan = 0,
-            permanentBan = false
-        } = penalty;
-
-        const penaltyRecord = {
-            playerIndex,
-            reason,
-            type,
-            coins,
-            xp,
-            temporaryBan,
-            permanentBan,
-            timestamp: Date.now(),
-            id: Utils.generateUUID()
+        return {
+            allowed: true,
+            remaining: config.maxRequests - validRequests.length,
+            resetAt: now + config.windowMs
         };
+    }
 
-        this.violations.push(penaltyRecord);
+    /**
+     * بررسی Rate Limit برای API
+     * @param {string} key - کلید
+     * @returns {Object}
+     */
+    checkAPIRateLimit(key) {
+        return this.checkRateLimit(key, 'api');
+    }
 
-        this._emit('penalty-applied', penaltyRecord);
+    /**
+     * بررسی Rate Limit برای Login
+     * @param {string} key - کلید
+     * @returns {Object}
+     */
+    checkLoginRateLimit(key) {
+        return this.checkRateLimit(key, 'login');
+    }
+
+    /**
+     * بررسی Rate Limit برای OTP
+     * @param {string} key - کلید
+     * @returns {Object}
+     */
+    checkOTPRateLimit(key) {
+        return this.checkRateLimit(key, 'otp');
+    }
+
+    /**
+     * بررسی Rate Limit برای Chat
+     * @param {string} key - کلید
+     * @returns {Object}
+     */
+    checkChatRateLimit(key) {
+        return this.checkRateLimit(key, 'chat');
+    }
+
+    /**
+     * بررسی Rate Limit برای Report
+     * @param {string} key - کلید
+     * @returns {Object}
+     */
+    checkReportRateLimit(key) {
+        return this.checkRateLimit(key, 'report');
+    }
+
+    /**
+     * بررسی Rate Limit برای Password Reset
+     * @param {string} key - کلید
+     * @returns {Object}
+     */
+    checkPasswordResetRateLimit(key) {
+        return this.checkRateLimit(key, 'passwordReset');
+    }
+
+    /**
+     * بررسی Rate Limit برای File Upload
+     * @param {string} key - کلید
+     * @returns {Object}
+     */
+    checkFileUploadRateLimit(key) {
+        return this.checkRateLimit(key, 'fileUpload');
+    }
+
+    /**
+     * پاکسازی Rate Limits قدیمی
+     * @returns {number} تعداد پاکسازی شده
+     */
+    cleanupRateLimits() {
+        const now = Date.now();
+        let cleaned = 0;
+
+        this.rateLimits.forEach((requests, key) => {
+            const validRequests = requests.filter(t => now - t < 3600000); // 1 ساعت
+
+            if (validRequests.length === 0) {
+                this.rateLimits.delete(key);
+                cleaned++;
+            } else {
+                this.rateLimits.set(key, validRequests);
+            }
+        });
+
+        if (this.debug && cleaned > 0) {
+            console.log(`🧹 Cleaned ${cleaned} expired rate limit entries`);
+        }
+
+        return cleaned;
+    }
+
+    // ============================================================
+    // بخش : CSRF Protection
+    // ============================================================
+
+    /**
+     * تولید CSRF Token جدید
+     * @returns {string}
+     */
+    generateCSRFToken() {
+        this.csrfToken = this._generateCSRFToken();
+        storage?.set('csrf_token', this.csrfToken);
+
+        this._emit('csrf-token-generated', { token: this.csrfToken });
+
+        return this.csrfToken;
+    }
+
+    /**
+     * بررسی CSRF Token
+     * @param {string} token - Token ارسالی
+     * @returns {Object} نتیجه
+     */
+    verifyCSRFToken(token) {
+        if (!token || token !== this.csrfToken) {
+            this.stats.csrfFailures++;
+
+            this._emit('csrf-validation-failed', { token });
+
+            if (this.debug) {
+                console.log('❌ CSRF validation failed');
+            }
+
+            return {
+                valid: false,
+                error: 'CSRF_TOKEN_INVALID',
+                message: 'توکن CSRF نامعتبر است'
+            };
+        }
+
+        return {
+            valid: true,
+            message: 'توکن CSRF معتبر است'
+        };
+    }
+
+    /**
+     * دریافت CSRF Token فعلی
+     * @returns {string}
+     */
+    getCSRFToken() {
+        return this.csrfToken;
+    }
+
+    /**
+     * تولید CSRF Token
+     * @returns {string}
+     * @private
+     */
+    _generateCSRFToken() {
+        const array = new Uint8Array(32);
+        crypto.getRandomValues(array);
+        return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+    }
+
+    // ============================================================
+    // بخش ۸: اعتبارسنجی فایل
+    // ============================================================
+
+    /**
+     * اعتبارسنجی فایل آپلود شده
+     * @param {Object} file - فایل
+     * @param {Object} options - گزینه‌ها
+     * @returns {Object} نتیجه
+     */
+    validateFile(file, options = {}) {
+        const {
+            maxSizeMB = 2,
+            allowedTypes = ['image/jpeg', 'image/png', 'image/webp'],
+            allowedExtensions = ['.jpg', '.jpeg', '.png', '.webp']
+        } = options;
+
+        // بررسی وجود فایل
+        if (!file) {
+            return {
+                valid: false,
+                error: 'NO_FILE',
+                message: 'فایلی انتخاب نشده است'
+            };
+        }
+
+        // بررسی اندازه
+        const maxSizeBytes = maxSizeMB * 1024 * 1024;
+        if (file.size > maxSizeBytes) {
+            return {
+                valid: false,
+                error: 'FILE_TOO_LARGE',
+                message: `حجم فایل نباید بیشتر از ${maxSizeMB} مگابایت باشد`
+            };
+        }
+
+        // بررسی نوع MIME
+        if (allowedTypes.length > 0 && !allowedTypes.includes(file.type)) {
+            return {
+                valid: false,
+                error: 'INVALID_FILE_TYPE',
+                message: `نوع فایل نامعتبر است. انواع مجاز: ${allowedTypes.join(', ')}`
+            };
+        }
+
+        // بررسی پسوند
+        const fileName = file.name.toLowerCase();
+        const extension = '.' + fileName.split('.').pop();
+
+        if (allowedExtensions.length > 0 && !allowedExtensions.includes(extension)) {
+            return {
+                valid: false,
+                error: 'INVALID_EXTENSION',
+                message: `پسوند فایل نامعتبر است. پسوندهای مجاز: ${allowedExtensions.join(', ')}`
+            };
+        }
+
+        // بررسی نام فایل مشکوک
+        if (this._isSuspiciousFileName(fileName)) {
+            return {
+                valid: false,
+                error: 'SUSPICIOUS_FILENAME',
+                message: 'نام فایل مشکوک است'
+            };
+        }
+
+        return {
+            valid: true,
+            file: {
+                name: file.name,
+                size: file.size,
+                type: file.type,
+                extension: extension
+            }
+        };
+    }
+
+    /**
+     * بررسی نام فایل مشکوک
+     * @param {string} fileName - نام فایل
+     * @returns {boolean}
+     * @private
+     */
+    _isSuspiciousFileName(fileName) {
+        const suspiciousPatterns = [
+            /\.exe$/i,
+            /\.bat$/i,
+            /\.cmd$/i,
+            /\.ps1$/i,
+            /\.sh$/i,
+            /\.php$/i,
+            /\.asp$/i,
+            /\.aspx$/i,
+            /\.jsp$/i,
+            /\.js$/i,
+            /\.html$/i,
+            /\.htm$/i,
+            /\.svg$/i,
+            /script/i,
+            /eval/i,
+            /exec/i,
+            /\.\./,
+            /[<>:"|?*]/
+        ];
+
+        return suspiciousPatterns.some(pattern => pattern.test(fileName));
+    }
+
+    // ============================================================
+    // بخش ۹: اعتبارسنجی User Agent
+    // ============================================================
+
+    /**
+     * بررسی User Agent
+     * @param {string} userAgent - User Agent
+     * @returns {Object} نتیجه
+     */
+    validateUserAgent(userAgent) {
+        if (!userAgent) {
+            return {
+                valid: false,
+                error: 'NO_USER_AGENT',
+                message: 'User Agent وجود ندارد'
+            };
+        }
+
+        const lowerUA = userAgent.toLowerCase();
+        const isSuspicious = this.suspiciousUserAgents.some(ua => lowerUA.includes(ua));
+
+        if (isSuspicious) {
+            return {
+                valid: false,
+                error: 'SUSPICIOUS_USER_AGENT',
+                message: 'User Agent مشکوک شناسایی شد',
+                userAgent: userAgent
+            };
+        }
+
+        return {
+            valid: true,
+            userAgent: userAgent
+        };
+    }
+
+    // ============================================================
+    // بخش ۰: اعتبارسنجی IP
+    // ============================================================
+
+    /**
+     * بررسی IP
+     * @param {string} ip - آدرس IP
+     * @returns {Object} نتیجه
+     */
+    validateIP(ip) {
+        if (!ip) {
+            return {
+                valid: false,
+                error: 'NO_IP',
+                message: 'آدرس IP وجود ندارد'
+            };
+        }
+
+        // بررسی فرمت IPv4
+        const ipv4Pattern = /^(\d{1,3}\.){3}\d{1,3}$/;
+        // بررسی فرمت IPv6
+        const ipv6Pattern = /^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/;
+
+        if (!ipv4Pattern.test(ip) && !ipv6Pattern.test(ip)) {
+            return {
+                valid: false,
+                error: 'INVALID_IP',
+                message: 'فرمت IP نامعتبر است'
+            };
+        }
+
+        // بررسی IP های رزرو شده
+        if (this._isReservedIP(ip)) {
+            return {
+                valid: false,
+                error: 'RESERVED_IP',
+                message: 'IP رزرو شده است'
+            };
+        }
+
+        // بررسی IP مسدود
+        if (this.blockedIPs.has(ip)) {
+            return {
+                valid: false,
+                error: 'BLOCKED_IP',
+                message: 'این IP مسدود شده است'
+            };
+        }
+
+        return {
+            valid: true,
+            ip: ip
+        };
+    }
+
+    /**
+     * بررسی IP رزرو شده
+     * @param {string} ip - IP
+     * @returns {boolean}
+     * @private
+     */
+    _isReservedIP(ip) {
+        const reservedPatterns = [
+            /^10\./,
+            /^172\.(1[6-9]|2\d|3[0-1])\./,
+            /^192\.168\./,
+            /^127\./,
+            /^0\./,
+            /^169\.254\./,
+            /^::1$/,
+            /^fe80::/,
+            /^fc00::/,
+            /^fd00::/
+        ];
+
+        return reservedPatterns.some(pattern => pattern.test(ip));
+    }
+
+    /**
+     * مسدود کردن IP
+     * @param {string} ip - IP
+     * @returns {Object} نتیجه
+     */
+    blockIP(ip) {
+        this.blockedIPs.add(ip);
+        this._saveData();
+
+        this._emit('ip-blocked', { ip });
 
         if (this.debug) {
-            console.log(`⚖️ Penalty applied to player ${playerIndex}:`, penaltyRecord);
+            console.log(`🚫 IP blocked: ${ip}`);
         }
 
         return {
             success: true,
-            penalty: penaltyRecord
+            ip: ip
         };
     }
 
     /**
-     * دریافت تاریخچه تخلفات بازیکن
-     * @param {number} playerIndex - ایندکس بازیکن
-     * @returns {Array}
-     */
-    getPlayerViolations(playerIndex) {
-        return this.violations.filter(v => v.playerIndex === playerIndex);
-    }
-
-    /**
-     * بررسی آیا بازیکن Ban شده است
-     * @param {number} playerIndex - ایندکس بازیکن
+     * رفع مسدودیت IP
+     * @param {string} ip - IP
      * @returns {Object} نتیجه
      */
-    isPlayerBanned(playerIndex) {
-        const violations = this.getPlayerViolations(playerIndex);
-        const latestBan = violations.find(v => 
-            v.permanentBan || v.temporaryBan > 0
-        );
+    unblockIP(ip) {
+        this.blockedIPs.delete(ip);
+        this._saveData();
 
-        if (!latestBan) {
-            return { banned: false };
-        }
-
-        if (latestBan.permanentBan) {
-            return {
-                banned: true,
-                type: 'permanent',
-                reason: latestBan.reason,
-                timestamp: latestBan.timestamp
-            };
-        }
-
-        const banExpiry = latestBan.timestamp + (latestBan.temporaryBan * 1000);
-        const isBanned = Date.now() < banExpiry;
+        this._emit('ip-unblocked', { ip });
 
         return {
-            banned: isBanned,
-            type: 'temporary',
-            reason: latestBan.reason,
-            expiry: banExpiry,
-            remainingSeconds: Math.max(0, (banExpiry - Date.now()) / 1000)
+            success: true,
+            ip: ip
+        };
+    }
+
+    /**
+     * دریافت لیست IP های مسدود
+     * @returns {Array<string>}
+     */
+    getBlockedIPs() {
+        return Array.from(this.blockedIPs);
+    }
+
+    // ============================================================
+    // بخش ۱۱: اعتبارسنجی چند مقداری
+    // ============================================================
+
+    /**
+     * اعتبارسنجی چند مقدار همزمان
+     * @param {Object} data - داده‌ها
+     * @param {Object} rules - قوانین
+     * @returns {Object} نتیجه
+     */
+    validateMultiple(data, rules) {
+        const results = {};
+        let allValid = true;
+        const errors = [];
+
+        for (const [field, rule] of Object.entries(rules)) {
+            const value = data[field];
+            const result = this.validate(value, rule);
+
+            results[field] = result;
+
+            if (!result.valid) {
+                allValid = false;
+                errors.push({
+                    field,
+                    error: result.error,
+                    message: result.message
+                });
+            }
+        }
+
+        return {
+            valid: allValid,
+            results,
+            errors
+        };
+    }
+
+    /**
+     * اعتبارسنجی فرم ثبت‌نام
+     * @param {Object} formData - داده‌های فرم
+     * @returns {Object} نتیجه
+     */
+    validateRegistrationForm(formData) {
+        return this.validateMultiple(formData, {
+            username: 'username',
+            email: 'email',
+            password: 'password'
+        });
+    }
+
+    /**
+     * اعتبارسنجی فرم ورود
+     * @param {Object} formData - داده‌های فرم
+     * @returns {Object} نتیجه
+     */
+    validateLoginForm(formData) {
+        return this.validateMultiple(formData, {
+            email: 'email',
+            password: 'password'
+        });
+    }
+
+    /**
+     * اعتبارسنجی فرم تغییر رمز عبور
+     * @param {Object} formData - داده‌های فرم
+     * @returns {Object} نتیجه
+     */
+    validatePasswordChangeForm(formData) {
+        const results = this.validateMultiple(formData, {
+            currentPassword: 'password',
+            newPassword: 'password'
+        });
+
+        // بررسی یکسان نبودن رمز قدیم و جدید
+        if (results.valid && formData.currentPassword === formData.newPassword) {
+            results.valid = false;
+            results.errors.push({
+                field: 'newPassword',
+                error: 'SAME_PASSWORD',
+                message: 'رمز عبور جدید نباید با رمز قبلی یکسان باشد'
+            });
+        }
+
+        return results;
+    }
+
+    // ============================================================
+    // بخش ۱۲: Content Security
+    // ============================================================
+
+    /**
+     * بررسی Content Security Policy
+     * @returns {Object} نتیجه
+     */
+    checkContentSecurity() {
+        const issues = [];
+
+        // بررسی HTTPS
+        if (typeof window !== 'undefined' && window.location.protocol !== 'https:') {
+            issues.push({
+                type: 'INSECURE_PROTOCOL',
+                message: 'اتصال از HTTPS استفاده نمی‌کند',
+                severity: 'high'
+            });
+        }
+
+        // بررسی Mixed Content
+        if (typeof document !== 'undefined') {
+            const insecureResources = document.querySelectorAll('img[src^="http:"], script[src^="http:"], link[href^="http:"]');
+            if (insecureResources.length > 0) {
+                issues.push({
+                    type: 'MIXED_CONTENT',
+                    message: `${insecureResources.length} منبع ناامن شناسایی شد`,
+                    severity: 'medium'
+                });
+            }
+        }
+
+        return {
+            secure: issues.length === 0,
+            issues
         };
     }
 
     // ============================================================
-    // بخش ۸: توابع کمکی
+    // بخش ۳: آمار و تحلیل
     // ============================================================
 
     /**
-     * ایجاد نتیجه اعتبارسنجی
-     * @param {boolean} valid - آیا معتبر است
-     * @param {Array} errors - خطاها
-     * @param {Array} warnings - هشدارها
-     * @returns {Object}
-     * @private
-     */
-    _createValidationResult(valid, errors, warnings) {
-        return {
-            valid,
-            errors,
-            warnings,
-            errorCount: errors.length,
-            warningCount: warnings.length,
-            severity: this._getHighestSeverity(errors)
-        };
-    }
-
-    /**
-     * دریافت بالاترین سطح خطا
-     * @param {Array} errors - خطاها
-     * @returns {string}
-     * @private
-     */
-    _getHighestSeverity(errors) {
-        if (errors.length === 0) return 'none';
-
-        const severities = errors.map(e => e.severity);
-        
-        if (severities.includes('critical')) return 'critical';
-        if (severities.includes('high')) return 'high';
-        if (severities.includes('medium')) return 'medium';
-        return 'low';
-    }
-
-    /**
-     * دریافت نام فارسی خال
-     * @param {string} suit - خال
-     * @returns {string}
-     * @private
-     */
-    _getSuitNameFa(suit) {
-        const names = {
-            spades: 'پیک',
-            hearts: 'دل',
-            diamonds: 'خشت',
-            clubs: 'گشنیز'
-        };
-        return names[suit] || suit;
-    }
-
-    /**
-     * دریافت آمار اعتبارسنجی
+     * دریافت آمار کامل
      * @returns {Object}
      */
     getStats() {
         return {
             ...this.stats,
-            totalViolations: this.violations.length,
-            suspiciousPlayersCount: this.suspiciousPlayers.size,
-            securityLevel: this.securityLevel
+            rateLimitEntries: this.rateLimits.size,
+            blockedIPsCount: this.blockedIPs.size,
+            csrfToken: this.csrfToken ? 'present' : 'missing'
         };
     }
 
     /**
-     * دریافت لیست تخلفات
-     * @param {number} limit - تعداد
-     * @returns {Array}
+     * دریافت خلاصه وضعیت
+     * @returns {Object}
      */
-    getViolations(limit = 50) {
-        return this.violations.slice(-limit).reverse();
-    }
-
-    /**
-     * ریست آمار
-     */
-    resetStats() {
-        this.stats = {
-            totalValidations: 0,
-            validMoves: 0,
-            invalidMoves: 0,
-            violationsDetected: 0,
-            playersKicked: 0,
-            falsePositives: 0
-        };
-    }
-
-    /**
-     * پاک کردن تاریخچه تخلفات
-     */
-    clearViolations() {
-        this.violations = [];
-        this.suspiciousPlayers.clear();
-    }
-
-    // ============================================================
-    // بخش : تنظیمات
-    // ============================================================
-
-    /**
-     * تنظیم سطح امنیت
-     * @param {string} level - سطح ('low' | 'medium' | 'high' | 'strict')
-     * @returns {Object} نتیجه
-     */
-    setSecurityLevel(level) {
-        const validLevels = ['low', 'medium', 'high', 'strict'];
-        
-        if (!validLevels.includes(level)) {
-            return {
-                success: false,
-                error: 'INVALID_LEVEL',
-                message: 'سطح امنیت نامعتبر است'
-            };
-        }
-
-        this.securityLevel = level;
-
-        this._emit('security-level-changed', { level });
+    getSummary() {
+        const totalValidations = this.stats.totalValidations;
+        const passRate = totalValidations > 0 ?
+            ((this.stats.passedValidations / totalValidations) * 100).toFixed(2) : '100';
 
         return {
-            success: true,
-            level
+            totalValidations,
+            passRate: passRate + '%',
+            securityThreats: {
+                xss: this.stats.xssAttempts,
+                injection: this.stats.injectionAttempts,
+                rateLimitHits: this.stats.rateLimitHits,
+                csrfFailures: this.stats.csrfFailures
+            },
+            activeBlocks: this.blockedIPs.size
         };
     }
 
     // ============================================================
-    // بخش ۰: Event System
+    // بخش ۱۴: ذخیره و بارگذاری
+    // ============================================================
+
+    /**
+     * ذخیره داده‌ها
+     * @private
+     */
+    _saveData() {
+        if (storage) {
+            storage.set('security_blocked_ips', Array.from(this.blockedIPs));
+            storage.set('security_csrf_token', this.csrfToken);
+            storage.set('security_stats', this.stats);
+        }
+    }
+
+    /**
+     * بارگذاری داده‌ها
+     * @private
+     */
+    _loadData() {
+        if (storage) {
+            const blockedIPs = storage.get('security_blocked_ips');
+            if (blockedIPs) this.blockedIPs = new Set(blockedIPs);
+
+            const csrfToken = storage.get('security_csrf_token');
+            if (csrfToken) this.csrfToken = csrfToken;
+
+            const stats = storage.get('security_stats');
+            if (stats) this.stats = { ...this.stats, ...stats };
+        }
+    }
+
+    // ============================================================
+    // بخش ۱۵: کنترل‌ها
+    // ============================================================
+
+    /**
+     * ریست کامل
+     */
+    reset() {
+        this.rateLimits.clear();
+        this.blockedIPs.clear();
+        this.csrfToken = this._generateCSRFToken();
+
+        this.stats = {
+            totalValidations: 0,
+            passedValidations: 0,
+            failedValidations: 0,
+            xssAttempts: 0,
+            injectionAttempts: 0,
+            rateLimitHits: 0,
+            csrfFailures: 0,
+            invalidInputs: 0,
+            lastValidationAt: null
+        };
+
+        this._saveData();
+
+        if (this.debug) {
+            console.log('🔄 SecurityValidationManager reset');
+        }
+    }
+
+    /**
+     * لاگ وضعیت
+     */
+    logStatus() {
+        const stats = this.getStats();
+        const summary = this.getSummary();
+
+        console.log('🛡️ SecurityValidationManager Status:');
+        console.log('  Total Validations:', stats.totalValidations);
+        console.log('  Pass Rate:', summary.passRate);
+        console.log('  XSS Attempts:', summary.securityThreats.xss);
+        console.log('  Injection Attempts:', summary.securityThreats.injection);
+        console.log('  Rate Limit Hits:', summary.securityThreats.rateLimitHits);
+        console.log('  CSRF Failures:', summary.securityThreats.csrfFailures);
+        console.log('  Blocked IPs:', summary.activeBlocks);
+        console.log('  Rate Limit Entries:', stats.rateLimitEntries);
+    }
+
+    // ============================================================
+    // بخش ۱: Event System
     // ============================================================
 
     /**
@@ -1095,12 +1479,12 @@ class ValidationEngine {
                 try {
                     callback(data);
                 } catch (error) {
-                    console.error(`❌ Validation event listener error:`, error);
+                    console.error(`❌ Security Validation event listener error:`, error);
                 }
             });
         }
 
-        eventBus.emit(`validation:${event}`, data);
+        eventBus.emit(`security-validation:${event}`, data);
     }
 
     /**
@@ -1109,38 +1493,21 @@ class ValidationEngine {
     clearListeners() {
         this.listeners.clear();
     }
-
-    /**
-     * لاگ وضعیت
-     */
-    logStatus() {
-        const stats = this.getStats();
-
-        console.log('🛡️ ValidationEngine Status:');
-        console.log('  Security Level:', stats.securityLevel);
-        console.log('  Total Validations:', stats.totalValidations);
-        console.log('  Valid Moves:', stats.validMoves);
-        console.log('  Invalid Moves:', stats.invalidMoves);
-        console.log('  Violations Detected:', stats.violationsDetected);
-        console.log('  Players Kicked:', stats.playersKicked);
-        console.log('  Total Violations:', stats.totalViolations);
-        console.log('  Suspicious Players:', stats.suspiciousPlayersCount);
-    }
 }
 
 // ============================================================
 // Singleton Instance
 // ============================================================
-const validationEngine = new ValidationEngine();
+const securityValidationManager = new SecurityValidationManager();
 
 // ============================================================
 // Export
 // ============================================================
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { ValidationEngine, validationEngine };
+    module.exports = { SecurityValidationManager, securityValidationManager };
 } else {
-    window.ValidationEngine = ValidationEngine;
-    window.validationEngine = validationEngine;
+    window.SecurityValidationManager = SecurityValidationManager;
+    window.securityValidationManager = securityValidationManager;
 }
 
-console.log('✅ ValidationEngine loaded');
+console.log('✅ SecurityValidationManager loaded');
