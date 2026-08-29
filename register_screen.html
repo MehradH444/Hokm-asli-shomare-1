@@ -1,0 +1,310 @@
+<div id="register-screen" class="screen screen-auth" data-screen-name="register">
+    <div class="screen-content">
+        <div class="auth-container">
+            <div class="auth-header">
+                <div class="auth-logo">
+                    <span class="logo-icon"></span>
+                </div>
+                <h1 class="auth-title">ثبت‌نام در حکم مستر</h1>
+                <p class="auth-subtitle">حساب کاربری جدید بسازید و بازی را شروع کنید</p>
+            </div>
+
+            <div class="auth-progress">
+                <div class="progress-step active" data-step="1">
+                    <span class="step-number"></span>
+                    <span class="step-label">اطلاعات پایه</span>
+                </div>
+                <div class="progress-step" data-step="2">
+                    <span class="step-number">۲</span>
+                    <span class="step-label">تأیید ایمیل</span>
+                </div>
+                <div class="progress-step" data-step="3">
+                    <span class="step-number">۳</span>
+                    <span class="step-label">تکمیل پروفایل</span>
+                </div>
+            </div>
+
+            <form id="form-register-step-1" class="auth-form auth-form-active" data-step="1">
+                <div class="form-group">
+                    <label for="register-username" class="form-label">نام کاربری</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">👤</span>
+                        <input
+                            type="text"
+                            id="register-username"
+                            name="username"
+                            class="input-field"
+                            placeholder="نام کاربری دلخواه (۳ تا ۳۰ کاراکتر)"
+                            autocomplete="username"
+                            required
+                            data-validate="username"
+                            minlength="3"
+                            maxlength="30"
+                        >
+                        <button type="button" class="btn-check-username" id="btn-check-username" aria-label="بررسی نام کاربری">
+                            <span class="icon">🔍</span>
+                        </button>
+                    </div>
+                    <span class="form-hint">فقط حروف، اعداد و _ مجاز است</span>
+                    <span class="form-error" id="error-register-username"></span>
+                    <span class="form-success" id="success-register-username" style="display: none;">نام کاربری در دسترس است</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-email" class="form-label">ایمیل</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon"></span>
+                        <input
+                            type="email"
+                            id="register-email"
+                            name="email"
+                            class="input-field"
+                            placeholder="example@email.com"
+                            autocomplete="email"
+                            required
+                            data-validate="email"
+                        >
+                    </div>
+                    <span class="form-error" id="error-register-email"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-phone" class="form-label">شماره موبایل (اختیاری)</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">📱</span>
+                        <input
+                            type="tel"
+                            id="register-phone"
+                            name="phone"
+                            class="input-field"
+                            placeholder="09123456789"
+                            autocomplete="tel"
+                            data-validate="phone"
+                            pattern="^09\d{9}$"
+                            maxlength="11"
+                        >
+                    </div>
+                    <span class="form-hint">برای بازیابی حساب مفید است</span>
+                    <span class="form-error" id="error-register-phone"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-password" class="form-label">رمز عبور</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🔒</span>
+                        <input
+                            type="password"
+                            id="register-password"
+                            name="password"
+                            class="input-field"
+                            placeholder="حداقل ۸ کاراکتر"
+                            autocomplete="new-password"
+                            required
+                            data-validate="password"
+                            minlength="8"
+                            maxlength="128"
+                        >
+                        <button type="button" class="btn-toggle-password" data-target="register-password" aria-label="نمایش رمز">
+                            <span class="icon-eye">👁️</span>
+                        </button>
+                    </div>
+                    <div class="password-strength" id="password-strength">
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strength-fill"></div>
+                        </div>
+                        <span class="strength-text" id="strength-text">ضعیف</span>
+                    </div>
+                    <span class="form-error" id="error-register-password"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-password-confirm" class="form-label">تکرار رمز عبور</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🔒</span>
+                        <input
+                            type="password"
+                            id="register-password-confirm"
+                            name="passwordConfirm"
+                            class="input-field"
+                            placeholder="رمز عبور را دوباره وارد کنید"
+                            autocomplete="new-password"
+                            required
+                            minlength="8"
+                        >
+                        <button type="button" class="btn-toggle-password" data-target="register-password-confirm" aria-label="نمایش رمز">
+                            <span class="icon-eye">👁️</span>
+                        </button>
+                    </div>
+                    <span class="form-error" id="error-register-password-confirm"></span>
+                </div>
+
+                <div class="form-options">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" id="register-terms" name="terms" class="checkbox-input" required>
+                        <span class="checkbox-label">
+                            <a href="#/terms" class="terms-link">قوانین و مقررات</a> را می‌پذیرم
+                        </span>
+                    </label>
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" id="register-newsletter" name="newsletter" class="checkbox-input">
+                        <span class="checkbox-label">اخبار و تخفیف‌ها را دریافت کنم</span>
+                    </label>
+                </div>
+
+                <button type="submit" id="btn-submit-register-step-1" class="btn btn-primary btn-block btn-large">
+                    <span class="btn-text">مرحله بعد</span>
+                    <span class="btn-loading" style="display: none;">
+                        <span class="spinner"></span>
+                    </span>
+                </button>
+            </form>
+
+            <form id="form-register-step-2" class="auth-form" data-step="2" style="display: none;">
+                <div class="otp-info">
+                    <div class="otp-icon">📧</div>
+                    <h3 class="otp-title">کد تأیید ارسال شد</h3>
+                    <p class="otp-description">
+                        کد  رقمی به ایمیل <strong id="register-email-display">example@email.com</strong> ارسال شد.
+                        لطفاً کد را وارد کنید.
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-otp" class="form-label">کد تأیید</label>
+                    <div class="otp-inputs" id="otp-inputs-register">
+                        <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]" data-index="0" aria-label="رقم ۱">
+                        <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]" data-index="1" aria-label="رقم ۲">
+                        <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]" data-index="2" aria-label="رقم ۳">
+                        <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]" data-index="3" aria-label="رقم ۴">
+                        <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]" data-index="4" aria-label="رقم ۵">
+                        <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]" data-index="5" aria-label="رقم ۶">
+                    </div>
+                    <input type="hidden" id="register-otp" name="otp">
+                    <span class="form-error" id="error-register-otp"></span>
+                </div>
+
+                <div class="otp-timer">
+                    <span class="timer-text">ارسال مجدد کد تا </span>
+                    <span class="timer-countdown" id="otp-timer-register">۶۰</span>
+                    <span class="timer-text"> ثانیه</span>
+                </div>
+
+                <button type="button" id="btn-resend-otp-register" class="btn-link btn-resend-otp" disabled>
+                    ارسال مجدد کد
+                </button>
+
+                <div class="form-actions">
+                    <button type="button" id="btn-back-register-step-1" class="btn btn-outline btn-block">
+                        بازگشت
+                    </button>
+                    <button type="submit" id="btn-submit-register-step-2" class="btn btn-primary btn-block btn-large">
+                        <span class="btn-text">تأیید و ادامه</span>
+                        <span class="btn-loading" style="display: none;">
+                            <span class="spinner"></span>
+                        </span>
+                    </button>
+                </div>
+            </form>
+
+            <form id="form-register-step-3" class="auth-form" data-step="3" style="display: none;">
+                <div class="profile-setup-info">
+                    <div class="profile-icon">🎨</div>
+                    <h3 class="profile-title">پروفایل خود را شخصی‌سازی کنید</h3>
+                    <p class="profile-description">این اطلاعات بعداً هم قابل تغییر هستند</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">آواتار</label>
+                    <div class="avatar-selector" id="avatar-selector">
+                        <div class="avatar-option selected" data-avatar="1">
+                            <span class="avatar avatar-large">👤</span>
+                        </div>
+                        <div class="avatar-option" data-avatar="2">
+                            <span class="avatar avatar-large">👨</span>
+                        </div>
+                        <div class="avatar-option" data-avatar="3">
+                            <span class="avatar avatar-large">👩</span>
+                        </div>
+                        <div class="avatar-option" data-avatar="4">
+                            <span class="avatar avatar-large"></span>
+                        </div>
+                        <div class="avatar-option" data-avatar="5">
+                            <span class="avatar avatar-large">👱</span>
+                        </div>
+                        <div class="avatar-option" data-avatar="6">
+                            <span class="avatar avatar-large">🧕</span>
+                        </div>
+                        <div class="avatar-option" data-avatar="7">
+                            <span class="avatar avatar-large">🦸</span>
+                        </div>
+                        <div class="avatar-option" data-avatar="8">
+                            <span class="avatar avatar-large"></span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="register-avatar" name="avatar" value="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="register-display-name" class="form-label">نام نمایشی (اختیاری)</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">✨</span>
+                        <input
+                            type="text"
+                            id="register-display-name"
+                            name="displayName"
+                            class="input-field"
+                            placeholder="نامی که دیگران می‌بینند"
+                            maxlength="30"
+                            data-validate="displayName"
+                        >
+                    </div>
+                    <span class="form-hint">اگر خالی بگذارید، نام کاربری نمایش داده می‌شود</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-bio" class="form-label">بیوگرافی (اختیاری)</label>
+                    <div class="input-wrapper textarea-wrapper">
+                        <textarea
+                            id="register-bio"
+                            name="bio"
+                            class="input-field textarea-field"
+                            placeholder="چند کلمه درباره خودتان بنویسید..."
+                            maxlength="500"
+                            rows="3"
+                        ></textarea>
+                    </div>
+                    <span class="char-counter"><span id="bio-char-count">0</span> / ۵۰۰</span>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" id="btn-back-register-step-2" class="btn btn-outline btn-block">
+                        بازگشت
+                    </button>
+                    <button type="submit" id="btn-submit-register-step-3" class="btn btn-primary btn-block btn-large">
+                        <span class="btn-text">تکمیل ثبت‌نام</span>
+                        <span class="btn-loading" style="display: none;">
+                            <span class="spinner"></span>
+                        </span>
+                    </button>
+                </div>
+            </form>
+
+            <div class="auth-footer">
+                <p class="auth-footer-text">
+                    قبلاً ثبت‌نام کرده‌اید؟
+                    <a href="#/login" class="auth-link" data-route="login" id="link-to-login">وارد شوید</a>
+                </p>
+            </div>
+
+            <div class="auth-terms">
+                <p class="terms-text">
+                    با ثبت‌نام، شما
+                    <a href="#/terms" class="terms-link">قوانین و مقررات</a>
+                    و
+                    <a href="#/privacy" class="terms-link">حریم خصوصی</a>
+                    ما را می‌پذیرید.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
