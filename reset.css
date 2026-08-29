@@ -1,0 +1,793 @@
+/**
+ * ============================================================
+ * HOKM MASTER - CSS Reset & Normalize
+ * بازنشانی و نرمال‌سازی استایل‌های مرورگر
+ * ============================================================
+ * 
+ * این فایل استایل‌های پیش‌فرض مرورگرها را بازنشانی می‌کند
+ * و یک پایه یکپارچه برای تمام مرورگرها فراهم می‌کند.
+ * 
+ * نسخه: 1.0.0
+ * ============================================================
+ */
+
+/* ============================================================
+   بخش ۱: Box Sizing
+   ============================================================ */
+
+/* استفاده از border-box برای همه عناصر */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================================================
+   بخش ۲: Document
+   ============================================================ */
+
+html {
+    /* جلوگیری از تغییر اندازه فونت در landscape */
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    
+    /* اسکرول نرم */
+    scroll-behavior: smooth;
+    
+    /* رندر بهتر فونت */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    
+    /* جلوگیری از bounce scrolling در iOS */
+    -webkit-overflow-scrolling: touch;
+    
+    /* تنظیم tab size */
+    tab-size: 4;
+    
+    /* خط پایه فونت */
+    line-height: 1.5;
+    
+    /* cursor پیش‌فرض */
+    cursor: default;
+    
+    /* highlight color */
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ============================================================
+   بخش ۳: Body
+   ============================================================ */
+
+body {
+    /* حذف margin پیش‌فرض */
+    margin: 0;
+    padding: 0;
+    
+    /* فونت پیش‌فرض */
+    font-family: var(--font-family-primary, 'Vazirmatn', 'Tahoma', 'Arial', sans-serif);
+    font-size: var(--font-size-base, 1rem);
+    line-height: var(--line-height-normal, 1.5);
+    color: var(--text-primary, #ffffff);
+    background-color: var(--bg-primary, #0d2924);
+    
+    /* جلوگیری از scroll افقی */
+    overflow-x: hidden;
+    
+    /* حداقل ارتفاع */
+    min-height: 100vh;
+    
+    /* جهت متن */
+    direction: rtl;
+    text-align: right;
+    
+    /* جلوگیری از انتخاب متن در body */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* ============================================================
+   بخش ۴: Sections
+   ============================================================ */
+
+main {
+    display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================================================
+   بخش ۵: Text-level semantics
+   ============================================================ */
+
+a {
+    color: inherit;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: color var(--transition-fast, 150ms) var(--easing-ease-in-out, ease);
+}
+
+a:hover {
+    color: var(--text-link-hover, #34d399);
+}
+
+a:active {
+    color: var(--color-primary-active, #0a7350);
+}
+
+abbr[title] {
+    border-bottom: none;
+    text-decoration: underline;
+    text-decoration: underline dotted;
+}
+
+b,
+strong {
+    font-weight: var(--font-weight-bold, 700);
+}
+
+code,
+kbd,
+samp,
+pre {
+    font-family: var(--font-family-mono, 'Courier New', monospace);
+    font-size: 1em;
+}
+
+small {
+    font-size: 80%;
+}
+
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+sup {
+    top: -0.5em;
+}
+
+/* ============================================================
+   بخش ۶: Embeds
+   ============================================================ */
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+    display: block;
+    vertical-align: middle;
+}
+
+img,
+video {
+    max-width: 100%;
+    height: auto;
+    border-style: none;
+}
+
+/* جلوگیری از drag تصاویر */
+img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+    pointer-events: none;
+}
+
+/* ============================================================
+   بخش ۷: Forms
+   ============================================================ */
+
+/* inherit فونت برای form elements */
+button,
+input,
+optgroup,
+select,
+textarea {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    background: transparent;
+    color: inherit;
+}
+
+/* حذف استایل پیش‌فرض button */
+button,
+input {
+    overflow: visible;
+}
+
+button,
+select {
+    text-transform: none;
+}
+
+/* استایل button */
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+    -webkit-appearance: button;
+    appearance: button;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+}
+
+/* حذف استایل داخلی button در Firefox */
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+}
+
+/* بازگرداندن focus styles */
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+    outline: none;
+}
+
+/* fieldset */
+fieldset {
+    padding: 0;
+    margin: 0;
+    border: none;
+    min-width: 0;
+}
+
+legend {
+    color: inherit;
+    display: table;
+    max-width: 100%;
+    padding: 0;
+    white-space: normal;
+}
+
+progress {
+    vertical-align: baseline;
+}
+
+/* textarea */
+textarea {
+    overflow: auto;
+    resize: vertical;
+}
+
+/* checkbox و radio */
+[type="checkbox"],
+[type="radio"] {
+    padding: 0;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* number input - حذف spinner */
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+    height: auto;
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* search input */
+[type="search"] {
+    -webkit-appearance: textfield;
+    appearance: textfield;
+    outline-offset: -2px;
+}
+
+[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+/* file input button */
+::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit;
+}
+
+/* select */
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: left 0.75rem center;
+    background-size: 1rem;
+    padding-left: 2.5rem;
+}
+
+/* placeholder */
+::placeholder {
+    color: var(--input-placeholder, #9ca3af);
+    opacity: 1;
+}
+
+/* autofill styles */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--input-text, #ffffff);
+    -webkit-box-shadow: 0 0 0px 1000px var(--input-bg, rgba(0, 0, 0, 0.2)) inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ============================================================
+   بخش ۸: Interactive
+   ============================================================ */
+
+/* details و summary */
+details {
+    display: block;
+}
+
+summary {
+    display: list-item;
+    cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+/* ============================================================
+   بخش ۹: Tables
+   ============================================================ */
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    text-indent: 0;
+    border-color: inherit;
+}
+
+th,
+td {
+    padding: 0;
+    text-align: inherit;
+}
+
+/* ============================================================
+   بخش ۱۰: Lists
+   ============================================================ */
+
+ol,
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+dl,
+dd {
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================================================
+   بخش ۱۱: Misc
+   ============================================================ */
+
+/* حذف outline پیش‌فرض و استفاده از focus-visible */
+*:focus {
+    outline: none;
+}
+
+*:focus-visible {
+    outline: 2px solid var(--color-primary, #10b981);
+    outline-offset: 2px;
+}
+
+/* حذف outline برای mouse users */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* hr */
+hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+    border: none;
+    border-top: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+    margin: var(--spacing-4, 1rem) 0;
+}
+
+/* hidden attribute */
+[hidden] {
+    display: none !important;
+}
+
+/* disabled elements */
+[disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* ============================================================
+   بخش ۱۲: Scrollbar سفارشی
+   ============================================================ */
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-bg, rgba(0, 0, 0, 0.2));
+    border-radius: var(--radius-full, 9999px);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb, rgba(255, 255, 255, 0.2));
+    border-radius: var(--radius-full, 9999px);
+    transition: background var(--transition-fast, 150ms) var(--easing-ease-in-out, ease);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover, rgba(255, 255, 255, 0.3));
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb, rgba(255, 255, 255, 0.2)) var(--scrollbar-bg, rgba(0, 0, 0, 0.2));
+}
+
+/* ============================================================
+   بخش ۱۳: Selection
+   ============================================================ */
+
+::selection {
+    background-color: var(--color-primary, #10b981);
+    color: var(--color-white, #ffffff);
+    text-shadow: none;
+}
+
+::-moz-selection {
+    background-color: var(--color-primary, #10b981);
+    color: var(--color-white, #ffffff);
+    text-shadow: none;
+}
+
+/* ============================================================
+   بخش ۱۴: Dialog
+   ============================================================ */
+
+dialog {
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: inherit;
+}
+
+dialog::backdrop {
+    background-color: var(--bg-overlay, rgba(0, 0, 0, 0.6));
+    backdrop-filter: var(--blur-md, blur(8px));
+}
+
+/* ============================================================
+   بخش ۱۵: Print
+   ============================================================ */
+
+@media print {
+    *,
+    *::before,
+    *::after {
+        background: transparent !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+    
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+    
+    a[href]::after {
+        content: " (" attr(href) ")";
+    }
+    
+    pre::after {
+        content: " (" attr(href) ")";
+    }
+    
+    abbr[title]::after {
+        content: " (" attr(title) ")";
+    }
+    
+    img {
+        page-break-inside: avoid;
+    }
+    
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+    
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}
+
+/* ============================================================
+   بخش ۱۶: Accessibility
+   ============================================================ */
+
+/* Screen reader only */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Skip to content link */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-primary, #10b981);
+    color: var(--color-white, #ffffff);
+    padding: 8px;
+    z-index: var(--z-index-max, 9999);
+    transition: top var(--transition-fast, 150ms) var(--easing-ease-in-out, ease);
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ============================================================
+   بخش ۱۷: RTL Specific
+   ============================================================ */
+
+/* اعداد فارسی در input ها */
+input[type="text"],
+input[type="number"],
+input[type="tel"],
+textarea {
+    direction: rtl;
+    text-align: right;
+}
+
+/* کد و URL ها LTR */
+input[type="email"],
+input[type="url"],
+code,
+pre {
+    direction: ltr;
+    text-align: left;
+}
+
+/* ============================================================
+   بخش ۱۸: Mobile Optimizations
+   ============================================================ */
+
+/* جلوگیری از zoom در iOS هنگام focus */
+@media screen and (max-width: 768px) {
+    input,
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
+}
+
+/* بهبود touch targets */
+@media (pointer: coarse) {
+    button,
+    a,
+    input[type="button"],
+    input[type="submit"],
+    [role="button"] {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* ============================================================
+   بخش ۱۹: Dark Mode Support
+   ============================================================ */
+
+/* اطمینان از color-scheme */
+:root {
+    color-scheme: dark light;
+}
+
+/* ============================================================
+   بخش ۲۰: Performance Optimizations
+   ============================================================ */
+
+/* GPU acceleration برای عناصر انیمیشنی */
+.will-animate {
+    will-change: transform, opacity;
+}
+
+/* Containment برای بهبود performance */
+.contain-layout {
+    contain: layout;
+}
+
+.contain-paint {
+    contain: paint;
+}
+
+.contain-strict {
+    contain: strict;
+}
+
+/* ============================================================
+   بخش ۲۱: User Select Utilities
+   ============================================================ */
+
+.select-none {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.select-text {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+.select-all {
+    -webkit-user-select: all;
+    -moz-user-select: all;
+    -ms-user-select: all;
+    user-select: all;
+}
+
+.select-auto {
+    -webkit-user-select: auto;
+    -moz-user-select: auto;
+    -ms-user-select: auto;
+    user-select: auto;
+}
+
+/* ============================================================
+   بخش ۲۲: Pointer Events
+   ============================================================ */
+
+.pointer-events-none {
+    pointer-events: none;
+}
+
+.pointer-events-auto {
+    pointer-events: auto;
+}
+
+/* ============================================================
+   بخش ۲۳: Touch Action
+   ============================================================ */
+
+.touch-none {
+    touch-action: none;
+}
+
+.touch-pan-x {
+    touch-action: pan-x;
+}
+
+.touch-pan-y {
+    touch-action: pan-y;
+}
+
+.touch-manipulation {
+    touch-action: manipulation;
+}
+
+/* ============================================================
+   بخش ۲۴: Hyphens
+   ============================================================ */
+
+.hyphens-none {
+    -webkit-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+.hyphens-manual {
+    -webkit-hyphens: manual;
+    -ms-hyphens: manual;
+    hyphens: manual;
+}
+
+.hyphens-auto {
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
+
+/* ============================================================
+   بخش ۲۵: Word Break
+   ============================================================ */
+
+.break-normal {
+    overflow-wrap: normal;
+    word-break: normal;
+}
+
+.break-words {
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.break-all {
+    word-break: break-all;
+}
