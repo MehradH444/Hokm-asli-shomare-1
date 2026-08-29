@@ -1,0 +1,612 @@
+<div id="reward-claim-modal" class="modal modal-medium" data-modal-name="reward-claim" style="display: none;">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-header-right">
+                <span class="modal-icon">🎁</span>
+                <h3 class="modal-title">دریافت پاداش</h3>
+            </div>
+            <div class="modal-header-left">
+                <button class="btn-icon btn-small btn-close-modal" id="btn-close-reward-claim" aria-label="بستن">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="modal-body">
+            <!-- Step 1: Reward Selection -->
+            <section class="reward-step active" id="reward-step-selection" data-step="1">
+                <div class="reward-hero">
+                    <div class="hero-icon-wrapper">
+                        <span class="hero-icon">🎁</span>
+                        <div class="hero-glow"></div>
+                    </div>
+                    <h3 class="hero-title">پاداش‌های شما</h3>
+                    <p class="hero-desc">پاداش‌های زیر برای دریافت آماده هستند</p>
+                </div>
+
+                <div class="reward-summary">
+                    <div class="summary-card">
+                        <div class="summary-icon">🎁</div>
+                        <div class="summary-info">
+                            <span class="summary-value" id="reward-total-count">۵</span>
+                            <span class="summary-label">پاداش آماده</span>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon">🪙</div>
+                        <div class="summary-info">
+                            <span class="summary-value" id="reward-total-coins">۲,۵۰۰</span>
+                            <span class="summary-label">کل سکه</span>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon">💎</div>
+                        <div class="summary-info">
+                            <span class="summary-value" id="reward-total-gems">۷۵</span>
+                            <span class="summary-label">کل الماس</span>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon">⭐</div>
+                        <div class="summary-info">
+                            <span class="summary-value" id="reward-total-xp">۵۰۰</span>
+                            <span class="summary-label">کل XP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reward-categories-tabs">
+                    <button class="reward-cat-btn active" data-category="all" id="tab-reward-all">
+                        <span class="tab-icon">🎁</span>
+                        <span class="tab-text">همه</span>
+                        <span class="tab-badge">۵</span>
+                    </button>
+                    <button class="reward-cat-btn" data-category="daily" id="tab-reward-daily">
+                        <span class="tab-icon">📅</span>
+                        <span class="tab-text">روزانه</span>
+                        <span class="tab-badge">۱</span>
+                    </button>
+                    <button class="reward-cat-btn" data-category="mission" id="tab-reward-mission">
+                        <span class="tab-icon">🎯</span>
+                        <span class="tab-text">مأموریت</span>
+                        <span class="tab-badge">۲</span>
+                    </button>
+                    <button class="reward-cat-btn" data-category="achievement" id="tab-reward-achievement">
+                        <span class="tab-icon">🏅</span>
+                        <span class="tab-text">دستاورد</span>
+                        <span class="tab-badge">۱</span>
+                    </button>
+                    <button class="reward-cat-btn" data-category="league" id="tab-reward-league">
+                        <span class="tab-icon">🏆</span>
+                        <span class="tab-text">لیگ</span>
+                        <span class="tab-badge">۱</span>
+                    </button>
+                </div>
+
+                <div class="rewards-list" id="claimable-rewards-list">
+                    <div class="reward-card daily" data-reward-id="r1" data-category="daily">
+                        <div class="reward-card-header">
+                            <div class="reward-icon-wrapper daily">
+                                <span class="reward-icon">📅</span>
+                            </div>
+                            <div class="reward-info">
+                                <h4 class="reward-name">پاداش روزانه</h4>
+                                <p class="reward-desc">جایزه ورود روزانه - روز ۳</p>
+                                <div class="reward-meta">
+                                    <span class="meta-item">
+                                        <span class="meta-icon">⏰</span>
+                                        <span class="meta-text">انقضا: ۱۲ ساعت</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="reward-expiry">
+                                <div class="expiry-circle">
+                                    <svg class="expiry-svg" viewBox="0 0 100 100">
+                                        <circle class="expiry-bg" cx="50" cy="50" r="45"></circle>
+                                        <circle class="expiry-progress" cx="50" cy="50" r="45" style="--percentage: 50;"></circle>
+                                    </svg>
+                                    <div class="expiry-content">
+                                        <span class="expiry-value">۱۲</span>
+                                        <span class="expiry-label">ساعت</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="reward-prizes">
+                            <div class="prize-item">
+                                <span class="prize-icon">🪙</span>
+                                <span class="prize-value">۵۰</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-icon">⭐</span>
+                                <span class="prize-value">۲۵</span>
+                            </div>
+                        </div>
+                        <div class="reward-actions">
+                            <button class="btn btn-primary btn-small btn-claim-reward" data-reward-id="r1">
+                                <span class="btn-icon">🎁</span>
+                                <span class="btn-text">دریافت</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="reward-card mission" data-reward-id="r2" data-category="mission">
+                        <div class="reward-card-header">
+                            <div class="reward-icon-wrapper mission">
+                                <span class="reward-icon">🎯</span>
+                            </div>
+                            <div class="reward-info">
+                                <h4 class="reward-name">مأموریت تکمیل شده</h4>
+                                <p class="reward-desc">۳ بازی انجام بده</p>
+                                <div class="reward-meta">
+                                    <span class="meta-item">
+                                        <span class="meta-icon">✅</span>
+                                        <span class="meta-text">تکمیل شده</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="reward-prizes">
+                            <div class="prize-item">
+                                <span class="prize-icon">🪙</span>
+                                <span class="prize-value">۱۰۰</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-icon">⭐</span>
+                                <span class="prize-value">۵۰</span>
+                            </div>
+                        </div>
+                        <div class="reward-actions">
+                            <button class="btn btn-primary btn-small btn-claim-reward" data-reward-id="r2">
+                                <span class="btn-icon">🎁</span>
+                                <span class="btn-text">دریافت</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="reward-card mission" data-reward-id="r3" data-category="mission">
+                        <div class="reward-card-header">
+                            <div class="reward-icon-wrapper mission">
+                                <span class="reward-icon">🎯</span>
+                            </div>
+                            <div class="reward-info">
+                                <h4 class="reward-name">مأموریت هفتگی</h4>
+                                <p class="reward-desc">۲۰ بازی در هفته</p>
+                                <div class="reward-meta">
+                                    <span class="meta-item">
+                                        <span class="meta-icon">✅</span>
+                                        <span class="meta-text">تکمیل شده</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="reward-prizes">
+                            <div class="prize-item">
+                                <span class="prize-icon">🪙</span>
+                                <span class="prize-value">۵۰۰</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-icon">💎</span>
+                                <span class="prize-value">۱۰</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-icon">⭐</span>
+                                <span class="prize-value">۱۰۰</span>
+                            </div>
+                        </div>
+                        <div class="reward-actions">
+                            <button class="btn btn-primary btn-small btn-claim-reward" data-reward-id="r3">
+                                <span class="btn-icon">🎁</span>
+                                <span class="btn-text">دریافت</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="reward-card achievement" data-reward-id="r4" data-category="achievement">
+                        <div class="reward-card-header">
+                            <div class="reward-icon-wrapper achievement">
+                                <span class="reward-icon">🏅</span>
+                            </div>
+                            <div class="reward-info">
+                                <h4 class="reward-name">دستاورد باز شده</h4>
+                                <p class="reward-desc">اولین پیروزی</p>
+                                <div class="reward-meta">
+                                    <span class="meta-item">
+                                        <span class="meta-icon">⭐</span>
+                                        <span class="meta-text">معمولی</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="reward-prizes">
+                            <div class="prize-item">
+                                <span class="prize-icon">🪙</span>
+                                <span class="prize-value">۱۰</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-icon">⭐</span>
+                                <span class="prize-value">۵۰</span>
+                            </div>
+                        </div>
+                        <div class="reward-actions">
+                            <button class="btn btn-primary btn-small btn-claim-reward" data-reward-id="r4">
+                                <span class="btn-icon">🎁</span>
+                                <span class="btn-text">دریافت</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="reward-card league" data-reward-id="r5" data-category="league">
+                        <div class="reward-card-header">
+                            <div class="reward-icon-wrapper league">
+                                <span class="reward-icon">🏆</span>
+                            </div>
+                            <div class="reward-info">
+                                <h4 class="reward-name">پاداش لیگ</h4>
+                                <p class="reward-desc">پاداش پایان فصل - لیگ برنز</p>
+                                <div class="reward-meta">
+                                    <span class="meta-item">
+                                        <span class="meta-icon">🏅</span>
+                                        <span class="meta-text">رتبه ۱۵</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="reward-prizes">
+                            <div class="prize-item">
+                                <span class="prize-icon">🪙</span>
+                                <span class="prize-value">۱,۸۴۰</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-icon">💎</span>
+                                <span class="prize-value">۵۵</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-icon">⭐</span>
+                                <span class="prize-value">۲۷۵</span>
+                            </div>
+                        </div>
+                        <div class="reward-actions">
+                            <button class="btn btn-primary btn-small btn-claim-reward" data-reward-id="r5">
+                                <span class="btn-icon">🎁</span>
+                                <span class="btn-text">دریافت</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="empty-state" id="rewards-empty-state" style="display: none;">
+                    <span class="empty-icon">🎁</span>
+                    <h4 class="empty-title">پاداشی برای دریافت وجود ندارد</h4>
+                    <p class="empty-desc">با انجام مأموریت‌ها و بازی، پاداش کسب کنید</p>
+                    <button class="btn btn-primary" id="btn-go-to-missions">
+                        <span class="btn-icon">🎯</span>
+                        <span class="btn-text">مشاهده مأموریت‌ها</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Step 2: Claiming Animation -->
+            <section class="reward-step" id="reward-step-claiming" data-step="2" style="display: none;">
+                <div class="claiming-section">
+                    <div class="claiming-animation">
+                        <div class="gift-box">
+                            <div class="gift-box-lid"></div>
+                            <div class="gift-box-body">
+                                <span class="gift-icon">🎁</span>
+                            </div>
+                        </div>
+                        <div class="confetti-container" id="claiming-confetti"></div>
+                        <div class="sparkles" id="claiming-sparkles"></div>
+                    </div>
+                    <h3 class="claiming-title" id="claiming-title">در حال دریافت پاداش...</h3>
+                    <p class="claiming-desc" id="claiming-desc">لطفاً صبر کنید</p>
+                    <div class="claiming-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="claiming-progress-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 3: Success -->
+            <section class="reward-step" id="reward-step-success" data-step="3" style="display: none;">
+                <div class="success-section">
+                    <div class="success-animation">
+                        <div class="success-icon-wrapper">
+                            <span class="success-icon">✅</span>
+                            <div class="success-ring"></div>
+                            <div class="success-ring ring-2"></div>
+                        </div>
+                        <div class="success-confetti" id="success-confetti"></div>
+                    </div>
+                    <h3 class="success-title">پاداش با موفقیت دریافت شد!</h3>
+                    <p class="success-desc" id="success-desc">پاداش به حساب شما اضافه شد</p>
+
+                    <div class="success-rewards-summary" id="success-rewards-summary">
+                        <h4 class="summary-title">پاداش‌های دریافت شده:</h4>
+                        <div class="claimed-rewards-list" id="claimed-rewards-list">
+                            <div class="claimed-reward-item">
+                                <span class="claimed-icon">📅</span>
+                                <span class="claimed-name">پاداش روزانه</span>
+                                <div class="claimed-prizes">
+                                    <span class="prize">۵۰ 🪙</span>
+                                    <span class="prize">۲۵ ⭐</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="success-total-prizes">
+                        <h4 class="total-title">مجموع پاداش‌ها:</h4>
+                        <div class="total-prizes-grid">
+                            <div class="total-prize-item coins">
+                                <span class="prize-icon">🪙</span>
+                                <span class="prize-label">سکه</span>
+                                <span class="prize-value" id="success-total-coins">+۲,۵۰۰</span>
+                            </div>
+                            <div class="total-prize-item gems">
+                                <span class="prize-icon">💎</span>
+                                <span class="prize-label">الماس</span>
+                                <span class="prize-value" id="success-total-gems">+۷۵</span>
+                            </div>
+                            <div class="total-prize-item xp">
+                                <span class="prize-icon">⭐</span>
+                                <span class="prize-label">XP</span>
+                                <span class="prize-value" id="success-total-xp">+۵۰۰</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="success-balance-update">
+                        <h4 class="balance-title">موجودی جدید شما:</h4>
+                        <div class="balance-cards">
+                            <div class="balance-card coins">
+                                <div class="balance-icon">🪙</div>
+                                <div class="balance-info">
+                                    <span class="balance-label">سکه</span>
+                                    <div class="balance-change">
+                                        <span class="old-value" id="success-old-coins">۵,۰۰۰</span>
+                                        <span class="arrow">→</span>
+                                        <span class="new-value" id="success-new-coins">۷,۵۰۰</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="balance-card gems">
+                                <div class="balance-icon">💎</div>
+                                <div class="balance-info">
+                                    <span class="balance-label">الماس</span>
+                                    <div class="balance-change">
+                                        <span class="old-value" id="success-old-gems">۱۵۰</span>
+                                        <span class="arrow">→</span>
+                                        <span class="new-value" id="success-new-gems">۲۲۵</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="success-special-rewards" id="success-special-rewards" style="display: none;">
+                        <h4 class="special-title">جوایز ویژه:</h4>
+                        <div class="special-rewards-list">
+                            <div class="special-reward-item">
+                                <span class="special-icon">👑</span>
+                                <span class="special-name">عنوان جدید: قهرمان</span>
+                            </div>
+                            <div class="special-reward-item">
+                                <span class="special-icon">🏅</span>
+                                <span class="special-name">نشان جدید: نشان برنز</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="success-actions">
+                        <button class="btn btn-primary btn-block" id="btn-success-continue">
+                            <span class="btn-icon">🎮</span>
+                            <span class="btn-text">ادامه بازی</span>
+                        </button>
+                        <button class="btn btn-outline btn-block" id="btn-success-view-inventory">
+                            <span class="btn-icon">🎒</span>
+                            <span class="btn-text">مشاهده موجودی</span>
+                        </button>
+                        <button class="btn btn-outline btn-block" id="btn-success-share">
+                            <span class="btn-icon">📤</span>
+                            <span class="btn-text">اشتراک‌گذاری</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 4: Error -->
+            <section class="reward-step" id="reward-step-error" data-step="4" style="display: none;">
+                <div class="error-section">
+                    <div class="error-animation">
+                        <div class="error-icon-wrapper">
+                            <span class="error-icon">❌</span>
+                        </div>
+                    </div>
+                    <h3 class="error-title">خطا در دریافت پاداش</h3>
+                    <p class="error-desc" id="error-desc">متأسفانه دریافت پاداش با خطا مواجه شد</p>
+                    <div class="error-details">
+                        <div class="error-item">
+                            <span class="error-label">کد خطا:</span>
+                            <span class="error-value" id="error-code">ERR_RWD_001</span>
+                        </div>
+                        <div class="error-item">
+                            <span class="error-label">دلیل:</span>
+                            <span class="error-value" id="error-reason">اتصال اینترنت ضعیف</span>
+                        </div>
+                    </div>
+                    <div class="error-suggestions">
+                        <h4 class="suggestions-title">پیشنهادات:</h4>
+                        <ul class="suggestions-list">
+                            <li>
+                                <span class="suggestion-icon">📶</span>
+                                <span class="suggestion-text">اتصال اینترنت خود را بررسی کنید</span>
+                            </li>
+                            <li>
+                                <span class="suggestion-icon">🔄</span>
+                                <span class="suggestion-text">دوباره تلاش کنید</span>
+                            </li>
+                            <li>
+                                <span class="suggestion-icon">📞</span>
+                                <span class="suggestion-text">با پشتیبانی تماس بگیرید</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="error-actions">
+                        <button class="btn btn-primary btn-block" id="btn-retry-claim">
+                            <span class="btn-icon">🔄</span>
+                            <span class="btn-text">تلاش مجدد</span>
+                        </button>
+                        <button class="btn btn-outline btn-block" id="btn-contact-support">
+                            <span class="btn-icon">📞</span>
+                            <span class="btn-text">تماس با پشتیبانی</span>
+                        </button>
+                        <button class="btn btn-outline btn-block" id="btn-close-error">
+                            <span class="btn-text">بستن</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="modal-footer" id="reward-modal-footer">
+            <div class="footer-info">
+                <span class="footer-text" id="reward-step-indicator">مرحله ۱ از ۲</span>
+            </div>
+            <div class="footer-actions">
+                <button class="btn btn-outline" id="btn-reward-cancel">
+                    <span class="btn-text">انصراف</span>
+                </button>
+                <button class="btn btn-primary" id="btn-claim-all-rewards">
+                    <span class="btn-icon">🎁</span>
+                    <span class="btn-text">دریافت همه</span>
+                </button>
+                <button class="btn btn-primary" id="btn-reward-done" style="display: none;">
+                    <span class="btn-text">پایان</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Individual Reward Claim Confirmation -->
+    <div class="reward-confirm-overlay" id="reward-confirm-overlay" style="display: none;">
+        <div class="confirm-content">
+            <div class="confirm-header">
+                <span class="confirm-icon">🎁</span>
+                <h4 class="confirm-title">دریافت پاداش</h4>
+                <button class="btn-icon btn-small" id="btn-close-confirm-overlay" aria-label="بستن">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+            <div class="confirm-body">
+                <div class="confirm-reward-info">
+                    <div class="reward-icon-wrapper" id="confirm-reward-icon-wrapper">
+                        <span class="reward-icon" id="confirm-reward-icon">🎯</span>
+                    </div>
+                    <div class="reward-info">
+                        <h5 class="reward-name" id="confirm-reward-name">مأموریت تکمیل شده</h5>
+                        <p class="reward-desc" id="confirm-reward-desc">۳ بازی انجام بده</p>
+                    </div>
+                </div>
+                <div class="confirm-prizes">
+                    <h5 class="prizes-title">پاداش‌ها:</h5>
+                    <div class="prizes-list" id="confirm-prizes-list">
+                        <div class="prize-item">
+                            <span class="prize-icon">🪙</span>
+                            <span class="prize-value">۱۰۰</span>
+                            <span class="prize-label">سکه</span>
+                        </div>
+                        <div class="prize-item">
+                            <span class="prize-icon">⭐</span>
+                            <span class="prize-value">۵۰</span>
+                            <span class="prize-label">XP</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="confirm-warning">
+                    <span class="warning-icon">ℹ️</span>
+                    <p class="warning-text">پاداش به حساب شما اضافه خواهد شد</p>
+                </div>
+            </div>
+            <div class="confirm-footer">
+                <button class="btn btn-outline" id="btn-cancel-confirm-reward">
+                    <span class="btn-text">انصراف</span>
+                </button>
+                <button class="btn btn-primary" id="btn-confirm-claim-reward">
+                    <span class="btn-icon">🎁</span>
+                    <span class="btn-text">تأیید و دریافت</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Daily Reward Calendar Sub-modal -->
+    <div class="daily-reward-overlay" id="daily-reward-overlay" style="display: none;">
+        <div class="daily-reward-content">
+            <div class="daily-reward-header">
+                <span class="daily-reward-icon">📅</span>
+                <h4 class="daily-reward-title">پاداش‌های روزانه</h4>
+                <button class="btn-icon btn-small" id="btn-close-daily-reward" aria-label="بستن">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+            <div class="daily-reward-body">
+                <div class="daily-streak-info">
+                    <div class="streak-icon">🔥</div>
+                    <div class="streak-info">
+                        <span class="streak-title">رشته فعلی</span>
+                        <span class="streak-value" id="daily-streak-value">۲ روز</span>
+                    </div>
+                </div>
+                <div class="daily-calendar" id="daily-calendar">
+                    <div class="calendar-day claimed" data-day="1">
+                        <span class="day-number">۱</span>
+                        <span class="day-reward">🪙 ۲۰</span>
+                        <span class="day-status">✅</span>
+                    </div>
+                    <div class="calendar-day claimed" data-day="2">
+                        <span class="day-number">۲</span>
+                        <span class="day-reward">🪙 ۳۰</span>
+                        <span class="day-status">✅</span>
+                    </div>
+                    <div class="calendar-day current" data-day="3">
+                        <span class="day-number">۳</span>
+                        <span class="day-reward">💎 ۵</span>
+                        <span class="day-status">🎁</span>
+                    </div>
+                    <div class="calendar-day" data-day="4">
+                        <span class="day-number">۴</span>
+                        <span class="day-reward">🪙 ۵۰</span>
+                    </div>
+                    <div class="calendar-day" data-day="5">
+                        <span class="day-number">۵</span>
+                        <span class="day-reward">🪙 ۷۵</span>
+                    </div>
+                    <div class="calendar-day" data-day="6">
+                        <span class="day-number">۶</span>
+                        <span class="day-reward">💎 ۱۰</span>
+                    </div>
+                    <div class="calendar-day special" data-day="7">
+                        <span class="day-number">۷</span>
+                        <span class="day-reward">🎁</span>
+                        <span class="special-badge">ویژه</span>
+                    </div>
+                </div>
+                <div class="daily-reward-timer">
+                    <span class="timer-icon">⏰</span>
+                    <span class="timer-text">ریست بعدی: </span>
+                    <span class="timer-value" id="daily-reset-timer">۱۲:۳۴:۵۶</span>
+                </div>
+            </div>
+            <div class="daily-reward-footer">
+                <button class="btn btn-primary btn-block" id="btn-claim-daily-reward-now">
+                    <span class="btn-icon">🎁</span>
+                    <span class="btn-text">دریافت پاداش امروز</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
