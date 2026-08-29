@@ -1,0 +1,433 @@
+<div id="ranked-screen" class="screen screen-ranked" data-screen-name="ranked">
+    <div class="screen-content">
+        <header class="screen-header">
+            <button class="btn-back" data-route="home" aria-label="بازگشت">
+                <span class="icon">→</span>
+            </button>
+            <h1 class="screen-title">بازی رقابتی</h1>
+            <div class="header-spacer"></div>
+        </header>
+
+        <section class="ranked-hero">
+            <div class="hero-background"></div>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-icon"></span>
+                    <span class="badge-text">فصل ۱</span>
+                </div>
+                <h2 class="hero-title">بازی رقابتی</h2>
+                <p class="hero-subtitle">با بازیکنان هم‌سطح رقابت کنید و رتبه خود را بالا ببرید</p>
+            </div>
+        </section>
+
+        <section class="ranked-player-card">
+            <div class="player-card-header">
+                <div class="player-info">
+                    <span id="ranked-avatar" class="avatar avatar-large">👤</span>
+                    <div class="player-details">
+                        <h3 id="ranked-username" class="player-name">بازیکن</h3>
+                        <p class="player-subtitle">بازیکن فعال</p>
+                    </div>
+                </div>
+                <div class="player-rating">
+                    <span class="rating-label">امتیاز شما</span>
+                    <span id="ranked-rating-value" class="rating-value">۱۰۰</span>
+                </div>
+            </div>
+            <div class="player-card-body">
+                <div class="league-display">
+                    <div class="league-icon-wrapper">
+                        <span id="ranked-league-icon" class="league-icon"></span>
+                    </div>
+                    <div class="league-info">
+                        <span id="ranked-league-name" class="league-name">برنز</span>
+                        <span id="ranked-league-division" class="league-division">تقسیم ۱</span>
+                    </div>
+                </div>
+                <div class="league-progress-section">
+                    <div class="progress-info">
+                        <span class="progress-label">پیشرفت به لیگ بعدی</span>
+                        <span id="ranked-progress-text" class="progress-text">۰ / ۰۰۰</span>
+                    </div>
+                    <div class="progress-bar-large">
+                        <div id="ranked-progress-fill" class="progress-fill" style="width: 0%;"></div>
+                    </div>
+                    <div class="progress-details">
+                        <span id="ranked-points-needed" class="points-needed">۱۰۰۰ امتیاز تا نقره</span>
+                        <span id="ranked-percentile" class="percentile">بالاتر از ۰٪ بازیکنان</span>
+                    </div>
+                </div>
+            </div>
+            <div class="player-card-stats">
+                <div class="stat-item">
+                    <span class="stat-icon">🎮</span>
+                    <div class="stat-info">
+                        <span id="ranked-games-played" class="stat-value">۰</span>
+                        <span class="stat-label">بازی رقابتی</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">⭐</span>
+                    <div class="stat-info">
+                        <span id="ranked-win-rate" class="stat-value">۰٪</span>
+                        <span class="stat-label">نرخ برد</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">🔥</span>
+                    <div class="stat-info">
+                        <span id="ranked-streak" class="stat-value">۰</span>
+                        <span class="stat-label">رشته برد فعلی</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">🏆</span>
+                    <div class="stat-info">
+                        <span id="ranked-best-streak" class="stat-value">۰</span>
+                        <span class="stat-label">بهترین رشته</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ranked-season-info">
+            <div class="season-card">
+                <div class="season-header">
+                    <span class="season-icon"></span>
+                    <div class="season-info">
+                        <h4 class="season-title">فصل فعلی</h4>
+                        <p class="season-subtitle" id="ranked-season-end">پایان فصل: ۲۹ روز دیگر</p>
+                    </div>
+                </div>
+                <div class="season-progress">
+                    <div class="progress-bar">
+                        <div id="ranked-season-progress" class="progress-fill" style="width: 5%;"></div>
+                    </div>
+                    <div class="season-stats">
+                        <span class="season-stat">
+                            <span class="stat-label">روز باقی‌مانده</span>
+                            <span class="stat-value" id="ranked-days-left">۲۹</span>
+                        </span>
+                        <span class="season-stat">
+                            <span class="stat-label">بازی امروز</span>
+                            <span class="stat-value" id="ranked-today-games">۰ / ۵۰</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ranked-matchmaking" id="ranked-matchmaking-section">
+            <div class="section-header">
+                <h3 class="section-title">شروع بازی رقابتی</h3>
+            </div>
+            <div class="matchmaking-options">
+                <label class="match-option selected" data-mode="solo">
+                    <input type="radio" name="ranked-mode" value="solo" checked>
+                    <div class="match-option-content">
+                        <span class="option-icon"></span>
+                        <div class="option-info">
+                            <h4 class="option-title">تک‌نفره</h4>
+                            <p class="option-desc">بازی انفرادی با حریفان تصادفی</p>
+                        </div>
+                        <span class="option-check"></span>
+                    </div>
+                </label>
+                <label class="match-option" data-mode="team">
+                    <input type="radio" name="ranked-mode" value="team">
+                    <div class="match-option-content">
+                        <span class="option-icon"></span>
+                        <div class="option-info">
+                            <h4 class="option-title">تیمی</h4>
+                            <p class="option-desc">بازی تیمی با هم‌تیمی انتخابی</p>
+                        </div>
+                        <span class="option-check"></span>
+                    </div>
+                </label>
+            </div>
+            <button id="btn-start-ranked-search" class="btn btn-primary btn-block btn-large btn-play">
+                <span class="btn-icon"></span>
+                <span class="btn-text">جستجوی بازی رقابتی</span>
+            </button>
+            <div class="matchmaking-info">
+                <div class="info-item">
+                    <span class="info-icon">⏱️</span>
+                    <span class="info-text" id="ranked-avg-wait">میانگین انتظار: ۴۵ ثانیه</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">👥</span>
+                    <span class="info-text" id="ranked-online-players">بازیکنان آنلاین: ۱۲۴</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="ranked-searching" id="ranked-searching-section" style="display: none;">
+            <div class="searching-container">
+                <div class="searching-animation">
+                    <div class="searching-circle">
+                        <div class="searching-ring"></div>
+                        <div class="searching-ring ring-2"></div>
+                        <div class="searching-ring ring-3"></div>
+                        <div class="searching-icon">🏆</div>
+                    </div>
+                </div>
+                <h3 class="searching-title">در حال جستجوی حریف...</h3>
+                <p class="searching-subtitle">به دنبال بازیکنان هم‌سطح شما هستیم</p>
+                <div class="searching-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="ranked-search-progress" style="width: 0%;"></div>
+                    </div>
+                    <span class="searching-time" id="ranked-search-time">۰:۰</span>
+                </div>
+                <div class="searching-criteria">
+                    <div class="criteria-item">
+                        <span class="criteria-icon">🎯</span>
+                        <span class="criteria-text">امتیاز: ۹۵۰ - ۱۰۵۰</span>
+                    </div>
+                    <div class="criteria-item">
+                        <span class="criteria-icon">🏅</span>
+                        <span class="criteria-text">لیگ: برنز - نقره</span>
+                    </div>
+                    <div class="criteria-item">
+                        <span class="criteria-icon">🌍</span>
+                        <span class="criteria-text">منطقه: ایران</span>
+                    </div>
+                </div>
+                <button id="btn-cancel-ranked-search" class="btn btn-outline btn-block">
+                    <span class="btn-text">انصراف از جستجو</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="ranked-match-found" id="ranked-match-section" style="display: none;">
+            <div class="match-container">
+                <div class="match-animation">
+                    <span class="match-icon">🏆</span>
+                </div>
+                <h3 class="match-title">حریف پیدا شد!</h3>
+                <p class="match-subtitle">بازی در حال آماده‌سازی است</p>
+                <div class="match-players">
+                    <div class="match-player">
+                        <span class="player-avatar">👤</span>
+                        <span class="player-name" id="ranked-match-player">شما</span>
+                        <span class="player-rating" id="ranked-match-player-rating">۰۰۰</span>
+                        <span class="player-league" id="ranked-match-player-league">برنز</span>
+                    </div>
+                    <div class="match-vs">VS</div>
+                    <div class="match-player">
+                        <span class="player-avatar">👤</span>
+                        <span class="player-name" id="ranked-match-opponent">حریف</span>
+                        <span class="player-rating" id="ranked-match-opponent-rating">۱۰۲۰</span>
+                        <span class="player-league" id="ranked-match-opponent-league">برنز</span>
+                    </div>
+                </div>
+                <div class="match-countdown">
+                    <span class="countdown-label">شروع بازی در</span>
+                    <span class="countdown-value" id="ranked-match-countdown">۵</span>
+                </div>
+                <div class="match-reward-preview">
+                    <span class="reward-label">پاداش برد:</span>
+                    <span class="reward-value" id="ranked-match-reward">+۲۵ امتیاز</span>
+                </div>
+                <button id="btn-cancel-ranked-match" class="btn btn-outline btn-small">
+                    انصراف
+                </button>
+            </div>
+        </section>
+
+        <section class="ranked-leaderboard-preview">
+            <div class="section-header">
+                <h3 class="section-title">رتبه‌بندی فصل</h3>
+                <a href="#/leaderboard" class="section-link" data-route="leaderboard">مشاهده کامل</a>
+            </div>
+            <div class="leaderboard-preview" id="ranked-leaderboard-preview">
+                <div class="leaderboard-item top-rank">
+                    <span class="rank-number">🥇</span>
+                    <span class="avatar avatar-small"></span>
+                    <span class="player-name">استاد بزرگ</span>
+                    <span class="player-rating">۲۸۰</span>
+                    <span class="player-league">الماس</span>
+                </div>
+                <div class="leaderboard-item top-rank">
+                    <span class="rank-number">🥈</span>
+                    <span class="avatar avatar-small">👩</span>
+                    <span class="player-name">بازیکن حرفه‌ای</span>
+                    <span class="player-rating">۶۵۰</span>
+                    <span class="player-league">الماس</span>
+                </div>
+                <div class="leaderboard-item top-rank">
+                    <span class="rank-number">🥉</span>
+                    <span class="avatar avatar-small">👨</span>
+                    <span class="player-name">قهرمان</span>
+                    <span class="player-rating">۴۵۰</span>
+                    <span class="player-league">پلاتین</span>
+                </div>
+                <div class="leaderboard-item">
+                    <span class="rank-number">۴</span>
+                    <span class="avatar avatar-small">👩</span>
+                    <span class="player-name">بازیکن ۴</span>
+                    <span class="player-rating">۲۲۰</span>
+                    <span class="player-league">پلاتین</span>
+                </div>
+                <div class="leaderboard-item">
+                    <span class="rank-number"></span>
+                    <span class="avatar avatar-small">👨</span>
+                    <span class="player-name">بازیکن ۵</span>
+                    <span class="player-rating">۰۵۰</span>
+                    <span class="player-league">پلاتین</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="ranked-rewards">
+            <div class="section-header">
+                <h3 class="section-title">پاداش‌های پایان فصل</h3>
+            </div>
+            <div class="rewards-grid">
+                <div class="reward-card">
+                    <div class="reward-icon">🥇</div>
+                    <div class="reward-info">
+                        <h4 class="reward-title">مقام اول</h4>
+                        <p class="reward-desc">۰۰,۰۰ سکه + ۱۰۰ الماس</p>
+                    </div>
+                </div>
+                <div class="reward-card">
+                    <div class="reward-icon"></div>
+                    <div class="reward-info">
+                        <h4 class="reward-title">مقام دوم</h4>
+                        <p class="reward-desc">۵۰,۰۰۰ سکه + ۰۰ الماس</p>
+                    </div>
+                </div>
+                <div class="reward-card">
+                    <div class="reward-icon">🥉</div>
+                    <div class="reward-info">
+                        <h4 class="reward-title">مقام سوم</h4>
+                        <p class="reward-desc">۲,۰۰۰ سکه + ۲۵۰ الماس</p>
+                    </div>
+                </div>
+                <div class="reward-card">
+                    <div class="reward-icon">🏅</div>
+                    <div class="reward-info">
+                        <h4 class="reward-title">تاپ ۱۰</h4>
+                        <p class="reward-desc">۰,۰۰۰ سکه + ۱۰۰ الماس</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ranked-league-info">
+            <div class="section-header">
+                <h3 class="section-title">لیگ‌ها</h3>
+            </div>
+            <div class="leagues-list">
+                <div class="league-item">
+                    <span class="league-icon">🥉</span>
+                    <div class="league-details">
+                        <span class="league-name">برنز</span>
+                        <span class="league-range">۰ - ۹۹ امتیاز</span>
+                    </div>
+                    <span class="league-status current">لیگ فعلی</span>
+                </div>
+                <div class="league-item">
+                    <span class="league-icon">🥈</span>
+                    <div class="league-details">
+                        <span class="league-name">نقره</span>
+                        <span class="league-range">۱۰۰۰ - ۱۴۹۹ امتیاز</span>
+                    </div>
+                    <span class="league-status next">لیگ بعدی</span>
+                </div>
+                <div class="league-item">
+                    <span class="league-icon">🥇</span>
+                    <div class="league-details">
+                        <span class="league-name">طلا</span>
+                        <span class="league-range">۱۰۰ - ۱۹۹ امتیاز</span>
+                    </div>
+                </div>
+                <div class="league-item">
+                    <span class="league-icon"></span>
+                    <div class="league-details">
+                        <span class="league-name">پلاتین</span>
+                        <span class="league-range">۲۰۰۰ - ۲۴۹۹ امتیاز</span>
+                    </div>
+                </div>
+                <div class="league-item">
+                    <span class="league-icon">💎</span>
+                    <div class="league-details">
+                        <span class="league-name">الماس</span>
+                        <span class="league-range">۲۰۰ - ۲۹۹ امتیاز</span>
+                    </div>
+                </div>
+                <div class="league-item">
+                    <span class="league-icon">👑</span>
+                    <div class="league-details">
+                        <span class="league-name">مستر</span>
+                        <span class="league-range">۳۰۰+ امتیاز</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ranked-rules">
+            <div class="section-header">
+                <h3 class="section-title">قوانین بازی رقابتی</h3>
+            </div>
+            <div class="rules-list">
+                <div class="rule-item">
+                    <span class="rule-icon">🎯</span>
+                    <div class="rule-content">
+                        <h4 class="rule-title">سیستم امتیازدهی ELO</h4>
+                        <p class="rule-desc">امتیاز شما بر اساس عملکرد و امتیاز حریف تغییر می‌کند</p>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">🏅</span>
+                    <div class="rule-content">
+                        <h4 class="rule-title">ارتقا و سقوط</h4>
+                        <p class="rule-desc">با کسب امتیاز کافی به لیگ بالاتر ارتقا می‌یابید</p>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">📅</span>
+                    <div class="rule-content">
+                        <h4 class="rule-title">فصل‌های ماهانه</h4>
+                        <p class="rule-desc">هر ماه فصل جدید شروع می‌شود و امتیازها ریست می‌شوند</p>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">️</span>
+                    <div class="rule-content">
+                        <h4 class="rule-title">تطابق عادلانه</h4>
+                        <p class="rule-desc">سیستم matchmaking بازیکنان هم‌سطح را پیدا می‌کند</p>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">🚫</span>
+                    <div class="rule-content">
+                        <h4 class="rule-title">محدودیت روزانه</h4>
+                        <p class="rule-desc">حداکثر ۵۰ بازی رقابتی در روز مجاز است</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ranked-tips">
+            <div class="section-header">
+                <h3 class="section-title">نکات بازی رقابتی</h3>
+            </div>
+            <div class="tips-list">
+                <div class="tip-item">
+                    <span class="tip-icon">💡</span>
+                    <p class="tip-text">با بردن بازی‌های متوالی، bonus رشته برد دریافت کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🎯</span>
+                    <p class="tip-text">برای ارتقای سریع‌تر، با بازیکنان قوی‌تر بازی کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon"></span>
+                    <p class="tip-text">در پایان فصل، بر اساس لیگ خود پاداش دریافت کنید</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
