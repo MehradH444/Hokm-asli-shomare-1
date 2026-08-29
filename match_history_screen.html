@@ -1,0 +1,603 @@
+<div id="match-history-screen" class="screen screen-match-history" data-screen-name="match-history">
+    <div class="screen-content">
+        <header class="screen-header">
+            <button class="btn-back" data-route="home" aria-label="بازگشت">
+                <span class="icon">→</span>
+            </button>
+            <h1 class="screen-title">تاریخچه بازی</h1>
+            <div class="header-actions">
+                <button class="btn-icon btn-small" id="btn-history-filter" aria-label="فیلتر">
+                    <span class="icon"></span>
+                </button>
+                <button class="btn-icon btn-small" id="btn-history-export" aria-label="خروجی">
+                    <span class="icon">📤</span>
+                </button>
+            </div>
+        </header>
+
+        <section class="history-hero">
+            <div class="hero-background"></div>
+            <div class="hero-content">
+                <div class="hero-icon">📜</div>
+                <h2 class="hero-title">تاریخچه بازی‌های شما</h2>
+                <p class="hero-subtitle">تمام بازی‌های انجام شده را مرور و تحلیل کنید</p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="stat-icon">🎮</span>
+                        <span class="stat-value" id="history-total-games">۰</span>
+                        <span class="stat-label">کل بازی‌ها</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-icon">🏆</span>
+                        <span class="stat-value" id="history-total-wins"></span>
+                        <span class="stat-label">برد</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-icon">⭐</span>
+                        <span class="stat-value" id="history-win-rate">۰٪</span>
+                        <span class="stat-label">نرخ برد</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="history-filters">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label for="history-mode-filter" class="filter-label">نوع بازی:</label>
+                    <select id="history-mode-filter" class="filter-select">
+                        <option value="all">همه</option>
+                        <option value="quick">سریع</option>
+                        <option value="classic">کلاسیک</option>
+                        <option value="ranked">رقابتی</option>
+                        <option value="private">خصوصی</option>
+                        <option value="practice">تمرین</option>
+                        <option value="tournament">تورنمنت</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="history-result-filter" class="filter-label">نتیجه:</label>
+                    <select id="history-result-filter" class="filter-select">
+                        <option value="all">همه</option>
+                        <option value="win">برد</option>
+                        <option value="lose">باخت</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="history-period-filter" class="filter-label">دوره:</label>
+                    <select id="history-period-filter" class="filter-select">
+                        <option value="today">امروز</option>
+                        <option value="week">هفته اخیر</option>
+                        <option value="month" selected>ماه اخیر</option>
+                        <option value="season">فصل</option>
+                        <option value="all">همه</option>
+                    </select>
+                </div>
+                <button class="btn-icon btn-small" id="btn-refresh-history" aria-label="بروزرسانی">
+                    <span class="icon">🔄</span>
+                </button>
+            </div>
+            <div class="search-row">
+                <div class="input-wrapper search-wrapper">
+                    <span class="input-icon"></span>
+                    <input
+                        type="text"
+                        id="history-search-input"
+                        class="input-field"
+                        placeholder="جستجو در تاریخچه..."
+                        maxlength="50"
+                    >
+                    <button class="btn-clear-search" id="btn-clear-history-search" style="display: none;">
+                        <span class="icon">✕</span>
+                    </button>
+                </div>
+            </div>
+            <div class="quick-filters">
+                <button class="btn-filter-chip active" data-filter="all">همه</button>
+                <button class="btn-filter-chip" data-filter="wins">بردها</button>
+                <button class="btn-filter-chip" data-filter="losses">باخت‌ها</button>
+                <button class="btn-filter-chip" data-filter="kots">کت‌ها</button>
+                <button class="btn-filter-chip" data-filter="ranked">رقابتی</button>
+            </div>
+        </section>
+
+        <section class="history-summary-cards">
+            <div class="summary-card">
+                <div class="summary-icon">🎮</div>
+                <div class="summary-info">
+                    <span class="summary-value" id="summary-games-today">۰</span>
+                    <span class="summary-label">بازی امروز</span>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-icon"></div>
+                <div class="summary-info">
+                    <span class="summary-value" id="summary-wins-today">۰</span>
+                    <span class="summary-label">برد امروز</span>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-icon">🔥</div>
+                <div class="summary-info">
+                    <span class="summary-value" id="summary-current-streak">۰</span>
+                    <span class="summary-label">رشته فعلی</span>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-icon">👑</div>
+                <div class="summary-info">
+                    <span class="summary-value" id="summary-kots">۰</span>
+                    <span class="summary-label">کت‌ها</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="history-chart-section">
+            <div class="chart-card">
+                <div class="card-header">
+                    <h3 class="card-title">روند بازی‌ها</h3>
+                    <div class="card-filters">
+                        <select id="history-chart-period" class="filter-select">
+                            <option value="week">هفته</option>
+                            <option value="month" selected>ماه</option>
+                            <option value="season">فصل</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="chart-container" id="history-chart">
+                    <div class="chart-placeholder">
+                        <div class="chart-bars">
+                            <div class="chart-bar win" style="height: 60%;" data-date="۱">
+                                <span class="bar-value">۶</span>
+                            </div>
+                            <div class="chart-bar lose" style="height: 40%;" data-date="۲">
+                                <span class="bar-value">۴</span>
+                            </div>
+                            <div class="chart-bar win" style="height: 80%;" data-date="۳">
+                                <span class="bar-value">۸</span>
+                            </div>
+                            <div class="chart-bar win" style="height: 50%;" data-date="۴">
+                                <span class="bar-value"></span>
+                            </div>
+                            <div class="chart-bar lose" style="height: 30%;" data-date="">
+                                <span class="bar-value">۳</span>
+                            </div>
+                            <div class="chart-bar win" style="height: 70%;" data-date="">
+                                <span class="bar-value"></span>
+                            </div>
+                            <div class="chart-bar win" style="height: 90%;" data-date="">
+                                <span class="bar-value">۹</span>
+                            </div>
+                        </div>
+                        <div class="chart-labels">
+                            <span>شنبه</span>
+                            <span>یکشنبه</span>
+                            <span>دوشنبه</span>
+                            <span>سه‌شنبه</span>
+                            <span>چهارشنبه</span>
+                            <span>پنجشنبه</span>
+                            <span>جمعه</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="history-list-section">
+            <div class="section-header">
+                <h3 class="section-title" id="history-list-title">همه بازی‌ها</h3>
+                <span class="total-count" id="history-list-count">۰ بازی</span>
+            </div>
+
+            <div class="history-date-group" data-date="today">
+                <div class="date-divider">
+                    <span class="date-text">امروز</span>
+                </div>
+                <div id="history-today-list" class="history-list">
+                    <div class="history-card win" data-game-id="game1">
+                        <div class="game-result-icon">🏆</div>
+                        <div class="game-info">
+                            <div class="game-header">
+                                <span class="game-mode classic">کلاسیک</span>
+                                <span class="game-time">۱۴:۳۰</span>
+                            </div>
+                            <div class="game-details">
+                                <div class="game-score">
+                                    <span class="score-label">نتیجه:</span>
+                                    <span class="score-value">۷ - ۳</span>
+                                </div>
+                                <div class="game-duration">
+                                    <span class="duration-label">مدت:</span>
+                                    <span class="duration-value">۱۲ دقیقه</span>
+                                </div>
+                            </div>
+                            <div class="game-players">
+                                <span class="player-item">شما (تیم ۱)</span>
+                                <span class="vs-text">VS</span>
+                                <span class="player-item">حریف (تیم ۲)</span>
+                            </div>
+                            <div class="game-rewards">
+                                <span class="reward-item">🪙 +۲۵</span>
+                                <span class="reward-item">⭐ +۱۰</span>
+                            </div>
+                        </div>
+                        <div class="game-actions">
+                            <button class="btn btn-small btn-outline btn-view-game-details" data-game-id="game1">
+                                <span class="btn-icon">️</span>
+                                <span class="btn-text">جزئیات</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="history-card lose" data-game-id="game2">
+                        <div class="game-result-icon">💔</div>
+                        <div class="game-info">
+                            <div class="game-header">
+                                <span class="game-mode ranked">رقابتی</span>
+                                <span class="game-time">۳:۱۵</span>
+                            </div>
+                            <div class="game-details">
+                                <div class="game-score">
+                                    <span class="score-label">نتیجه:</span>
+                                    <span class="score-value">۵ - ۷</span>
+                                </div>
+                                <div class="game-duration">
+                                    <span class="duration-label">مدت:</span>
+                                    <span class="duration-value">۱۵ دقیقه</span>
+                                </div>
+                            </div>
+                            <div class="game-players">
+                                <span class="player-item">شما (تیم ۱)</span>
+                                <span class="vs-text">VS</span>
+                                <span class="player-item">حریف (تیم ۲)</span>
+                            </div>
+                            <div class="game-rewards">
+                                <span class="reward-item">🪙 +۱۰</span>
+                                <span class="reward-item rating-change negative">⭐ -۵</span>
+                            </div>
+                        </div>
+                        <div class="game-actions">
+                            <button class="btn btn-small btn-outline btn-view-game-details" data-game-id="game2">
+                                <span class="btn-icon">️</span>
+                                <span class="btn-text">جزئیات</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="history-card win kot" data-game-id="game3">
+                        <div class="game-result-icon">👑</div>
+                        <div class="game-info">
+                            <div class="game-header">
+                                <span class="game-mode private">خصوصی</span>
+                                <span class="game-time">۱۲:۰۰</span>
+                                <span class="game-badge kot">کت!</span>
+                            </div>
+                            <div class="game-details">
+                                <div class="game-score">
+                                    <span class="score-label">نتیجه:</span>
+                                    <span class="score-value">۷ - ۰</span>
+                                </div>
+                                <div class="game-duration">
+                                    <span class="duration-label">مدت:</span>
+                                    <span class="duration-value">۸ دقیقه</span>
+                                </div>
+                            </div>
+                            <div class="game-players">
+                                <span class="player-item">شما (تیم ۱)</span>
+                                <span class="vs-text">VS</span>
+                                <span class="player-item">حریف (تیم ۲)</span>
+                            </div>
+                            <div class="game-rewards">
+                                <span class="reward-item">🪙 +۰</span>
+                                <span class="reward-item">⭐ +۲۵</span>
+                                <span class="reward-item special">🎁 پاداش کت</span>
+                            </div>
+                        </div>
+                        <div class="game-actions">
+                            <button class="btn btn-small btn-outline btn-view-game-details" data-game-id="game3">
+                                <span class="btn-icon">️</span>
+                                <span class="btn-text">جزئیات</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="history-date-group" data-date="yesterday">
+                <div class="date-divider">
+                    <span class="date-text">دیروز</span>
+                </div>
+                <div id="history-yesterday-list" class="history-list">
+                    <div class="history-card win" data-game-id="game4">
+                        <div class="game-result-icon">🏆</div>
+                        <div class="game-info">
+                            <div class="game-header">
+                                <span class="game-mode quick">سریع</span>
+                                <span class="game-time">۲۰:۳۰</span>
+                            </div>
+                            <div class="game-details">
+                                <div class="game-score">
+                                    <span class="score-label">نتیجه:</span>
+                                    <span class="score-value">۷ - ۴</span>
+                                </div>
+                                <div class="game-duration">
+                                    <span class="duration-label">مدت:</span>
+                                    <span class="duration-value">۱۰ دقیقه</span>
+                                </div>
+                            </div>
+                            <div class="game-players">
+                                <span class="player-item">شما (تیم ۱)</span>
+                                <span class="vs-text">VS</span>
+                                <span class="player-item">حریف (تیم ۲)</span>
+                            </div>
+                            <div class="game-rewards">
+                                <span class="reward-item"> +۲۵</span>
+                            </div>
+                        </div>
+                        <div class="game-actions">
+                            <button class="btn btn-small btn-outline btn-view-game-details" data-game-id="game4">
+                                <span class="btn-icon">️</span>
+                                <span class="btn-text">جزئیات</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="history-card lose" data-game-id="game5">
+                        <div class="game-result-icon">💔</div>
+                        <div class="game-info">
+                            <div class="game-header">
+                                <span class="game-mode practice">تمرین</span>
+                                <span class="game-time">۱۸:۰۰</span>
+                            </div>
+                            <div class="game-details">
+                                <div class="game-score">
+                                    <span class="score-label">نتیجه:</span>
+                                    <span class="score-value">۳ - ۷</span>
+                                </div>
+                                <div class="game-duration">
+                                    <span class="duration-label">مدت:</span>
+                                    <span class="duration-value">۲ دقیقه</span>
+                                </div>
+                            </div>
+                            <div class="game-players">
+                                <span class="player-item">شما (تیم ۱)</span>
+                                <span class="vs-text">VS</span>
+                                <span class="player-item">AI سخت (تیم ۲)</span>
+                            </div>
+                            <div class="game-rewards">
+                                <span class="reward-item">بدون پاداش</span>
+                            </div>
+                        </div>
+                        <div class="game-actions">
+                            <button class="btn btn-small btn-outline btn-view-game-details" data-game-id="game5">
+                                <span class="btn-icon">️</span>
+                                <span class="btn-text">جزئیات</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="history-date-group" data-date="older">
+                <div class="date-divider">
+                    <span class="date-text">قدیمی‌تر</span>
+                </div>
+                <div id="history-older-list" class="history-list">
+                    <div class="history-card win" data-game-id="game6">
+                        <div class="game-result-icon">🏆</div>
+                        <div class="game-info">
+                            <div class="game-header">
+                                <span class="game-mode classic">کلاسیک</span>
+                                <span class="game-time">۲ روز پیش</span>
+                            </div>
+                            <div class="game-details">
+                                <div class="game-score">
+                                    <span class="score-label">نتیجه:</span>
+                                    <span class="score-value"> - ۲</span>
+                                </div>
+                                <div class="game-duration">
+                                    <span class="duration-label">مدت:</span>
+                                    <span class="duration-value">۹ دقیقه</span>
+                                </div>
+                            </div>
+                            <div class="game-rewards">
+                                <span class="reward-item">🪙 +۲۵</span>
+                            </div>
+                        </div>
+                        <div class="game-actions">
+                            <button class="btn btn-small btn-outline btn-view-game-details" data-game-id="game6">
+                                <span class="btn-icon">👁️</span>
+                                <span class="btn-text">جزئیات</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="load-more-container" id="history-load-more-container">
+                <button class="btn btn-outline btn-block" id="btn-load-more-history">
+                    <span class="btn-icon">⬇️</span>
+                    <span class="btn-text">بارگذاری بیشتر</span>
+                </button>
+            </div>
+
+            <div class="empty-state" id="history-empty-state" style="display: none;">
+                <span class="empty-icon">📜</span>
+                <h4 class="empty-title">بازی یافت نشد</h4>
+                <p class="empty-desc">فیلترها را تغییر دهید یا عبارت جستجو را اصلاح کنید</p>
+                <button class="btn btn-primary" id="btn-clear-history-filters">
+                    پاک کردن فیلترها
+                </button>
+            </div>
+        </section>
+
+        <section class="history-detail-modal" id="history-detail-modal" style="display: none;">
+            <div class="modal-overlay"></div>
+            <div class="modal-content game-detail-modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">جزئیات بازی</h3>
+                    <button class="btn-icon btn-close-modal" id="btn-close-game-detail" aria-label="بستن">
+                        <span class="icon">✕</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="game-detail-header" id="game-detail-header">
+                        <div class="game-result-badge win" id="game-detail-result">
+                            <span class="result-icon"></span>
+                            <span class="result-text">پیروزی</span>
+                        </div>
+                        <div class="game-mode-badge" id="game-detail-mode">
+                            <span class="mode-icon"></span>
+                            <span class="mode-text">کلاسیک</span>
+                        </div>
+                    </div>
+
+                    <div class="game-detail-info">
+                        <div class="info-row">
+                            <span class="info-label">تاریخ:</span>
+                            <span class="info-value" id="game-detail-date">۱۴۰۵/۰۶/۰۸</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">ساعت:</span>
+                            <span class="info-value" id="game-detail-time">۱۴:۳۰</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">مدت:</span>
+                            <span class="info-value" id="game-detail-duration">۱۲ دقیقه</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">نتیجه:</span>
+                            <span class="info-value" id="game-detail-score">۷ - ۳</span>
+                        </div>
+                    </div>
+
+                    <div class="game-detail-teams">
+                        <div class="team-card team-1">
+                            <div class="team-header">
+                                <span class="team-badge">تیم ۱</span>
+                                <span class="team-result win">برنده</span>
+                            </div>
+                            <div class="team-players">
+                                <div class="team-player you">
+                                    <span class="player-avatar">👤</span>
+                                    <span class="player-name">شما</span>
+                                    <span class="player-role">حاکم</span>
+                                </div>
+                                <div class="team-player">
+                                    <span class="player-avatar">🤖</span>
+                                    <span class="player-name">AI ۱</span>
+                                    <span class="player-role">یار</span>
+                                </div>
+                            </div>
+                            <div class="team-stats">
+                                <div class="team-stat">
+                                    <span class="stat-label">دست‌ها:</span>
+                                    <span class="stat-value"></span>
+                                </div>
+                                <div class="team-stat">
+                                    <span class="stat-label">امتیاز:</span>
+                                    <span class="stat-value">۷</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="team-card team-2">
+                            <div class="team-header">
+                                <span class="team-badge">تیم ۲</span>
+                                <span class="team-result lose">بازنده</span>
+                            </div>
+                            <div class="team-players">
+                                <div class="team-player">
+                                    <span class="player-avatar">🤖</span>
+                                    <span class="player-name">AI ۲</span>
+                                    <span class="player-role">حاکم</span>
+                                </div>
+                                <div class="team-player">
+                                    <span class="player-avatar">🤖</span>
+                                    <span class="player-name">AI ۳</span>
+                                    <span class="player-role">یار</span>
+                                </div>
+                            </div>
+                            <div class="team-stats">
+                                <div class="team-stat">
+                                    <span class="stat-label">دست‌ها:</span>
+                                    <span class="stat-value">۳</span>
+                                </div>
+                                <div class="team-stat">
+                                    <span class="stat-label">امتیاز:</span>
+                                    <span class="stat-value">۳</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-detail-tricks" id="game-detail-tricks-section">
+                        <h4 class="tricks-title">دست‌های بازی:</h4>
+                        <div class="tricks-list" id="game-detail-tricks-list">
+                            <div class="trick-item won">
+                                <span class="trick-number">دست ۱</span>
+                                <span class="trick-winner">شما بردید</span>
+                                <span class="trick-cards">A ♠K ♥Q ♣J</span>
+                            </div>
+                            <div class="trick-item won">
+                                <span class="trick-number">دست ۲</span>
+                                <span class="trick-winner">شما بردید</span>
+                                <span class="trick-cards">♠10 ♠9 ♥8 ♣7</span>
+                            </div>
+                            <div class="trick-item lost">
+                                <span class="trick-number">دست ۳</span>
+                                <span class="trick-winner">حریف برد</span>
+                                <span class="trick-cards">♥A ♥K ♠Q ♣10</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-detail-rewards" id="game-detail-rewards-section">
+                        <h4 class="rewards-title">پاداش‌ها:</h4>
+                        <div class="rewards-list" id="game-detail-rewards-list">
+                            <div class="reward-item">
+                                <span class="reward-icon">🪙</span>
+                                <span class="reward-value">+۲۵ سکه</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-icon">⭐</span>
+                                <span class="reward-value">+۱۰ XP</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-detail-actions" id="game-detail-actions">
+                        <button class="btn btn-outline btn-block" id="btn-share-game-result">
+                            <span class="btn-icon">📤</span>
+                            <span class="btn-text">اشتراک‌گذاری نتیجه</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="history-tips">
+            <div class="section-header">
+                <h3 class="section-title">نکات تاریخچه</h3>
+            </div>
+            <div class="tips-list">
+                <div class="tip-item">
+                    <span class="tip-icon">💡</span>
+                    <p class="tip-text">با فیلتر کردن بازی‌ها، می‌توانید عملکرد خود را در حالت‌های مختلف تحلیل کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">📊</span>
+                    <p class="tip-text">نمودار روند بازی‌ها به شما کمک می‌کند پیشرفت خود را دنبال کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🎯</span>
+                    <p class="tip-text">با بررسی جزئیات هر بازی، نقاط قوت و ضعف خود را شناسایی کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🏆</span>
+                    <p class="tip-text">رکوردهای شخصی خود را در بازی‌های مختلف دنبال کنید</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
