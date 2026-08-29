@@ -1,0 +1,365 @@
+<div id="home-screen" class="screen screen-home" data-screen-name="home">
+    <div class="screen-content">
+        <section class="home-hero">
+            <div class="hero-background"></div>
+            <div class="hero-content">
+                <div class="hero-greeting">
+                    <span class="greeting-emoji">👋</span>
+                    <div class="greeting-text">
+                        <h2 id="home-welcome" class="welcome-title">سلام، بازیکن!</h2>
+                        <p class="welcome-subtitle">آماده یک بازی هیجان‌انگیز هستی؟</p>
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="stat-icon">🏆</span>
+                        <div class="stat-info">
+                            <span id="home-rank" class="stat-value">سطح ۱</span>
+                            <span class="stat-label">رتبه شما</span>
+                        </div>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-icon">🎮</span>
+                        <div class="stat-info">
+                            <span id="home-games-played" class="stat-value">۰</span>
+                            <span class="stat-label">بازی انجام شده</span>
+                        </div>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-icon">⭐</span>
+                        <div class="stat-info">
+                            <span id="home-win-rate" class="stat-value">۰٪</span>
+                            <span class="stat-label">نرخ برد</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-quick-play">
+            <button id="btn-quick-play" class="btn-quick-play btn-large" data-route="quick-play">
+                <span class="quick-play-icon">⚡</span>
+                <div class="quick-play-text">
+                    <span class="quick-play-title">بازی سریع</span>
+                    <span class="quick-play-subtitle">شروع فوری بازی با حریفان آنلاین</span>
+                </div>
+                <span class="quick-play-arrow">←</span>
+            </button>
+        </section>
+
+        <section class="home-game-modes">
+            <div class="section-header">
+                <h3 class="section-title">حالت‌های بازی</h3>
+                <a href="#/classic" class="section-link" data-route="classic">مشاهده همه</a>
+            </div>
+            <div class="game-modes-grid">
+                <a href="#/classic" class="game-mode-card" data-route="classic">
+                    <div class="mode-icon">🎴</div>
+                    <div class="mode-info">
+                        <h4 class="mode-title">کلاسیک</h4>
+                        <p class="mode-description">بازی استاندارد حکم</p>
+                    </div>
+                    <div class="mode-players">
+                        <span class="players-icon">👥</span>
+                        <span class="players-count">۱۲۳</span>
+                    </div>
+                </a>
+                <a href="#/ranked" class="game-mode-card" data-route="ranked">
+                    <div class="mode-icon">🏆</div>
+                    <div class="mode-info">
+                        <h4 class="mode-title">رقابتی</h4>
+                        <p class="mode-description">کسب امتیاز و رتبه</p>
+                    </div>
+                    <div class="mode-players">
+                        <span class="players-icon">👥</span>
+                        <span class="players-count">۸۷</span>
+                    </div>
+                </a>
+                <a href="#/private" class="game-mode-card" data-route="private">
+                    <div class="mode-icon">🏠</div>
+                    <div class="mode-info">
+                        <h4 class="mode-title">خصوصی</h4>
+                        <p class="mode-description">بازی با دوستان</p>
+                    </div>
+                    <div class="mode-players">
+                        <span class="players-icon">👥</span>
+                        <span class="players-count">۴۵</span>
+                    </div>
+                </a>
+                <a href="#/tournament" class="game-mode-card" data-route="tournament">
+                    <div class="mode-icon">🏅</div>
+                    <div class="mode-info">
+                        <h4 class="mode-title">تورنمنت</h4>
+                        <p class="mode-description">مسابقات هفتگی</p>
+                    </div>
+                    <div class="mode-players">
+                        <span class="players-icon">👥</span>
+                        <span class="players-count">۳۲</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="home-daily-missions">
+            <div class="section-header">
+                <h3 class="section-title">مأموریت‌های روزانه</h3>
+                <a href="#/missions" class="section-link" data-route="missions">مشاهده همه</a>
+            </div>
+            <div id="home-missions-list" class="missions-list">
+                <div class="mission-card">
+                    <div class="mission-icon">🎯</div>
+                    <div class="mission-info">
+                        <h4 class="mission-title">۳ بازی انجام بده</h4>
+                        <div class="mission-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 66%;"></div>
+                            </div>
+                            <span class="progress-text">۲ از ۳</span>
+                        </div>
+                    </div>
+                    <div class="mission-reward">
+                        <span class="reward-icon">🪙</span>
+                        <span class="reward-amount">۵۰</span>
+                    </div>
+                </div>
+                <div class="mission-card">
+                    <div class="mission-icon">⭐</div>
+                    <div class="mission-info">
+                        <h4 class="mission-title">یک کت ثبت کن</h4>
+                        <div class="mission-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%;"></div>
+                            </div>
+                            <span class="progress-text">۰ از ۱</span>
+                        </div>
+                    </div>
+                    <div class="mission-reward">
+                        <span class="reward-icon">💎</span>
+                        <span class="reward-amount">۱۰</span>
+                    </div>
+                </div>
+                <div class="mission-card">
+                    <div class="mission-icon">👥</div>
+                    <div class="mission-info">
+                        <h4 class="mission-title">با دوستانت بازی کن</h4>
+                        <div class="mission-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%;"></div>
+                            </div>
+                            <span class="progress-text">۰ از ۲</span>
+                        </div>
+                    </div>
+                    <div class="mission-reward">
+                        <span class="reward-icon">🪙</span>
+                        <span class="reward-amount">۱۰۰</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-daily-reward">
+            <div class="daily-reward-card">
+                <div class="reward-header">
+                    <span class="reward-icon-large">🎁</span>
+                    <div class="reward-info">
+                        <h3 class="reward-title">جایزه روزانه</h3>
+                        <p class="reward-subtitle">هر روز وارد شو و جایزه بگیر!</p>
+                    </div>
+                </div>
+                <div class="reward-days">
+                    <div class="reward-day completed">
+                        <span class="day-number">۱</span>
+                        <span class="day-reward">🪙 ۲۰</span>
+                    </div>
+                    <div class="reward-day completed">
+                        <span class="day-number">۲</span>
+                        <span class="day-reward">🪙 ۳۰</span>
+                    </div>
+                    <div class="reward-day current">
+                        <span class="day-number">۳</span>
+                        <span class="day-reward">💎 ۵</span>
+                        <button id="btn-claim-daily-reward" class="btn-claim-reward">دریافت</button>
+                    </div>
+                    <div class="reward-day">
+                        <span class="day-number">۴</span>
+                        <span class="day-reward">🪙 ۵۰</span>
+                    </div>
+                    <div class="reward-day">
+                        <span class="day-number">۵</span>
+                        <span class="day-reward">🪙 ۷۵</span>
+                    </div>
+                    <div class="reward-day">
+                        <span class="day-number">۶</span>
+                        <span class="day-reward">💎 ۱۰</span>
+                    </div>
+                    <div class="reward-day special">
+                        <span class="day-number">۷</span>
+                        <span class="day-reward">🎁</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-friends-online">
+            <div class="section-header">
+                <h3 class="section-title">دوستان آنلاین</h3>
+                <a href="#/friends" class="section-link" data-route="friends">مشاهده همه</a>
+            </div>
+            <div id="home-friends-list" class="friends-list-horizontal">
+                <div class="friend-card-online">
+                    <div class="friend-avatar-wrapper">
+                        <span class="avatar avatar-medium">👨</span>
+                        <span class="online-indicator"></span>
+                    </div>
+                    <span class="friend-name">علی</span>
+                    <button class="btn-invite-friend btn-small" data-friend-id="1">دعوت</button>
+                </div>
+                <div class="friend-card-online">
+                    <div class="friend-avatar-wrapper">
+                        <span class="avatar avatar-medium">👩</span>
+                        <span class="online-indicator"></span>
+                    </div>
+                    <span class="friend-name">مریم</span>
+                    <button class="btn-invite-friend btn-small" data-friend-id="2">دعوت</button>
+                </div>
+                <div class="friend-card-online">
+                    <div class="friend-avatar-wrapper">
+                        <span class="avatar avatar-medium">👨</span>
+                        <span class="online-indicator in-game"></span>
+                    </div>
+                    <span class="friend-name">رضا</span>
+                    <button class="btn-watch-friend btn-small" data-friend-id="3">تماشا</button>
+                </div>
+                <div class="friend-card-online">
+                    <div class="friend-avatar-wrapper">
+                        <span class="avatar avatar-medium">👩</span>
+                        <span class="online-indicator"></span>
+                    </div>
+                    <span class="friend-name">زهرا</span>
+                    <button class="btn-invite-friend btn-small" data-friend-id="4">دعوت</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-recent-matches">
+            <div class="section-header">
+                <h3 class="section-title">آخرین بازی‌ها</h3>
+                <a href="#/match-history" class="section-link" data-route="match-history">تاریخچه کامل</a>
+            </div>
+            <div id="home-matches-list" class="matches-list">
+                <div class="match-card win">
+                    <div class="match-result">
+                        <span class="result-icon">🏆</span>
+                        <span class="result-text">پیروزی</span>
+                    </div>
+                    <div class="match-info">
+                        <span class="match-mode">کلاسیک</span>
+                        <span class="match-score">۷ - ۳</span>
+                    </div>
+                    <div class="match-meta">
+                        <span class="match-time">۵ دقیقه پیش</span>
+                        <span class="match-reward">+۲۵ 🪙</span>
+                    </div>
+                </div>
+                <div class="match-card lose">
+                    <div class="match-result">
+                        <span class="result-icon">💔</span>
+                        <span class="result-text">شکست</span>
+                    </div>
+                    <div class="match-info">
+                        <span class="match-mode">رقابتی</span>
+                        <span class="match-score">۵ - ۷</span>
+                    </div>
+                    <div class="match-meta">
+                        <span class="match-time">۲۰ دقیقه پیش</span>
+                        <span class="match-reward">+۱۰ 🪙</span>
+                    </div>
+                </div>
+                <div class="match-card win">
+                    <div class="match-result">
+                        <span class="result-icon">👑</span>
+                        <span class="result-text">کت!</span>
+                    </div>
+                    <div class="match-info">
+                        <span class="match-mode">خصوصی</span>
+                        <span class="match-score">۷ - ۰</span>
+                    </div>
+                    <div class="match-meta">
+                        <span class="match-time">۱ ساعت پیش</span>
+                        <span class="match-reward">+۵۰ 🪙</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-events">
+            <div class="section-header">
+                <h3 class="section-title">رویدادهای ویژه</h3>
+                <a href="#/events" class="section-link" data-route="events">مشاهده همه</a>
+            </div>
+            <div id="home-events-list" class="events-carousel">
+                <div class="event-card featured">
+                    <div class="event-image">🎉</div>
+                    <div class="event-content">
+                        <span class="event-badge">ویژه</span>
+                        <h4 class="event-title">جشنواره بهاره</h4>
+                        <p class="event-description">با شرکت در بازی‌های ویژه، جوایز ارزشمند کسب کنید!</p>
+                        <div class="event-timer">
+                            <span class="timer-icon">⏰</span>
+                            <span class="timer-text">۲ روز و ۱۴ ساعت باقی‌مانده</span>
+                        </div>
+                        <button class="btn btn-primary btn-small" data-route="events">شرکت در رویداد</button>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-image">🏆</div>
+                    <div class="event-content">
+                        <span class="event-badge">تورنمنت</span>
+                        <h4 class="event-title">مسابقات هفتگی</h4>
+                        <p class="event-description">رقابت با بهترین بازیکنان برای کسب جایزه بزرگ</p>
+                        <div class="event-timer">
+                            <span class="timer-icon">⏰</span>
+                            <span class="timer-text">۵ روز باقی‌مانده</span>
+                        </div>
+                        <button class="btn btn-secondary btn-small" data-route="tournament">مشاهده جزئیات</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-league-preview">
+            <div class="league-card">
+                <div class="league-header">
+                    <span class="league-icon">🏅</span>
+                    <div class="league-info">
+                        <h3 class="league-title">لیگ فعلی شما</h3>
+                        <p class="league-name">لیگ نقره‌ای</p>
+                    </div>
+                </div>
+                <div class="league-progress">
+                    <div class="progress-bar-large">
+                        <div class="progress-fill" style="width: 65%;"></div>
+                    </div>
+                    <div class="league-stats">
+                        <span class="league-points">۶۵۰ / ۱۰۰۰ امتیاز</span>
+                        <span class="league-next">۳۵۰ امتیاز تا لیگ طلایی</span>
+                    </div>
+                </div>
+                <button class="btn btn-outline btn-block" data-route="league">مشاهده لیگ</button>
+            </div>
+        </section>
+
+        <section class="home-announcements">
+            <div class="announcement-card">
+                <span class="announcement-icon">📢</span>
+                <div class="announcement-content">
+                    <h4 class="announcement-title">به‌روزرسانی جدید!</h4>
+                    <p class="announcement-text">حالت تمرین با هوش مصنوعی پیشرفته اضافه شد.</p>
+                </div>
+                <button class="btn-icon btn-small" aria-label="بستن">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+        </section>
+    </div>
+</div>
