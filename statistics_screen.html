@@ -1,0 +1,953 @@
+<div id="statistics-screen" class="screen screen-statistics" data-screen-name="statistics">
+    <div class="screen-content">
+        <header class="screen-header">
+            <button class="btn-back" data-route="home" aria-label="بازگشت">
+                <span class="icon">→</span>
+            </button>
+            <h1 class="screen-title">آمار</h1>
+            <div class="header-actions">
+                <button class="btn-icon btn-small" id="btn-stats-filter" aria-label="فیلتر">
+                    <span class="icon">🔍</span>
+                </button>
+                <button class="btn-icon btn-small" id="btn-stats-share" aria-label="اشتراک‌گذاری">
+                    <span class="icon"></span>
+                </button>
+            </div>
+        </header>
+
+        <section class="stats-hero">
+            <div class="hero-background"></div>
+            <div class="hero-content">
+                <div class="hero-icon"></div>
+                <h2 class="hero-title">آمار بازی شما</h2>
+                <p class="hero-subtitle">عملکرد خود را تحلیل و پیشرفت کنید</p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="stat-icon">🎮</span>
+                        <span class="stat-value" id="stats-hero-games">۰</span>
+                        <span class="stat-label">کل بازی‌ها</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-icon">🏆</span>
+                        <span class="stat-value" id="stats-hero-wins">۰</span>
+                        <span class="stat-label">برد</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-icon">⭐</span>
+                        <span class="stat-value" id="stats-hero-winrate">۰٪</span>
+                        <span class="stat-label">نرخ برد</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-overview">
+            <div class="stats-grid">
+                <div class="stat-card primary">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">🎮</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="stat-total-games" class="stat-value">۰</span>
+                        <span class="stat-label">کل بازی‌ها</span>
+                        <span class="stat-change positive" id="stat-games-change">+۵ این هفته</span>
+                    </div>
+                </div>
+                <div class="stat-card success">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">🏆</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="stat-total-wins" class="stat-value">۰</span>
+                        <span class="stat-label">برد</span>
+                        <span class="stat-change positive" id="stat-wins-change">+۳ این هفته</span>
+                    </div>
+                </div>
+                <div class="stat-card danger">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">💔</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="stat-total-losses" class="stat-value">۰</span>
+                        <span class="stat-label">باخت</span>
+                        <span class="stat-change negative" id="stat-losses-change">+۲ این هفته</span>
+                    </div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">⭐</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="stat-win-rate" class="stat-value">۰٪</span>
+                        <span class="stat-label">نرخ برد</span>
+                        <span class="stat-change neutral" id="stat-winrate-change">ثابت</span>
+                    </div>
+                </div>
+                <div class="stat-card info">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">🔥</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="stat-current-streak" class="stat-value">۰</span>
+                        <span class="stat-label">رشته فعلی</span>
+                        <span class="stat-change positive" id="stat-streak-label">برد متوالی</span>
+                    </div>
+                </div>
+                <div class="stat-card epic">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon"></span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="stat-best-streak" class="stat-value">۰</span>
+                        <span class="stat-label">بهترین رشته</span>
+                        <span class="stat-change neutral">رکورد شخصی</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-tabs">
+            <div class="tabs-container">
+                <button class="tab-btn active" data-tab="overview" id="tab-stats-overview">
+                    <span class="tab-icon">📊</span>
+                    <span class="tab-text">کلی</span>
+                </button>
+                <button class="tab-btn" data-tab="recent" id="tab-stats-recent">
+                    <span class="tab-icon"></span>
+                    <span class="tab-text">اخیر</span>
+                </button>
+                <button class="tab-btn" data-tab="modes" id="tab-stats-modes">
+                    <span class="tab-icon"></span>
+                    <span class="tab-text">حالت‌ها</span>
+                </button>
+                <button class="tab-btn" data-tab="performance" id="tab-stats-performance">
+                    <span class="tab-icon">📈</span>
+                    <span class="tab-text">عملکرد</span>
+                </button>
+                <button class="tab-btn" data-tab="compare" id="tab-stats-compare">
+                    <span class="tab-icon">👥</span>
+                    <span class="tab-text">مقایسه</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="stats-overview-section" id="stats-overview-section">
+            <div class="stats-chart-card">
+                <div class="card-header">
+                    <h3 class="card-title">روند بازی‌ها</h3>
+                    <div class="card-filters">
+                        <select id="stats-period-filter" class="filter-select">
+                            <option value="week">هفته اخیر</option>
+                            <option value="month" selected>ماه اخیر</option>
+                            <option value="season">فصل</option>
+                            <option value="all">همه</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="chart-container" id="stats-games-chart">
+                    <div class="chart-placeholder">
+                        <span class="chart-icon">📈</span>
+                        <span class="chart-text">نمودار تعداد بازی‌ها در طول زمان</span>
+                        <div class="chart-bars">
+                            <div class="chart-bar" style="height: 40%;" data-day="۱">
+                                <span class="bar-value">۴</span>
+                            </div>
+                            <div class="chart-bar" style="height: 60%;" data-day="۲">
+                                <span class="bar-value">۶</span>
+                            </div>
+                            <div class="chart-bar" style="height: 30%;" data-day="۳">
+                                <span class="bar-value">۳</span>
+                            </div>
+                            <div class="chart-bar" style="height: 80%;" data-day="۴">
+                                <span class="bar-value">۸</span>
+                            </div>
+                            <div class="chart-bar" style="height: 50%;" data-day="۵">
+                                <span class="bar-value">۵</span>
+                            </div>
+                            <div class="chart-bar" style="height: 70%;" data-day="">
+                                <span class="bar-value"></span>
+                            </div>
+                            <div class="chart-bar" style="height: 90%;" data-day="">
+                                <span class="bar-value"></span>
+                            </div>
+                        </div>
+                        <div class="chart-labels">
+                            <span>شنبه</span>
+                            <span>یکشنبه</span>
+                            <span>دوشنبه</span>
+                            <span>سه‌شنبه</span>
+                            <span>چهارشنبه</span>
+                            <span>پنجشنبه</span>
+                            <span>جمعه</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-chart-card">
+                <div class="card-header">
+                    <h3 class="card-title">نرخ برد</h3>
+                </div>
+                <div class="chart-container" id="stats-winrate-chart">
+                    <div class="chart-placeholder">
+                        <div class="donut-chart">
+                            <div class="donut-center">
+                                <span class="donut-value" id="stats-donut-winrate">۰٪</span>
+                                <span class="donut-label">نرخ برد</span>
+                            </div>
+                            <div class="donut-ring">
+                                <div class="donut-segment win" style="--percentage: 0;"></div>
+                                <div class="donut-segment loss" style="--percentage: 100;"></div>
+                            </div>
+                        </div>
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <span class="legend-color win"></span>
+                                <span class="legend-label">برد: <strong id="stats-legend-wins">۰</strong></span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color loss"></span>
+                                <span class="legend-label">باخت: <strong id="stats-legend-losses">۰</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-detail-card">
+                <div class="card-header">
+                    <h3 class="card-title">جزئیات عملکرد</h3>
+                </div>
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <div class="detail-icon">🃏</div>
+                        <div class="detail-info">
+                            <span class="detail-label">دست‌های برده</span>
+                            <span class="detail-value" id="stat-tricks-won">۰</span>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">👑</div>
+                        <div class="detail-info">
+                            <span class="detail-label">کت‌های اعلام شده</span>
+                            <span class="detail-value" id="stat-kots-declared"></span>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">✅</div>
+                        <div class="detail-info">
+                            <span class="detail-label">کت‌های موفق</span>
+                            <span class="detail-value" id="stat-kots-success">۰</span>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon"></div>
+                        <div class="detail-info">
+                            <span class="detail-label">کت‌های ناموفق</span>
+                            <span class="detail-value" id="stat-kots-failed">۰</span>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">🎯</div>
+                        <div class="detail-info">
+                            <span class="detail-label">دقت انتخاب حکم</span>
+                            <span class="detail-value" id="stat-trump-accuracy">۰٪</span>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">⏱️</div>
+                        <div class="detail-info">
+                            <span class="detail-label">میانگین زمان نوبت</span>
+                            <span class="detail-value" id="stat-avg-turn-time">۰s</span>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">🏅</div>
+                        <div class="detail-info">
+                            <span class="detail-label">بازی‌های کامل (۱۳-۰)</span>
+                            <span class="detail-value" id="stat-perfect-games"></span>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">🔄</div>
+                        <div class="detail-info">
+                            <span class="detail-label">بازگشت‌های بزرگ</span>
+                            <span class="detail-value" id="stat-comebacks">۰</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-detail-card">
+                <div class="card-header">
+                    <h3 class="card-title">پیشرفت در طول زمان</h3>
+                </div>
+                <div class="progress-timeline" id="stats-progress-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot success"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-title">اولین بازی</span>
+                            <span class="timeline-date" id="stat-first-game">۱۴۰۵/۰۶/۰۱</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot success"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-title">اولین برد</span>
+                            <span class="timeline-date" id="stat-first-win">۱۴۰۵/۰۶/۰۱</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot epic"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-title">اولین کت</span>
+                            <span class="timeline-date" id="stat-first-kot">۱۴۰۵/۰۶/۰۵</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot info"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-title">رسیدن به ۱۰ برد</span>
+                            <span class="timeline-date" id="stat-10-wins">۱۴۰۵/۶/۱۰</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot warning"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-title">بهترین رشته برد</span>
+                            <span class="timeline-date" id="stat-best-streak-date">۱۴۰۵/۰۶/۱۵</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-recent-section" id="stats-recent-section" style="display: none;">
+            <div class="section-header">
+                <h3 class="section-title">بازی‌های اخیر</h3>
+                <div class="section-filters">
+                    <select id="recent-games-filter" class="filter-select">
+                        <option value="all">همه</option>
+                        <option value="wins">بردها</option>
+                        <option value="losses">باخت‌ها</option>
+                    </select>
+                </div>
+            </div>
+            <div id="recent-games-list" class="recent-games-list">
+                <div class="recent-game-card win" data-game-id="g1">
+                    <div class="game-result-icon"></div>
+                    <div class="game-info">
+                        <div class="game-header">
+                            <span class="game-mode">کلاسیک</span>
+                            <span class="game-date">امروز ۱۴:۳۰</span>
+                        </div>
+                        <div class="game-details">
+                            <span class="game-score">۷ - ۳</span>
+                            <span class="game-duration">۲ دقیقه</span>
+                        </div>
+                        <div class="game-rewards">
+                            <span class="reward-item">🪙 +۲۵</span>
+                            <span class="reward-item">⭐ +۱۰</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-small btn-outline btn-view-game" data-game-id="g1">
+                        جزئیات
+                    </button>
+                </div>
+
+                <div class="recent-game-card lose" data-game-id="g2">
+                    <div class="game-result-icon">💔</div>
+                    <div class="game-info">
+                        <div class="game-header">
+                            <span class="game-mode">رقابتی</span>
+                            <span class="game-date">امروز ۱۳:۱۵</span>
+                        </div>
+                        <div class="game-details">
+                            <span class="game-score">۵ - ۷</span>
+                            <span class="game-duration">۱۵ دقیقه</span>
+                        </div>
+                        <div class="game-rewards">
+                            <span class="reward-item">🪙 +۱۰</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-small btn-outline btn-view-game" data-game-id="g2">
+                        جزئیات
+                    </button>
+                </div>
+
+                <div class="recent-game-card win" data-game-id="g3">
+                    <div class="game-result-icon">👑</div>
+                    <div class="game-info">
+                        <div class="game-header">
+                            <span class="game-mode">خصوصی</span>
+                            <span class="game-date">دیروز ۲۰:۰۰</span>
+                        </div>
+                        <div class="game-details">
+                            <span class="game-score">۷ - ۰</span>
+                            <span class="game-duration">۸ دقیقه</span>
+                            <span class="game-badge kot">کت!</span>
+                        </div>
+                        <div class="game-rewards">
+                            <span class="reward-item"> +۵۰</span>
+                            <span class="reward-item">⭐ +۲۵</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-small btn-outline btn-view-game" data-game-id="g3">
+                        جزئیات
+                    </button>
+                </div>
+
+                <div class="recent-game-card win" data-game-id="g4">
+                    <div class="game-result-icon">🏆</div>
+                    <div class="game-info">
+                        <div class="game-header">
+                            <span class="game-mode">کلاسیک</span>
+                            <span class="game-date">دیروز ۱۸:۳۰</span>
+                        </div>
+                        <div class="game-details">
+                            <span class="game-score">۷ - ۴</span>
+                            <span class="game-duration">۴ دقیقه</span>
+                        </div>
+                        <div class="game-rewards">
+                            <span class="reward-item">🪙 +۲۵</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-small btn-outline btn-view-game" data-game-id="g4">
+                        جزئیات
+                    </button>
+                </div>
+
+                <div class="recent-game-card lose" data-game-id="g5">
+                    <div class="game-result-icon">💔</div>
+                    <div class="game-info">
+                        <div class="game-header">
+                            <span class="game-mode">تمرین</span>
+                            <span class="game-date"> روز پیش</span>
+                        </div>
+                        <div class="game-details">
+                            <span class="game-score"> - ۷</span>
+                            <span class="game-duration">۱۰ دقیقه</span>
+                        </div>
+                        <div class="game-rewards">
+                            <span class="reward-item">بدون پاداش</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-small btn-outline btn-view-game" data-game-id="g5">
+                        جزئیات
+                    </button>
+                </div>
+            </div>
+
+            <div class="load-more-container" id="recent-games-load-more">
+                <button class="btn btn-outline btn-block" id="btn-load-more-recent-games">
+                    <span class="btn-icon">️</span>
+                    <span class="btn-text">بارگذاری بیشتر</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="stats-modes-section" id="stats-modes-section" style="display: none;">
+            <div class="section-header">
+                <h3 class="section-title">آمار بر اساس حالت بازی</h3>
+            </div>
+            <div class="modes-grid">
+                <div class="mode-stat-card" data-mode="quick">
+                    <div class="mode-icon">⚡</div>
+                    <div class="mode-info">
+                        <h4 class="mode-name">بازی سریع</h4>
+                        <div class="mode-stats">
+                            <div class="mode-stat">
+                                <span class="stat-label">بازی:</span>
+                                <span class="stat-value" id="mode-quick-games">۰</span>
+                            </div>
+                            <div class="mode-stat">
+                                <span class="stat-label">برد:</span>
+                                <span class="stat-value" id="mode-quick-wins">۰</span>
+                            </div>
+                            <div class="mode-stat">
+                                <span class="stat-label">نرخ برد:</span>
+                                <span class="stat-value" id="mode-quick-winrate">۰٪</span>
+                            </div>
+                        </div>
+                        <div class="mode-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="mode-quick-bar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mode-stat-card" data-mode="classic">
+                    <div class="mode-icon">🎴</div>
+                    <div class="mode-info">
+                        <h4 class="mode-name">کلاسیک</h4>
+                        <div class="mode-stats">
+                            <div class="mode-stat">
+                                <span class="stat-label">بازی:</span>
+                                <span class="stat-value" id="mode-classic-games">۰</span>
+                            </div>
+                            <div class="mode-stat">
+                                <span class="stat-label">برد:</span>
+                                <span class="stat-value" id="mode-classic-wins">۰</span>
+                            </div>
+                            <div class="mode-stat">
+                                <span class="stat-label">نرخ برد:</span>
+                                <span class="stat-value" id="mode-classic-winrate">۰٪</span>
+                            </div>
+                        </div>
+                        <div class="mode-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="mode-classic-bar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mode-stat-card" data-mode="ranked">
+                    <div class="mode-icon">🏆</div>
+                    <div class="mode-info">
+                        <h4 class="mode-name">رقابتی</h4>
+                        <div class="mode-stats">
+                            <div class="mode-stat">
+                                <span class="stat-label">بازی:</span>
+                                <span class="stat-value" id="mode-ranked-games">۰</span>
+                            </div>
+                            <div class="mode-stat">
+                                <span class="stat-label">برد:</span>
+                                <span class="stat-value" id="mode-ranked-wins">۰</span>
+                            </div>
+                            <div class="mode-stat">
+                                <span class="stat-label">نرخ برد:</span>
+                                <span class="stat-value" id="mode-ranked-winrate">۰٪</span>
+                            </div>
+                        </div>
+                        <div class="mode-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="mode-ranked-bar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mode-stat-card" data-mode="private">
+                    <div class="mode-icon">🏠</div>
+                    <div class="mode-info">
+                        <h4 class="mode-name">خصوصی</h4>
+                        <div class="mode-stats">
+                            <div class="mode-stat">
+                                <span class="stat-label">بازی:</span>
+                                <span class="stat-value" id="mode-private-games"></span>
+                            </div>
+                            <div class="mode-stat">
+                                <span class="stat-label">برد:</span>
+                                <span class="stat-value" id="mode-private-wins">۰</span>
+                            </div>
+                            <div class="mode-stat">
+                                <span class="stat-label">نرخ برد:</span>
+                                <span class="stat-value" id="mode-private-winrate">۰٪</span>
+                            </div>
+                        </div>
+                        <div class="mode-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="mode-private-bar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mode-stat-card" data-mode="practice">
+                    <div class="mode-icon">🎓</div>
+                    <div class="mode-info">
+                        <h4 class="mode-name">تمرین</h4>
+                        <div class="mode-stats">
+                            <div class="mode-stat">
+                                <span class="stat-label">بازی:</span>
+                                <span class="stat-value" id="mode-practice-games">۰</span>
+                            </div>
+                            <div class="mode-stat">
+                                <span class="stat-label">برد:</span>
+                                <span class="stat-value" id="mode-practice-wins">۰</span>
+                            </div>
+                            <div class="mode-stat">
+                                <span class="stat-label">نرخ برد:</span>
+                                <span class="stat-value" id="mode-practice-winrate">۰٪</span>
+                            </div>
+                        </div>
+                        <div class="mode-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="mode-practice-bar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mode-stat-card" data-mode="tournament">
+                    <div class="mode-icon">🏅</div>
+                    <div class="mode-info">
+                        <h4 class="mode-name">تورنمنت</h4>
+                        <div class="mode-stats">
+                            <div class="mode-stat">
+                                <span class="stat-label">بازی:</span>
+                                <span class="stat-value" id="mode-tournament-games"></span>
+                            </div>
+                            <div class="mode-stat">
+                                <span class="stat-label">برد:</span>
+                                <span class="stat-value" id="mode-tournament-wins">۰</span>
+                            </div>
+                            <div class="mode-stat">
+                                <span class="stat-label">نرخ برد:</span>
+                                <span class="stat-value" id="mode-tournament-winrate">۰٪</span>
+                            </div>
+                        </div>
+                        <div class="mode-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="mode-tournament-bar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-chart-card">
+                <div class="card-header">
+                    <h3 class="card-title">مقایسه حالت‌ها</h3>
+                </div>
+                <div class="chart-container" id="stats-modes-chart">
+                    <div class="chart-placeholder">
+                        <div class="bar-chart">
+                            <div class="bar-group">
+                                <div class="bar win" style="height: 0%;" data-mode="quick">
+                                    <span class="bar-value">۰٪</span>
+                                </div>
+                                <span class="bar-label">سریع</span>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar win" style="height: 0%;" data-mode="classic">
+                                    <span class="bar-value">۰٪</span>
+                                </div>
+                                <span class="bar-label">کلاسیک</span>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar win" style="height: 0%;" data-mode="ranked">
+                                    <span class="bar-value">۰٪</span>
+                                </div>
+                                <span class="bar-label">رقابتی</span>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar win" style="height: 0%;" data-mode="private">
+                                    <span class="bar-value">۰٪</span>
+                                </div>
+                                <span class="bar-label">خصوصی</span>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar win" style="height: 0%;" data-mode="practice">
+                                    <span class="bar-value">۰٪</span>
+                                </div>
+                                <span class="bar-label">تمرین</span>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar win" style="height: 0%;" data-mode="tournament">
+                                    <span class="bar-value">۰٪</span>
+                                </div>
+                                <span class="bar-label">تورنمنت</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-performance-section" id="stats-performance-section" style="display: none;">
+            <div class="section-header">
+                <h3 class="section-title">تحلیل عملکرد</h3>
+            </div>
+
+            <div class="performance-card">
+                <div class="card-header">
+                    <h3 class="card-title">نقاط قوت</h3>
+                </div>
+                <div class="strengths-list" id="stats-strengths-list">
+                    <div class="strength-item">
+                        <span class="strength-icon">✅</span>
+                        <span class="strength-text">نرخ برد بالای ۶۰٪ در بازی کلاسیک</span>
+                    </div>
+                    <div class="strength-item">
+                        <span class="strength-icon">🎯</span>
+                        <span class="strength-text">دقت بالا در انتخاب حکم</span>
+                    </div>
+                    <div class="strength-item">
+                        <span class="strength-icon">🔥</span>
+                        <span class="strength-text">رشته برد ۵ تایی</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="performance-card">
+                <div class="card-header">
+                    <h3 class="card-title">نقاط قابل بهبود</h3>
+                </div>
+                <div class="improvements-list" id="stats-improvements-list">
+                    <div class="improvement-item">
+                        <span class="improvement-icon">⚠️</span>
+                        <span class="improvement-text">نرخ برد در بازی رقابتی پایین است</span>
+                    </div>
+                    <div class="improvement-item">
+                        <span class="improvement-icon">️</span>
+                        <span class="improvement-text">میانگین زمان نوبت بالا است</span>
+                    </div>
+                    <div class="improvement-item">
+                        <span class="improvement-icon">📊</span>
+                        <span class="improvement-text">تعداد کت‌های ناموفق زیاد است</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="performance-card">
+                <div class="card-header">
+                    <h3 class="card-title">پیشنهادات</h3>
+                </div>
+                <div class="suggestions-list" id="stats-suggestions-list">
+                    <div class="suggestion-item">
+                        <span class="suggestion-icon">💡</span>
+                        <div class="suggestion-content">
+                            <span class="suggestion-title">تمرین بیشتر در حالت رقابتی</span>
+                            <span class="suggestion-desc">با بازی بیشتر در حالت رقابتی، مهارت خود را افزایش دهید</span>
+                        </div>
+                    </div>
+                    <div class="suggestion-item">
+                        <span class="suggestion-icon"></span>
+                        <div class="suggestion-content">
+                            <span class="suggestion-title">سرعت تصمیم‌گیری را افزایش دهید</span>
+                            <span class="suggestion-desc">سعی کنید در زمان کمتری کارت بازی کنید</span>
+                        </div>
+                    </div>
+                    <div class="suggestion-item">
+                        <span class="suggestion-icon">💡</span>
+                        <div class="suggestion-content">
+                            <span class="suggestion-title">احتیاط بیشتر در اعلام کت</span>
+                            <span class="suggestion-desc">فقط زمانی کت اعلام کنید که مطمئن هستید</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="performance-card">
+                <div class="card-header">
+                    <h3 class="card-title">رکوردهای شخصی</h3>
+                </div>
+                <div class="records-grid" id="stats-records-list">
+                    <div class="record-item">
+                        <div class="record-icon">🏆</div>
+                        <div class="record-info">
+                            <span class="record-label">بیشترین برد متوالی</span>
+                            <span class="record-value" id="record-best-streak">۰</span>
+                        </div>
+                    </div>
+                    <div class="record-item">
+                        <div class="record-icon">🎯</div>
+                        <div class="record-info">
+                            <span class="record-label">بیشترین کت در یک روز</span>
+                            <span class="record-value" id="record-most-kots">۰</span>
+                        </div>
+                    </div>
+                    <div class="record-item">
+                        <div class="record-icon">⚡</div>
+                        <div class="record-info">
+                            <span class="record-label">سریع‌ترین بازی</span>
+                            <span class="record-value" id="record-fastest-game">۰ دقیقه</span>
+                        </div>
+                    </div>
+                    <div class="record-item">
+                        <div class="record-icon"></div>
+                        <div class="record-info">
+                            <span class="record-label">بیشترین بازی در یک روز</span>
+                            <span class="record-value" id="record-most-games">۰</span>
+                        </div>
+                    </div>
+                    <div class="record-item">
+                        <div class="record-icon">👑</div>
+                        <div class="record-info">
+                            <span class="record-label">بازی‌های کامل (۱۳-۰)</span>
+                            <span class="record-value" id="record-perfect-games"></span>
+                        </div>
+                    </div>
+                    <div class="record-item">
+                        <div class="record-icon">🔄</div>
+                        <div class="record-info">
+                            <span class="record-label">بزرگترین بازگشت</span>
+                            <span class="record-value" id="record-biggest-comeback">۰ امتیاز</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-compare-section" id="stats-compare-section" style="display: none;">
+            <div class="section-header">
+                <h3 class="section-title">مقایسه با دیگران</h3>
+            </div>
+
+            <div class="compare-card">
+                <div class="card-header">
+                    <h3 class="card-title">شما در مقابل میانگین بازیکنان</h3>
+                </div>
+                <div class="compare-list">
+                    <div class="compare-item">
+                        <div class="compare-info">
+                            <span class="compare-label">نرخ برد</span>
+                            <span class="compare-avg">میانگین: ۴۵٪</span>
+                        </div>
+                        <div class="compare-bars">
+                            <div class="compare-bar you" style="width: 0%;">
+                                <span class="bar-label">شما: ۰٪</span>
+                            </div>
+                            <div class="compare-bar avg" style="width: 45%;">
+                                <span class="bar-label">میانگین: ۴۵٪</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="compare-item">
+                        <div class="compare-info">
+                            <span class="compare-label">تعداد بازی</span>
+                            <span class="compare-avg">میانگین: ۵۰</span>
+                        </div>
+                        <div class="compare-bars">
+                            <div class="compare-bar you" style="width: 0%;">
+                                <span class="bar-label">شما: ۰</span>
+                            </div>
+                            <div class="compare-bar avg" style="width: 50%;">
+                                <span class="bar-label">میانگین: ۵۰</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="compare-item">
+                        <div class="compare-info">
+                            <span class="compare-label">رشته برد</span>
+                            <span class="compare-avg">میانگین: ۳</span>
+                        </div>
+                        <div class="compare-bars">
+                            <div class="compare-bar you" style="width: 0%;">
+                                <span class="bar-label">شما: </span>
+                            </div>
+                            <div class="compare-bar avg" style="width: 30%;">
+                                <span class="bar-label">میانگین: ۳</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="compare-item">
+                        <div class="compare-info">
+                            <span class="compare-label">امتیاز</span>
+                            <span class="compare-avg">میانگین: ۱۲۰۰</span>
+                        </div>
+                        <div class="compare-bars">
+                            <div class="compare-bar you" style="width: 0%;">
+                                <span class="bar-label">شما: ۱۰۰۰</span>
+                            </div>
+                            <div class="compare-bar avg" style="width: 60%;">
+                                <span class="bar-label">میانگین: ۱۰۰</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="compare-card">
+                <div class="card-header">
+                    <h3 class="card-title">مقایسه با دوستان</h3>
+                </div>
+                <div class="friends-compare-list" id="friends-compare-list">
+                    <div class="friend-compare-item you">
+                        <span class="avatar avatar-small">👤</span>
+                        <span class="friend-name">شما</span>
+                        <span class="friend-stat">۰ بازی</span>
+                        <span class="friend-stat">۰٪ برد</span>
+                        <span class="friend-rank">#۱</span>
+                    </div>
+                    <div class="friend-compare-item">
+                        <span class="avatar avatar-small">👨</span>
+                        <span class="friend-name">علی</span>
+                        <span class="friend-stat">۲۵ بازی</span>
+                        <span class="friend-stat">۶۰٪ برد</span>
+                        <span class="friend-rank">#۲</span>
+                    </div>
+                    <div class="friend-compare-item">
+                        <span class="avatar avatar-small">👩</span>
+                        <span class="friend-name">مریم</span>
+                        <span class="friend-stat">۱۸ بازی</span>
+                        <span class="friend-stat">۵۵٪ برد</span>
+                        <span class="friend-rank">#۳</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="percentile-card">
+                <div class="percentile-header">
+                    <span class="percentile-icon">📊</span>
+                    <div class="percentile-info">
+                        <h4 class="percentile-title">رتبه شما در بین بازیکنان</h4>
+                        <p class="percentile-desc">شما از نظر عملکرد در کجای بازیکنان قرار دارید</p>
+                    </div>
+                </div>
+                <div class="percentile-display">
+                    <div class="percentile-value" id="stats-percentile">٪</div>
+                    <div class="percentile-label" id="stats-percentile-label">بالاتر از ۰٪ بازیکنان</div>
+                </div>
+                <div class="percentile-bar">
+                    <div class="percentile-fill" id="stats-percentile-bar" style="width: 0%;"></div>
+                    <div class="percentile-marker" style="left: 0%;">
+                        <span class="marker-label">شما</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-achievements-preview">
+            <div class="section-header">
+                <h3 class="section-title">دستاوردهای آماری</h3>
+                <a href="#/achievements" class="section-link" data-route="achievements">مشاهده همه</a>
+            </div>
+            <div class="achievements-preview" id="stats-achievements-preview">
+                <div class="achievement-badge unlocked">
+                    <span class="badge-icon"></span>
+                    <span class="badge-name">اولین بازی</span>
+                </div>
+                <div class="achievement-badge unlocked">
+                    <span class="badge-icon">🏆</span>
+                    <span class="badge-name">اولین برد</span>
+                </div>
+                <div class="achievement-badge locked">
+                    <span class="badge-icon">🔥</span>
+                    <span class="badge-name">۵ برد متوالی</span>
+                </div>
+                <div class="achievement-badge locked">
+                    <span class="badge-icon">👑</span>
+                    <span class="badge-name">۱۰ کت</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-tips">
+            <div class="section-header">
+                <h3 class="section-title">نکات آماری</h3>
+            </div>
+            <div class="tips-list">
+                <div class="tip-item">
+                    <span class="tip-icon">💡</span>
+                    <p class="tip-text">نرخ برد بالای ۶۰٪ نشان‌دهنده عملکرد خوب است</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon"></span>
+                    <p class="tip-text">پیشرفت خود را در طول زمان دنبال کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🎯</span>
+                    <p class="tip-text">نقاط ضعف خود را شناسایی و برطرف کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🏆</span>
+                    <p class="tip-text">رکوردهای شخصی جدید ثبت کنید</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
