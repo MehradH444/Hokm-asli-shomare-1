@@ -5,538 +5,889 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#0d2924">
     <title>حکم مستر - Hokm Master</title>
-    
-    <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="variables.css">
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="typography.css">
-    <link rel="stylesheet" href="layout.css">
-    <link rel="stylesheet" href="navigation.css">
-    <link rel="stylesheet" href="components.css">
-    <link rel="stylesheet" href="screens.css">
-    <link rel="stylesheet" href="auth.css">
-    <link rel="stylesheet" href="game.css">
-    <link rel="stylesheet" href="modals.css">
-    <link rel="stylesheet" href="toasts.css">
-    <link rel="stylesheet" href="animations.css">
-    <link rel="stylesheet" href="themes.css">
-    <link rel="stylesheet" href="responsive.css">
-    <link rel="stylesheet" href="utilities.css">
-</head>
-<body class="theme-dark">
-    <div id="app" class="app-container">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Vazirmatn', sans-serif; }
+        body { background: #0d2924; color: #fff; overflow-x: hidden; }
         
-        <!-- Loader -->
-        <div id="app-loader" class="app-loader">
-            <div class="loader-logo">🃏</div>
-            <h1>حکم مستر</h1>
-            <p>در حال بارگذاری...</p>
+        /* Header */
+        .app-header { background: linear-gradient(135deg, #1a3d36 0%, #0d2924 100%); padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .header-title { font-size: 20px; font-weight: bold; }
+        .header-currency { display: flex; gap: 12px; }
+        .currency-badge { background: rgba(255,255,255,0.1); padding: 6px 12px; border-radius: 20px; display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; }
+        .btn-menu { background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; }
+        
+        /* Main Content */
+        .app-main { padding-bottom: 70px; min-height: calc(100vh - 130px); }
+        .screen { display: none; animation: fadeIn 0.3s ease; }
+        .screen.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Bottom Nav */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #1a3d36; display: flex; justify-content: space-around; padding: 10px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.3); z-index: 100; }
+        .nav-item { background: none; border: none; color: #9ca3af; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; font-size: 12px; transition: all 0.3s; }
+        .nav-item.active { color: #10b981; }
+        .nav-item span:first-child { font-size: 24px; }
+        
+        /* Sidebar */
+        .sidebar-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; display: none; }
+        .sidebar-overlay.active { display: block; }
+        .sidebar { position: fixed; top: 0; right: -300px; width: 300px; height: 100%; background: #1a3d36; z-index: 201; transition: right 0.3s; overflow-y: auto; }
+        .sidebar.open { right: 0; }
+        .sidebar-header { padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; }
+        .sidebar-user { display: flex; align-items: center; gap: 12px; }
+        .sidebar-avatar { width: 50px; height: 50px; border-radius: 50%; background: #2d5c53; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        .sidebar-section { padding: 16px; }
+        .sidebar-section-title { font-size: 12px; color: #9ca3af; margin-bottom: 12px; font-weight: 600; }
+        .sidebar-item { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.3s; margin-bottom: 4px; }
+        .sidebar-item:hover { background: rgba(255,255,255,0.1); }
+        .sidebar-item-icon { font-size: 20px; }
+        .sidebar-item-text { flex: 1; font-size: 14px; }
+        
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, #10b981 0%, #0d9668 100%); padding: 40px 20px; border-radius: 0 0 30px 30px; margin-bottom: 20px; text-align: center; }
+        .hero h1 { font-size: 28px; margin-bottom: 10px; }
+        .hero p { font-size: 14px; opacity: 0.9; margin-bottom: 20px; }
+        .btn-primary { background: #fff; color: #10b981; border: none; padding: 14px 32px; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s; }
+        .btn-primary:hover { transform: scale(1.05); }
+        
+        /* Game Modes */
+        .section-title { font-size: 20px; font-weight: bold; padding: 16px; }
+        .modes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 16px; }
+        .mode-card { background: #1a3d36; padding: 20px; border-radius: 12px; cursor: pointer; transition: all 0.3s; text-align: center; }
+        .mode-card:hover { transform: translateY(-5px); box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
+        .mode-icon { font-size: 40px; margin-bottom: 10px; }
+        .mode-title { font-size: 16px; font-weight: bold; margin-bottom: 5px; }
+        .mode-desc { font-size: 12px; color: #9ca3af; }
+        
+        /* Stats */
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 16px; }
+        .stat-card { background: #1a3d36; padding: 16px; border-radius: 12px; text-align: center; }
+        .stat-icon { font-size: 30px; margin-bottom: 8px; }
+        .stat-value { font-size: 24px; font-weight: bold; color: #10b981; }
+        .stat-label { font-size: 12px; color: #9ca3af; margin-top: 4px; }
+        
+        /* Shop */
+        .shop-categories { display: flex; gap: 8px; padding: 16px; overflow-x: auto; }
+        .shop-category { background: #1a3d36; padding: 10px 20px; border-radius: 20px; white-space: nowrap; cursor: pointer; transition: all 0.3s; }
+        .shop-category.active { background: #10b981; }
+        .shop-items { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 16px; }
+        .shop-item { background: #1a3d36; border-radius: 12px; overflow: hidden; }
+        .shop-item-image { height: 120px; background: linear-gradient(135deg, #2d5c53 0%, #1a3d36 100%); display: flex; align-items: center; justify-content: center; font-size: 50px; }
+        .shop-item-info { padding: 12px; }
+        .shop-item-name { font-size: 14px; font-weight: bold; margin-bottom: 4px; }
+        .shop-item-desc { font-size: 11px; color: #9ca3af; margin-bottom: 8px; }
+        .shop-item-footer { display: flex; justify-content: space-between; align-items: center; }
+        .shop-item-price { font-size: 14px; font-weight: bold; color: #ffc107; }
+        .btn-buy { background: #10b981; color: #fff; border: none; padding: 6px 12px; border-radius: 15px; font-size: 12px; cursor: pointer; }
+        
+        /* Leaderboard */
+        .leaderboard-list { padding: 0 16px; }
+        .leader-item { background: #1a3d36; padding: 16px; border-radius: 12px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; }
+        .leader-rank { width: 30px; height: 30px; border-radius: 50%; background: #2d5c53; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        .leader-rank.gold { background: #ffd700; color: #000; }
+        .leader-rank.silver { background: #c0c0c0; color: #000; }
+        .leader-rank.bronze { background: #cd7f32; color: #fff; }
+        .leader-avatar { width: 40px; height: 40px; border-radius: 50%; background: #2d5c53; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .leader-info { flex: 1; }
+        .leader-name { font-size: 14px; font-weight: bold; }
+        .leader-level { font-size: 11px; color: #9ca3af; }
+        .leader-score { font-size: 16px; font-weight: bold; color: #10b981; }
+        
+        /* Profile */
+        .profile-header { background: linear-gradient(135deg, #10b981 0%, #0d9668 100%); padding: 40px 20px; text-align: center; border-radius: 0 0 30px 30px; }
+        .profile-avatar { width: 100px; height: 100px; border-radius: 50%; background: rgba(255,255,255,0.2); margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 50px; border: 4px solid #fff; }
+        .profile-name { font-size: 24px; font-weight: bold; margin-bottom: 8px; }
+        .profile-level { font-size: 14px; opacity: 0.9; }
+        .profile-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 20px 16px; }
+        .profile-stat { background: #1a3d36; padding: 16px; border-radius: 12px; text-align: center; }
+        .profile-stat-value { font-size: 20px; font-weight: bold; color: #10b981; }
+        .profile-stat-label { font-size: 11px; color: #9ca3af; margin-top: 4px; }
+        
+        /* Missions */
+        .mission-card { background: #1a3d36; padding: 16px; border-radius: 12px; margin: 0 16px 12px; }
+        .mission-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .mission-title { font-size: 16px; font-weight: bold; }
+        .mission-reward { background: #10b981; padding: 4px 12px; border-radius: 15px; font-size: 12px; }
+        .mission-progress { background: #2d5c53; height: 8px; border-radius: 4px; overflow: hidden; }
+        .mission-progress-bar { background: #10b981; height: 100%; transition: width 0.3s; }
+        .mission-footer { display: flex; justify-content: space-between; margin-top: 8px; font-size: 12px; color: #9ca3af; }
+        
+        /* Achievements */
+        .achievements-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 16px; }
+        .achievement-card { background: #1a3d36; padding: 16px; border-radius: 12px; text-align: center; }
+        .achievement-icon { font-size: 40px; margin-bottom: 8px; }
+        .achievement-name { font-size: 12px; font-weight: bold; margin-bottom: 4px; }
+        .achievement-desc { font-size: 10px; color: #9ca3af; }
+        .achievement-card.locked { opacity: 0.5; }
+        
+        /* Friends */
+        .friend-card { background: #1a3d36; padding: 12px 16px; border-radius: 12px; margin: 0 16px 8px; display: flex; align-items: center; gap: 12px; }
+        .friend-avatar { width: 45px; height: 45px; border-radius: 50%; background: #2d5c53; display: flex; align-items: center; justify-content: center; font-size: 22px; position: relative; }
+        .friend-status { position: absolute; bottom: 0; right: 0; width: 12px; height: 12px; border-radius: 50%; background: #10b981; border: 2px solid #1a3d36; }
+        .friend-status.offline { background: #9ca3af; }
+        .friend-info { flex: 1; }
+        .friend-name { font-size: 14px; font-weight: bold; }
+        .friend-level { font-size: 11px; color: #9ca3af; }
+        .btn-invite { background: #10b981; color: #fff; border: none; padding: 6px 12px; border-radius: 15px; font-size: 12px; cursor: pointer; }
+        
+        /* Settings */
+        .settings-section { padding: 16px; }
+        .settings-title { font-size: 14px; color: #9ca3af; margin-bottom: 12px; }
+        .settings-item { background: #1a3d36; padding: 16px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .settings-item-info { display: flex; align-items: center; gap: 12px; flex: 1; }
+        .settings-item-icon { font-size: 20px; }
+        .settings-item-text { font-size: 14px; }
+        .toggle { width: 50px; height: 26px; background: #2d5c53; border-radius: 13px; position: relative; cursor: pointer; transition: all 0.3s; }
+        .toggle.active { background: #10b981; }
+        .toggle::after { content: ''; position: absolute; width: 22px; height: 22px; background: #fff; border-radius: 50%; top: 2px; right: 2px; transition: all 0.3s; }
+        .toggle.active::after { right: 26px; }
+        
+        /* Toast */
+        .toast { position: fixed; top: 80px; left: 50%; transform: translateX(-50%); background: #10b981; color: #fff; padding: 12px 24px; border-radius: 8px; z-index: 1000; animation: slideDown 0.3s ease; }
+        @keyframes slideDown { from { opacity: 0; transform: translate(-50%, -20px); } to { opacity: 1; transform: translate(-50%, 0); } }
+        
+        /* League */
+        .league-card { background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); color: #000; padding: 24px; border-radius: 16px; margin: 16px; text-align: center; }
+        .league-icon { font-size: 60px; margin-bottom: 12px; }
+        .league-name { font-size: 24px; font-weight: bold; margin-bottom: 8px; }
+        .league-progress { background: rgba(0,0,0,0.2); height: 10px; border-radius: 5px; overflow: hidden; margin-top: 16px; }
+        .league-progress-bar { background: #000; height: 100%; width: 65%; }
+        
+        /* Events */
+        .event-card { background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); padding: 20px; border-radius: 16px; margin: 0 16px 12px; position: relative; overflow: hidden; }
+        .event-badge { position: absolute; top: 12px; left: 12px; background: #fff; color: #ff6b6b; padding: 4px 12px; border-radius: 15px; font-size: 11px; font-weight: bold; }
+        .event-title { font-size: 18px; font-weight: bold; margin-bottom: 8px; }
+        .event-desc { font-size: 13px; opacity: 0.9; margin-bottom: 12px; }
+        .event-timer { display: flex; gap: 8px; }
+        .timer-box { background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 8px; text-align: center; }
+        .timer-value { font-size: 18px; font-weight: bold; }
+        .timer-label { font-size: 10px; opacity: 0.8; }
+        
+        /* Chat */
+        .chat-list { padding: 0 16px; }
+        .chat-item { background: #1a3d36; padding: 12px 16px; border-radius: 12px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; }
+        .chat-avatar { width: 45px; height: 45px; border-radius: 50%; background: #2d5c53; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+        .chat-info { flex: 1; }
+        .chat-name { font-size: 14px; font-weight: bold; }
+        .chat-last { font-size: 12px; color: #9ca3af; }
+        .chat-badge { background: #10b981; color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 11px; }
+        
+        /* Tournament */
+        .tournament-card { background: linear-gradient(135deg, #9c27b0 0%, #673ab7 100%); padding: 20px; border-radius: 16px; margin: 0 16px 12px; }
+        .tournament-title { font-size: 18px; font-weight: bold; margin-bottom: 8px; }
+        .tournament-info { display: flex; gap: 16px; margin-bottom: 12px; font-size: 12px; }
+        .tournament-prize { background: rgba(255,255,255,0.2); padding: 12px; border-radius: 12px; text-align: center; margin-top: 12px; }
+        .prize-value { font-size: 24px; font-weight: bold; }
+        .prize-label { font-size: 11px; opacity: 0.9; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <button class="btn-menu" onclick="toggleSidebar()">☰</button>
+        <div class="header-title">حکم مستر</div>
+        <div class="header-currency">
+            <div class="currency-badge"> <span id="gems">150</span></div>
+            <div class="currency-badge">🪙 <span id="coins">5000</span></div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="app-main">
+        <!-- Home Screen -->
+        <div id="screen-home" class="screen active">
+            <div class="hero">
+                <h1>به حکم مستر خوش آمدید!</h1>
+                <p>بازی حکم آنلاین با هوش مصنوعی پیشرفته</p>
+                <button class="btn-primary" onclick="navigate('quick-play')">⚡ بازی سریع</button>
+            </div>
+            
+            <div class="section-title">حالت‌های بازی</div>
+            <div class="modes-grid">
+                <div class="mode-card" onclick="navigate('classic')">
+                    <div class="mode-icon">🎴</div>
+                    <div class="mode-title">کلاسیک</div>
+                    <div class="mode-desc">بازی استاندارد</div>
+                </div>
+                <div class="mode-card" onclick="navigate('ranked')">
+                    <div class="mode-icon">🏆</div>
+                    <div class="mode-title">رقابتی</div>
+                    <div class="mode-desc">کسب امتیاز</div>
+                </div>
+                <div class="mode-card" onclick="navigate('private')">
+                    <div class="mode-icon">🏠</div>
+                    <div class="mode-title">خصوصی</div>
+                    <div class="mode-desc">با دوستان</div>
+                </div>
+                <div class="mode-card" onclick="navigate('practice')">
+                    <div class="mode-icon">🎓</div>
+                    <div class="mode-title">تمرین</div>
+                    <div class="mode-desc">با هوش مصنوعی</div>
+                </div>
+            </div>
+            
+            <div class="section-title">آمار شما</div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🎮</div>
+                    <div class="stat-value">24</div>
+                    <div class="stat-label">بازی</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-value">18</div>
+                    <div class="stat-label">برد</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-value">75%</div>
+                    <div class="stat-label">نرخ برد</div>
+                </div>
+            </div>
         </div>
 
-        <!-- Header -->
-        <header class="app-header">
-            <div class="header-content">
-                <button id="btn-menu" class="header-btn">☰</button>
-                <div class="header-brand">
-                    <span></span>
-                    <span>حکم مستر</span>
-                </div>
-                <div class="header-currency">
-                    <span>🪙 <span id="coins">5000</span></span>
-                    <span>💎 <span id="gems">150</span></span>
-                </div>
+        <!-- Shop Screen -->
+        <div id="screen-shop" class="screen">
+            <div class="section-title">فروشگاه</div>
+            <div class="shop-categories">
+                <div class="shop-category active">همه</div>
+                <div class="shop-category">آواتار</div>
+                <div class="shop-category">پشت کارت</div>
+                <div class="shop-category">تم</div>
+                <div class="shop-category">قاب</div>
             </div>
-        </header>
-
-        <!-- Sidebar -->
-        <div id="sidebar-overlay" class="sidebar-overlay"></div>
-        <nav id="sidebar" class="app-sidebar">
-            <div class="sidebar-header">
-                <div class="user-info">
-                    <span class="avatar">👤</span>
-                    <div>
-                        <div class="username">مهمان</div>
-                        <div class="level">سطح ۱</div>
+            <div class="shop-items">
+                <div class="shop-item">
+                    <div class="shop-item-image">👤</div>
+                    <div class="shop-item-info">
+                        <div class="shop-item-name">آواتار قهرمان</div>
+                        <div class="shop-item-desc">آواتار ویژه</div>
+                        <div class="shop-item-footer">
+                            <div class="shop-item-price">💎 50</div>
+                            <button class="btn-buy">خرید</button>
+                        </div>
                     </div>
                 </div>
-                <button id="btn-close-sidebar" class="btn-close">✕</button>
+                <div class="shop-item">
+                    <div class="shop-item-image">🎴</div>
+                    <div class="shop-item-info">
+                        <div class="shop-item-name">پشت کارت طلایی</div>
+                        <div class="shop-item-desc">طرح لوکس</div>
+                        <div class="shop-item-footer">
+                            <div class="shop-item-price"> 2000</div>
+                            <button class="btn-buy">خرید</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="shop-item">
+                    <div class="shop-item-image">🎨</div>
+                    <div class="shop-item-info">
+                        <div class="shop-item-name">تم شب</div>
+                        <div class="shop-item-desc">تم تاریک</div>
+                        <div class="shop-item-footer">
+                            <div class="shop-item-price">💎 100</div>
+                            <button class="btn-buy">خرید</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="shop-item">
+                    <div class="shop-item-image">🖼️</div>
+                    <div class="shop-item-info">
+                        <div class="shop-item-name">قاب الماسی</div>
+                        <div class="shop-item-desc">قاب پروفایل</div>
+                        <div class="shop-item-footer">
+                            <div class="shop-item-price"> 5000</div>
+                            <button class="btn-buy">خرید</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="shop-item">
+                    <div class="shop-item-image">👑</div>
+                    <div class="shop-item-info">
+                        <div class="shop-item-name">تاج پادشاه</div>
+                        <div class="shop-item-desc">آواتار ویژه</div>
+                        <div class="shop-item-footer">
+                            <div class="shop-item-price">💎 200</div>
+                            <button class="btn-buy">خرید</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="shop-item">
+                    <div class="shop-item-image"></div>
+                    <div class="shop-item-info">
+                        <div class="shop-item-name">ستاره درخشان</div>
+                        <div class="shop-item-desc">افکت ویژه</div>
+                        <div class="shop-item-footer">
+                            <div class="shop-item-price">🪙 3000</div>
+                            <button class="btn-buy">خرید</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="sidebar-content" id="sidebar-menu">
-                <!-- Menu items will be loaded here -->
+        </div>
+
+        <!-- Leaderboard Screen -->
+        <div id="screen-leaderboard" class="screen">
+            <div class="section-title">رتبه‌بندی</div>
+            <div class="leaderboard-list">
+                <div class="leader-item">
+                    <div class="leader-rank gold">1</div>
+                    <div class="leader-avatar">👑</div>
+                    <div class="leader-info">
+                        <div class="leader-name">استاد بزرگ</div>
+                        <div class="leader-level">سطح 50 • الماس</div>
+                    </div>
+                    <div class="leader-score">2800</div>
+                </div>
+                <div class="leader-item">
+                    <div class="leader-rank silver">2</div>
+                    <div class="leader-avatar">🥈</div>
+                    <div class="leader-info">
+                        <div class="leader-name">قهرمان</div>
+                        <div class="leader-level">سطح 45 • پلاتین</div>
+                    </div>
+                    <div class="leader-score">2400</div>
+                </div>
+                <div class="leader-item">
+                    <div class="leader-rank bronze">3</div>
+                    <div class="leader-avatar">🥉</div>
+                    <div class="leader-info">
+                        <div class="leader-name">بازیکن حرفه‌ای</div>
+                        <div class="leader-level">سطح 40 • طلا</div>
+                    </div>
+                    <div class="leader-score">2200</div>
+                </div>
+                <div class="leader-item">
+                    <div class="leader-rank">4</div>
+                    <div class="leader-avatar"></div>
+                    <div class="leader-info">
+                        <div class="leader-name">بازیکن خوب</div>
+                        <div class="leader-level">سطح 35 • نقره</div>
+                    </div>
+                    <div class="leader-score">1800</div>
+                </div>
+                <div class="leader-item">
+                    <div class="leader-rank">5</div>
+                    <div class="leader-avatar"></div>
+                    <div class="leader-info">
+                        <div class="leader-name">بازیکن متوسط</div>
+                        <div class="leader-level">سطح 30 • برنز</div>
+                    </div>
+                    <div class="leader-score">1500</div>
+                </div>
             </div>
-        </nav>
+        </div>
 
-        <!-- Main Content -->
-        <main class="app-main">
-            <div id="content" class="screen-content">
-                <!-- Dynamic content loads here -->
+        <!-- Profile Screen -->
+        <div id="screen-profile" class="screen">
+            <div class="profile-header">
+                <div class="profile-avatar"></div>
+                <div class="profile-name">بازیکن مهمان</div>
+                <div class="profile-level">سطح 1 • برنز</div>
             </div>
-        </main>
+            <div class="profile-stats">
+                <div class="profile-stat">
+                    <div class="profile-stat-value">24</div>
+                    <div class="profile-stat-label">بازی</div>
+                </div>
+                <div class="profile-stat">
+                    <div class="profile-stat-value">18</div>
+                    <div class="profile-stat-label">برد</div>
+                </div>
+                <div class="profile-stat">
+                    <div class="profile-stat-value">75%</div>
+                    <div class="profile-stat-label">نرخ برد</div>
+                </div>
+            </div>
+        </div>
 
-        <!-- Bottom Navigation -->
-        <nav class="app-bottom-nav">
-            <button class="nav-item active" data-screen="home">
-                <span>🏠</span>
-                <span>خانه</span>
-            </button>
-            <button class="nav-item" data-screen="game">
-                <span>⚡</span>
-                <span>بازی</span>
-            </button>
-            <button class="nav-item" data-screen="shop">
-                <span>🛒</span>
-                <span>فروشگاه</span>
-            </button>
-            <button class="nav-item" data-screen="leaderboard">
-                <span>🏆</span>
-                <span>رتبه</span>
-            </button>
-            <button class="nav-item" data-screen="profile">
-                <span>👤</span>
-                <span>پروفایل</span>
-            </button>
-        </nav>
+        <!-- Missions Screen -->
+        <div id="screen-missions" class="screen">
+            <div class="section-title">مأموریت‌ها</div>
+            <div class="mission-card">
+                <div class="mission-header">
+                    <div class="mission-title">5 بازی انجام بده</div>
+                    <div class="mission-reward">🪙 500</div>
+                </div>
+                <div class="mission-progress">
+                    <div class="mission-progress-bar" style="width: 60%"></div>
+                </div>
+                <div class="mission-footer">
+                    <span>3 از 5</span>
+                    <span>2 روز باقی‌مانده</span>
+                </div>
+            </div>
+            <div class="mission-card">
+                <div class="mission-header">
+                    <div class="mission-title">3 برد متوالی</div>
+                    <div class="mission-reward">💎 25</div>
+                </div>
+                <div class="mission-progress">
+                    <div class="mission-progress-bar" style="width: 33%"></div>
+                </div>
+                <div class="mission-footer">
+                    <span>1 از 3</span>
+                    <span>5 روز باقی‌مانده</span>
+                </div>
+            </div>
+            <div class="mission-card">
+                <div class="mission-header">
+                    <div class="mission-title">10 دست ببر</div>
+                    <div class="mission-reward">🪙 1000</div>
+                </div>
+                <div class="mission-progress">
+                    <div class="mission-progress-bar" style="width: 80%"></div>
+                </div>
+                <div class="mission-footer">
+                    <span>8 از 10</span>
+                    <span>1 روز باقی‌مانده</span>
+                </div>
+            </div>
+        </div>
 
-        <!-- Toast Container -->
-        <div id="toast-container"></div>
-    </div>
+        <!-- Achievements Screen -->
+        <div id="screen-achievements" class="screen">
+            <div class="section-title">دستاوردها</div>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <div class="achievement-icon">🏆</div>
+                    <div class="achievement-name">اولین برد</div>
+                    <div class="achievement-desc">اولین بازی را ببر</div>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">🔥</div>
+                    <div class="achievement-name">5 برد متوالی</div>
+                    <div class="achievement-desc">5 بازی پشت سر هم ببر</div>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">👑</div>
+                    <div class="achievement-name">قهرمان</div>
+                    <div class="achievement-desc">به لیگ طلا برس</div>
+                </div>
+                <div class="achievement-card locked">
+                    <div class="achievement-icon">💎</div>
+                    <div class="achievement-name">الماس</div>
+                    <div class="achievement-desc">به لیگ الماس برس</div>
+                </div>
+                <div class="achievement-card locked">
+                    <div class="achievement-icon"></div>
+                    <div class="achievement-name">تیرانداز</div>
+                    <div class="achievement-desc">10 کت اعلام کن</div>
+                </div>
+                <div class="achievement-card locked">
+                    <div class="achievement-icon">⭐</div>
+                    <div class="achievement-name">ستاره</div>
+                    <div class="achievement-desc">سطح 10 را باز کن</div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Main App Script -->
+        <!-- Friends Screen -->
+        <div id="screen-friends" class="screen">
+            <div class="section-title">دوستان</div>
+            <div class="friend-card">
+                <div class="friend-avatar">
+                    👤
+                    <div class="friend-status"></div>
+                </div>
+                <div class="friend-info">
+                    <div class="friend-name">علی رضایی</div>
+                    <div class="friend-level">سطح 25 • نقره</div>
+                </div>
+                <button class="btn-invite">دعوت</button>
+            </div>
+            <div class="friend-card">
+                <div class="friend-avatar">
+                    👤
+                    <div class="friend-status"></div>
+                </div>
+                <div class="friend-info">
+                    <div class="friend-name">مریم احمدی</div>
+                    <div class="friend-level">سطح 30 • طلا</div>
+                </div>
+                <button class="btn-invite">دعوت</button>
+            </div>
+            <div class="friend-card">
+                <div class="friend-avatar">
+                    👤
+                    <div class="friend-status offline"></div>
+                </div>
+                <div class="friend-info">
+                    <div class="friend-name">رضا محمدی</div>
+                    <div class="friend-level">سطح 20 • برنز</div>
+                </div>
+                <button class="btn-invite">دعوت</button>
+            </div>
+        </div>
+
+        <!-- Chat Screen -->
+        <div id="screen-chat" class="screen">
+            <div class="section-title">چت</div>
+            <div class="chat-list">
+                <div class="chat-item">
+                    <div class="chat-avatar"></div>
+                    <div class="chat-info">
+                        <div class="chat-name">علی رضایی</div>
+                        <div class="chat-last">سلام! بازی کنیم؟</div>
+                    </div>
+                    <div class="chat-badge">2</div>
+                </div>
+                <div class="chat-item">
+                    <div class="chat-avatar">👤</div>
+                    <div class="chat-info">
+                        <div class="chat-name">مریم احمدی</div>
+                        <div class="chat-last">آخرین بازی عالی بود!</div>
+                    </div>
+                    <div class="chat-badge">1</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- League Screen -->
+        <div id="screen-league" class="screen">
+            <div class="section-title">لیگ</div>
+            <div class="league-card">
+                <div class="league-icon">🥉</div>
+                <div class="league-name">لیگ برنز</div>
+                <div>1000 از 1500 امتیاز</div>
+                <div class="league-progress">
+                    <div class="league-progress-bar"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Events Screen -->
+        <div id="screen-events" class="screen">
+            <div class="section-title">رویدادها</div>
+            <div class="event-card">
+                <div class="event-badge">ویژه</div>
+                <div class="event-title">جشنواره بهاره</div>
+                <div class="event-desc">با شرکت در بازی‌های ویژه، جوایز ارزشمند کسب کنید</div>
+                <div class="event-timer">
+                    <div class="timer-box">
+                        <div class="timer-value">2</div>
+                        <div class="timer-label">روز</div>
+                    </div>
+                    <div class="timer-box">
+                        <div class="timer-value">14</div>
+                        <div class="timer-label">ساعت</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tournament Screen -->
+        <div id="screen-tournament" class="screen">
+            <div class="section-title">تورنمنت</div>
+            <div class="tournament-card">
+                <div class="tournament-title">قهرمانی هفتگی</div>
+                <div class="tournament-info">
+                    <span>👥 16 بازیکن</span>
+                    <span> 10,000 سکه</span>
+                </div>
+                <div class="tournament-prize">
+                    <div class="prize-value">10,000 🪙</div>
+                    <div class="prize-label">جایزه اول</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Screen -->
+        <div id="screen-settings" class="screen">
+            <div class="section-title">تنظیمات</div>
+            <div class="settings-section">
+                <div class="settings-title">صدا</div>
+                <div class="settings-item">
+                    <div class="settings-item-info">
+                        <span class="settings-item-icon"></span>
+                        <span class="settings-item-text">صدای بازی</span>
+                    </div>
+                    <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+                </div>
+                <div class="settings-item">
+                    <div class="settings-item-info">
+                        <span class="settings-item-icon"></span>
+                        <span class="settings-item-text">موسیقی</span>
+                    </div>
+                    <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+                </div>
+            </div>
+            <div class="settings-section">
+                <div class="settings-title">اعلان‌ها</div>
+                <div class="settings-item">
+                    <div class="settings-item-info">
+                        <span class="settings-item-icon">🔔</span>
+                        <span class="settings-item-text">اعلان‌ها</span>
+                    </div>
+                    <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Screen -->
+        <div id="screen-statistics" class="screen">
+            <div class="section-title">آمار</div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🎮</div>
+                    <div class="stat-value">24</div>
+                    <div class="stat-label">کل بازی‌ها</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-value">18</div>
+                    <div class="stat-label">برد</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💔</div>
+                    <div class="stat-value">6</div>
+                    <div class="stat-label">باخت</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-value">75%</div>
+                    <div class="stat-label">نرخ برد</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">بهترین رشته</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👑</div>
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">کت موفق</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inventory Screen -->
+        <div id="screen-inventory" class="screen">
+            <div class="section-title">موجودی</div>
+            <div class="shop-items">
+                <div class="shop-item">
+                    <div class="shop-item-image">👤</div>
+                    <div class="shop-item-info">
+                        <div class="shop-item-name">آواتار پیش‌فرض</div>
+                        <div class="shop-item-desc">فعال ✓</div>
+                    </div>
+                </div>
+                <div class="shop-item">
+                    <div class="shop-item-image">🎴</div>
+                    <div class="shop-item-info">
+                        <div class="shop-item-name">پشت کارت کلاسیک</div>
+                        <div class="shop-item-desc">فعال ✓</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Help Screen -->
+        <div id="screen-help" class="screen">
+            <div class="section-title">راهنما</div>
+            <div class="mission-card">
+                <div class="mission-title">قوانین بازی حکم</div>
+                <div class="mission-desc" style="margin-top: 8px; font-size: 13px; color: #9ca3af;">حکم یک بازی کارتی ایرانی است که با 4 بازیکن و 52 کارت بازی می‌شود...</div>
+            </div>
+        </div>
+
+        <!-- About Screen -->
+        <div id="screen-about" class="screen">
+            <div class="section-title">درباره</div>
+            <div class="mission-card">
+                <div class="mission-title">حکم مستر v1.0.0</div>
+                <div class="mission-desc" style="margin-top: 8px; font-size: 13px; color: #9ca3af;">بازی حکم آنلاین با هوش مصنوعی پیشرفته</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Sidebar -->
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-user">
+                <div class="sidebar-avatar"></div>
+                <div>
+                    <div style="font-weight: bold;">مهمان</div>
+                    <div style="font-size: 12px; color: #9ca3af;">سطح 1</div>
+                </div>
+            </div>
+            <button class="btn-menu" onclick="toggleSidebar()">✕</button>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">بازی</div>
+            <div class="sidebar-item" onclick="navigate('quick-play'); toggleSidebar()">
+                <span class="sidebar-item-icon">⚡</span>
+                <span class="sidebar-item-text">بازی سریع</span>
+            </div>
+            <div class="sidebar-item" onclick="navigate('classic'); toggleSidebar()">
+                <span class="sidebar-item-icon">🎴</span>
+                <span class="sidebar-item-text">بازی کلاسیک</span>
+            </div>
+            <div class="sidebar-item" onclick="navigate('ranked'); toggleSidebar()">
+                <span class="sidebar-item-icon">🏆</span>
+                <span class="sidebar-item-text">بازی رقابتی</span>
+            </div>
+            <div class="sidebar-item" onclick="navigate('private'); toggleSidebar()">
+                <span class="sidebar-item-icon">🏠</span>
+                <span class="sidebar-item-text">اتاق خصوصی</span>
+            </div>
+            <div class="sidebar-item" onclick="navigate('practice'); toggleSidebar()">
+                <span class="sidebar-item-icon">🎓</span>
+                <span class="sidebar-item-text">تمرین</span>
+            </div>
+            <div class="sidebar-item" onclick="navigate('tournament'); toggleSidebar()">
+                <span class="sidebar-item-icon">🏅</span>
+                <span class="sidebar-item-text">تورنمنت</span>
+            </div>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">پیشرفت</div>
+            <div class="sidebar-item" onclick="navigate('league'); toggleSidebar()">
+                <span class="sidebar-item-icon">🏅</span>
+                <span class="sidebar-item-text">لیگ</span>
+            </div>
+            <div class="sidebar-item" onclick="navigate('season'); toggleSidebar()">
+                <span class="sidebar-item-icon">📅</span>
+                <span class="sidebar-item-text">فصل</span>
+            </div>
+            <div class="sidebar-item" onclick="navigate('missions'); toggleSidebar()">
+                <span class="sidebar-item-icon">🎯</span>
+                <span class="sidebar-item-text">مأموریت‌ها</span>
+            </div>
+            <div class="sidebar-item" onclick="navigate('achievements'); toggleSidebar()">
+                <span class="sidebar-item-icon">🏆</span>
+                <span class="sidebar-item-text">دستاوردها</span>
+            </div>
+            <div class="sidebar-item" onclick="navigate('statistics'); toggleSidebar()">
+                <span class="sidebar-item-icon">📊</span>
+                <span class="sidebar-item-text">آمار</span>
+            </div>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">اجتماعی</div>
+            <div class="sidebar-item" onclick="navigate('friends'); toggleSidebar()">
+                <span class="sidebar-item-icon">👥</span>
+                <span class="sidebar-item-text">دوستان</span>
+            </div>
+            <div class="sidebar-item" onclick="navigate('chat'); toggleSidebar()">
+                <span class="sidebar-item-icon">💬</span>
+                <span class="sidebar-item-text">چت</span>
+            </div>
+            <div class="sidebar-item" onclick="navigate('leaderboard'); toggleSidebar()">
+                <span class="sidebar-item-icon">🏆</span>
+                <span class="sidebar-item-text">رتبه‌بندی</span>
+            </div>
+            <div class="sidebar-item" onclick="navigate('events'); toggleSidebar()">
+                <span class="sidebar-item-icon">🎪</span>
+                <span class="sidebar-item-text">رویدادها</span>
+            </div>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">حساب</div>
+            <div class="sidebar-item" onclick="navigate('profile'); toggleSidebar()">
+                <span class="sidebar-item-icon">👤</span>
+                <span class="sidebar-item-text">پروفایل</span>
+            </div>
+            <div class="sidebar-item" onclick="navigate('inventory'); toggleSidebar()">
+                <span class="sidebar-item-icon">🎒</span>
+                <span class="sidebar-item-text">موجودی</span>
+            </div>
+            <div class="sidebar-item" onclick="navigate('shop'); toggleSidebar()">
+                <span class="sidebar-item-icon">🛒</span>
+                <span class="sidebar-item-text">فروشگاه</span>
+            </div>
+            <div class="sidebar-item" onclick="navigate('settings'); toggleSidebar()">
+                <span class="sidebar-item-icon">⚙️</span>
+                <span class="sidebar-item-text">تنظیمات</span>
+            </div>
+            <div class="sidebar-item" onclick="navigate('help'); toggleSidebar()">
+                <span class="sidebar-item-icon">❓</span>
+                <span class="sidebar-item-text">راهنما</span>
+            </div>
+            <div class="sidebar-item" onclick="navigate('about'); toggleSidebar()">
+                <span class="sidebar-item-icon">ℹ️</span>
+                <span class="sidebar-item-text">درباره</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="navigate('home'); setActiveNav(this)">
+            <span>🏠</span>
+            <span>خانه</span>
+        </button>
+        <button class="nav-item" onclick="navigate('quick-play'); setActiveNav(this)">
+            <span>⚡</span>
+            <span>بازی</span>
+        </button>
+        <button class="nav-item" onclick="navigate('shop'); setActiveNav(this)">
+            <span>🛒</span>
+            <span>فروشگاه</span>
+        </button>
+        <button class="nav-item" onclick="navigate('leaderboard'); setActiveNav(this)">
+            <span>🏆</span>
+            <span>رتبه</span>
+        </button>
+        <button class="nav-item" onclick="navigate('profile'); setActiveNav(this)">
+            <span>👤</span>
+            <span>پروفایل</span>
+        </button>
+    </nav>
+
     <script>
-        // ============================================
-        // HOKM MASTER - COMPLETE APPLICATION
-        // ============================================
-
-        // Application State
-        const AppState = {
-            currentUser: {
-                name: 'مهمان',
-                level: 1,
-                coins: 5000,
-                gems: 150,
-                gamesPlayed: 0,
-                gamesWon: 0
-            },
-            currentScreen: 'home',
-            sidebarOpen: false
-        };
-
-        // Screen Contents (HTML Templates)
-        const Screens = {
-            home: `
-                <div class="hero-section">
-                    <div class="hero-content">
-                        <h1>به حکم مستر خوش آمدید!</h1>
-                        <p>بازی حکم آنلاین با هوش مصنوعی پیشرفته</p>
-                        <button class="btn-primary btn-large" onclick="App.navigate('quick-play')">
-                            ⚡ بازی سریع
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="game-modes">
-                    <h2>حالت‌های بازی</h2>
-                    <div class="modes-grid">
-                        <div class="mode-card" onclick="App.navigate('classic')">
-                            <span class="mode-icon">🎴</span>
-                            <h3>کلاسیک</h3>
-                            <p>بازی استاندارد حکم</p>
-                        </div>
-                        <div class="mode-card" onclick="App.navigate('ranked')">
-                            <span class="mode-icon">🏆</span>
-                            <h3>رقابتی</h3>
-                            <p>کسب امتیاز و لیگ</p>
-                        </div>
-                        <div class="mode-card" onclick="App.navigate('private')">
-                            <span class="mode-icon"></span>
-                            <h3>خصوصی</h3>
-                            <p>بازی با دوستان</p>
-                        </div>
-                        <div class="mode-card" onclick="App.navigate('practice')">
-                            <span class="mode-icon">🎓</span>
-                            <h3>تمرین</h3>
-                            <p>تمرین با هوش مصنوعی</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="stats-section">
-                    <h2>آمار شما</h2>
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <span class="stat-icon">🎮</span>
-                            <span class="stat-value" id="stat-games">0</span>
-                            <span class="stat-label">بازی</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-icon">🏆</span>
-                            <span class="stat-value" id="stat-wins">0</span>
-                            <span class="stat-label">برد</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-icon">⭐</span>
-                            <span class="stat-value" id="stat-winrate">0%</span>
-                            <span class="stat-label">نرخ برد</span>
-                        </div>
-                    </div>
-                </div>
-            `,
-
-            game: `
-                <div class="screen-header">
-                    <h1>انتخاب حالت بازی</h1>
-                </div>
-                <div class="options-list">
-                    <button class="option-card" onclick="App.navigate('quick-play')">
-                        <span class="option-icon"></span>
-                        <div class="option-info">
-                            <h3>بازی سریع</h3>
-                            <p>شروع فوری بازی</p>
-                        </div>
-                    </button>
-                    <button class="option-card" onclick="App.navigate('classic')">
-                        <span class="option-icon">🎴</span>
-                        <div class="option-info">
-                            <h3>بازی کلاسیک</h3>
-                            <p>حالت استاندارد</p>
-                        </div>
-                    </button>
-                    <button class="option-card" onclick="App.navigate('ranked')">
-                        <span class="option-icon">🏆</span>
-                        <div class="option-info">
-                            <h3>رقابتی</h3>
-                            <p>بازی برای امتیاز</p>
-                        </div>
-                    </button>
-                </div>
-            `,
-
-            shop: `
-                <div class="screen-header">
-                    <h1>فروشگاه</h1>
-                </div>
-                <div class="shop-items">
-                    <div class="shop-item">
-                        <span class="item-icon">💎</span>
-                        <div class="item-info">
-                            <h3>۱۰ الماس</h3>
-                            <p>ارز премиум بازی</p>
-                        </div>
-                        <button class="btn-buy">خرید</button>
-                    </div>
-                </div>
-            `,
-
-            leaderboard: `
-                <div class="screen-header">
-                    <h1>رتبه‌بندی</h1>
-                </div>
-                <div class="leaderboard-list">
-                    <div class="leader-item">
-                        <span class="rank">۱</span>
-                        <span class="player-name">بازیکن برتر</span>
-                        <span class="player-score">۲۵۰۰</span>
-                    </div>
-                </div>
-            `,
-
-            profile: `
-                <div class="screen-header">
-                    <h1>پروفایل</h1>
-                </div>
-                <div class="profile-info">
-                    <div class="avatar-large">👤</div>
-                    <h2>${AppState.currentUser.name}</h2>
-                    <p>سطح ${AppState.currentUser.level}</p>
-                </div>
-            `,
-
-            'quick-play': `
-                <div class="game-lobby">
-                    <h1>بازی سریع</h1>
-                    <p>در حال جستجوی حریف...</p>
-                    <div class="loading-spinner"></div>
-                    <button class="btn-secondary" onclick="App.navigate('home')">انصراف</button>
-                </div>
-            `,
-
-            classic: `
-                <div class="game-setup">
-                    <h1>بازی کلاسیک</h1>
-                    <p>تنظیمات بازی</p>
-                    <button class="btn-primary" onclick="App.startGame('classic')">شروع بازی</button>
-                </div>
-            `,
-
-            ranked: `
-                <div class="game-setup">
-                    <h1>بازی رقابتی</h1>
-                    <p>کسب امتیاز و صعود در لیگ</p>
-                    <button class="btn-primary" onclick="App.startGame('ranked')">شروع بازی</button>
-                </div>
-            `,
-
-            private: `
-                <div class="game-setup">
-                    <h1>اتاق خصوصی</h1>
-                    <input type="text" placeholder="کد اتاق را وارد کنید" class="input-field">
-                    <button class="btn-primary">پیوستن</button>
-                    <button class="btn-secondary">ساخت اتاق</button>
-                </div>
-            `,
-
-            practice: `
-                <div class="game-setup">
-                    <h1>تمرین</h1>
-                    <p>بازی با هوش مصنوعی</p>
-                    <button class="btn-primary" onclick="App.startGame('practice')">شروع تمرین</button>
-                </div>
-            `
-        };
-
-        // Sidebar Menu Items
-        const MenuItems = {
-            game: [
-                { id: 'quick-play', icon: '⚡', text: 'بازی سریع' },
-                { id: 'classic', icon: '🎴', text: 'بازی کلاسیک' },
-                { id: 'ranked', icon: '🏆', text: 'بازی رقابتی' },
-                { id: 'private', icon: '🏠', text: 'اتاق خصوصی' },
-                { id: 'practice', icon: '', text: 'تمرین' },
-                { id: 'tournament', icon: '🏅', text: 'تورنمنت' }
-            ],
-            progress: [
-                { id: 'league', icon: '🏅', text: 'لیگ' },
-                { id: 'season', icon: '📅', text: 'فصل' },
-                { id: 'missions', icon: '🎯', text: 'مأموریت‌ها' },
-                { id: 'achievements', icon: '', text: 'دستاوردها' },
-                { id: 'statistics', icon: '📊', text: 'آمار' }
-            ],
-            social: [
-                { id: 'friends', icon: '👥', text: 'دوستان' },
-                { id: 'chat', icon: '💬', text: 'چت' },
-                { id: 'leaderboard', icon: '🏆', text: 'رتبه‌بندی' },
-                { id: 'events', icon: '🎪', text: 'رویدادها' }
-            ],
-            account: [
-                { id: 'profile', icon: '👤', text: 'پروفایل' },
-                { id: 'inventory', icon: '🎒', text: 'موجودی' },
-                { id: 'shop', icon: '🛒', text: 'فروشگاه' },
-                { id: 'settings', icon: '⚙️', text: 'تنظیمات' },
-                { id: 'help', icon: '❓', text: 'راهنما' }
-            ]
-        };
-
-        // Main Application
-        const App = {
-            init() {
-                this.cacheDOM();
-                this.bindEvents();
-                this.renderSidebar();
-                this.navigate('home');
-                this.updateStats();
-                this.hideLoader();
-            },
-
-            cacheDOM() {
-                this.dom = {
-                    loader: document.getElementById('app-loader'),
-                    content: document.getElementById('content'),
-                    sidebar: document.getElementById('sidebar'),
-                    sidebarMenu: document.getElementById('sidebar-menu'),
-                    sidebarOverlay: document.getElementById('sidebar-overlay'),
-                    btnMenu: document.getElementById('btn-menu'),
-                    btnCloseSidebar: document.getElementById('btn-close-sidebar'),
-                    navItems: document.querySelectorAll('.nav-item'),
-                    coins: document.getElementById('coins'),
-                    gems: document.getElementById('gems')
-                };
-            },
-
-            bindEvents() {
-                // Sidebar toggle
-                this.dom.btnMenu.addEventListener('click', () => this.toggleSidebar());
-                this.dom.btnCloseSidebar.addEventListener('click', () => this.toggleSidebar());
-                this.dom.sidebarOverlay.addEventListener('click', () => this.toggleSidebar());
-
-                // Bottom navigation
-                this.dom.navItems.forEach(item => {
-                    item.addEventListener('click', (e) => {
-                        const screen = e.currentTarget.dataset.screen;
-                        this.navigate(screen);
-                        
-                        // Update active state
-                        this.dom.navItems.forEach(nav => nav.classList.remove('active'));
-                        e.currentTarget.classList.add('active');
-                    });
-                });
-            },
-
-            renderSidebar() {
-                let html = '';
-                
-                for (const [category, items] of Object.entries(MenuItems)) {
-                    html += `<div class="sidebar-section">`;
-                    html += `<div class="section-title">${this.getCategoryTitle(category)}</div>`;
-                    
-                    items.forEach(item => {
-                        html += `
-                            <button class="sidebar-item" onclick="App.navigate('${item.id}'); App.toggleSidebar()">
-                                <span class="item-icon">${item.icon}</span>
-                                <span class="item-text">${item.text}</span>
-                            </button>
-                        `;
-                    });
-                    
-                    html += `</div>`;
-                }
-                
-                this.dom.sidebarMenu.innerHTML = html;
-            },
-
-            getCategoryTitle(category) {
-                const titles = {
-                    game: 'بازی',
-                    progress: 'پیشرفت',
-                    social: 'اجتماعی',
-                    account: 'حساب'
-                };
-                return titles[category] || category;
-            },
-
-            navigate(screenId) {
-                AppState.currentScreen = screenId;
-                
-                if (Screens[screenId]) {
-                    this.dom.content.innerHTML = Screens[screenId];
-                    this.dom.content.classList.remove('fade-in');
-                    void this.dom.content.offsetWidth; // Trigger reflow
-                    this.dom.content.classList.add('fade-in');
-                } else {
-                    this.showToast(`صفحه ${screenId} به زودی...`, 'info');
-                }
-
-                // Close sidebar if open
-                if (AppState.sidebarOpen) {
-                    this.toggleSidebar();
-                }
-            },
-
-            toggleSidebar() {
-                AppState.sidebarOpen = !AppState.sidebarOpen;
-                this.dom.sidebar.classList.toggle('open', AppState.sidebarOpen);
-                this.dom.sidebarOverlay.classList.toggle('active', AppState.sidebarOpen);
-            },
-
-            startGame(mode) {
-                this.showToast(`شروع بازی ${mode}...`, 'success');
-                setTimeout(() => {
-                    this.showToast('به زودی...', 'info');
-                }, 1000);
-            },
-
-            updateStats() {
-                const winrate = AppState.currentUser.gamesPlayed > 0 
-                    ? Math.round((AppState.currentUser.gamesWon / AppState.currentUser.gamesPlayed) * 100)
-                    : 0;
-                
-                const gamesEl = document.getElementById('stat-games');
-                const winsEl = document.getElementById('stat-wins');
-                const winrateEl = document.getElementById('stat-winrate');
-                
-                if (gamesEl) gamesEl.textContent = AppState.currentUser.gamesPlayed;
-                if (winsEl) winsEl.textContent = AppState.currentUser.gamesWon;
-                if (winrateEl) winrateEl.textContent = winrate + '%';
-            },
-
-            showToast(message, type = 'info') {
-                const container = document.getElementById('toast-container');
-                const toast = document.createElement('div');
-                
-                const colors = {
-                    success: 'var(--color-success)',
-                    error: 'var(--color-danger)',
-                    warning: 'var(--color-warning)',
-                    info: 'var(--color-primary)'
-                };
-                
-                const icons = {
-                    success: '✅',
-                    error: '❌',
-                    warning: '⚠️',
-                    info: 'ℹ️'
-                };
-                
-                toast.className = 'toast';
-                toast.style.cssText = `
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    padding: 12px 20px;
-                    background: ${colors[type]};
-                    color: white;
-                    border-radius: 8px;
-                    box-shadow: var(--shadow-lg);
-                    margin-bottom: 8px;
-                    animation: slideIn 0.3s ease;
-                    font-weight: 500;
-                `;
-                
-                toast.innerHTML = `
-                    <span>${icons[type]}</span>
-                    <span>${message}</span>
-                `;
-                
-                container.appendChild(toast);
-                
-                setTimeout(() => {
-                    toast.style.opacity = '0';
-                    toast.style.transform = 'translateY(-10px)';
-                    setTimeout(() => toast.remove(), 300);
-                }, 2500);
-            },
-
-            hideLoader() {
-                setTimeout(() => {
-                    this.dom.loader.classList.add('hidden');
-                    this.showToast('به حکم مستر خوش آمدید! 🃏', 'success');
-                }, 800);
+        function navigate(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            const screen = document.getElementById('screen-' + screenId);
+            if (screen) {
+                screen.classList.add('active');
+            } else {
+                showToast('صفحه ' + screenId + ' به زودی...', 'info');
             }
-        };
+        }
 
-        // Initialize app when DOM is ready
-        document.addEventListener('DOMContentLoaded', () => {
-            App.init();
+        function setActiveNav(element) {
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('open');
+            document.querySelector('.sidebar-overlay').classList.toggle('active');
+        }
+
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2500);
+        }
+
+        // Shop category filter
+        document.querySelectorAll('.shop-category').forEach(cat => {
+            cat.addEventListener('click', function() {
+                document.querySelectorAll('.shop-category').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
         });
 
-        // Add CSS animation
-        const style = document.createElement('style');
-        style.textContent = `
-            .fade-in {
-                animation: fadeIn 0.4s ease-out;
-            }
-            
-            @keyframes fadeIn {
-                from { opacity: 0; transform: translateY(20px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-            
-            @keyframes slideIn {
-                from { opacity: 0; transform: translateY(-20px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-            
-            .toast {
-                position: fixed;
-                top: 80px;
-                left: 50%;
-                transform: translateX(-50%);
-                z-index: 10000;
-            }
-        `;
-        document.head.appendChild(style);
+        // Buy buttons
+        document.querySelectorAll('.btn-buy').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                showToast('خرید با موفقیت انجام شد! ✅', 'success');
+            });
+        });
+
+        // Invite buttons
+        document.querySelectorAll('.btn-invite').forEach(btn => {
+            btn.addEventListener('click', function() {
+                showToast('دعوت‌نامه ارسال شد! 📨', 'success');
+            });
+        });
     </script>
 </body>
 </html>
