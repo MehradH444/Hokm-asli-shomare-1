@@ -1,0 +1,374 @@
+<div id="classic-screen" class="screen screen-classic" data-screen-name="classic">
+    <div class="screen-content">
+        <header class="screen-header">
+            <button class="btn-back" data-route="home" aria-label="بازگشت">
+                <span class="icon">→</span>
+            </button>
+            <h1 class="screen-title">بازی کلاسیک</h1>
+            <div class="header-spacer"></div>
+        </header>
+
+        <section class="classic-intro">
+            <div class="intro-icon">🎴</div>
+            <h2 class="intro-title">بازی کلاسیک حکم</h2>
+            <p class="intro-description">
+                تجربه کامل بازی حکم با تمام قوانین و تنظیمات استاندارد.
+                حریفان خود را انتخاب کنید و از بازی لذت ببرید.
+            </p>
+        </section>
+
+        <section class="classic-setup" id="classic-setup-section">
+            <div class="setup-steps">
+                <div class="step active" data-step="1">
+                    <span class="step-number">۱</span>
+                    <span class="step-label">تنظیمات</span>
+                </div>
+                <div class="step" data-step="2">
+                    <span class="step-number">۲</span>
+                    <span class="step-label">انتخاب حریفان</span>
+                </div>
+                <div class="step" data-step="3">
+                    <span class="step-number">۳</span>
+                    <span class="step-label">آماده‌سازی</span>
+                </div>
+            </div>
+
+            <div class="setup-content" id="setup-step-1">
+                <h3 class="setup-title">تنظیمات بازی</h3>
+
+                <div class="form-group">
+                    <label class="form-label">تعداد دست برای برد</label>
+                    <div class="option-cards">
+                        <label class="option-card selected">
+                            <input type="radio" name="hands-to-win" value="7" checked>
+                            <div class="option-content">
+                                <span class="option-value">۷</span>
+                                <span class="option-desc">بازی کوتاه</span>
+                            </div>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="hands-to-win" value="13">
+                            <div class="option-content">
+                                <span class="option-value">۱۳</span>
+                                <span class="option-desc">بازی کامل</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">تعداد راند برای پیروزی</label>
+                    <select id="classic-rounds-select" class="form-select">
+                        <option value="1">۱ راند</option>
+                        <option value="2" selected>۲ راند</option>
+                        <option value="3"> راند</option>
+                        <option value="5">۵ راند</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">سطح هوش مصنوعی</label>
+                    <div class="level-selector">
+                        <label class="level-option">
+                            <input type="radio" name="classic-ai-level" value="beginner">
+                            <div class="level-content">
+                                <span class="level-icon">🌱</span>
+                                <span class="level-name">مبتدی</span>
+                            </div>
+                        </label>
+                        <label class="level-option">
+                            <input type="radio" name="classic-ai-level" value="easy">
+                            <div class="level-content">
+                                <span class="level-icon">😊</span>
+                                <span class="level-name">آسان</span>
+                            </div>
+                        </label>
+                        <label class="level-option selected">
+                            <input type="radio" name="classic-ai-level" value="normal" checked>
+                            <div class="level-content">
+                                <span class="level-icon">😐</span>
+                                <span class="level-name">معمولی</span>
+                            </div>
+                        </label>
+                        <label class="level-option">
+                            <input type="radio" name="classic-ai-level" value="hard">
+                            <div class="level-content">
+                                <span class="level-icon">😤</span>
+                                <span class="level-name">سخت</span>
+                            </div>
+                        </label>
+                        <label class="level-option locked">
+                            <input type="radio" name="classic-ai-level" value="expert" disabled>
+                            <div class="level-content">
+                                <span class="level-icon">🔥</span>
+                                <span class="level-name">حرفه‌ای</span>
+                                <span class="level-lock">🔒</span>
+                            </div>
+                        </label>
+                        <label class="level-option locked">
+                            <input type="radio" name="classic-ai-level" value="master" disabled>
+                            <div class="level-content">
+                                <span class="level-icon">👑</span>
+                                <span class="level-name">استاد</span>
+                                <span class="level-lock">🔒</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">قوانین بازی</label>
+                    <div class="rules-list">
+                        <label class="rule-item">
+                            <input type="checkbox" id="classic-allow-kot" checked>
+                            <span class="rule-icon">👑</span>
+                            <span class="rule-text">اجازه اعلام کت</span>
+                        </label>
+                        <label class="rule-item">
+                            <input type="checkbox" id="classic-allow-double-kot">
+                            <span class="rule-icon">👑</span>
+                            <span class="rule-text">اجازه کت دبل</span>
+                        </label>
+                        <label class="rule-item">
+                            <input type="checkbox" id="classic-timer-enabled" checked>
+                            <span class="rule-icon">️</span>
+                            <span class="rule-text">تایمر نوبت</span>
+                        </label>
+                        <label class="rule-item">
+                            <input type="checkbox" id="classic-chat-enabled" checked>
+                            <span class="rule-icon">💬</span>
+                            <span class="rule-text">چت فعال</span>
+                        </label>
+                        <label class="rule-item">
+                            <input type="checkbox" id="classic-emotes-enabled" checked>
+                            <span class="rule-icon">😀</span>
+                            <span class="rule-text">ایموجی فعال</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">مدت تایمر (ثانیه)</label>
+                    <input type="range" id="classic-timer-duration" min="10" max="120" value="30" class="range-input">
+                    <div class="range-labels">
+                        <span>۱۰</span>
+                        <span id="timer-duration-value">۳۰</span>
+                        <span>۱۲۰</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="setup-content" id="setup-step-2" style="display: none;">
+                <h3 class="setup-title">انتخاب حریفان</h3>
+
+                <div class="players-setup">
+                    <div class="player-slot">
+                        <div class="player-avatar-wrapper">
+                            <span class="avatar avatar-large">👤</span>
+                            <span class="player-badge">شما</span>
+                        </div>
+                        <div class="player-info">
+                            <span class="player-name" id="classic-player-name">بازیکن</span>
+                            <span class="player-role">تیم ۱</span>
+                        </div>
+                    </div>
+
+                    <div class="player-slot" id="slot-2">
+                        <div class="player-avatar-wrapper">
+                            <span class="avatar avatar-large empty">➕</span>
+                        </div>
+                        <div class="player-info">
+                            <span class="player-name">حریف ۱</span>
+                            <button class="btn-add-player" data-slot="2">
+                                <span class="icon">🤖</span>
+                                <span class="text">افزودن AI</span>
+                            </button>
+                            <button class="btn-add-friend" data-slot="2" style="display: none;">
+                                <span class="icon"></span>
+                                <span class="text">دعوت دوست</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="player-slot" id="slot-3">
+                        <div class="player-avatar-wrapper">
+                            <span class="avatar avatar-large empty">➕</span>
+                        </div>
+                        <div class="player-info">
+                            <span class="player-name">هم‌تیمی</span>
+                            <button class="btn-add-player" data-slot="3">
+                                <span class="icon">🤖</span>
+                                <span class="text">افزودن AI</span>
+                            </button>
+                            <button class="btn-add-friend" data-slot="3" style="display: none;">
+                                <span class="icon">👥</span>
+                                <span class="text">دعوت دوست</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="player-slot" id="slot-4">
+                        <div class="player-avatar-wrapper">
+                            <span class="avatar avatar-large empty">➕</span>
+                        </div>
+                        <div class="player-info">
+                            <span class="player-name">حریف ۲</span>
+                            <button class="btn-add-player" data-slot="4">
+                                <span class="icon"></span>
+                                <span class="text">افزودن AI</span>
+                            </button>
+                            <button class="btn-add-friend" data-slot="4" style="display: none;">
+                                <span class="icon">👥</span>
+                                <span class="text">دعوت دوست</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setup-actions">
+                    <button id="btn-auto-fill-ai" class="btn btn-outline btn-block">
+                        <span class="btn-icon">🤖</span>
+                        <span class="btn-text">پر کردن خودکار با AI</span>
+                    </button>
+                </div>
+
+                <div class="friends-list" id="classic-friends-list" style="display: none;">
+                    <h4 class="friends-title">دوستان آنلاین</h4>
+                    <div class="friends-grid">
+                        <div class="friend-item" data-friend-id="1">
+                            <span class="avatar avatar-medium">👨</span>
+                            <span class="friend-name">علی</span>
+                            <button class="btn-invite btn-small">دعوت</button>
+                        </div>
+                        <div class="friend-item" data-friend-id="2">
+                            <span class="avatar avatar-medium">👩</span>
+                            <span class="friend-name">مریم</span>
+                            <button class="btn-invite btn-small">دعوت</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="setup-content" id="setup-step-3" style="display: none;">
+                <h3 class="setup-title">آماده‌سازی بازی</h3>
+
+                <div class="lobby-info">
+                    <div class="info-card">
+                        <span class="info-icon">🎴</span>
+                        <div class="info-content">
+                            <span class="info-label">حالت بازی</span>
+                            <span class="info-value">کلاسیک</span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <span class="info-icon">🎯</span>
+                        <div class="info-content">
+                            <span class="info-label">تعداد دست</span>
+                            <span class="info-value" id="lobby-hands">۷</span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <span class="info-icon">🏆</span>
+                        <div class="info-content">
+                            <span class="info-label">تعداد راند</span>
+                            <span class="info-value" id="lobby-rounds"></span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <span class="info-icon">🤖</span>
+                        <div class="info-content">
+                            <span class="info-label">سطح AI</span>
+                            <span class="info-value" id="lobby-ai-level">معمولی</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lobby-players" id="lobby-players-list">
+                    <div class="lobby-player ready">
+                        <span class="avatar avatar-medium">👤</span>
+                        <span class="player-name">شما</span>
+                        <span class="player-status">✅ آماده</span>
+                    </div>
+                    <div class="lobby-player not-ready">
+                        <span class="avatar avatar-medium">🤖</span>
+                        <span class="player-name">AI ۱</span>
+                        <span class="player-status"> در انتظار</span>
+                    </div>
+                    <div class="lobby-player not-ready">
+                        <span class="avatar avatar-medium">🤖</span>
+                        <span class="player-name">AI ۲</span>
+                        <span class="player-status">⏳ در انتظار</span>
+                    </div>
+                    <div class="lobby-player not-ready">
+                        <span class="avatar avatar-medium">🤖</span>
+                        <span class="player-name">AI ۳</span>
+                        <span class="player-status"> در انتظار</span>
+                    </div>
+                </div>
+
+                <div class="lobby-actions">
+                    <button id="btn-ready-classic" class="btn btn-primary btn-block btn-large">
+                        <span class="btn-icon">✅</span>
+                        <span class="btn-text">آماده‌ام</span>
+                    </button>
+                    <button id="btn-start-classic-game" class="btn btn-success btn-block btn-large" style="display: none;">
+                        <span class="btn-icon">🎮</span>
+                        <span class="btn-text">شروع بازی</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="setup-navigation">
+                <button id="btn-setup-prev" class="btn btn-outline" style="display: none;">
+                    <span class="btn-icon">→</span>
+                    <span class="btn-text">قبلی</span>
+                </button>
+                <button id="btn-setup-next" class="btn btn-primary">
+                    <span class="btn-text">مرحله بعد</span>
+                    <span class="btn-icon">←</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="classic-saved-games" id="classic-saved-section">
+            <div class="section-header">
+                <h3 class="section-title">بازی‌های ذخیره شده</h3>
+            </div>
+            <div id="saved-games-list" class="saved-games-list">
+                <div class="saved-game-card">
+                    <div class="saved-game-info">
+                        <span class="game-icon"></span>
+                        <div class="game-details">
+                            <span class="game-name">بازی کلاسیک</span>
+                            <span class="game-date">۲ ساعت پیش</span>
+                        </div>
+                    </div>
+                    <div class="saved-game-actions">
+                        <button class="btn btn-small btn-primary" data-game-id="1">ادامه</button>
+                        <button class="btn btn-small btn-danger" data-game-id="1">حذف</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="classic-tips">
+            <div class="section-header">
+                <h3 class="section-title">نکات بازی کلاسیک</h3>
+            </div>
+            <div class="tips-list">
+                <div class="tip-item">
+                    <span class="tip-icon"></span>
+                    <p class="tip-text">می‌توانید حریفان را از بین دوستان یا AI انتخاب کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">💾</span>
+                    <p class="tip-text">بازی را ذخیره کنید و بعداً ادامه دهید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">️</span>
+                    <p class="tip-text">تمام قوانین و تنظیمات قابل شخصی‌سازی هستند</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
