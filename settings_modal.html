@@ -1,0 +1,1071 @@
+<div id="settings-modal" class="modal modal-large" data-modal-name="settings" style="display: none;">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-header-right">
+                <span class="modal-icon">⚙️</span>
+                <h3 class="modal-title">تنظیمات</h3>
+            </div>
+            <div class="modal-header-left">
+                <button class="btn-icon btn-small" id="btn-modal-search-settings" aria-label="جستجو">
+                    <span class="icon">🔍</span>
+                </button>
+                <button class="btn-icon btn-small btn-close-modal" id="btn-close-settings-modal" aria-label="بستن">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="modal-body">
+            <div class="settings-modal-layout">
+                <aside class="settings-sidebar">
+                    <div class="settings-search" id="settings-modal-search-section" style="display: none;">
+                        <div class="input-wrapper search-wrapper">
+                            <span class="input-icon">🔍</span>
+                            <input
+                                type="text"
+                                id="settings-modal-search-input"
+                                class="input-field"
+                                placeholder="جستجو..."
+                                maxlength="30"
+                            >
+                        </div>
+                    </div>
+                    <nav class="settings-nav">
+                        <button class="settings-nav-item active" data-section="device">
+                            <span class="nav-icon">📱</span>
+                            <span class="nav-text">دستگاه</span>
+                        </button>
+                        <button class="settings-nav-item" data-section="graphics">
+                            <span class="nav-icon">🎨</span>
+                            <span class="nav-text">گرافیک</span>
+                        </button>
+                        <button class="settings-nav-item" data-section="game">
+                            <span class="nav-icon">🎮</span>
+                            <span class="nav-text">بازی</span>
+                        </button>
+                        <button class="settings-nav-item" data-section="privacy">
+                            <span class="nav-icon">🔒</span>
+                            <span class="nav-text">حریم خصوصی</span>
+                        </button>
+                        <button class="settings-nav-item" data-section="notifications">
+                            <span class="nav-icon">🔔</span>
+                            <span class="nav-text">اعلان‌ها</span>
+                        </button>
+                        <button class="settings-nav-item" data-section="language">
+                            <span class="nav-icon">🌐</span>
+                            <span class="nav-text">زبان</span>
+                        </button>
+                        <button class="settings-nav-item" data-section="accessibility">
+                            <span class="nav-icon">♿</span>
+                            <span class="nav-text">دسترسی‌پذیری</span>
+                        </button>
+                        <button class="settings-nav-item" data-section="account">
+                            <span class="nav-icon">👤</span>
+                            <span class="nav-text">حساب</span>
+                        </button>
+                    </nav>
+                    <div class="settings-nav-footer">
+                        <button class="btn btn-outline btn-block btn-small" id="btn-modal-reset-settings">
+                            <span class="btn-icon">🔄</span>
+                            <span class="btn-text">بازنشانی</span>
+                        </button>
+                    </div>
+                </aside>
+
+                <div class="settings-content-area">
+                    <section class="settings-section active" id="settings-section-device" data-section="device">
+                        <div class="section-header">
+                            <h4 class="section-title">تنظیمات دستگاه</h4>
+                            <p class="section-desc">تنظیمات مربوط به صدا، ویبره و بازخورد لمسی</p>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">ویبره</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">📳</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">فعال‌سازی ویبره</span>
+                                        <span class="setting-hint">لرزش دستگاه برای بازخوردها</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-vibration-enabled" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">⚡</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">شدت ویبره</span>
+                                        <span class="setting-hint">میزان قدرت لرزش</span>
+                                    </div>
+                                </div>
+                                <select id="modal-setting-vibration-intensity" class="setting-select">
+                                    <option value="light">کم</option>
+                                    <option value="medium" selected>متوسط</option>
+                                    <option value="heavy">زیاد</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">صدا</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🔊</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">فعال‌سازی صدا</span>
+                                        <span class="setting-hint">پخش افکت‌های صوتی</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-sound-enabled" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🔉</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">حجم صدا</span>
+                                        <span class="setting-hint">میزان بلندی صدا</span>
+                                    </div>
+                                </div>
+                                <div class="range-setting">
+                                    <input type="range" id="modal-setting-sound-volume" min="0" max="100" value="70" class="range-input">
+                                    <span class="range-value" id="modal-sound-volume-value">۷۰٪</span>
+                                </div>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🎵</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">حجم افکت‌ها</span>
+                                        <span class="setting-hint">میزان بلندی افکت‌های صوتی</span>
+                                    </div>
+                                </div>
+                                <div class="range-setting">
+                                    <input type="range" id="modal-setting-sfx-volume" min="0" max="100" value="70" class="range-input">
+                                    <span class="range-value" id="modal-sfx-volume-value">۷۰٪</span>
+                                </div>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🎶</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">حجم موسیقی</span>
+                                        <span class="setting-hint">میزان بلندی موسیقی پس‌زمینه</span>
+                                    </div>
+                                </div>
+                                <div class="range-setting">
+                                    <input type="range" id="modal-setting-music-volume" min="0" max="100" value="50" class="range-input">
+                                    <span class="range-value" id="modal-music-volume-value">۵۰٪</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">بازخورد لمسی</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">👆</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">فعال‌سازی بازخورد لمسی</span>
+                                        <span class="setting-hint">لرزش هنگام لمس دکمه‌ها</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-haptic-enabled" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="settings-section" id="settings-section-graphics" data-section="graphics" style="display: none;">
+                        <div class="section-header">
+                            <h4 class="section-title">تنظیمات گرافیک</h4>
+                            <p class="section-desc">تنظیمات کیفیت، انیمیشن و جلوه‌های بصری</p>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">کیفیت</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🎨</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">کیفیت گرافیک</span>
+                                        <span class="setting-hint">کیفیت بصری بازی</span>
+                                    </div>
+                                </div>
+                                <select id="modal-setting-graphics-quality" class="setting-select">
+                                    <option value="low">کم</option>
+                                    <option value="medium" selected>متوسط</option>
+                                    <option value="high">بالا</option>
+                                </select>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🖥️</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">نرخ فریم</span>
+                                        <span class="setting-hint">تعداد فریم در ثانیه</span>
+                                    </div>
+                                </div>
+                                <select id="modal-setting-graphics-fps" class="setting-select">
+                                    <option value="30">۳۰ FPS</option>
+                                    <option value="60" selected>۶۰ FPS</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">جلوه‌های بصری</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">✨</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">ذرات</span>
+                                        <span class="setting-hint">افکت‌های ذره‌ای</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-particles-enabled" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🌑</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">سایه‌ها</span>
+                                        <span class="setting-hint">نمایش سایه‌های پویا</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-shadows-enabled">
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">انیمیشن‌ها</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🎬</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">فعال‌سازی انیمیشن‌ها</span>
+                                        <span class="setting-hint">نمایش انیمیشن‌های بازی</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-animations-enabled" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">⏱️</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">سرعت انیمیشن</span>
+                                        <span class="setting-hint">سرعت پخش انیمیشن‌ها</span>
+                                    </div>
+                                </div>
+                                <select id="modal-setting-animation-speed" class="setting-select">
+                                    <option value="0.5">۰.۵x (کند)</option>
+                                    <option value="1.0" selected>۱.x (عادی)</option>
+                                    <option value="1.5">۱.x (سریع)</option>
+                                    <option value="2.0">۲.x (خیلی سریع)</option>
+                                </select>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">♿</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">کاهش حرکت</span>
+                                        <span class="setting-hint">کاهش انیمیشن‌ها برای حساسیت به حرکت</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-reduced-motion">
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">ظاهر</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🎨</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">تم</span>
+                                        <span class="setting-hint">تم رنگی اپلیکیشن</span>
+                                    </div>
+                                </div>
+                                <select id="modal-setting-theme" class="setting-select">
+                                    <option value="dark" selected>تیره</option>
+                                    <option value="light">روشن</option>
+                                    <option value="auto">خودکار</option>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="settings-section" id="settings-section-game" data-section="game" style="display: none;">
+                        <div class="section-header">
+                            <h4 class="section-title">تنظیمات بازی</h4>
+                            <p class="section-desc">تنظیمات تایمر، پخش خودکار و تأیید اقدامات</p>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">تایمر</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">⏱️</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">فعال‌سازی تایمر</span>
+                                        <span class="setting-hint">نمایش تایمر برای هر نوبت</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-timer-enabled" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">⏰</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">مدت تایمر</span>
+                                        <span class="setting-hint">مدت زمان هر نوبت (ثانیه)</span>
+                                    </div>
+                                </div>
+                                <select id="modal-setting-timer-duration" class="setting-select">
+                                    <option value="15">۱۵ ثانیه</option>
+                                    <option value="30" selected>۳۰ ثانیه</option>
+                                    <option value="60">۶۰ ثانیه</option>
+                                    <option value="120">۱۲۰ ثانیه</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">پخش خودکار</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🤖</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">فعال‌سازی پخش خودکار</span>
+                                        <span class="setting-hint">پخش خودکار کارت توسط AI</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-auto-play-enabled">
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">نمایش</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🃏</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">نمایش آخرین دست</span>
+                                        <span class="setting-hint">نمایش کارت‌های آخرین دست</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-show-last-trick" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">📊</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">نمایش احتمالات</span>
+                                        <span class="setting-hint">نمایش احتمالات کارت‌ها</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-show-probabilities">
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">تأیید اقدامات</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🚪</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">تأیید ترک بازی</span>
+                                        <span class="setting-hint">درخواست تأیید قبل از ترک بازی</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-confirm-leave" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">⚠️</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">تأیید تسلیم</span>
+                                        <span class="setting-hint">درخواست تأیید قبل از تسلیم</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-confirm-surrender" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">مرتب‌سازی کارت‌ها</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🔢</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">مرتب‌سازی خودکار</span>
+                                        <span class="setting-hint">مرتب‌سازی خودکار کارت‌ها</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-auto-sort-cards" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">📋</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">ترتیب مرتب‌سازی</span>
+                                        <span class="setting-hint">نحوه مرتب‌سازی کارت‌ها</span>
+                                    </div>
+                                </div>
+                                <select id="modal-setting-card-sort-order" class="setting-select">
+                                    <option value="suit" selected>بر اساس خال</option>
+                                    <option value="rank">بر اساس رتبه</option>
+                                    <option value="value">بر اساس ارزش</option>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="settings-section" id="settings-section-privacy" data-section="privacy" style="display: none;">
+                        <div class="section-header">
+                            <h4 class="section-title">تنظیمات حریم خصوصی</h4>
+                            <p class="section-desc">تنظیمات نمایش پروفایل و تعاملات</p>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">نمایش پروفایل</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">👁️</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">قابلیت مشاهده پروفایل</span>
+                                        <span class="setting-hint">چه کسانی می‌توانند پروفایل شما را ببینند</span>
+                                    </div>
+                                </div>
+                                <select id="modal-setting-profile-visibility" class="setting-select">
+                                    <option value="public" selected>عمومی</option>
+                                    <option value="friends">فقط دوستان</option>
+                                    <option value="private">خصوصی</option>
+                                </select>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🟢</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">نمایش وضعیت آنلاین</span>
+                                        <span class="setting-hint">نمایش وضعیت آنلاین بودن شما</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-show-online-status" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">📜</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">نمایش تاریخچه بازی</span>
+                                        <span class="setting-hint">نمایش تاریخچه بازی‌های شما</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-show-game-history" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">تعاملات</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">👥</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">اجازه درخواست دوستی</span>
+                                        <span class="setting-hint">دریافت درخواست دوستی از دیگران</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-allow-friend-requests" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🎮</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">اجازه دعوت به بازی</span>
+                                        <span class="setting-hint">دریافت دعوت به بازی از دیگران</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-allow-game-invites" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">💬</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">اجازه پیام</span>
+                                        <span class="setting-hint">دریافت پیام از دیگران</span>
+                                    </div>
+                                </div>
+                                <select id="modal-setting-allow-messages" class="setting-select">
+                                    <option value="everyone">همه</option>
+                                    <option value="friends" selected>فقط دوستان</option>
+                                    <option value="none">هیچ‌کس</option>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="settings-section" id="settings-section-notifications" data-section="notifications" style="display: none;">
+                        <div class="section-header">
+                            <h4 class="section-title">تنظیمات اعلان‌ها</h4>
+                            <p class="section-desc">تنظیمات انواع اعلان‌ها و ساعات سکوت</p>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">کلی</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🔔</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">فعال‌سازی اعلان‌ها</span>
+                                        <span class="setting-hint">دریافت اعلان‌ها</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-notif-enabled" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🔊</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">صدای اعلان</span>
+                                        <span class="setting-hint">پخش صدا برای اعلان‌ها</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-notif-sound" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🔔</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">Push Notification</span>
+                                        <span class="setting-hint">دریافت اعلان در پس‌زمینه</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-notif-push" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">ساعات سکوت</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🌙</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">فعال‌سازی ساعات سکوت</span>
+                                        <span class="setting-hint">بی‌صدا کردن اعلان‌ها در ساعات مشخص</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-quiet-hours-enabled">
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row time-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🌙</span>
+                                    <span class="setting-label">شروع</span>
+                                </div>
+                                <input type="time" id="modal-setting-quiet-start" value="23:00" class="time-input">
+                            </div>
+                            <div class="setting-row time-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🌅</span>
+                                    <span class="setting-label">پایان</span>
+                                </div>
+                                <input type="time" id="modal-setting-quiet-end" value="08:00" class="time-input">
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">انواع اعلان</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">👥</span>
+                                    <span class="setting-label">درخواست دوستی</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-notif-friend_request" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🎮</span>
+                                    <span class="setting-label">دعوت به بازی</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-notif-game_invite" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🎁</span>
+                                    <span class="setting-label">پاداش</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-notif-reward" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🎯</span>
+                                    <span class="setting-label">مأموریت</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-notif-mission" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🏅</span>
+                                    <span class="setting-label">لیگ</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-notif-league" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🏆</span>
+                                    <span class="setting-label">تورنمنت</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-notif-tournament" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🎪</span>
+                                    <span class="setting-label">رویداد</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-notif-event" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🛒</span>
+                                    <span class="setting-label">فروشگاه</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-notif-shop">
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">⚙️</span>
+                                    <span class="setting-label">سیستمی</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-notif-system" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="settings-section" id="settings-section-language" data-section="language" style="display: none;">
+                        <div class="section-header">
+                            <h4 class="section-title">تنظیمات زبان و منطقه</h4>
+                            <p class="section-desc">تنظیمات زبان، فرمت اعداد و تاریخ</p>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">زبان</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🌐</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">زبان</span>
+                                        <span class="setting-hint">زبان رابط کاربری</span>
+                                    </div>
+                                </div>
+                                <select id="modal-setting-language" class="setting-select">
+                                    <option value="fa" selected>فارسی</option>
+                                    <option value="en">English</option>
+                                </select>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🌍</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">منطقه</span>
+                                        <span class="setting-hint">منطقه جغرافیایی</span>
+                                    </div>
+                                </div>
+                                <select id="modal-setting-region" class="setting-select">
+                                    <option value="IR" selected>ایران</option>
+                                    <option value="US">آمریکا</option>
+                                    <option value="UK">انگلستان</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">فرمت‌ها</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🔢</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">فرمت اعداد</span>
+                                        <span class="setting-hint">نحوه نمایش اعداد</span>
+                                    </div>
+                                </div>
+                                <select id="modal-setting-number-format" class="setting-select">
+                                    <option value="persian" selected>فارسی</option>
+                                    <option value="english">انگلیسی</option>
+                                </select>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">📅</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">فرمت تاریخ</span>
+                                        <span class="setting-hint">نحوه نمایش تاریخ</span>
+                                    </div>
+                                </div>
+                                <select id="modal-setting-date-format" class="setting-select">
+                                    <option value="shamsi" selected>شمسی</option>
+                                    <option value="gregorian">میلادی</option>
+                                </select>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🕐</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">فرمت زمان</span>
+                                        <span class="setting-hint">نحوه نمایش زمان</span>
+                                    </div>
+                                </div>
+                                <select id="modal-setting-time-format" class="setting-select">
+                                    <option value="24h" selected>۲۴ ساعته</option>
+                                    <option value="12h">۱۲ ساعته</option>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="settings-section" id="settings-section-accessibility" data-section="accessibility" style="display: none;">
+                        <div class="section-header">
+                            <h4 class="section-title">تنظیمات دسترسی‌پذیری</h4>
+                            <p class="section-desc">تنظیمات برای کاربران با نیازهای ویژه</p>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">نمایش</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🔤</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">اندازه فونت</span>
+                                        <span class="setting-hint">اندازه متن رابط کاربری</span>
+                                    </div>
+                                </div>
+                                <div class="range-setting">
+                                    <input type="range" id="modal-setting-font-size" min="80" max="130" value="100" class="range-input">
+                                    <span class="range-value" id="modal-font-size-value">۱۰۰٪</span>
+                                </div>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🎨</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">کنتراست بالا</span>
+                                        <span class="setting-hint">افزایش کنتراست برای دید بهتر</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-high-contrast">
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">کوررنگی</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">👁️</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">حالت کوررنگی</span>
+                                        <span class="setting-hint">تنظیم رنگ‌ها برای کوررنگی</span>
+                                    </div>
+                                </div>
+                                <select id="modal-setting-color-blind-mode" class="setting-select">
+                                    <option value="none" selected>غیرفعال</option>
+                                    <option value="protanopia">پروتانوپیا (قرمز)</option>
+                                    <option value="deuteranopia">دوترانوپیا (سبز)</option>
+                                    <option value="tritanopia">تریتانوپیا (آبی)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">کمک‌های ویژه</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🔊</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">خواننده صفحه</span>
+                                        <span class="setting-hint">پشتیبانی از خواننده صفحه</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-screen-reader">
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🔘</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">دکمه‌های بزرگ</span>
+                                        <span class="setting-hint">افزایش اندازه دکمه‌ها</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-large-buttons">
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="settings-section" id="settings-section-account" data-section="account" style="display: none;">
+                        <div class="section-header">
+                            <h4 class="section-title">تنظیمات حساب کاربری</h4>
+                            <p class="section-desc">تنظیمات امنیت و نشست</p>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">امنیت</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🔐</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">احراز هویت دو مرحله‌ای</span>
+                                        <span class="setting-hint">افزایش امنیت حساب</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-two-factor-auth">
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🔔</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">اعلان ورود</span>
+                                        <span class="setting-hint">اعلان هنگام ورود به حساب</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-login-notifications" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">نشست</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">⏱️</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">زمان انقضای نشست</span>
+                                        <span class="setting-hint">مدت زمان قبل از خروج خودکار (دقیقه)</span>
+                                    </div>
+                                </div>
+                                <select id="modal-setting-session-timeout" class="setting-select">
+                                    <option value="15">۱۵ دقیقه</option>
+                                    <option value="30" selected>۳۰ دقیقه</option>
+                                    <option value="60">۶۰ دقیقه</option>
+                                    <option value="120">۱۲۰ دقیقه</option>
+                                    <option value="0">هرگز</option>
+                                </select>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">💾</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">مرا به خاطر بسپار</span>
+                                        <span class="setting-hint">ذخیره اطلاعات ورود</span>
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-setting-remember-me" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5 class="group-title">پشتیبان‌گیری</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">💾</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">ایجاد پشتیبان</span>
+                                        <span class="setting-hint">ذخیره تنظیمات فعلی</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-small" id="btn-modal-create-backup">
+                                    ایجاد
+                                </button>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">♻️</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">بازیابی پشتیبان</span>
+                                        <span class="setting-hint">بازیابی تنظیمات از پشتیبان</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline btn-small" id="btn-modal-restore-backup">
+                                    بازیابی
+                                </button>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">📤</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">خروجی JSON</span>
+                                        <span class="setting-hint">دانلود تنظیمات به صورت JSON</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline btn-small" id="btn-modal-export-json">
+                                    خروجی
+                                </button>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">📥</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">ورودی JSON</span>
+                                        <span class="setting-hint">بارگذاری تنظیمات از JSON</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline btn-small" id="btn-modal-import-json">
+                                    ورودی
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="settings-group danger-zone">
+                            <h5 class="group-title danger-title">منطقه خطر</h5>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🔄</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">بازنشانی به پیش‌فرض</span>
+                                        <span class="setting-hint">بازگرداندن تمام تنظیمات به حالت پیش‌فرض</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-warning btn-small" id="btn-modal-reset-to-defaults">
+                                    بازنشانی
+                                </button>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <span class="setting-icon">🗑️</span>
+                                    <div class="setting-text">
+                                        <span class="setting-label">پاک کردن داده‌ها</span>
+                                        <span class="setting-hint">حذف تمام داده‌های ذخیره شده</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-danger btn-small" id="btn-modal-clear-data">
+                                    پاک کردن
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <div class="footer-info">
+                <span class="footer-text" id="settings-modal-status">تنظیمات ذخیره شده</span>
+            </div>
+            <div class="footer-actions">
+                <button class="btn btn-outline" id="btn-modal-cancel-settings">
+                    <span class="btn-text">انصراف</span>
+                </button>
+                <button class="btn btn-primary" id="btn-modal-save-settings">
+                    <span class="btn-icon">💾</span>
+                    <span class="btn-text">ذخیره</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
