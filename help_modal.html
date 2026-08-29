@@ -1,0 +1,695 @@
+<div id="help-modal" class="modal modal-large" data-modal-name="help" style="display: none;">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-header-right">
+                <span class="modal-icon">❓</span>
+                <h3 class="modal-title">راهنما و پشتیبانی</h3>
+            </div>
+            <div class="modal-header-left">
+                <button class="btn-icon btn-small btn-close-modal" id="btn-close-help-modal" aria-label="بستن">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="modal-body">
+            <div class="help-modal-tabs">
+                <button class="help-tab-btn active" data-tab="quick-help" id="tab-quick-help">
+                    <span class="tab-icon">⚡</span>
+                    <span class="tab-text">راهنمای سریع</span>
+                </button>
+                <button class="help-tab-btn" data-tab="faq" id="tab-help-faq">
+                    <span class="tab-icon">💬</span>
+                    <span class="tab-text">سوالات متداول</span>
+                </button>
+                <button class="help-tab-btn" data-tab="contact" id="tab-help-contact">
+                    <span class="tab-icon">📞</span>
+                    <span class="tab-text">تماس با ما</span>
+                </button>
+                <button class="help-tab-btn" data-tab="report" id="tab-help-report">
+                    <span class="tab-icon">🐛</span>
+                    <span class="tab-text">گزارش مشکل</span>
+                </button>
+                <button class="help-tab-btn" data-tab="feedback" id="tab-help-feedback">
+                    <span class="tab-icon">💡</span>
+                    <span class="tab-text">بازخورد</span>
+                </button>
+            </div>
+
+            <section class="help-modal-section active" id="help-section-quick-help" data-tab="quick-help">
+                <div class="quick-help-header">
+                    <h4 class="section-title">چه کمکی نیاز دارید؟</h4>
+                    <div class="quick-help-search">
+                        <div class="input-wrapper search-wrapper">
+                            <span class="input-icon">🔍</span>
+                            <input
+                                type="text"
+                                id="help-modal-search-input"
+                                class="input-field"
+                                placeholder="جستجو در راهنما..."
+                                maxlength="50"
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-help-categories">
+                    <div class="quick-category-card" data-category="gameplay">
+                        <span class="category-icon">🎮</span>
+                        <h5 class="category-name">گیم‌پلی</h5>
+                        <p class="category-desc">قوانین بازی، استراتژی</p>
+                    </div>
+                    <div class="quick-category-card" data-category="account">
+                        <span class="category-icon">👤</span>
+                        <h5 class="category-name">حساب کاربری</h5>
+                        <p class="category-desc">ورود، ثبت‌نام، رمز عبور</p>
+                    </div>
+                    <div class="quick-category-card" data-category="shop">
+                        <span class="category-icon">🛒</span>
+                        <h5 class="category-name">فروشگاه</h5>
+                        <p class="category-desc">خرید، پاداش، سکه</p>
+                    </div>
+                    <div class="quick-category-card" data-category="social">
+                        <span class="category-icon">👥</span>
+                        <h5 class="category-name">اجتماعی</h5>
+                        <p class="category-desc">دوستان، چت، دعوت</p>
+                    </div>
+                    <div class="quick-category-card" data-category="technical">
+                        <span class="category-icon">🔧</span>
+                        <h5 class="category-name">فنی</h5>
+                        <p class="category-desc">خطاها، اتصال، عملکرد</p>
+                    </div>
+                    <div class="quick-category-card" data-category="competitive">
+                        <span class="category-icon">🏆</span>
+                        <h5 class="category-name">رقابتی</h5>
+                        <p class="category-desc">لیگ، تورنمنت، رتبه‌بندی</p>
+                    </div>
+                </div>
+
+                <div class="quick-help-topics">
+                    <h4 class="section-title">موضوعات پرطرفدار</h4>
+                    <div class="topics-list" id="help-topics-list">
+                        <button class="topic-item" data-topic="rules">
+                            <span class="topic-icon">📜</span>
+                            <span class="topic-text">قوانین کامل بازی حکم</span>
+                            <span class="topic-arrow">←</span>
+                        </button>
+                        <button class="topic-item" data-topic="trump">
+                            <span class="topic-icon">👑</span>
+                            <span class="topic-text">حکم (Trump) چیست و چگونه کار می‌کند؟</span>
+                            <span class="topic-arrow">←</span>
+                        </button>
+                        <button class="topic-item" data-topic="kot">
+                            <span class="topic-icon">🏅</span>
+                            <span class="topic-text">کت چیست و چگونه اعلام کنم؟</span>
+                            <span class="topic-arrow">←</span>
+                        </button>
+                        <button class="topic-item" data-topic="scoring">
+                            <span class="topic-icon">📊</span>
+                            <span class="topic-text">سیستم امتیازدهی و لیگ</span>
+                            <span class="topic-arrow">←</span>
+                        </button>
+                        <button class="topic-item" data-topic="friends">
+                            <span class="topic-icon">👥</span>
+                            <span class="topic-text">چگونه دوست اضافه کنم؟</span>
+                            <span class="topic-arrow">←</span>
+                        </button>
+                        <button class="topic-item" data-topic="private-room">
+                            <span class="topic-icon">🏠</span>
+                            <span class="topic-text">چگونه اتاق خصوصی بسازم؟</span>
+                            <span class="topic-arrow">←</span>
+                        </button>
+                        <button class="topic-item" data-topic="coins">
+                            <span class="topic-icon">🪙</span>
+                            <span class="topic-text">چگونه سکه و الماس کسب کنم؟</span>
+                            <span class="topic-arrow">←</span>
+                        </button>
+                        <button class="topic-item" data-topic="password">
+                            <span class="topic-icon">🔐</span>
+                            <span class="topic-text">فراموشی رمز عبور</span>
+                            <span class="topic-arrow">←</span>
+                        </button>
+                        <button class="topic-item" data-topic="connection">
+                            <span class="topic-icon">📶</span>
+                            <span class="topic-text">مشکلات اتصال اینترنت</span>
+                            <span class="topic-arrow">←</span>
+                        </button>
+                        <button class="topic-item" data-topic="shortcuts">
+                            <span class="topic-icon">⌨️</span>
+                            <span class="topic-text">میانبرهای صفحه کلید</span>
+                            <span class="topic-arrow">←</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="quick-help-shortcuts">
+                    <h4 class="section-title">میانبرهای صفحه کلید</h4>
+                    <div class="shortcuts-grid">
+                        <div class="shortcut-item">
+                            <kbd>F1</kbd>
+                            <span class="shortcut-desc">راهنما</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <kbd>F2</kbd>
+                            <span class="shortcut-desc">تنظیمات</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <kbd>Esc</kbd>
+                            <span class="shortcut-desc">بازگشت / بستن</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <kbd>Ctrl+M</kbd>
+                            <span class="shortcut-desc">صدا</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <kbd>Ctrl+N</kbd>
+                            <span class="shortcut-desc">بازی جدید</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <kbd>Ctrl+L</kbd>
+                            <span class="shortcut-desc">رتبه‌بندی</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-help-links">
+                    <h4 class="section-title">لینک‌های مفید</h4>
+                    <div class="links-grid">
+                        <a href="#/help" class="help-link" data-route="help">
+                            <span class="link-icon">📚</span>
+                            <span class="link-text">مرکز راهنمای کامل</span>
+                        </a>
+                        <a href="#/practice" class="help-link" data-route="practice">
+                            <span class="link-icon">🎓</span>
+                            <span class="link-text">حالت تمرین</span>
+                        </a>
+                        <a href="#/tutorial" class="help-link" id="help-modal-tutorial-link">
+                            <span class="link-icon">📖</span>
+                            <span class="link-text">آموزش گام به گام</span>
+                        </a>
+                        <a href="#/about" class="help-link" data-route="about">
+                            <span class="link-icon">ℹ️</span>
+                            <span class="link-text">درباره بازی</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="help-modal-section" id="help-section-faq" data-tab="faq" style="display: none;">
+                <div class="faq-header">
+                    <h4 class="section-title">سوالات متداول</h4>
+                    <div class="faq-search">
+                        <div class="input-wrapper search-wrapper">
+                            <span class="input-icon">🔍</span>
+                            <input
+                                type="text"
+                                id="help-faq-search-input"
+                                class="input-field"
+                                placeholder="جستجو در سوالات..."
+                                maxlength="50"
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-categories-filter">
+                    <button class="faq-filter-btn active" data-filter="all">همه</button>
+                    <button class="faq-filter-btn" data-filter="gameplay">گیم‌پلی</button>
+                    <button class="faq-filter-btn" data-filter="account">حساب</button>
+                    <button class="faq-filter-btn" data-filter="shop">فروشگاه</button>
+                    <button class="faq-filter-btn" data-filter="technical">فنی</button>
+                </div>
+
+                <div class="faq-list" id="help-faq-list">
+                    <div class="faq-item" data-faq-id="hfaq1" data-category="gameplay">
+                        <button class="faq-question" aria-expanded="false">
+                            <span class="faq-text">حکم چیست و چگونه بازی می‌شود؟</span>
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer" style="display: none;">
+                            <p>حکم یک بازی کارتی ایرانی است که با ۴ بازیکن (دو تیم دو نفره) و ۵۲ کارت بازی می‌شود. هدف هر تیم کسب ۷ دست قبل از تیم حریف است.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-faq-id="hfaq2" data-category="gameplay">
+                        <button class="faq-question" aria-expanded="false">
+                            <span class="faq-text">حکم (Trump) چگونه انتخاب می‌شود؟</span>
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer" style="display: none;">
+                            <p>حاکم (بازیکنی که دیلر است) یکی از چهار خال را به عنوان حکم انتخاب می‌کند. کارت‌های خال حکم از تمام کارت‌های دیگر قوی‌تر هستند.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-faq-id="hfaq3" data-category="gameplay">
+                        <button class="faq-question" aria-expanded="false">
+                            <span class="faq-text">کت چیست؟</span>
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer" style="display: none;">
+                            <p>کت یعنی اعلام اینکه تیم شما تمام ۱۳ دست را می‌برد. اگر موفق شوید، پاداش دوبرابر دریافت می‌کنید. اگر شکست بخورید، حریف پاداش دوبرابر می‌گیرد.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-faq-id="hfaq4" data-category="account">
+                        <button class="faq-question" aria-expanded="false">
+                            <span class="faq-text">چگونه حساب کاربری بسازم؟</span>
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer" style="display: none;">
+                            <p>روی دکمه "ثبت‌نام" در صفحه ورود کلیک کنید. می‌توانید با ایمیل یا شماره موبایل ثبت‌نام کنید. پس از تأیید کد OTP، حساب شما فعال می‌شود.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-faq-id="hfaq5" data-category="account">
+                        <button class="faq-question" aria-expanded="false">
+                            <span class="faq-text">رمز عبورم را فراموش کرده‌ام، چه کنم؟</span>
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer" style="display: none;">
+                            <p>در صفحه ورود، روی "فراموشی رمز عبور" کلیک کنید. ایمیل یا شماره موبایل خود را وارد کنید و کد بازیابی را دریافت کنید.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-faq-id="hfaq6" data-category="shop">
+                        <button class="faq-question" aria-expanded="false">
+                            <span class="faq-text">سکه و الماس چگونه به دست می‌آید؟</span>
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer" style="display: none;">
+                            <p>سکه با بردن بازی‌ها، تکمیل مأموریت‌ها و پاداش روزانه به دست می‌آید. الماس از دستاوردها، تورنمنت‌ها و خرید مستقیم قابل دریافت است.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-faq-id="hfaq7" data-category="shop">
+                        <button class="faq-question" aria-expanded="false">
+                            <span class="faq-text">آیا خریدها قابل بازگشت هستند؟</span>
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer" style="display: none;">
+                            <p>خریدهای مجازی معمولاً قابل بازگشت نیستند. اما در موارد خاص، می‌توانید با پشتیبانی تماس بگیرید.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-faq-id="hfaq8" data-category="technical">
+                        <button class="faq-question" aria-expanded="false">
+                            <span class="faq-text">بازی بارگذاری نمی‌شود، چه کنم؟</span>
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer" style="display: none;">
+                            <p>اتصال اینترنت خود را بررسی کنید. مرورگر را رفرش کنید. کش مرورگر را پاک کنید. اگر مشکل ادامه داشت، با پشتیبانی تماس بگیرید.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-faq-id="hfaq9" data-category="technical">
+                        <button class="faq-question" aria-expanded="false">
+                            <span class="faq-text">در حین بازی قطع شدم، چه می‌شود؟</span>
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer" style="display: none;">
+                            <p>بازی به صورت خودکار ذخیره می‌شود. پس از اتصال مجدد، می‌توانید به بازی برگردید. اگر بیش از ۳ بار قطع شوید، ممکن است بازی را ببازید.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-faq-id="hfaq10" data-category="gameplay">
+                        <button class="faq-question" aria-expanded="false">
+                            <span class="faq-text">آیا می‌توانم با دوستانم بازی کنم؟</span>
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer" style="display: none;">
+                            <p>بله! از بخش "اتاق خصوصی" یک اتاق بسازید و کد ۵ رقمی آن را با دوستانتان به اشتراک بگذارید. همچنین می‌توانید دوستان آنلاین را مستقیماً دعوت کنید.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="help-modal-section" id="help-section-contact" data-tab="contact" style="display: none;">
+                <div class="contact-header">
+                    <h4 class="section-title">تماس با پشتیبانی</h4>
+                    <p class="section-desc">تیم پشتیبانی ما آماده کمک به شماست</p>
+                </div>
+
+                <div class="contact-methods-grid">
+                    <div class="contact-method-card primary">
+                        <div class="method-icon">🎫</div>
+                        <h5 class="method-name">تیکت پشتیبانی</h5>
+                        <p class="method-desc">ارسال تیکت و دریافت پاسخ در کمتر از ۲۴ ساعت</p>
+                        <button class="btn btn-primary btn-small" id="btn-open-support-ticket-modal">
+                            <span class="btn-text">ارسال تیکت</span>
+                        </button>
+                    </div>
+                    <div class="contact-method-card">
+                        <div class="method-icon">✈️</div>
+                        <h5 class="method-name">تلگرام</h5>
+                        <p class="method-desc">چت مستقیم با تیم پشتیبانی</p>
+                        <a href="https://t.me/hokmmaster_support" class="btn btn-outline btn-small" target="_blank" rel="noopener">
+                            <span class="btn-text">@hokmmaster_support</span>
+                        </a>
+                    </div>
+                    <div class="contact-method-card">
+                        <div class="method-icon">📧</div>
+                        <h5 class="method-name">ایمیل</h5>
+                        <p class="method-desc">ارسال ایمیل برای سوالات غیرفوری</p>
+                        <a href="mailto:support@hokmmaster.com" class="btn btn-outline btn-small">
+                            <span class="btn-text">support@hokmmaster.com</span>
+                        </a>
+                    </div>
+                    <div class="contact-method-card">
+                        <div class="method-icon">💬</div>
+                        <h5 class="method-name">چت زنده</h5>
+                        <p class="method-desc">چت آنلاین با اپراتور (۹ صبح تا ۹ شب)</p>
+                        <button class="btn btn-outline btn-small" id="btn-start-live-chat">
+                            <span class="btn-text">شروع چت</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="support-hours">
+                    <div class="hours-icon">🕐</div>
+                    <div class="hours-info">
+                        <h5 class="hours-title">ساعات پشتیبانی</h5>
+                        <div class="hours-schedule">
+                            <div class="schedule-row">
+                                <span class="day">شنبه تا چهارشنبه:</span>
+                                <span class="time">۹:۰۰ - ۲۱:۰۰</span>
+                            </div>
+                            <div class="schedule-row">
+                                <span class="day">پنجشنبه:</span>
+                                <span class="time">۹:۰۰ - ۱۷:۰۰</span>
+                            </div>
+                            <div class="schedule-row">
+                                <span class="day">جمعه:</span>
+                                <span class="time">تعطیل</span>
+                            </div>
+                        </div>
+                        <p class="hours-note">تیکت‌ها در تمام ساعات قابل ارسال هستند</p>
+                    </div>
+                </div>
+
+                <div class="support-ticket-form" id="support-ticket-form" style="display: none;">
+                    <h4 class="section-title">ارسال تیکت پشتیبانی</h4>
+                    <form id="form-support-ticket" class="ticket-form">
+                        <div class="form-group">
+                            <label for="ticket-subject" class="form-label">موضوع</label>
+                            <select id="ticket-subject" name="subject" class="form-select" required>
+                                <option value="">انتخاب کنید</option>
+                                <option value="account">مشکل حساب کاربری</option>
+                                <option value="payment">مشکل پرداخت</option>
+                                <option value="game">مشکل بازی</option>
+                                <option value="bug">گزارش باگ</option>
+                                <option value="cheating">گزارش تقلب</option>
+                                <option value="suggestion">پیشنهاد</option>
+                                <option value="other">سایر</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ticket-priority" class="form-label">اولویت</label>
+                            <select id="ticket-priority" name="priority" class="form-select">
+                                <option value="low">کم</option>
+                                <option value="normal" selected>معمولی</option>
+                                <option value="high">بالا</option>
+                                <option value="urgent">فوری</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ticket-title" class="form-label">عنوان</label>
+                            <input
+                                type="text"
+                                id="ticket-title"
+                                name="title"
+                                class="input-field"
+                                placeholder="عنوان مشکل خود را بنویسید"
+                                maxlength="100"
+                                required
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="ticket-description" class="form-label">توضیحات</label>
+                            <textarea
+                                id="ticket-description"
+                                name="description"
+                                class="input-field textarea-field"
+                                placeholder="مشکل خود را با جزئیات توضیح دهید..."
+                                maxlength="2000"
+                                rows="5"
+                                required
+                            ></textarea>
+                            <span class="char-counter">
+                                <span id="ticket-desc-char-count">0</span> / ۲۰۰۰
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">پیوست (اختیاری)</label>
+                            <div class="file-upload-area" id="ticket-file-upload">
+                                <span class="upload-icon">📎</span>
+                                <span class="upload-text">فایل خود را اینجا بکشید یا کلیک کنید</span>
+                                <span class="upload-hint">حداکثر ۵ مگابایت - PNG, JPG, GIF</span>
+                                <input type="file" id="ticket-file-input" accept="image/*" hidden>
+                            </div>
+                            <div class="uploaded-files" id="ticket-uploaded-files"></div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-outline" id="btn-cancel-ticket">
+                                <span class="btn-text">انصراف</span>
+                            </button>
+                            <button type="submit" class="btn btn-primary" id="btn-submit-ticket">
+                                <span class="btn-icon">📤</span>
+                                <span class="btn-text">ارسال تیکت</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section class="help-modal-section" id="help-section-report" data-tab="report" style="display: none;">
+                <div class="report-header">
+                    <h4 class="section-title">گزارش مشکل</h4>
+                    <p class="section-desc">با گزارش مشکلات، به بهبود بازی کمک کنید</p>
+                </div>
+
+                <div class="report-types">
+                    <div class="report-type-card" data-type="bug">
+                        <span class="type-icon">🐛</span>
+                        <h5 class="type-name">باگ</h5>
+                        <p class="type-desc">خطا یا مشکل فنی در بازی</p>
+                    </div>
+                    <div class="report-type-card" data-type="cheating">
+                        <span class="type-icon">🚫</span>
+                        <h5 class="type-name">تقلب</h5>
+                        <p class="type-desc">گزارش بازیکن متقلب</p>
+                    </div>
+                    <div class="report-type-card" data-type="behavior">
+                        <span class="type-icon">⚠️</span>
+                        <h5 class="type-name">رفتار نامناسب</h5>
+                        <p class="type-desc">توهین، اسپم یا رفتار بد</p>
+                    </div>
+                    <div class="report-type-card" data-type="payment">
+                        <span class="type-icon">💳</span>
+                        <h5 class="type-name">مشکل پرداخت</h5>
+                        <p class="type-desc">مشکل در خرید یا پرداخت</p>
+                    </div>
+                </div>
+
+                <form id="form-report-issue" class="report-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="report-type-selected" class="form-label">نوع گزارش</label>
+                        <input type="text" id="report-type-selected" class="input-field" readonly>
+                    </div>
+
+                    <div class="form-group" id="report-player-group" style="display: none;">
+                        <label for="report-player-name" class="form-label">نام بازیکن متخلف</label>
+                        <input
+                            type="text"
+                            id="report-player-name"
+                            class="input-field"
+                            placeholder="نام کاربری بازیکن"
+                            maxlength="30"
+                        >
+                    </div>
+
+                    <div class="form-group" id="report-game-id-group" style="display: none;">
+                        <label for="report-game-id" class="form-label">شناسه بازی (اختیاری)</label>
+                        <input
+                            type="text"
+                            id="report-game-id"
+                            class="input-field"
+                            placeholder="شناسه بازی که مشکل در آن رخ داد"
+                            maxlength="20"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="report-title" class="form-label">عنوان</label>
+                        <input
+                            type="text"
+                            id="report-title"
+                            class="input-field"
+                            placeholder="عنوان مشکل"
+                            maxlength="100"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="report-description" class="form-label">توضیحات</label>
+                        <textarea
+                            id="report-description"
+                            class="input-field textarea-field"
+                            placeholder="مشکل را با جزئیات توضیح دهید. مراحل بازتولید مشکل را بنویسید."
+                            maxlength="2000"
+                            rows="5"
+                            required
+                        ></textarea>
+                        <span class="char-counter">
+                            <span id="report-desc-char-count">0</span> / ۲۰۰۰
+                        </span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="report-steps" class="form-label">مراحل بازتولید (اختیاری)</label>
+                        <textarea
+                            id="report-steps"
+                            class="input-field textarea-field"
+                            placeholder="۱. وارد بازی شوید&#10;۲. روی دکمه ... کلیک کنید&#10;۳. خطا رخ می‌دهد"
+                            maxlength="1000"
+                            rows="4"
+                        ></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">اسکرین‌شات (اختیاری)</label>
+                        <div class="file-upload-area" id="report-file-upload">
+                            <span class="upload-icon">📷</span>
+                            <span class="upload-text">اسکرین‌شات را اینجا بکشید یا کلیک کنید</span>
+                            <input type="file" id="report-file-input" accept="image/*" hidden>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="btn-cancel-report">
+                            <span class="btn-text">انصراف</span>
+                        </button>
+                        <button type="submit" class="btn btn-primary" id="btn-submit-report">
+                            <span class="btn-icon">📤</span>
+                            <span class="btn-text">ارسال گزارش</span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="help-modal-section" id="help-section-feedback" data-tab="feedback" style="display: none;">
+                <div class="feedback-header">
+                    <h4 class="section-title">بازخورد و پیشنهادات</h4>
+                    <p class="section-desc">نظر شما به بهبود بازی کمک می‌کند</p>
+                </div>
+
+                <div class="feedback-rating-section">
+                    <h5 class="rating-title">تجربه کلی شما از بازی چطور است؟</h5>
+                    <div class="rating-stars-large" id="feedback-overall-rating">
+                        <button class="rating-star" data-rating="1" aria-label="۱ ستاره">⭐</button>
+                        <button class="rating-star" data-rating="2" aria-label="۲ ستاره">⭐</button>
+                        <button class="rating-star" data-rating="3" aria-label="۳ ستاره">⭐</button>
+                        <button class="rating-star" data-rating="4" aria-label="۴ ستاره">⭐</button>
+                        <button class="rating-star" data-rating="5" aria-label="۵ ستاره">⭐</button>
+                    </div>
+                    <span class="rating-label" id="feedback-rating-label">انتخاب کنید</span>
+                </div>
+
+                <div class="feedback-categories">
+                    <h5 class="categories-title">در چه بخش‌هایی بهبود لازم است؟</h5>
+                    <div class="feedback-checkboxes">
+                        <label class="feedback-checkbox">
+                            <input type="checkbox" name="feedback-area" value="gameplay">
+                            <span class="checkbox-label">گیم‌پلی</span>
+                        </label>
+                        <label class="feedback-checkbox">
+                            <input type="checkbox" name="feedback-area" value="graphics">
+                            <span class="checkbox-label">گرافیک</span>
+                        </label>
+                        <label class="feedback-checkbox">
+                            <input type="checkbox" name="feedback-area" value="sound">
+                            <span class="checkbox-label">صدا و موسیقی</span>
+                        </label>
+                        <label class="feedback-checkbox">
+                            <input type="checkbox" name="feedback-area" value="ui">
+                            <span class="checkbox-label">رابط کاربری</span>
+                        </label>
+                        <label class="feedback-checkbox">
+                            <input type="checkbox" name="feedback-area" value="performance">
+                            <span class="checkbox-label">عملکرد</span>
+                        </label>
+                        <label class="feedback-checkbox">
+                            <input type="checkbox" name="feedback-area" value="social">
+                            <span class="checkbox-label">بخش اجتماعی</span>
+                        </label>
+                        <label class="feedback-checkbox">
+                            <input type="checkbox" name="feedback-area" value="shop">
+                            <span class="checkbox-label">فروشگاه</span>
+                        </label>
+                        <label class="feedback-checkbox">
+                            <input type="checkbox" name="feedback-area" value="other">
+                            <span class="checkbox-label">سایر</span>
+                        </label>
+                    </div>
+                </div>
+
+                <form id="form-feedback" class="feedback-form">
+                    <div class="form-group">
+                        <label for="feedback-suggestion" class="form-label">پیشنهاد یا نظر شما</label>
+                        <textarea
+                            id="feedback-suggestion"
+                            class="input-field textarea-field"
+                            placeholder="نظر، پیشنهاد یا انتقاد خود را بنویسید..."
+                            maxlength="1000"
+                            rows="5"
+                        ></textarea>
+                        <span class="char-counter">
+                            <span id="feedback-char-count">0</span> / ۱۰۰۰
+                        </span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">آیا مایل به شرکت در نظرسنجی‌های آینده هستید؟</label>
+                        <label class="radio-option">
+                            <input type="radio" name="feedback-survey" value="yes">
+                            <span class="radio-label">بله</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="feedback-survey" value="no" checked>
+                            <span class="radio-label">خیر</span>
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-block" id="btn-submit-feedback">
+                            <span class="btn-icon">📤</span>
+                            <span class="btn-text">ارسال بازخورد</span>
+                        </button>
+                    </div>
+                </form>
+
+                <div class="feedback-success" id="feedback-success" style="display: none;">
+                    <div class="success-icon">✅</div>
+                    <h4 class="success-title">ممنون از بازخورد شما!</h4>
+                    <p class="success-desc">نظر شما برای ما بسیار ارزشمند است و به بهبود بازی کمک می‌کند.</p>
+                </div>
+            </section>
+        </div>
+
+        <div class="modal-footer">
+            <div class="footer-info">
+                <span class="footer-text">نسخه ۱.۰.۰</span>
+            </div>
+            <div class="footer-actions">
+                <button class="btn btn-outline" id="btn-close-help-modal-footer">
+                    <span class="btn-text">بستن</span>
+                </button>
+                <a href="#/help" class="btn btn-primary" data-route="help">
+                    <span class="btn-icon">📚</span>
+                    <span class="btn-text">مرکز راهنمای کامل</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
