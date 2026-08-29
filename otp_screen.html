@@ -1,0 +1,195 @@
+<div id="otp-screen" class="screen screen-auth" data-screen-name="otp">
+    <div class="screen-content">
+        <div class="auth-container">
+            <div class="auth-header">
+                <div class="auth-logo">
+                    <span class="logo-icon">🔢</span>
+                </div>
+                <h1 class="auth-title">تأیید کد OTP</h1>
+                <p class="auth-subtitle">کد ۶ رقمی ارسال شده را وارد کنید</p>
+            </div>
+
+            <div class="otp-context-info">
+                <div class="context-icon" id="otp-context-icon">📱</div>
+                <div class="context-details">
+                    <p class="context-text">
+                        کد تأیید به
+                        <strong id="otp-destination">شماره موبایل شما</strong>
+                        ارسال شد.
+                    </p>
+                    <p class="context-hint">
+                        اگر کد را دریافت نکردید، پوشه اسپم را بررسی کنید.
+                    </p>
+                </div>
+            </div>
+
+            <div class="otp-security-notice">
+                <span class="security-icon"></span>
+                <span class="security-text">این کد محرمانه است و با هیچ‌کس به اشتراک نگذارید</span>
+            </div>
+
+            <form id="form-otp-verify" class="auth-form">
+                <div class="form-group">
+                    <label for="otp-code" class="form-label">کد تأیید</label>
+                    <div class="otp-inputs" id="otp-inputs">
+                        <input
+                            type="text"
+                            class="otp-input"
+                            id="otp-digit-1"
+                            maxlength="1"
+                            inputmode="numeric"
+                            pattern="[0-9]"
+                            data-index="0"
+                            autocomplete="one-time-code"
+                            aria-label="رقم اول"
+                            required
+                        >
+                        <input
+                            type="text"
+                            class="otp-input"
+                            id="otp-digit-2"
+                            maxlength="1"
+                            inputmode="numeric"
+                            pattern="[0-9]"
+                            data-index="1"
+                            aria-label="رقم دوم"
+                            required
+                        >
+                        <input
+                            type="text"
+                            class="otp-input"
+                            id="otp-digit-3"
+                            maxlength="1"
+                            inputmode="numeric"
+                            pattern="[0-9]"
+                            data-index="2"
+                            aria-label="رقم سوم"
+                            required
+                        >
+                        <input
+                            type="text"
+                            class="otp-input"
+                            id="otp-digit-4"
+                            maxlength="1"
+                            inputmode="numeric"
+                            pattern="[0-9]"
+                            data-index="3"
+                            aria-label="رقم چهارم"
+                            required
+                        >
+                        <input
+                            type="text"
+                            class="otp-input"
+                            id="otp-digit-5"
+                            maxlength="1"
+                            inputmode="numeric"
+                            pattern="[0-9]"
+                            data-index="4"
+                            aria-label="رقم پنجم"
+                            required
+                        >
+                        <input
+                            type="text"
+                            class="otp-input"
+                            id="otp-digit-6"
+                            maxlength="1"
+                            inputmode="numeric"
+                            pattern="[0-9]"
+                            data-index="5"
+                            aria-label="رقم ششم"
+                            required
+                        >
+                    </div>
+                    <input type="hidden" id="otp-code" name="otpCode">
+                    <span class="form-error" id="error-otp-code"></span>
+                    <span class="form-success" id="success-otp-code" style="display: none;">کد تأیید شد</span>
+                </div>
+
+                <div class="otp-timer-container">
+                    <div class="timer-circle">
+                        <svg class="timer-svg" viewBox="0 0 100 100">
+                            <circle class="timer-bg" cx="50" cy="50" r="45"></circle>
+                            <circle class="timer-progress" cx="50" cy="50" r="45" id="otp-timer-circle"></circle>
+                        </svg>
+                        <div class="timer-content">
+                            <span class="timer-countdown" id="otp-timer">۱۲۰</span>
+                            <span class="timer-label">ثانیه</span>
+                        </div>
+                    </div>
+                    <p class="timer-description">
+                        کد تا <strong id="otp-expiry-time">۲ دقیقه</strong> دیگر معتبر است
+                    </p>
+                </div>
+
+                <button type="button" id="btn-resend-otp" class="btn-link btn-resend-otp" disabled>
+                    <span class="resend-icon">🔄</span>
+                    <span class="resend-text">ارسال مجدد کد</span>
+                </button>
+
+                <div class="otp-help">
+                    <button type="button" id="btn-otp-help" class="btn-link btn-help">
+                        <span class="help-icon"></span>
+                        <span class="help-text">کد را دریافت نکردم</span>
+                    </button>
+                </div>
+
+                <button type="submit" id="btn-submit-otp" class="btn btn-primary btn-block btn-large">
+                    <span class="btn-text">تأیید کد</span>
+                    <span class="btn-loading" style="display: none;">
+                        <span class="spinner"></span>
+                    </span>
+                </button>
+
+                <div class="otp-alternative">
+                    <p class="alternative-text">روش دیگری را امتحان کنید:</p>
+                    <div class="alternative-methods">
+                        <button type="button" id="btn-otp-call" class="btn btn-outline btn-small">
+                            <span class="method-icon">📞</span>
+                            <span class="method-text">تماس تلفنی</span>
+                        </button>
+                        <button type="button" id="btn-otp-email" class="btn btn-outline btn-small">
+                            <span class="method-icon"></span>
+                            <span class="method-text">ارسال به ایمیل</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div id="otp-help-modal-content" class="otp-help-content" style="display: none;">
+                <h3 class="help-title">راهنمای دریافت کد</h3>
+                <ul class="help-list">
+                    <li>
+                        <span class="help-item-icon"></span>
+                        <span class="help-item-text">پیامک را در گوشی خود بررسی کنید</span>
+                    </li>
+                    <li>
+                        <span class="help-item-icon">📥</span>
+                        <span class="help-item-text">پوشه اسپم ایمیل را چک کنید</span>
+                    </li>
+                    <li>
+                        <span class="help-item-icon">📶</span>
+                        <span class="help-item-text">اتصال اینترنت خود را بررسی کنید</span>
+                    </li>
+                    <li>
+                        <span class="help-item-icon">⏰</span>
+                        <span class="help-item-text">چند دقیقه صبر کنید و دوباره امتحان کنید</span>
+                    </li>
+                    <li>
+                        <span class="help-item-icon">🔄</span>
+                        <span class="help-item-text">از دکمه ارسال مجدد کد استفاده کنید</span>
+                    </li>
+                </ul>
+                <button type="button" id="btn-close-otp-help" class="btn btn-secondary btn-block">
+                    متوجه شدم
+                </button>
+            </div>
+
+            <div class="auth-footer">
+                <button type="button" id="btn-back-to-login" class="btn-link" data-route="login">
+                    <span class="back-icon">→</span>
+                    <span class="back-text">بازگشت به صفحه ورود</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
