@@ -1,0 +1,1383 @@
+/**
+ * ============================================================
+ * HOKM MASTER - Themes
+ * سیستم تم‌های رنگی
+ * ============================================================
+ * 
+ * این فایل سیستم تم‌های رنگی پروژه را تعریف می‌کند:
+ * Dark Theme (پیش‌فرض)، Light Theme، Auto Theme،
+ * تم‌های خاص، و تغییرات داینامیک تم.
+ * 
+ * نسخه: 1.0.0
+ * ============================================================
+ */
+
+/* ============================================================
+   بخش ۱: Dark Theme (پیش‌فرض)
+   ============================================================ */
+
+:root,
+[data-theme="dark"],
+.theme-dark {
+    /* پس‌زمینه‌های اصلی */
+    --bg-primary: #0d2924;
+    --bg-secondary: #1a3d36;
+    --bg-tertiary: #244d45;
+    --bg-elevated: #2d5c53;
+    --bg-surface: #1a3d36;
+    --bg-overlay: rgba(0, 0, 0, 0.6);
+    --bg-backdrop: rgba(13, 41, 36, 0.8);
+    
+    /* میز بازی */
+    --bg-table: linear-gradient(135deg, #0d2924 0%, #1a3d36 50%, #0d2924 100%);
+    --bg-table-surface: radial-gradient(ellipse at center, #1a3d36 0%, #0d2924 100%);
+    --bg-table-pattern: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255, 255, 255, 0.02) 10px,
+        rgba(255, 255, 255, 0.02) 20px
+    );
+    
+    /* متن‌ها */
+    --text-primary: #ffffff;
+    --text-secondary: #d1d5db;
+    --text-tertiary: #9ca3af;
+    --text-disabled: #6b7280;
+    --text-inverse: #0d2924;
+    --text-link: #10b981;
+    --text-link-hover: #34d399;
+    
+    /* حاشیه‌ها */
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-color-light: rgba(255, 255, 255, 0.05);
+    --border-color-strong: rgba(255, 255, 255, 0.2);
+    --border-color-focus: var(--color-primary);
+    
+    /* کارت‌ها */
+    --card-bg: rgba(26, 61, 54, 0.6);
+    --card-bg-hover: rgba(36, 77, 69, 0.8);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    
+    /* ورودی‌ها */
+    --input-bg: rgba(0, 0, 0, 0.2);
+    --input-bg-focus: rgba(0, 0, 0, 0.3);
+    --input-bg-disabled: rgba(0, 0, 0, 0.1);
+    --input-border: rgba(255, 255, 255, 0.1);
+    --input-border-focus: var(--color-primary);
+    --input-border-error: var(--color-danger);
+    --input-border-success: var(--color-success);
+    --input-text: var(--text-primary);
+    --input-placeholder: var(--text-tertiary);
+    
+    /* اسکرول‌بار */
+    --scrollbar-bg: rgba(0, 0, 0, 0.2);
+    --scrollbar-thumb: rgba(255, 255, 255, 0.2);
+    --scrollbar-thumb-hover: rgba(255, 255, 255, 0.3);
+    
+    /* سایه‌ها */
+    --shadow-dark-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-dark-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+    --shadow-dark-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+    --shadow-dark-xl: 0 16px 32px rgba(0, 0, 0, 0.6);
+    
+    /* دکمه‌ها */
+    --btn-primary-bg: var(--color-primary);
+    --btn-primary-hover: var(--color-primary-hover);
+    --btn-primary-text: var(--color-white);
+    --btn-secondary-bg: var(--bg-tertiary);
+    --btn-secondary-hover: var(--bg-elevated);
+    --btn-secondary-text: var(--text-primary);
+    --btn-outline-border: var(--border-color-strong);
+    --btn-outline-hover-bg: var(--bg-tertiary);
+    
+    /* Badge ها */
+    --badge-bg: var(--bg-tertiary);
+    --badge-text: var(--text-secondary);
+    --badge-success-bg: var(--color-success);
+    --badge-warning-bg: var(--color-warning);
+    --badge-danger-bg: var(--color-danger);
+    --badge-info-bg: var(--color-info);
+    
+    /* Tooltip */
+    --tooltip-bg: var(--bg-elevated);
+    --tooltip-text: var(--text-primary);
+    --tooltip-border: var(--border-color);
+    
+    /* Modal */
+    --modal-bg: var(--bg-secondary);
+    --modal-header-bg: var(--bg-tertiary);
+    --modal-footer-bg: var(--bg-tertiary);
+    --modal-border: var(--border-color);
+    
+    /* Toast */
+    --toast-bg: var(--bg-secondary);
+    --toast-border: var(--border-color);
+    
+    /* Navigation */
+    --nav-bg: var(--bg-secondary);
+    --nav-item-hover: var(--bg-tertiary);
+    --nav-item-active: var(--color-primary);
+    --nav-item-text: var(--text-secondary);
+    --nav-item-active-text: var(--color-white);
+    
+    /* Game specific */
+    --game-card-bg: #ffffff;
+    --game-card-back: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    --game-card-border: rgba(0, 0, 0, 0.1);
+    --game-trump-glow: var(--color-trump-glow);
+    --game-player-active: rgba(16, 185, 129, 0.2);
+    --game-player-winner: rgba(255, 193, 7, 0.2);
+    
+    /* Status colors */
+    --status-online: var(--color-success);
+    --status-offline: var(--text-tertiary);
+    --status-ingame: var(--color-warning);
+    --status-busy: var(--color-danger);
+    
+    /* League colors (dark mode adjustments) */
+    --league-bronze-text: var(--color-league-bronze-light);
+    --league-silver-text: var(--color-league-silver-light);
+    --league-gold-text: var(--color-league-gold-light);
+    --league-platinum-text: var(--color-league-platinum-light);
+    --league-diamond-text: var(--color-league-diamond-light);
+    --league-master-text: var(--color-league-master-light);
+    
+    /* Rarity glow (dark mode) */
+    --rarity-rare-glow: 0 0 12px var(--color-rarity-rare-glow);
+    --rarity-epic-glow: 0 0 16px var(--color-rarity-epic-glow);
+    --rarity-legendary-glow: 0 0 20px var(--color-rarity-legendary-glow);
+    --rarity-mythic-glow: 0 0 24px var(--color-rarity-mythic-glow);
+}
+
+/* ============================================================
+   بخش ۲: Light Theme
+   ============================================================ */
+
+[data-theme="light"],
+.theme-light {
+    /* پس‌زمینه‌های اصلی */
+    --bg-primary: #f5f5f5;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f9fafb;
+    --bg-elevated: #ffffff;
+    --bg-surface: #ffffff;
+    --bg-overlay: rgba(0, 0, 0, 0.4);
+    --bg-backdrop: rgba(245, 245, 245, 0.8);
+    
+    /* میز بازی */
+    --bg-table: linear-gradient(135deg, #0d9668 0%, #10b981 50%, #0d9668 100%);
+    --bg-table-surface: radial-gradient(ellipse at center, #10b981 0%, #0d9668 100%);
+    --bg-table-pattern: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255, 255, 255, 0.05) 10px,
+        rgba(255, 255, 255, 0.05) 20px
+    );
+    
+    /* متن‌ها */
+    --text-primary: #1a1a1a;
+    --text-secondary: #404040;
+    --text-tertiary: #737373;
+    --text-disabled: #a3a3a3;
+    --text-inverse: #ffffff;
+    --text-link: #0d9668;
+    --text-link-hover: #0a7350;
+    
+    /* حاشیه‌ها */
+    --border-color: rgba(0, 0, 0, 0.1);
+    --border-color-light: rgba(0, 0, 0, 0.05);
+    --border-color-strong: rgba(0, 0, 0, 0.2);
+    --border-color-focus: var(--color-primary);
+    
+    /* کارت‌ها */
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --card-bg-hover: rgba(255, 255, 255, 1);
+    --card-border: rgba(0, 0, 0, 0.1);
+    --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    
+    /* ورودی‌ها */
+    --input-bg: rgba(255, 255, 255, 1);
+    --input-bg-focus: rgba(255, 255, 255, 1);
+    --input-bg-disabled: rgba(245, 245, 245, 1);
+    --input-border: rgba(0, 0, 0, 0.1);
+    --input-border-focus: var(--color-primary);
+    --input-text: var(--text-primary);
+    --input-placeholder: var(--text-tertiary);
+    
+    /* اسکرول‌بار */
+    --scrollbar-bg: rgba(0, 0, 0, 0.05);
+    --scrollbar-thumb: rgba(0, 0, 0, 0.2);
+    --scrollbar-thumb-hover: rgba(0, 0, 0, 0.3);
+    
+    /* سایه‌ها */
+    --shadow-dark-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-dark-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --shadow-dark-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+    --shadow-dark-xl: 0 16px 32px rgba(0, 0, 0, 0.25);
+    
+    /* دکمه‌ها */
+    --btn-primary-bg: var(--color-primary);
+    --btn-primary-hover: var(--color-primary-hover);
+    --btn-primary-text: var(--color-white);
+    --btn-secondary-bg: var(--bg-tertiary);
+    --btn-secondary-hover: var(--bg-elevated);
+    --btn-secondary-text: var(--text-primary);
+    --btn-outline-border: var(--border-color-strong);
+    --btn-outline-hover-bg: var(--bg-tertiary);
+    
+    /* Badge ها */
+    --badge-bg: var(--bg-tertiary);
+    --badge-text: var(--text-secondary);
+    
+    /* Tooltip */
+    --tooltip-bg: var(--bg-elevated);
+    --tooltip-text: var(--text-primary);
+    --tooltip-border: var(--border-color);
+    
+    /* Modal */
+    --modal-bg: var(--bg-secondary);
+    --modal-header-bg: var(--bg-tertiary);
+    --modal-footer-bg: var(--bg-tertiary);
+    --modal-border: var(--border-color);
+    
+    /* Toast */
+    --toast-bg: var(--bg-secondary);
+    --toast-border: var(--border-color);
+    
+    /* Navigation */
+    --nav-bg: var(--bg-secondary);
+    --nav-item-hover: var(--bg-tertiary);
+    --nav-item-active: var(--color-primary);
+    --nav-item-text: var(--text-secondary);
+    --nav-item-active-text: var(--color-white);
+    
+    /* Game specific */
+    --game-card-bg: #ffffff;
+    --game-card-back: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    --game-card-border: rgba(0, 0, 0, 0.1);
+    --game-player-active: rgba(16, 185, 129, 0.15);
+    --game-player-winner: rgba(255, 193, 7, 0.15);
+    
+    /* League colors (light mode adjustments) */
+    --league-bronze-text: var(--color-league-bronze-dark);
+    --league-silver-text: var(--color-league-silver-dark);
+    --league-gold-text: var(--color-league-gold-dark);
+    --league-platinum-text: var(--color-league-platinum-dark);
+    --league-diamond-text: var(--color-league-diamond-dark);
+    --league-master-text: var(--color-league-master-dark);
+    
+    /* Rarity glow (light mode - subtle) */
+    --rarity-rare-glow: 0 0 8px var(--color-rarity-rare-glow);
+    --rarity-epic-glow: 0 0 10px var(--color-rarity-epic-glow);
+    --rarity-legendary-glow: 0 0 12px var(--color-rarity-legendary-glow);
+    --rarity-mythic-glow: 0 0 14px var(--color-rarity-mythic-glow);
+}
+
+/* ============================================================
+   بخش ۳: Auto Theme (بر اساس تنظیمات سیستم)
+   ============================================================ */
+
+[data-theme="auto"] {
+    /* به صورت پیش‌فرض از تنظیمات سیستم استفاده می‌کند */
+    color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: light) {
+    [data-theme="auto"] {
+        /* Light Theme Variables */
+        --bg-primary: #f5f5f5;
+        --bg-secondary: #ffffff;
+        --bg-tertiary: #f9fafb;
+        --bg-elevated: #ffffff;
+        --bg-surface: #ffffff;
+        --bg-overlay: rgba(0, 0, 0, 0.4);
+        --bg-backdrop: rgba(245, 245, 245, 0.8);
+        
+        --bg-table: linear-gradient(135deg, #0d9668 0%, #10b981 50%, #0d9668 100%);
+        --bg-table-surface: radial-gradient(ellipse at center, #10b981 0%, #0d9668 100%);
+        --bg-table-pattern: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(255, 255, 255, 0.05) 10px,
+            rgba(255, 255, 255, 0.05) 20px
+        );
+        
+        --text-primary: #1a1a1a;
+        --text-secondary: #404040;
+        --text-tertiary: #737373;
+        --text-disabled: #a3a3a3;
+        --text-inverse: #ffffff;
+        --text-link: #0d9668;
+        --text-link-hover: #0a7350;
+        
+        --border-color: rgba(0, 0, 0, 0.1);
+        --border-color-light: rgba(0, 0, 0, 0.05);
+        --border-color-strong: rgba(0, 0, 0, 0.2);
+        
+        --card-bg: rgba(255, 255, 255, 0.9);
+        --card-bg-hover: rgba(255, 255, 255, 1);
+        --card-border: rgba(0, 0, 0, 0.1);
+        --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        
+        --input-bg: rgba(255, 255, 255, 1);
+        --input-bg-focus: rgba(255, 255, 255, 1);
+        --input-border: rgba(0, 0, 0, 0.1);
+        --input-text: var(--text-primary);
+        --input-placeholder: var(--text-tertiary);
+        
+        --scrollbar-bg: rgba(0, 0, 0, 0.05);
+        --scrollbar-thumb: rgba(0, 0, 0, 0.2);
+        --scrollbar-thumb-hover: rgba(0, 0, 0, 0.3);
+        
+        --shadow-dark-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+        --shadow-dark-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+        --shadow-dark-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+        --shadow-dark-xl: 0 16px 32px rgba(0, 0, 0, 0.25);
+        
+        --nav-bg: var(--bg-secondary);
+        --nav-item-hover: var(--bg-tertiary);
+        --nav-item-active: var(--color-primary);
+        --nav-item-text: var(--text-secondary);
+        --nav-item-active-text: var(--color-white);
+        
+        --game-player-active: rgba(16, 185, 129, 0.15);
+        --game-player-winner: rgba(255, 193, 7, 0.15);
+        
+        --league-bronze-text: var(--color-league-bronze-dark);
+        --league-silver-text: var(--color-league-silver-dark);
+        --league-gold-text: var(--color-league-gold-dark);
+        --league-platinum-text: var(--color-league-platinum-dark);
+        --league-diamond-text: var(--color-league-diamond-dark);
+        --league-master-text: var(--color-league-master-dark);
+        
+        --rarity-rare-glow: 0 0 8px var(--color-rarity-rare-glow);
+        --rarity-epic-glow: 0 0 10px var(--color-rarity-epic-glow);
+        --rarity-legendary-glow: 0 0 12px var(--color-rarity-legendary-glow);
+        --rarity-mythic-glow: 0 0 14px var(--color-rarity-mythic-glow);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    [data-theme="auto"] {
+        /* Dark Theme Variables (همان مقادیر پیش‌فرض) */
+        --bg-primary: #0d2924;
+        --bg-secondary: #1a3d36;
+        --bg-tertiary: #244d45;
+        --bg-elevated: #2d5c53;
+        --bg-surface: #1a3d36;
+        --bg-overlay: rgba(0, 0, 0, 0.6);
+        --bg-backdrop: rgba(13, 41, 36, 0.8);
+        
+        --text-primary: #ffffff;
+        --text-secondary: #d1d5db;
+        --text-tertiary: #9ca3af;
+        --text-disabled: #6b7280;
+        --text-inverse: #0d2924;
+        --text-link: #10b981;
+        --text-link-hover: #34d399;
+        
+        --border-color: rgba(255, 255, 255, 0.1);
+        --border-color-light: rgba(255, 255, 255, 0.05);
+        --border-color-strong: rgba(255, 255, 255, 0.2);
+        
+        --card-bg: rgba(26, 61, 54, 0.6);
+        --card-bg-hover: rgba(36, 77, 69, 0.8);
+        --card-border: rgba(255, 255, 255, 0.1);
+        --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        
+        --input-bg: rgba(0, 0, 0, 0.2);
+        --input-bg-focus: rgba(0, 0, 0, 0.3);
+        --input-border: rgba(255, 255, 255, 0.1);
+        --input-text: var(--text-primary);
+        --input-placeholder: var(--text-tertiary);
+        
+        --scrollbar-bg: rgba(0, 0, 0, 0.2);
+        --scrollbar-thumb: rgba(255, 255, 255, 0.2);
+        --scrollbar-thumb-hover: rgba(255, 255, 255, 0.3);
+        
+        --shadow-dark-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+        --shadow-dark-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+        --shadow-dark-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+        --shadow-dark-xl: 0 16px 32px rgba(0, 0, 0, 0.6);
+        
+        --game-player-active: rgba(16, 185, 129, 0.2);
+        --game-player-winner: rgba(255, 193, 7, 0.2);
+        
+        --league-bronze-text: var(--color-league-bronze-light);
+        --league-silver-text: var(--color-league-silver-light);
+        --league-gold-text: var(--color-league-gold-light);
+        --league-platinum-text: var(--color-league-platinum-light);
+        --league-diamond-text: var(--color-league-diamond-light);
+        --league-master-text: var(--color-league-master-light);
+        
+        --rarity-rare-glow: 0 0 12px var(--color-rarity-rare-glow);
+        --rarity-epic-glow: 0 0 16px var(--color-rarity-epic-glow);
+        --rarity-legendary-glow: 0 0 20px var(--color-rarity-legendary-glow);
+        --rarity-mythic-glow: 0 0 24px var(--color-rarity-mythic-glow);
+    }
+}
+
+/* ============================================================
+   بخش ۴: High Contrast Theme (دسترسی‌پذیری)
+   ============================================================ */
+
+[data-theme="high-contrast"],
+.theme-high-contrast {
+    --bg-primary: #000000;
+    --bg-secondary: #1a1a1a;
+    --bg-tertiary: #2a2a2a;
+    --bg-elevated: #3a3a3a;
+    
+    --text-primary: #ffffff;
+    --text-secondary: #e5e5e5;
+    --text-tertiary: #cccccc;
+    --text-disabled: #999999;
+    
+    --border-color: rgba(255, 255, 255, 0.4);
+    --border-color-light: rgba(255, 255, 255, 0.2);
+    --border-color-strong: rgba(255, 255, 255, 0.6);
+    
+    --card-bg: rgba(26, 26, 26, 0.9);
+    --card-bg-hover: rgba(42, 42, 42, 1);
+    --card-border: rgba(255, 255, 255, 0.4);
+    
+    --input-bg: rgba(0, 0, 0, 0.5);
+    --input-border: rgba(255, 255, 255, 0.4);
+    
+    color-scheme: dark;
+}
+
+[data-theme="high-contrast"] * {
+    border-width: 2px !important;
+}
+
+[data-theme="high-contrast"] .btn {
+    border-width: 2px !important;
+}
+
+[data-theme="high-contrast"] .card,
+[data-theme="high-contrast"] .modal-content,
+[data-theme="high-contrast"] .toast {
+    border-width: 2px !important;
+}
+
+[data-theme="high-contrast"] a {
+    text-decoration: underline !important;
+}
+
+[data-theme="high-contrast"] .text-link {
+    font-weight: var(--font-weight-bold) !important;
+}
+
+/* ============================================================
+   بخش ۵: Sepia Theme (مطالعه راحت‌تر)
+   ============================================================ */
+
+[data-theme="sepia"],
+.theme-sepia {
+    --bg-primary: #f4ecd8;
+    --bg-secondary: #faf6e9;
+    --bg-tertiary: #ede4cc;
+    --bg-elevated: #ffffff;
+    
+    --text-primary: #3e3428;
+    --text-secondary: #5a4f3f;
+    --text-tertiary: #7a6f5f;
+    --text-disabled: #9a8f7f;
+    
+    --border-color: rgba(62, 52, 40, 0.2);
+    --border-color-light: rgba(62, 52, 40, 0.1);
+    --border-color-strong: rgba(62, 52, 40, 0.3);
+    
+    --card-bg: rgba(250, 246, 233, 0.9);
+    --card-bg-hover: rgba(255, 255, 255, 1);
+    --card-border: rgba(62, 52, 40, 0.2);
+    
+    --input-bg: rgba(255, 255, 255, 0.8);
+    --input-border: rgba(62, 52, 40, 0.2);
+    
+    --text-link: #8b6f47;
+    --text-link-hover: #6b5437;
+    
+    color-scheme: light;
+}
+
+/* ============================================================
+   بخش ۶: Blue Theme
+   ============================================================ */
+
+[data-theme="blue"],
+.theme-blue {
+    --bg-primary: #0a1929;
+    --bg-secondary: #132f4c;
+    --bg-tertiary: #173a5e;
+    --bg-elevated: #1e4976;
+    
+    --text-primary: #ffffff;
+    --text-secondary: #b2bac2;
+    --text-tertiary: #7a8896;
+    
+    --color-primary: #3b82f6;
+    --color-primary-hover: #2563eb;
+    --color-primary-active: #1d4ed8;
+    --color-primary-light: #dbeafe;
+    
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-color-light: rgba(255, 255, 255, 0.05);
+    --border-color-strong: rgba(255, 255, 255, 0.2);
+    
+    --card-bg: rgba(19, 47, 76, 0.6);
+    --card-bg-hover: rgba(23, 58, 94, 0.8);
+    
+    --bg-table: linear-gradient(135deg, #0a1929 0%, #132f4c 50%, #0a1929 100%);
+    --bg-table-surface: radial-gradient(ellipse at center, #132f4c 0%, #0a1929 100%);
+    
+    color-scheme: dark;
+}
+
+/* ============================================================
+   بخش ۷: Purple Theme
+   ============================================================ */
+
+[data-theme="purple"],
+.theme-purple {
+    --bg-primary: #1a0b2e;
+    --bg-secondary: #2d1b4e;
+    --bg-tertiary: #3d2764;
+    --bg-elevated: #4e3380;
+    
+    --text-primary: #ffffff;
+    --text-secondary: #d1c4e9;
+    --text-tertiary: #9575cd;
+    
+    --color-primary: #a855f7;
+    --color-primary-hover: #9333ea;
+    --color-primary-active: #7e22ce;
+    --color-primary-light: #f3e8ff;
+    
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-color-light: rgba(255, 255, 255, 0.05);
+    --border-color-strong: rgba(255, 255, 255, 0.2);
+    
+    --card-bg: rgba(45, 27, 78, 0.6);
+    --card-bg-hover: rgba(61, 39, 100, 0.8);
+    
+    --bg-table: linear-gradient(135deg, #1a0b2e 0%, #2d1b4e 50%, #1a0b2e 100%);
+    --bg-table-surface: radial-gradient(ellipse at center, #2d1b4e 0%, #1a0b2e 100%);
+    
+    color-scheme: dark;
+}
+
+/* ============================================================
+   بخش ۸: Red Theme
+   ============================================================ */
+
+[data-theme="red"],
+.theme-red {
+    --bg-primary: #2a0a0a;
+    --bg-secondary: #4a1010;
+    --bg-tertiary: #661515;
+    --bg-elevated: #821a1a;
+    
+    --text-primary: #ffffff;
+    --text-secondary: #fecaca;
+    --text-tertiary: #f87171;
+    
+    --color-primary: #ef4444;
+    --color-primary-hover: #dc2626;
+    --color-primary-active: #b91c1c;
+    --color-primary-light: #fee2e2;
+    
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-color-light: rgba(255, 255, 255, 0.05);
+    --border-color-strong: rgba(255, 255, 255, 0.2);
+    
+    --card-bg: rgba(74, 16, 16, 0.6);
+    --card-bg-hover: rgba(102, 21, 21, 0.8);
+    
+    --bg-table: linear-gradient(135deg, #2a0a0a 0%, #4a1010 50%, #2a0a0a 100%);
+    --bg-table-surface: radial-gradient(ellipse at center, #4a1010 0%, #2a0a0a 100%);
+    
+    color-scheme: dark;
+}
+
+/* ============================================================
+   بخش ۹: Green Theme (جایگزین)
+   ============================================================ */
+
+[data-theme="green"],
+.theme-green {
+    --bg-primary: #052e16;
+    --bg-secondary: #14532d;
+    --bg-tertiary: #166534;
+    --bg-elevated: #15803d;
+    
+    --text-primary: #ffffff;
+    --text-secondary: #bbf7d0;
+    --text-tertiary: #4ade80;
+    
+    --color-primary: #22c55e;
+    --color-primary-hover: #16a34a;
+    --color-primary-active: #15803d;
+    --color-primary-light: #dcfce7;
+    
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-color-light: rgba(255, 255, 255, 0.05);
+    --border-color-strong: rgba(255, 255, 255, 0.2);
+    
+    --card-bg: rgba(20, 83, 45, 0.6);
+    --card-bg-hover: rgba(22, 101, 52, 0.8);
+    
+    --bg-table: linear-gradient(135deg, #052e16 0%, #14532d 50%, #052e16 100%);
+    --bg-table-surface: radial-gradient(ellipse at center, #14532d 0%, #052e16 100%);
+    
+    color-scheme: dark;
+}
+
+/* ============================================================
+   بخش ۱۰: OLED Theme (صفحه‌نمایش‌های OLED)
+   ============================================================ */
+
+[data-theme="oled"],
+.theme-oled {
+    --bg-primary: #000000;
+    --bg-secondary: #0a0a0a;
+    --bg-tertiary: #141414;
+    --bg-elevated: #1e1e1e;
+    --bg-surface: #0a0a0a;
+    --bg-overlay: rgba(0, 0, 0, 0.8);
+    --bg-backdrop: rgba(0, 0, 0, 0.95);
+    
+    --text-primary: #ffffff;
+    --text-secondary: #d1d5db;
+    --text-tertiary: #9ca3af;
+    --text-disabled: #6b7280;
+    
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-color-light: rgba(255, 255, 255, 0.05);
+    --border-color-strong: rgba(255, 255, 255, 0.2);
+    
+    --card-bg: rgba(10, 10, 10, 0.9);
+    --card-bg-hover: rgba(20, 20, 20, 1);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    
+    --input-bg: rgba(0, 0, 0, 0.5);
+    --input-bg-focus: rgba(0, 0, 0, 0.7);
+    --input-border: rgba(255, 255, 255, 0.1);
+    
+    --scrollbar-bg: rgba(0, 0, 0, 0.5);
+    --scrollbar-thumb: rgba(255, 255, 255, 0.2);
+    --scrollbar-thumb-hover: rgba(255, 255, 255, 0.3);
+    
+    --shadow-dark-sm: 0 2px 4px rgba(0, 0, 0, 0.5);
+    --shadow-dark-md: 0 4px 8px rgba(0, 0, 0, 0.6);
+    --shadow-dark-lg: 0 8px 16px rgba(0, 0, 0, 0.7);
+    --shadow-dark-xl: 0 16px 32px rgba(0, 0, 0, 0.8);
+    
+    --bg-table: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+    --bg-table-surface: radial-gradient(ellipse at center, #0a0a0a 0%, #000000 100%);
+    
+    color-scheme: dark;
+}
+
+/* ============================================================
+   بخش ۱۱: Theme Switcher Component
+   ============================================================ */
+
+.theme-switcher {
+    display: flex;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2);
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+}
+
+.theme-option {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-1);
+    padding: var(--spacing-3);
+    background-color: transparent;
+    color: var(--text-secondary);
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-all);
+    font-family: inherit;
+}
+
+.theme-option:hover {
+    background-color: var(--bg-elevated);
+    color: var(--text-primary);
+}
+
+.theme-option.active {
+    background-color: var(--color-primary-light);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.theme-preview {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    border: 2px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-preview-dark {
+    background: linear-gradient(135deg, #0d2924 0%, #1a3d36 100%);
+}
+
+.theme-preview-light {
+    background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+}
+
+.theme-preview-auto {
+    background: linear-gradient(135deg, #0d2924 0%, #f5f5f5 100%);
+}
+
+.theme-preview-high-contrast {
+    background: #000000;
+    border-color: #ffffff;
+}
+
+.theme-preview-sepia {
+    background: linear-gradient(135deg, #f4ecd8 0%, #faf6e9 100%);
+}
+
+.theme-preview-blue {
+    background: linear-gradient(135deg, #0a1929 0%, #132f4c 100%);
+}
+
+.theme-preview-purple {
+    background: linear-gradient(135deg, #1a0b2e 0%, #2d1b4e 100%);
+}
+
+.theme-preview-red {
+    background: linear-gradient(135deg, #2a0a0a 0%, #4a1010 100%);
+}
+
+.theme-preview-green {
+    background: linear-gradient(135deg, #052e16 0%, #14532d 100%);
+}
+
+.theme-preview-oled {
+    background: #000000;
+}
+
+.theme-option-name {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+}
+
+/* ============================================================
+   بخش ۱۲: Theme Transition Animation
+   ============================================================ */
+
+.theme-transitioning * {
+    transition: background-color 0.3s ease,
+                color 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease !important;
+}
+
+/* Smooth theme change */
+body {
+    transition: background-color var(--transition-slow) var(--easing-ease-in-out),
+                color var(--transition-slow) var(--easing-ease-in-out);
+}
+
+/* ============================================================
+   بخش ۱۳: Theme Classes (Utility)
+   ============================================================ */
+
+.theme-dark-only {
+    display: none;
+}
+
+.theme-light-only {
+    display: none;
+}
+
+[data-theme="dark"] .theme-dark-only,
+[data-theme="auto"][data-system-theme="dark"] .theme-dark-only {
+    display: block;
+}
+
+[data-theme="light"] .theme-light-only,
+[data-theme="auto"][data-system-theme="light"] .theme-light-only {
+    display: block;
+}
+
+/* ============================================================
+   بخش ۱۴: Component-Specific Theme Adjustments
+   ============================================================ */
+
+/* Header */
+[data-theme="light"] .app-header {
+    background-color: var(--bg-secondary);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .app-header {
+    background-color: var(--bg-secondary);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Bottom Navigation */
+[data-theme="light"] .app-bottom-nav {
+    background-color: var(--bg-secondary);
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .app-bottom-nav {
+    background-color: var(--bg-secondary);
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Cards */
+[data-theme="light"] .card,
+[data-theme="light"] .stat-card,
+[data-theme="light"] .match-card,
+[data-theme="light"] .friend-card,
+[data-theme="light"] .event-card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .card,
+[data-theme="dark"] .stat-card,
+[data-theme="dark"] .match-card,
+[data-theme="dark"] .friend-card,
+[data-theme="dark"] .event-card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Buttons */
+[data-theme="light"] .btn-primary {
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+[data-theme="dark"] .btn-primary {
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+}
+
+/* Modals */
+[data-theme="light"] .modal-content {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .modal-content {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Toasts */
+[data-theme="light"] .toast {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .toast {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Game Table */
+[data-theme="light"] .table-surface {
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        inset 0 0 60px rgba(0, 0, 0, 0.2),
+        0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .table-surface {
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        inset 0 0 60px rgba(0, 0, 0, 0.4),
+        0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Playing Cards */
+[data-theme="light"] .card {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Rarity Badges */
+[data-theme="light"] .rarity-badge.rare {
+    box-shadow: 0 0 8px var(--color-rarity-rare-glow);
+}
+
+[data-theme="dark"] .rarity-badge.rare {
+    box-shadow: 0 0 12px var(--color-rarity-rare-glow);
+}
+
+[data-theme="light"] .rarity-badge.epic {
+    box-shadow: 0 0 10px var(--color-rarity-epic-glow);
+}
+
+[data-theme="dark"] .rarity-badge.epic {
+    box-shadow: 0 0 16px var(--color-rarity-epic-glow);
+}
+
+[data-theme="light"] .rarity-badge.legendary {
+    box-shadow: 0 0 12px var(--color-rarity-legendary-glow);
+}
+
+[data-theme="dark"] .rarity-badge.legendary {
+    box-shadow: 0 0 20px var(--color-rarity-legendary-glow);
+}
+
+[data-theme="light"] .rarity-badge.mythic {
+    box-shadow: 0 0 14px var(--color-rarity-mythic-glow);
+}
+
+[data-theme="dark"] .rarity-badge.mythic {
+    box-shadow: 0 0 24px var(--color-rarity-mythic-glow);
+}
+
+/* ============================================================
+   بخش ۱۵: Responsive Themes
+   ============================================================ */
+
+/* موبایل */
+@media (max-width: 768px) {
+    [data-theme="light"] .card,
+    [data-theme="light"] .stat-card {
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    }
+    
+    [data-theme="dark"] .card,
+    [data-theme="dark"] .stat-card {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+}
+
+/* ============================================================
+   بخش ۱۶: Accessibility - Reduced Motion
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .theme-transitioning * {
+        transition: none !important;
+    }
+    
+    body {
+        transition: none !important;
+    }
+}
+
+/* ============================================================
+   بخش ۱۷: Accessibility - High Contrast
+   ============================================================ */
+
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: rgba(255, 255, 255, 0.4);
+        --border-color-light: rgba(255, 255, 255, 0.2);
+        --border-color-strong: rgba(255, 255, 255, 0.6);
+    }
+    
+    [data-theme="light"] {
+        --border-color: rgba(0, 0, 0, 0.4);
+        --border-color-light: rgba(0, 0, 0, 0.2);
+        --border-color-strong: rgba(0, 0, 0, 0.6);
+    }
+}
+
+/* ============================================================
+   بخش ۱۸: Print Theme
+   ============================================================ */
+
+@media print {
+    :root,
+    [data-theme] {
+        --bg-primary: #ffffff !important;
+        --bg-secondary: #ffffff !important;
+        --bg-tertiary: #f5f5f5 !important;
+        --bg-elevated: #ffffff !important;
+        
+        --text-primary: #000000 !important;
+        --text-secondary: #333333 !important;
+        --text-tertiary: #666666 !important;
+        
+        --border-color: #000000 !important;
+        --border-color-light: #333333 !important;
+        --border-color-strong: #000000 !important;
+        
+        --card-bg: #ffffff !important;
+        --card-border: #000000 !important;
+        
+        --shadow-dark-sm: none !important;
+        --shadow-dark-md: none !important;
+        --shadow-dark-lg: none !important;
+        --shadow-dark-xl: none !important;
+    }
+}
+
+/* ============================================================
+   بخش ۱۹: Theme Persistence Indicator
+   ============================================================ */
+
+.theme-indicator {
+    position: fixed;
+    bottom: calc(var(--bottom-nav-height) + var(--spacing-4));
+    left: var(--spacing-4);
+    padding: var(--spacing-2) var(--spacing-3);
+    background-color: var(--bg-elevated);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    box-shadow: var(--shadow-dark-md);
+    z-index: var(--z-index-fixed);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity var(--transition-normal), transform var(--transition-normal);
+    pointer-events: none;
+}
+
+.theme-indicator.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.theme-indicator-icon {
+    font-size: var(--font-size-md);
+}
+
+/* ============================================================
+   بخش ۲۰: Theme-specific Gradients
+   ============================================================ */
+
+/* Dark Theme Gradients */
+[data-theme="dark"] .gradient-primary {
+    background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-700) 100%);
+}
+
+[data-theme="dark"] .gradient-bg {
+    background: var(--gradient-bg-dark);
+}
+
+/* Light Theme Gradients */
+[data-theme="light"] .gradient-primary {
+    background: linear-gradient(135deg, var(--color-primary-400) 0%, var(--color-primary-600) 100%);
+}
+
+[data-theme="light"] .gradient-bg {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+}
+
+/* ============================================================
+   بخش ۲۱: Theme-specific Text Effects
+   ============================================================ */
+
+/* Dark Theme Text */
+[data-theme="dark"] .text-gradient {
+    background: linear-gradient(135deg, var(--color-primary-400) 0%, var(--color-accent-400) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Light Theme Text */
+[data-theme="light"] .text-gradient {
+    background: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-accent-600) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ============================================================
+   بخش ۲۲: Theme-specific Animations
+   ============================================================ */
+
+/* Dark Theme Animations */
+[data-theme="dark"] .animate-glow {
+    animation: glowDark 2s infinite;
+}
+
+@keyframes glowDark {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(16, 185, 129, 0.8);
+    }
+}
+
+/* Light Theme Animations */
+[data-theme="light"] .animate-glow {
+    animation: glowLight 2s infinite;
+}
+
+@keyframes glowLight {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(16, 185, 129, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+    }
+}
+
+/* ============================================================
+   بخش ۲۳: Theme Storage Keys
+   ============================================================ */
+
+/* این بخش برای JavaScript استفاده می‌شود */
+:root {
+    --theme-storage-key: 'hokm-theme';
+    --theme-preference-key: 'hokm-theme-preference';
+    --theme-version: '1.0.0';
+}
+
+/* ============================================================
+   بخش ۲۴: Theme Utilities
+   ============================================================ */
+
+/* Force theme */
+.force-dark {
+    --bg-primary: #0d2924 !important;
+    --bg-secondary: #1a3d36 !important;
+    --text-primary: #ffffff !important;
+}
+
+.force-light {
+    --bg-primary: #f5f5f5 !important;
+    --bg-secondary: #ffffff !important;
+    --text-primary: #1a1a1a !important;
+}
+
+/* Theme preview (for theme switcher) */
+.theme-preview-box {
+    width: 100%;
+    height: 120px;
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--border-color);
+    overflow: hidden;
+    position: relative;
+    margin-bottom: var(--spacing-3);
+}
+
+.theme-preview-box.dark {
+    background: linear-gradient(135deg, #0d2924 0%, #1a3d36 100%);
+}
+
+.theme-preview-box.light {
+    background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+}
+
+.theme-preview-box.auto {
+    background: linear-gradient(135deg, #0d2924 0%, #f5f5f5 100%);
+}
+
+.theme-preview-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: var(--color-white);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+}
+
+/* ============================================================
+   بخش ۲۵: Theme-specific Component Overrides
+   ============================================================ */
+
+/* Sepia Theme - Game Table */
+[data-theme="sepia"] .table-surface {
+    background: linear-gradient(135deg, #8b6f47 0%, #a68860 50%, #8b6f47 100%);
+    border-color: rgba(62, 52, 40, 0.3);
+}
+
+/* Blue Theme - Game Table */
+[data-theme="blue"] .table-surface {
+    background: linear-gradient(135deg, #0a1929 0%, #132f4c 50%, #0a1929 100%);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Purple Theme - Game Table */
+[data-theme="purple"] .table-surface {
+    background: linear-gradient(135deg, #1a0b2e 0%, #2d1b4e 50%, #1a0b2e 100%);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Red Theme - Game Table */
+[data-theme="red"] .table-surface {
+    background: linear-gradient(135deg, #2a0a0a 0%, #4a1010 50%, #2a0a0a 100%);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Green Theme - Game Table */
+[data-theme="green"] .table-surface {
+    background: linear-gradient(135deg, #052e16 0%, #14532d 50%, #052e16 100%);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* OLED Theme - Game Table */
+[data-theme="oled"] .table-surface {
+    background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================================
+   بخش ۲۶: Theme-specific League Colors
+   ============================================================ */
+
+/* Dark Theme League */
+[data-theme="dark"] .league-badge.bronze {
+    color: var(--color-league-bronze-light);
+}
+
+[data-theme="dark"] .league-badge.silver {
+    color: var(--color-league-silver-light);
+}
+
+[data-theme="dark"] .league-badge.gold {
+    color: var(--color-league-gold-light);
+}
+
+[data-theme="dark"] .league-badge.platinum {
+    color: var(--color-league-platinum-light);
+}
+
+[data-theme="dark"] .league-badge.diamond {
+    color: var(--color-league-diamond-light);
+}
+
+[data-theme="dark"] .league-badge.master {
+    color: var(--color-league-master-light);
+}
+
+/* Light Theme League */
+[data-theme="light"] .league-badge.bronze {
+    color: var(--color-league-bronze-dark);
+}
+
+[data-theme="light"] .league-badge.silver {
+    color: var(--color-league-silver-dark);
+}
+
+[data-theme="light"] .league-badge.gold {
+    color: var(--color-league-gold-dark);
+}
+
+[data-theme="light"] .league-badge.platinum {
+    color: var(--color-league-platinum-dark);
+}
+
+[data-theme="light"] .league-badge.diamond {
+    color: var(--color-league-diamond-dark);
+}
+
+[data-theme="light"] .league-badge.master {
+    color: var(--color-league-master-dark);
+}
+
+/* ============================================================
+   بخش ۲۷: Theme-specific Status Colors
+   ============================================================ */
+
+/* Dark Theme Status */
+[data-theme="dark"] .badge-status.online {
+    color: #10b981;
+}
+
+[data-theme="dark"] .badge-status.offline {
+    color: #6b7280;
+}
+
+[data-theme="dark"] .badge-status.in-game {
+    color: #f59e0b;
+}
+
+/* Light Theme Status */
+[data-theme="light"] .badge-status.online {
+    color: #059669;
+}
+
+[data-theme="light"] .badge-status.offline {
+    color: #9ca3af;
+}
+
+[data-theme="light"] .badge-status.in-game {
+    color: #d97706;
+}
+
+/* ============================================================
+   بخش ۲۸: Theme Customization Variables
+   ============================================================ */
+
+:root {
+    /* Custom theme variables (can be overridden by user) */
+    --custom-primary-hue: 160;
+    --custom-primary-saturation: 84%;
+    --custom-primary-lightness: 39%;
+    
+    --custom-accent-hue: 45;
+    --custom-accent-saturation: 100%;
+    --custom-accent-lightness: 51%;
+    
+    --custom-border-radius: 8px;
+    --custom-font-scale: 1;
+}
+
+/* Apply custom primary color */
+[data-theme="custom"] {
+    --color-primary: hsl(var(--custom-primary-hue), var(--custom-primary-saturation), var(--custom-primary-lightness));
+    --color-accent: hsl(var(--custom-accent-hue), var(--custom-accent-saturation), var(--custom-accent-lightness));
+}
+
+/* ============================================================
+   بخش ۲۹: Theme Debug Mode
+   ============================================================ */
+
+.theme-debug .theme-debug-indicator {
+    position: fixed;
+    top: var(--spacing-2);
+    right: var(--spacing-2);
+    padding: var(--spacing-1) var(--spacing-2);
+    background-color: var(--color-danger);
+    color: var(--color-white);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xs);
+    font-family: var(--font-family-mono);
+    z-index: var(--z-index-max);
+}
+
+/* ============================================================
+   بخش ۳۰: Theme Print Adjustments
+   ============================================================ */
+
+@media print {
+    [data-theme] {
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+    
+    [data-theme] * {
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+    
+    [data-theme] .card,
+    [data-theme] .modal-content {
+        border: 1px solid #000000 !important;
+    }
+}
