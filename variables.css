@@ -1,0 +1,780 @@
+/**
+ * ============================================================
+ * HOKM MASTER - CSS Variables
+ * متغیرهای سراسری CSS
+ * ============================================================
+ * 
+ * این فایل تمام متغیرهای مورد استفاده در پروژه را تعریف می‌کند.
+ * شامل: رنگ‌ها، فونت‌ها، spacing، shadows، breakpoints و ...
+ * 
+ * نسخه: 1.0.0
+ * ============================================================
+ */
+
+/* ============================================================
+   بخش ۱: متغیرهای اصلی (Root Variables)
+   ============================================================ */
+
+:root {
+    /* ============================================================
+       ۱.۱ - رنگ‌های اصلی (Primary Colors)
+       ============================================================ */
+    
+    /* رنگ اصلی - سبز تیره حکم */
+    --color-primary-50: #e6f7f1;
+    --color-primary-100: #b3e8d3;
+    --color-primary-200: #80d9b5;
+    --color-primary-300: #4dca97;
+    --color-primary-400: #26bf80;
+    --color-primary-500: #10b981;
+    --color-primary-600: #0d9668;
+    --color-primary-700: #0a7350;
+    --color-primary-800: #075038;
+    --color-primary-900: #042d20;
+    
+    /* رنگ اصلی پیش‌فرض */
+    --color-primary: var(--color-primary-500);
+    --color-primary-hover: var(--color-primary-600);
+    --color-primary-active: var(--color-primary-700);
+    --color-primary-light: var(--color-primary-100);
+    --color-primary-dark: var(--color-primary-800);
+    
+    /* رنگ ثانویه - سبز زمردی */
+    --color-secondary-50: #e8f5e9;
+    --color-secondary-100: #c8e6c9;
+    --color-secondary-200: #a5d6a7;
+    --color-secondary-300: #81c784;
+    --color-secondary-400: #66bb6a;
+    --color-secondary-500: #0d2924;
+    --color-secondary-600: #0a2019;
+    --color-secondary-700: #07170f;
+    --color-secondary-800: #040e05;
+    --color-secondary-900: #020502;
+    
+    --color-secondary: var(--color-secondary-500);
+    --color-secondary-hover: var(--color-secondary-600);
+    --color-secondary-active: var(--color-secondary-700);
+    
+    /* رنگ تأکیدی - طلایی */
+    --color-accent-50: #fff8e1;
+    --color-accent-100: #ffecb3;
+    --color-accent-200: #ffe082;
+    --color-accent-300: #ffd54f;
+    --color-accent-400: #ffca28;
+    --color-accent-500: #ffc107;
+    --color-accent-600: #ffb300;
+    --color-accent-700: #ffa000;
+    --color-accent-800: #ff8f00;
+    --color-accent-900: #ff6f00;
+    
+    --color-accent: var(--color-accent-500);
+    --color-accent-hover: var(--color-accent-600);
+    --color-accent-active: var(--color-accent-700);
+    
+    /* ============================================================
+       ۱.۲ - رنگ‌های معنایی (Semantic Colors)
+       ============================================================ */
+    
+    /* موفقیت - سبز */
+    --color-success-50: #ecfdf5;
+    --color-success-100: #d1fae5;
+    --color-success-200: #a7f3d0;
+    --color-success-300: #6ee7b7;
+    --color-success-400: #34d399;
+    --color-success-500: #10b981;
+    --color-success-600: #059669;
+    --color-success-700: #047857;
+    --color-success-800: #065f46;
+    --color-success-900: #064e3b;
+    
+    --color-success: var(--color-success-500);
+    --color-success-hover: var(--color-success-600);
+    --color-success-light: var(--color-success-100);
+    --color-success-dark: var(--color-success-800);
+    
+    /* هشدار - زرد/نارنجی */
+    --color-warning-50: #fffbeb;
+    --color-warning-100: #fef3c7;
+    --color-warning-200: #fde68a;
+    --color-warning-300: #fcd34d;
+    --color-warning-400: #fbbf24;
+    --color-warning-500: #f59e0b;
+    --color-warning-600: #d97706;
+    --color-warning-700: #b45309;
+    --color-warning-800: #92400e;
+    --color-warning-900: #78350f;
+    
+    --color-warning: var(--color-warning-500);
+    --color-warning-hover: var(--color-warning-600);
+    --color-warning-light: var(--color-warning-100);
+    --color-warning-dark: var(--color-warning-800);
+    
+    /* خطر - قرمز */
+    --color-danger-50: #fef2f2;
+    --color-danger-100: #fee2e2;
+    --color-danger-200: #fecaca;
+    --color-danger-300: #fca5a5;
+    --color-danger-400: #f87171;
+    --color-danger-500: #ef4444;
+    --color-danger-600: #dc2626;
+    --color-danger-700: #b91c1c;
+    --color-danger-800: #991b1b;
+    --color-danger-900: #7f1d1d;
+    
+    --color-danger: var(--color-danger-500);
+    --color-danger-hover: var(--color-danger-600);
+    --color-danger-light: var(--color-danger-100);
+    --color-danger-dark: var(--color-danger-800);
+    
+    /* اطلاعات - آبی */
+    --color-info-50: #eff6ff;
+    --color-info-100: #dbeafe;
+    --color-info-200: #bfdbfe;
+    --color-info-300: #93c5fd;
+    --color-info-400: #60a5fa;
+    --color-info-500: #3b82f6;
+    --color-info-600: #2563eb;
+    --color-info-700: #1d4ed8;
+    --color-info-800: #1e40af;
+    --color-info-900: #1e3a8a;
+    
+    --color-info: var(--color-info-500);
+    --color-info-hover: var(--color-info-600);
+    --color-info-light: var(--color-info-100);
+    --color-info-dark: var(--color-info-800);
+    
+    /* ============================================================
+       ۱.۳ - رنگ‌های خال‌های کارت (Card Suits)
+       ============================================================ */
+    
+    /* پیک - سیاه */
+    --color-suit-spades: #1a1a1a;
+    --color-suit-spades-light: #333333;
+    --color-suit-spades-dark: #000000;
+    
+    /* گشنیز - سیاه */
+    --color-suit-clubs: #1a1a1a;
+    --color-suit-clubs-light: #333333;
+    --color-suit-clubs-dark: #000000;
+    
+    /* دل - قرمز */
+    --color-suit-hearts: #dc2626;
+    --color-suit-hearts-light: #ef4444;
+    --color-suit-hearts-dark: #991b1b;
+    
+    /* خشت - قرمز */
+    --color-suit-diamonds: #dc2626;
+    --color-suit-diamonds-light: #ef4444;
+    --color-suit-diamonds-dark: #991b1b;
+    
+    /* حکم - طلایی */
+    --color-trump: #ffc107;
+    --color-trump-light: #ffca28;
+    --color-trump-dark: #ffa000;
+    --color-trump-glow: rgba(255, 193, 7, 0.5);
+    
+    /* ============================================================
+       ۱.۴ - رنگ‌های لیگ (League Tiers)
+       ============================================================ */
+    
+    /* برنز */
+    --color-league-bronze: #cd7f32;
+    --color-league-bronze-light: #e0a060;
+    --color-league-bronze-dark: #8b5a2b;
+    --color-league-bronze-glow: rgba(205, 127, 50, 0.4);
+    
+    /* نقره */
+    --color-league-silver: #c0c0c0;
+    --color-league-silver-light: #e0e0e0;
+    --color-league-silver-dark: #808080;
+    --color-league-silver-glow: rgba(192, 192, 192, 0.4);
+    
+    /* طلا */
+    --color-league-gold: #ffd700;
+    --color-league-gold-light: #ffe44d;
+    --color-league-gold-dark: #b8860b;
+    --color-league-gold-glow: rgba(255, 215, 0, 0.4);
+    
+    /* پلاتین */
+    --color-league-platinum: #e5e4e2;
+    --color-league-platinum-light: #f5f5f5;
+    --color-league-platinum-dark: #a8a8a8;
+    --color-league-platinum-glow: rgba(229, 228, 226, 0.5);
+    
+    /* الماس */
+    --color-league-diamond: #b9f2ff;
+    --color-league-diamond-light: #d9faff;
+    --color-league-diamond-dark: #4dd0e1;
+    --color-league-diamond-glow: rgba(185, 242, 255, 0.5);
+    
+    /* مستر */
+    --color-league-master: #9c27b0;
+    --color-league-master-light: #ba68c8;
+    --color-league-master-dark: #6a1b9a;
+    --color-league-master-glow: rgba(156, 39, 176, 0.5);
+    
+    /* ============================================================
+       ۱.۵ - رنگ‌های کمیابی آیتم‌ها (Item Rarity)
+       ============================================================ */
+    
+    /* معمولی - خاکستری */
+    --color-rarity-common: #9ca3af;
+    --color-rarity-common-light: #d1d5db;
+    --color-rarity-common-dark: #4b5563;
+    
+    /* کمیاب - آبی */
+    --color-rarity-rare: #3b82f6;
+    --color-rarity-rare-light: #93c5fd;
+    --color-rarity-rare-dark: #1d4ed8;
+    --color-rarity-rare-glow: rgba(59, 130, 246, 0.4);
+    
+    /* حماسی - بنفش */
+    --color-rarity-epic: #a855f7;
+    --color-rarity-epic-light: #d8b4fe;
+    --color-rarity-epic-dark: #7e22ce;
+    --color-rarity-epic-glow: rgba(168, 85, 247, 0.4);
+    
+    /* افسانه‌ای - طلایی */
+    --color-rarity-legendary: #f59e0b;
+    --color-rarity-legendary-light: #fcd34d;
+    --color-rarity-legendary-dark: #b45309;
+    --color-rarity-legendary-glow: rgba(245, 158, 11, 0.5);
+    
+    /* اسطوره‌ای - قرمز */
+    --color-rarity-mythic: #ef4444;
+    --color-rarity-mythic-light: #fca5a5;
+    --color-rarity-mythic-dark: #b91c1c;
+    --color-rarity-mythic-glow: rgba(239, 68, 68, 0.5);
+    
+    /* ============================================================
+       ۱.۶ - رنگ‌های خنثی (Neutral Colors)
+       ============================================================ */
+    
+    --color-neutral-50: #fafafa;
+    --color-neutral-100: #f5f5f5;
+    --color-neutral-200: #e5e5e5;
+    --color-neutral-300: #d4d4d4;
+    --color-neutral-400: #a3a3a3;
+    --color-neutral-500: #737373;
+    --color-neutral-600: #525252;
+    --color-neutral-700: #404040;
+    --color-neutral-800: #262626;
+    --color-neutral-900: #171717;
+    --color-neutral-950: #0a0a0a;
+    
+    --color-white: #ffffff;
+    --color-black: #000000;
+    
+    /* ============================================================
+       ۱.۷ - رنگ‌های تم تیره (Dark Theme - Default)
+       ============================================================ */
+    
+    /* پس‌زمینه‌ها */
+    --bg-primary: #0d2924;
+    --bg-secondary: #1a3d36;
+    --bg-tertiary: #244d45;
+    --bg-elevated: #2d5c53;
+    --bg-surface: #1a3d36;
+    --bg-overlay: rgba(0, 0, 0, 0.6);
+    --bg-backdrop: rgba(13, 41, 36, 0.8);
+    
+    /* میز بازی */
+    --bg-table: linear-gradient(135deg, #0d2924 0%, #1a3d36 50%, #0d2924 100%);
+    --bg-table-surface: radial-gradient(ellipse at center, #1a3d36 0%, #0d2924 100%);
+    
+    /* متن‌ها */
+    --text-primary: #ffffff;
+    --text-secondary: #d1d5db;
+    --text-tertiary: #9ca3af;
+    --text-disabled: #6b7280;
+    --text-inverse: #0d2924;
+    --text-link: #10b981;
+    --text-link-hover: #34d399;
+    
+    /* حاشیه‌ها */
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-color-light: rgba(255, 255, 255, 0.05);
+    --border-color-strong: rgba(255, 255, 255, 0.2);
+    --border-color-focus: var(--color-primary);
+    
+    /* کارت‌ها */
+    --card-bg: rgba(26, 61, 54, 0.6);
+    --card-bg-hover: rgba(36, 77, 69, 0.8);
+    --card-border: rgba(255, 255, 255, 0.1);
+    
+    /* ورودی‌ها */
+    --input-bg: rgba(0, 0, 0, 0.2);
+    --input-bg-focus: rgba(0, 0, 0, 0.3);
+    --input-border: rgba(255, 255, 255, 0.1);
+    --input-border-focus: var(--color-primary);
+    --input-text: var(--text-primary);
+    --input-placeholder: var(--text-tertiary);
+    
+    /* اسکرول‌بار */
+    --scrollbar-bg: rgba(0, 0, 0, 0.2);
+    --scrollbar-thumb: rgba(255, 255, 255, 0.2);
+    --scrollbar-thumb-hover: rgba(255, 255, 255, 0.3);
+    
+    /* ============================================================
+       ۱.۸ - فونت‌ها (Typography)
+       ============================================================ */
+    
+    /* خانواده فونت */
+    --font-family-primary: 'Vazirmatn', 'Tahoma', 'Arial', sans-serif;
+    --font-family-secondary: 'Vazirmatn', 'Tahoma', sans-serif;
+    --font-family-mono: 'Courier New', monospace;
+    
+    /* اندازه فونت‌ها */
+    --font-size-xs: 0.75rem;      /* 12px */
+    --font-size-sm: 0.875rem;     /* 14px */
+    --font-size-base: 1rem;       /* 16px */
+    --font-size-md: 1.125rem;     /* 18px */
+    --font-size-lg: 1.25rem;      /* 20px */
+    --font-size-xl: 1.5rem;       /* 24px */
+    --font-size-2xl: 1.875rem;    /* 30px */
+    --font-size-3xl: 2.25rem;     /* 36px */
+    --font-size-4xl: 3rem;        /* 48px */
+    --font-size-5xl: 3.75rem;     /* 60px */
+    
+    /* وزن فونت */
+    --font-weight-thin: 100;
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    --font-weight-black: 900;
+    
+    /* ارتفاع خط */
+    --line-height-tight: 1.25;
+    --line-height-snug: 1.375;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.625;
+    --line-height-loose: 2;
+    
+    /* فاصله حروف */
+    --letter-spacing-tighter: -0.05em;
+    --letter-spacing-tight: -0.025em;
+    --letter-spacing-normal: 0;
+    --letter-spacing-wide: 0.025em;
+    --letter-spacing-wider: 0.05em;
+    --letter-spacing-widest: 0.1em;
+    
+    /* ============================================================
+       ۱.۹ - فاصله‌ها (Spacing)
+       ============================================================ */
+    
+    --spacing-0: 0;
+    --spacing-1: 0.25rem;   /* 4px */
+    --spacing-2: 0.5rem;    /* 8px */
+    --spacing-3: 0.75rem;   /* 12px */
+    --spacing-4: 1rem;      /* 16px */
+    --spacing-5: 1.25rem;   /* 20px */
+    --spacing-6: 1.5rem;    /* 24px */
+    --spacing-8: 2rem;      /* 32px */
+    --spacing-10: 2.5rem;   /* 40px */
+    --spacing-12: 3rem;     /* 48px */
+    --spacing-16: 4rem;     /* 64px */
+    --spacing-20: 5rem;     /* 80px */
+    --spacing-24: 6rem;     /* 96px */
+    --spacing-32: 8rem;     /* 128px */
+    
+    /* فاصله‌های کاربردی */
+    --spacing-xs: var(--spacing-1);
+    --spacing-sm: var(--spacing-2);
+    --spacing-md: var(--spacing-4);
+    --spacing-lg: var(--spacing-6);
+    --spacing-xl: var(--spacing-8);
+    --spacing-2xl: var(--spacing-12);
+    --spacing-3xl: var(--spacing-16);
+    
+    /* ============================================================
+       ۱.۱۰ - گردی گوشه‌ها (Border Radius)
+       ============================================================ */
+    
+    --radius-none: 0;
+    --radius-xs: 0.125rem;  /* 2px */
+    --radius-sm: 0.25rem;   /* 4px */
+    --radius-md: 0.5rem;    /* 8px */
+    --radius-lg: 0.75rem;   /* 12px */
+    --radius-xl: 1rem;      /* 16px */
+    --radius-2xl: 1.5rem;   /* 24px */
+    --radius-3xl: 2rem;     /* 32px */
+    --radius-full: 9999px;
+    
+    /* گردی‌های کاربردی */
+    --radius-button: var(--radius-md);
+    --radius-card: var(--radius-lg);
+    --radius-input: var(--radius-md);
+    --radius-modal: var(--radius-xl);
+    --radius-avatar: var(--radius-full);
+    --radius-badge: var(--radius-full);
+    
+    /* ============================================================
+       ۱.۱۱ - سایه‌ها (Shadows)
+       ============================================================ */
+    
+    --shadow-none: none;
+    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+    
+    /* سایه‌های رنگی */
+    --shadow-primary: 0 4px 14px 0 rgba(16, 185, 129, 0.39);
+    --shadow-success: 0 4px 14px 0 rgba(16, 185, 129, 0.39);
+    --shadow-danger: 0 4px 14px 0 rgba(239, 68, 68, 0.39);
+    --shadow-warning: 0 4px 14px 0 rgba(245, 158, 11, 0.39);
+    --shadow-info: 0 4px 14px 0 rgba(59, 130, 246, 0.39);
+    
+    /* سایه‌های تم تیره */
+    --shadow-dark-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-dark-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+    --shadow-dark-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+    --shadow-dark-xl: 0 16px 32px rgba(0, 0, 0, 0.6);
+    
+    /* ============================================================
+       ۱.۱۲ - نقاط شکست (Breakpoints)
+       ============================================================ */
+    
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --breakpoint-2xl: 1400px;
+    
+    /* ============================================================
+       ۱.۱۳ - لایه‌ها (Z-Index)
+       ============================================================ */
+    
+    --z-index-dropdown: 1000;
+    --z-index-sticky: 1020;
+    --z-index-fixed: 1030;
+    --z-index-modal-backdrop: 1040;
+    --z-index-modal: 1050;
+    --z-index-popover: 1060;
+    --z-index-tooltip: 1070;
+    --z-index-toast: 1080;
+    --z-index-max: 9999;
+    
+    /* ============================================================
+       ۱.۱۴ - انتقال‌ها (Transitions)
+       ============================================================ */
+    
+    --transition-fastest: 100ms;
+    --transition-fast: 150ms;
+    --transition-normal: 250ms;
+    --transition-slow: 400ms;
+    --transition-slower: 600ms;
+    
+    /* easing functions */
+    --easing-linear: linear;
+    --easing-ease: ease;
+    --easing-ease-in: ease-in;
+    --easing-ease-out: ease-out;
+    --easing-ease-in-out: ease-in-out;
+    --easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* transition shorthand */
+    --transition-all: all var(--transition-normal) var(--easing-ease-in-out);
+    --transition-colors: color, background-color, border-color, text-decoration-color, fill, stroke var(--transition-fast) var(--easing-ease-in-out);
+    --transition-opacity: opacity var(--transition-fast) var(--easing-ease-in-out);
+    --transition-shadow: box-shadow var(--transition-fast) var(--easing-ease-in-out);
+    --transition-transform: transform var(--transition-normal) var(--easing-ease-in-out);
+    
+    /* ============================================================
+       ۱.۱۵ - ابعاد (Dimensions)
+       ============================================================ */
+    
+    /* ارتفاع‌ها */
+    --header-height: 60px;
+    --bottom-nav-height: 64px;
+    --sidebar-width: 280px;
+    --sidebar-collapsed-width: 70px;
+    
+    /* اندازه‌های کارت */
+    --card-width-sm: 280px;
+    --card-width-md: 360px;
+    --card-width-lg: 480px;
+    
+    /* اندازه‌های مودال */
+    --modal-width-sm: 400px;
+    --modal-width-md: 600px;
+    --modal-width-lg: 800px;
+    --modal-width-xl: 1000px;
+    --modal-width-full: 90vw;
+    
+    /* اندازه‌های آواتار */
+    --avatar-size-xs: 24px;
+    --avatar-size-sm: 32px;
+    --avatar-size-md: 40px;
+    --avatar-size-lg: 56px;
+    --avatar-size-xl: 80px;
+    --avatar-size-2xl: 120px;
+    
+    /* اندازه‌های کارت بازی */
+    --card-width: 80px;
+    --card-height: 120px;
+    --card-width-sm: 60px;
+    --card-height-sm: 90px;
+    --card-width-lg: 100px;
+    --card-height-lg: 150px;
+    
+    /* ============================================================
+       ۱.۱۶ - کانتینر (Container)
+       ============================================================ */
+    
+    --container-max-width: 1280px;
+    --container-padding: var(--spacing-4);
+    
+    /* ============================================================
+       ۱.۱۷ - Opacity
+       ============================================================ */
+    
+    --opacity-0: 0;
+    --opacity-5: 0.05;
+    --opacity-10: 0.1;
+    --opacity-20: 0.2;
+    --opacity-25: 0.25;
+    --opacity-30: 0.3;
+    --opacity-40: 0.4;
+    --opacity-50: 0.5;
+    --opacity-60: 0.6;
+    --opacity-70: 0.7;
+    --opacity-75: 0.75;
+    --opacity-80: 0.8;
+    --opacity-90: 0.9;
+    --opacity-95: 0.95;
+    --opacity-100: 1;
+    
+    /* ============================================================
+       ۱.۱۸ - Aspect Ratios
+       ============================================================ */
+    
+    --aspect-square: 1 / 1;
+    --aspect-video: 16 / 9;
+    --aspect-card: 2 / 3;
+    --aspect-portrait: 3 / 4;
+    
+    /* ============================================================
+       ۱.۱۹ - Grid
+       ============================================================ */
+    
+    --grid-columns: 12;
+    --grid-gap: var(--spacing-4);
+    --grid-gap-sm: var(--spacing-2);
+    --grid-gap-lg: var(--spacing-6);
+    
+    /* ============================================================
+       ۱.۲۰ - Blur Effects
+       ============================================================ */
+    
+    --blur-sm: blur(4px);
+    --blur-md: blur(8px);
+    --blur-lg: blur(16px);
+    --blur-xl: blur(24px);
+    --blur-2xl: blur(40px);
+    
+    /* ============================================================
+       ۱.۲۱ - Gradient Presets
+       ============================================================ */
+    
+    --gradient-primary: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-700) 100%);
+    --gradient-secondary: linear-gradient(135deg, var(--color-secondary-500) 0%, var(--color-secondary-700) 100%);
+    --gradient-accent: linear-gradient(135deg, var(--color-accent-400) 0%, var(--color-accent-600) 100%);
+    --gradient-success: linear-gradient(135deg, var(--color-success-500) 0%, var(--color-success-700) 100%);
+    --gradient-danger: linear-gradient(135deg, var(--color-danger-500) 0%, var(--color-danger-700) 100%);
+    --gradient-warning: linear-gradient(135deg, var(--color-warning-500) 0%, var(--color-warning-700) 100%);
+    --gradient-info: linear-gradient(135deg, var(--color-info-500) 0%, var(--color-info-700) 100%);
+    
+    /* Gradient های لیگ */
+    --gradient-bronze: linear-gradient(135deg, var(--color-league-bronze-light) 0%, var(--color-league-bronze-dark) 100%);
+    --gradient-silver: linear-gradient(135deg, var(--color-league-silver-light) 0%, var(--color-league-silver-dark) 100%);
+    --gradient-gold: linear-gradient(135deg, var(--color-league-gold-light) 0%, var(--color-league-gold-dark) 100%);
+    --gradient-platinum: linear-gradient(135deg, var(--color-league-platinum-light) 0%, var(--color-league-platinum-dark) 100%);
+    --gradient-diamond: linear-gradient(135deg, var(--color-league-diamond-light) 0%, var(--color-league-diamond-dark) 100%);
+    --gradient-master: linear-gradient(135deg, var(--color-league-master-light) 0%, var(--color-league-master-dark) 100%);
+    
+    /* Gradient های پس‌زمینه */
+    --gradient-bg-dark: linear-gradient(135deg, #0d2924 0%, #1a3d36 50%, #0d2924 100%);
+    --gradient-bg-radial: radial-gradient(ellipse at center, #1a3d36 0%, #0d2924 100%);
+    
+    /* ============================================================
+       ۱.۲۲ - Safe Areas (برای دستگاه‌های notch دار)
+       ============================================================ */
+    
+    --safe-area-top: env(safe-area-inset-top, 0px);
+    --safe-area-right: env(safe-area-inset-right, 0px);
+    --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-area-left: env(safe-area-inset-left, 0px);
+}
+
+/* ============================================================
+   بخش ۲: متغیرهای تم روشن (Light Theme)
+   ============================================================ */
+
+[data-theme="light"],
+.theme-light {
+    /* پس‌زمینه‌ها */
+    --bg-primary: #f5f5f5;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f9fafb;
+    --bg-elevated: #ffffff;
+    --bg-surface: #ffffff;
+    --bg-overlay: rgba(0, 0, 0, 0.4);
+    --bg-backdrop: rgba(245, 245, 245, 0.8);
+    
+    /* میز بازی */
+    --bg-table: linear-gradient(135deg, #0d9668 0%, #10b981 50%, #0d9668 100%);
+    --bg-table-surface: radial-gradient(ellipse at center, #10b981 0%, #0d9668 100%);
+    
+    /* متن‌ها */
+    --text-primary: #1a1a1a;
+    --text-secondary: #404040;
+    --text-tertiary: #737373;
+    --text-disabled: #a3a3a3;
+    --text-inverse: #ffffff;
+    --text-link: #0d9668;
+    --text-link-hover: #0a7350;
+    
+    /* حاشیه‌ها */
+    --border-color: rgba(0, 0, 0, 0.1);
+    --border-color-light: rgba(0, 0, 0, 0.05);
+    --border-color-strong: rgba(0, 0, 0, 0.2);
+    
+    /* کارت‌ها */
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --card-bg-hover: rgba(255, 255, 255, 1);
+    --card-border: rgba(0, 0, 0, 0.1);
+    
+    /* ورودی‌ها */
+    --input-bg: rgba(255, 255, 255, 1);
+    --input-bg-focus: rgba(255, 255, 255, 1);
+    --input-border: rgba(0, 0, 0, 0.1);
+    --input-text: var(--text-primary);
+    --input-placeholder: var(--text-tertiary);
+    
+    /* اسکرول‌بار */
+    --scrollbar-bg: rgba(0, 0, 0, 0.05);
+    --scrollbar-thumb: rgba(0, 0, 0, 0.2);
+    --scrollbar-thumb-hover: rgba(0, 0, 0, 0.3);
+    
+    /* سایه‌ها */
+    --shadow-dark-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-dark-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --shadow-dark-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+    --shadow-dark-xl: 0 16px 32px rgba(0, 0, 0, 0.25);
+}
+
+/* ============================================================
+   بخش ۳: تم خودکار بر اساس تنظیمات سیستم
+   ============================================================ */
+
+@media (prefers-color-scheme: light) {
+    [data-theme="auto"] {
+        --bg-primary: #f5f5f5;
+        --bg-secondary: #ffffff;
+        --bg-tertiary: #f9fafb;
+        --bg-elevated: #ffffff;
+        --bg-surface: #ffffff;
+        --bg-overlay: rgba(0, 0, 0, 0.4);
+        --bg-backdrop: rgba(245, 245, 245, 0.8);
+        
+        --bg-table: linear-gradient(135deg, #0d9668 0%, #10b981 50%, #0d9668 100%);
+        --bg-table-surface: radial-gradient(ellipse at center, #10b981 0%, #0d9668 100%);
+        
+        --text-primary: #1a1a1a;
+        --text-secondary: #404040;
+        --text-tertiary: #737373;
+        --text-disabled: #a3a3a3;
+        --text-inverse: #ffffff;
+        --text-link: #0d9668;
+        --text-link-hover: #0a7350;
+        
+        --border-color: rgba(0, 0, 0, 0.1);
+        --border-color-light: rgba(0, 0, 0, 0.05);
+        --border-color-strong: rgba(0, 0, 0, 0.2);
+        
+        --card-bg: rgba(255, 255, 255, 0.9);
+        --card-bg-hover: rgba(255, 255, 255, 1);
+        --card-border: rgba(0, 0, 0, 0.1);
+        
+        --input-bg: rgba(255, 255, 255, 1);
+        --input-bg-focus: rgba(255, 255, 255, 1);
+        --input-border: rgba(0, 0, 0, 0.1);
+        --input-text: var(--text-primary);
+        --input-placeholder: var(--text-tertiary);
+        
+        --scrollbar-bg: rgba(0, 0, 0, 0.05);
+        --scrollbar-thumb: rgba(0, 0, 0, 0.2);
+        --scrollbar-thumb-hover: rgba(0, 0, 0, 0.3);
+        
+        --shadow-dark-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+        --shadow-dark-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+        --shadow-dark-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+        --shadow-dark-xl: 0 16px 32px rgba(0, 0, 0, 0.25);
+    }
+}
+
+/* ============================================================
+   بخش ۴: کاهش انیمیشن برای دسترسی‌پذیری
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --transition-fastest: 0ms;
+        --transition-fast: 0ms;
+        --transition-normal: 0ms;
+        --transition-slow: 0ms;
+        --transition-slower: 0ms;
+    }
+}
+
+/* ============================================================
+   بخش ۵: کلاس‌های کمکی برای متغیرها
+   ============================================================ */
+
+/* کلاس‌های رنگی */
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.text-accent { color: var(--color-accent); }
+.text-success { color: var(--color-success); }
+.text-warning { color: var(--color-warning); }
+.text-danger { color: var(--color-danger); }
+.text-info { color: var(--color-info); }
+
+.bg-primary { background-color: var(--color-primary); }
+.bg-secondary { background-color: var(--color-secondary); }
+.bg-accent { background-color: var(--color-accent); }
+.bg-success { background-color: var(--color-success); }
+.bg-warning { background-color: var(--color-warning); }
+.bg-danger { background-color: var(--color-danger); }
+.bg-info { background-color: var(--color-info); }
+
+/* کلاس‌های خال‌ها */
+.suit-spades { color: var(--color-suit-spades); }
+.suit-hearts { color: var(--color-suit-hearts); }
+.suit-diamonds { color: var(--color-suit-diamonds); }
+.suit-clubs { color: var(--color-suit-clubs); }
+.suit-trump { color: var(--color-trump); }
+
+/* کلاس‌های لیگ */
+.league-bronze { color: var(--color-league-bronze); }
+.league-silver { color: var(--color-league-silver); }
+.league-gold { color: var(--color-league-gold); }
+.league-platinum { color: var(--color-league-platinum); }
+.league-diamond { color: var(--color-league-diamond); }
+.league-master { color: var(--color-league-master); }
+
+/* کلاس‌های کمیابی */
+.rarity-common { color: var(--color-rarity-common); }
+.rarity-rare { color: var(--color-rarity-rare); }
+.rarity-epic { color: var(--color-rarity-epic); }
+.rarity-legendary { color: var(--color-rarity-legendary); }
+.rarity-mythic { color: var(--color-rarity-mythic); }
