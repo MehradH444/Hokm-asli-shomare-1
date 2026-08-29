@@ -1,0 +1,2355 @@
+/**
+ * ============================================================
+ * HOKM MASTER - Responsive
+ * استایل‌های ریسپانسیو برای تمام دستگاه‌ها
+ * ============================================================
+ * 
+ * این فایل تمام media queries و استایل‌های ریسپانسیو
+ * برای موبایل، تبلت، دسکتاپ و حالت‌های خاص را تعریف می‌کند.
+ * 
+ * نسخه: 1.0.0
+ * ============================================================
+ */
+
+/* ============================================================
+   بخش ۱: Breakpoints Variables
+   ============================================================ */
+
+:root {
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --breakpoint-2xl: 1400px;
+    
+    /* Container max widths */
+    --container-sm: 540px;
+    --container-md: 720px;
+    --container-lg: 960px;
+    --container-xl: 1140px;
+    --container-2xl: 1320px;
+}
+
+/* ============================================================
+   بخش ۲: Mobile First - Extra Small Devices (< 576px)
+   ============================================================ */
+
+/* موبایل کوچک - آیفون SE، گوشی‌های کوچک */
+@media (max-width: 575.98px) {
+    /* Typography */
+    :root {
+        --font-size-base: 0.9375rem;
+        --font-size-lg: 1.125rem;
+        --font-size-xl: 1.25rem;
+        --font-size-2xl: 1.5rem;
+        --font-size-3xl: 1.875rem;
+        --font-size-4xl: 2.25rem;
+    }
+    
+    /* Spacing */
+    :root {
+        --spacing-4: 0.875rem;
+        --spacing-6: 1.25rem;
+        --spacing-8: 1.75rem;
+    }
+    
+    /* Container */
+    .container {
+        padding-left: var(--spacing-3);
+        padding-right: var(--spacing-3);
+    }
+    
+    /* Header */
+    :root {
+        --header-height: 56px;
+    }
+    
+    .header-title {
+        font-size: var(--font-size-base);
+    }
+    
+    .brand-text {
+        display: none;
+    }
+    
+    .header-btn {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .btn-coin,
+    .btn-gem {
+        padding: var(--spacing-1) var(--spacing-2);
+        font-size: var(--font-size-xs);
+    }
+    
+    /* Bottom Navigation */
+    :root {
+        --bottom-nav-height: 60px;
+    }
+    
+    .bottom-nav-text {
+        font-size: 10px;
+    }
+    
+    .bottom-nav-icon {
+        font-size: var(--font-size-lg);
+    }
+    
+    /* Sidebar */
+    :root {
+        --sidebar-width: 260px;
+    }
+    
+    /* Main Content */
+    .app-main {
+        padding: var(--spacing-3);
+    }
+    
+    /* Screen Header */
+    .screen-title {
+        font-size: var(--font-size-xl);
+    }
+    
+    /* Hero Section */
+    .hero {
+        padding: var(--spacing-5) var(--spacing-3);
+    }
+    
+    .hero-title {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .hero-subtitle {
+        font-size: var(--font-size-sm);
+    }
+    
+    .hero-stats {
+        gap: var(--spacing-3);
+    }
+    
+    .hero-stat .stat-value {
+        font-size: var(--font-size-xl);
+    }
+    
+    /* Stats Grid */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-3);
+    }
+    
+    .stat-card {
+        padding: var(--spacing-3);
+    }
+    
+    .stat-icon-wrapper {
+        width: 40px;
+        height: 40px;
+        font-size: var(--font-size-xl);
+    }
+    
+    .stat-value {
+        font-size: var(--font-size-lg);
+    }
+    
+    /* Section Header */
+    .section-title {
+        font-size: var(--font-size-lg);
+    }
+    
+    /* Game Modes Grid */
+    .game-modes-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-3);
+    }
+    
+    /* Rewards Grid */
+    .rewards-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-3);
+    }
+    
+    /* Tabs */
+    .tabs-container {
+        padding: var(--spacing-1);
+    }
+    
+    .tab-btn {
+        padding: var(--spacing-2) var(--spacing-3);
+        font-size: var(--font-size-xs);
+    }
+    
+    .tab-icon {
+        font-size: var(--font-size-base);
+    }
+    
+    /* Match Cards */
+    .match-card {
+        padding: var(--spacing-2);
+    }
+    
+    .match-result {
+        min-width: 50px;
+    }
+    
+    .result-icon {
+        font-size: var(--font-size-xl);
+    }
+    
+    .match-score {
+        font-size: var(--font-size-base);
+    }
+    
+    /* Friend Cards */
+    .friend-card {
+        padding: var(--spacing-2);
+    }
+    
+    .friend-name {
+        font-size: var(--font-size-xs);
+    }
+    
+    .friend-status {
+        font-size: 10px;
+    }
+    
+    /* Event Cards */
+    .event-card {
+        min-width: 260px;
+    }
+    
+    /* Mission Cards */
+    .mission-card {
+        padding: var(--spacing-3);
+    }
+    
+    .mission-icon-wrapper {
+        width: 40px;
+        height: 40px;
+        font-size: var(--font-size-xl);
+    }
+    
+    .mission-title {
+        font-size: var(--font-size-sm);
+    }
+    
+    /* Achievement Cards */
+    .achievements-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .achievement-icon-wrapper {
+        width: 48px;
+        height: 48px;
+        font-size: var(--font-size-2xl);
+    }
+    
+    /* Leaderboard */
+    .leaderboard-podium {
+        padding: var(--spacing-4) var(--spacing-2);
+        gap: var(--spacing-2);
+    }
+    
+    .podium-base.first-place {
+        height: 80px;
+    }
+    
+    .podium-base.second-place {
+        height: 60px;
+    }
+    
+    .podium-base.third-place {
+        height: 40px;
+    }
+    
+    .podium-name {
+        font-size: var(--font-size-xs);
+    }
+    
+    .podium-rating {
+        font-size: 10px;
+    }
+    
+    .leaderboard-item {
+        padding: var(--spacing-2);
+    }
+    
+    .rank-number {
+        width: 28px;
+        height: 28px;
+        font-size: var(--font-size-xs);
+    }
+    
+    /* Modals */
+    .modal {
+        padding: var(--spacing-2);
+    }
+    
+    .modal-content {
+        border-radius: var(--radius-lg);
+    }
+    
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: var(--spacing-3);
+    }
+    
+    .modal-title {
+        font-size: var(--font-size-base);
+    }
+    
+    .modal-layout,
+    .settings-modal-layout,
+    .tutorial-layout {
+        flex-direction: column;
+    }
+    
+    .modal-sidebar,
+    .settings-sidebar,
+    .tutorial-sidebar {
+        width: 100%;
+        max-height: 200px;
+        border-left: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    /* Game Screen */
+    .game-table {
+        min-height: 400px;
+    }
+    
+    .table-surface {
+        aspect-ratio: 3 / 4;
+        padding: var(--spacing-3);
+    }
+    
+    .player-name {
+        max-width: 70px;
+        font-size: 10px;
+    }
+    
+    .player-cards-count {
+        font-size: 10px;
+        padding: 2px 6px;
+    }
+    
+    .game-scoreboard {
+        top: calc(var(--header-height) + var(--spacing-2));
+        padding: var(--spacing-1) var(--spacing-2);
+        gap: var(--spacing-2);
+    }
+    
+    .score-value {
+        font-size: var(--font-size-lg);
+    }
+    
+    .team-name {
+        font-size: 10px;
+    }
+    
+    .trick-area {
+        width: 200px;
+        height: 200px;
+    }
+    
+    /* Cards */
+    .card {
+        width: 60px;
+        height: 90px;
+    }
+    
+    .card-rank {
+        font-size: var(--font-size-base);
+    }
+    
+    .card-center {
+        font-size: 2rem;
+    }
+    
+    .hand-container {
+        min-height: 110px;
+    }
+    
+    .hand-cards {
+        height: 110px;
+    }
+    
+    /* OTP Inputs */
+    .otp-input {
+        width: 44px;
+        height: 56px;
+        font-size: var(--font-size-xl);
+    }
+    
+    /* Auth */
+    .auth-container {
+        padding: var(--spacing-5);
+    }
+    
+    .auth-title {
+        font-size: var(--font-size-xl);
+    }
+    
+    .avatar-selector {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    /* Toast */
+    .toast-container {
+        left: var(--spacing-2) !important;
+        right: var(--spacing-2) !important;
+        max-width: calc(100% - var(--spacing-4));
+    }
+    
+    .toast {
+        min-width: 100%;
+        padding: var(--spacing-3);
+    }
+    
+    .toast-title {
+        font-size: var(--font-size-sm);
+    }
+    
+    .toast-message {
+        font-size: var(--font-size-xs);
+    }
+    
+    /* Buttons */
+    .btn {
+        min-height: 40px;
+        padding: var(--spacing-2) var(--spacing-3);
+    }
+    
+    .btn-large {
+        min-height: 44px;
+    }
+    
+    /* Forms */
+    .input-field {
+        min-height: 44px;
+        padding: var(--spacing-2) var(--spacing-3);
+    }
+    
+    .form-group {
+        margin-bottom: var(--spacing-4);
+    }
+    
+    /* Daily Reward */
+    .reward-days {
+        grid-template-columns: repeat(7, 1fr);
+        gap: var(--spacing-1);
+    }
+    
+    .day-number,
+    .day-reward {
+        font-size: 10px;
+    }
+    
+    /* Chat Widget */
+    .chat-widget {
+        width: calc(100vw - var(--spacing-4));
+        left: var(--spacing-2);
+        right: var(--spacing-2);
+    }
+    
+    /* Pagination */
+    .pagination-item {
+        min-width: 36px;
+        height: 36px;
+        padding: 0 var(--spacing-2);
+    }
+    
+    /* Stepper */
+    .stepper {
+        flex-direction: column;
+        gap: var(--spacing-3);
+    }
+    
+    .step {
+        flex-direction: column;
+        gap: var(--spacing-2);
+    }
+    
+    .step:not(:last-child)::after {
+        display: none;
+    }
+    
+    /* Category Buttons */
+    .category-btn {
+        min-width: 70px;
+        padding: var(--spacing-2);
+    }
+    
+    .category-icon {
+        font-size: var(--font-size-xl);
+    }
+    
+    .category-text {
+        font-size: 10px;
+    }
+    
+    /* Quick Links */
+    .quick-links {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-2);
+    }
+    
+    .quick-link {
+        padding: var(--spacing-3);
+    }
+    
+    .quick-link-icon {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .quick-link-text {
+        font-size: var(--font-size-xs);
+    }
+    
+    /* Trump Selection */
+    .trump-options {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-2);
+    }
+    
+    .trump-option {
+        padding: var(--spacing-3);
+    }
+    
+    .suit-icon {
+        font-size: 2rem;
+    }
+    
+    /* Last Trick Panel */
+    .last-trick-panel {
+        width: 240px;
+    }
+    
+    /* Game Chat */
+    .game-chat-panel {
+        width: calc(100vw - var(--spacing-4));
+        left: var(--spacing-2);
+        right: var(--spacing-2);
+    }
+}
+
+/* ============================================================
+   بخش ۳: Small Devices (576px - 767px)
+   ============================================================ */
+
+/* موبایل بزرگ - آیفون‌های معمولی */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .container {
+        max-width: var(--container-sm);
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .game-modes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .rewards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .quick-links {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .modal-sidebar,
+    .settings-sidebar,
+    .tutorial-sidebar {
+        width: 200px;
+    }
+    
+    .trump-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .card {
+        width: 70px;
+        height: 105px;
+    }
+    
+    .trick-area {
+        width: 240px;
+        height: 240px;
+    }
+}
+
+/* ============================================================
+   بخش ۴: Medium Devices - Tablets (768px - 991px)
+   ============================================================ */
+
+/* تبلت */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .container {
+        max-width: var(--container-md);
+    }
+    
+    /* Typography */
+    :root {
+        --font-size-base: 1rem;
+    }
+    
+    /* Spacing */
+    :root {
+        --spacing-4: 1rem;
+        --spacing-6: 1.5rem;
+        --spacing-8: 2rem;
+    }
+    
+    /* Header */
+    .brand-text {
+        display: inline;
+    }
+    
+    /* Main Content */
+    .app-main {
+        padding: var(--spacing-5);
+    }
+    
+    /* Screen Header */
+    .screen-title {
+        font-size: var(--font-size-2xl);
+    }
+    
+    /* Hero Section */
+    .hero {
+        padding: var(--spacing-8) var(--spacing-6);
+    }
+    
+    .hero-title {
+        font-size: var(--font-size-3xl);
+    }
+    
+    /* Stats Grid */
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    /* Game Modes Grid */
+    .game-modes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Rewards Grid */
+    .rewards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Achievements List */
+    .achievements-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Leaderboard */
+    .leaderboard-podium {
+        padding: var(--spacing-6) var(--spacing-4);
+    }
+    
+    .podium-base.first-place {
+        height: 90px;
+    }
+    
+    .podium-base.second-place {
+        height: 70px;
+    }
+    
+    .podium-base.third-place {
+        height: 50px;
+    }
+    
+    /* Modals */
+    .modal-content {
+        max-width: 90%;
+    }
+    
+    .settings-sidebar,
+    .tutorial-sidebar {
+        width: 220px;
+    }
+    
+    /* Game Screen */
+    .table-surface {
+        max-width: 700px;
+    }
+    
+    .card {
+        width: var(--card-width);
+        height: var(--card-height);
+    }
+    
+    .trick-area {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .player-name {
+        max-width: 90px;
+    }
+    
+    /* Tabs */
+    .tabs-container {
+        padding: var(--spacing-2);
+    }
+    
+    .tab-btn {
+        padding: var(--spacing-3) var(--spacing-4);
+    }
+    
+    /* Category Buttons */
+    .category-btn {
+        min-width: 90px;
+    }
+    
+    /* Quick Links */
+    .quick-links {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    /* Trump Selection */
+    .trump-options {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    /* Last Trick Panel */
+    .last-trick-panel {
+        width: 260px;
+    }
+    
+    /* Chat Widget */
+    .chat-widget {
+        width: 320px;
+    }
+}
+
+/* ============================================================
+   بخش ۵: Large Devices - Desktops (992px - 1199px)
+   ============================================================ */
+
+/* دسکتاپ */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .container {
+        max-width: var(--container-lg);
+    }
+    
+    /* Sidebar */
+    .app-sidebar {
+        transform: translateX(0);
+    }
+    
+    .sidebar-overlay {
+        display: none;
+    }
+    
+    .app-main {
+        margin-right: var(--sidebar-width);
+        padding: var(--spacing-6);
+    }
+    
+    /* Bottom Navigation */
+    .app-bottom-nav {
+        display: none;
+    }
+    
+    .app-main {
+        margin-bottom: 0;
+    }
+    
+    /* Stats Grid */
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    /* Game Modes Grid */
+    .game-modes-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    /* Rewards Grid */
+    .rewards-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    /* Achievements List */
+    .achievements-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Game Screen */
+    .table-surface {
+        max-width: 800px;
+    }
+    
+    .card {
+        width: var(--card-width);
+        height: var(--card-height);
+    }
+    
+    .trick-area {
+        width: 320px;
+        height: 320px;
+    }
+    
+    .player-name {
+        max-width: 100px;
+    }
+    
+    /* Quick Links */
+    .quick-links {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    /* Modals */
+    .modal-content {
+        max-width: var(--modal-width-lg);
+    }
+    
+    .settings-sidebar,
+    .tutorial-sidebar {
+        width: 240px;
+    }
+}
+
+/* ============================================================
+   بخش ۶: Extra Large Devices - Large Desktops (1200px - 1399px)
+   ============================================================ */
+
+/* دسکتاپ بزرگ */
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+    .container {
+        max-width: var(--container-xl);
+    }
+    
+    /* Stats Grid */
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+    
+    /* Game Modes Grid */
+    .game-modes-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    /* Rewards Grid */
+    .rewards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    
+    /* Achievements List */
+    .achievements-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    /* Game Screen */
+    .table-surface {
+        max-width: 900px;
+    }
+    
+    .card {
+        width: var(--card-width-lg);
+        height: var(--card-height-lg);
+    }
+    
+    .trick-area {
+        width: 360px;
+        height: 360px;
+    }
+    
+    .player-name {
+        max-width: 120px;
+    }
+    
+    /* Quick Links */
+    .quick-links {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    
+    /* Modals */
+    .modal-large {
+        max-width: var(--modal-width-lg);
+    }
+    
+    .modal-xlarge {
+        max-width: var(--modal-width-xl);
+    }
+}
+
+/* ============================================================
+   بخش ۷: Extra Extra Large Devices (≥ 1400px)
+   ============================================================ */
+
+/* دسکتاپ خیلی بزرگ */
+@media (min-width: 1400px) {
+    .container {
+        max-width: var(--container-2xl);
+        padding-left: var(--spacing-8);
+        padding-right: var(--spacing-8);
+    }
+    
+    /* Stats Grid */
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: var(--spacing-5);
+    }
+    
+    /* Game Modes Grid */
+    .game-modes-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--spacing-5);
+    }
+    
+    /* Rewards Grid */
+    .rewards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: var(--spacing-5);
+    }
+    
+    /* Achievements List */
+    .achievements-list {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+    
+    /* Game Screen */
+    .table-surface {
+        max-width: 1000px;
+    }
+    
+    .card {
+        width: 100px;
+        height: 150px;
+    }
+    
+    .card-rank {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .card-center {
+        font-size: 4rem;
+    }
+    
+    .trick-area {
+        width: 400px;
+        height: 400px;
+    }
+    
+    .player-name {
+        max-width: 140px;
+        font-size: var(--font-size-sm);
+    }
+    
+    /* Quick Links */
+    .quick-links {
+        grid-template-columns: repeat(6, 1fr);
+    }
+    
+    /* Modals */
+    .modal-xlarge {
+        max-width: 1100px;
+    }
+    
+    .settings-sidebar,
+    .tutorial-sidebar {
+        width: 260px;
+    }
+}
+
+/* ============================================================
+   بخش ۸: Landscape Orientation
+   ============================================================ */
+
+/* حالت افقی - موبایل */
+@media (orientation: landscape) and (max-height: 500px) {
+    :root {
+        --header-height: 50px;
+        --bottom-nav-height: 56px;
+    }
+    
+    /* Hero Section */
+    .hero {
+        padding: var(--spacing-4) var(--spacing-3);
+    }
+    
+    .hero-title {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .hero-stats {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    /* Main Content */
+    .app-main {
+        padding-top: var(--spacing-2);
+        padding-bottom: var(--spacing-2);
+    }
+    
+    /* Game Screen */
+    .game-table {
+        min-height: 300px;
+    }
+    
+    .table-surface {
+        aspect-ratio: 16 / 9;
+        max-height: calc(100vh - var(--header-height) - var(--bottom-nav-height) - var(--spacing-4));
+    }
+    
+    .player-hand-area {
+        position: relative;
+        bottom: auto;
+        padding: var(--spacing-2);
+    }
+    
+    .hand-container {
+        min-height: 100px;
+    }
+    
+    .hand-cards {
+        height: 100px;
+    }
+    
+    .game-scoreboard {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        margin: var(--spacing-2) auto;
+    }
+    
+    /* Stats Grid */
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+    
+    /* Modals */
+    .modal-content {
+        max-height: 90vh;
+    }
+    
+    .modal-body {
+        max-height: calc(90vh - 120px);
+    }
+    
+    /* Auth */
+    .auth-container {
+        max-width: 600px;
+        padding: var(--spacing-4);
+    }
+    
+    .auth-progress {
+        margin-bottom: var(--spacing-4);
+    }
+}
+
+/* ============================================================
+   بخش ۹: Safe Areas (Notch Devices)
+   ============================================================ */
+
+@supports (padding: max(0px)) {
+    /* Header */
+    .app-header {
+        padding-top: max(var(--safe-area-top), 0px);
+    }
+    
+    .header-content {
+        padding-left: max(var(--safe-area-left), var(--spacing-4));
+        padding-right: max(var(--safe-area-right), var(--spacing-4));
+    }
+    
+    /* Bottom Navigation */
+    .app-bottom-nav {
+        padding-bottom: max(var(--safe-area-bottom), 0px);
+    }
+    
+    /* Main Content */
+    .app-main {
+        padding-left: max(var(--safe-area-left), var(--spacing-4));
+        padding-right: max(var(--safe-area-right), var(--spacing-4));
+    }
+    
+    /* Sidebar */
+    .app-sidebar {
+        padding-top: max(var(--safe-area-top), 0px);
+        padding-bottom: max(var(--safe-area-bottom), 0px);
+    }
+    
+    /* Modals */
+    .modal {
+        padding-top: max(var(--safe-area-top), var(--spacing-4));
+        padding-bottom: max(var(--safe-area-bottom), var(--spacing-4));
+        padding-left: max(var(--safe-area-left), var(--spacing-4));
+        padding-right: max(var(--safe-area-right), var(--spacing-4));
+    }
+    
+    /* Toast Container */
+    .toast-container-top-right {
+        top: calc(var(--header-height) + max(var(--safe-area-top), var(--spacing-2)));
+        right: max(var(--safe-area-right), var(--spacing-4));
+    }
+    
+    .toast-container-top-left {
+        top: calc(var(--header-height) + max(var(--safe-area-top), var(--spacing-2)));
+        left: max(var(--safe-area-left), var(--spacing-4));
+    }
+    
+    .toast-container-bottom-right {
+        bottom: calc(var(--bottom-nav-height) + max(var(--safe-area-bottom), var(--spacing-2)));
+        right: max(var(--safe-area-right), var(--spacing-4));
+    }
+    
+    .toast-container-bottom-left {
+        bottom: calc(var(--bottom-nav-height) + max(var(--safe-area-bottom), var(--spacing-2)));
+        left: max(var(--safe-area-left), var(--spacing-4));
+    }
+    
+    /* Game Elements */
+    .game-scoreboard {
+        top: calc(var(--header-height) + max(var(--safe-area-top), var(--spacing-3)));
+    }
+    
+    .player-hand-area {
+        bottom: calc(var(--bottom-nav-height) + max(var(--safe-area-bottom), 0px));
+    }
+    
+    /* Floating Elements */
+    .btn-scroll-top {
+        bottom: calc(var(--bottom-nav-height) + max(var(--safe-area-bottom), var(--spacing-4)));
+        right: max(var(--safe-area-right), var(--spacing-4));
+    }
+    
+    .chat-widget {
+        bottom: calc(var(--bottom-nav-height) + max(var(--safe-area-bottom), var(--spacing-4)));
+        left: max(var(--safe-area-left), var(--spacing-4));
+    }
+}
+
+/* ============================================================
+   بخش ۱۰: High DPI Displays (Retina)
+   ============================================================ */
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* Thinner borders for high DPI */
+    .app-header,
+    .app-bottom-nav,
+    .card,
+    .modal-content,
+    .toast {
+        border-width: 0.5px;
+    }
+    
+    /* Sharper shadows */
+    .card,
+    .modal-content {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    }
+    
+    /* Better text rendering */
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio: 3), (min-resolution: 288dpi) {
+    /* Even thinner borders for very high DPI */
+    .app-header,
+    .app-bottom-nav,
+    .card,
+    .modal-content,
+    .toast {
+        border-width: 0.33px;
+    }
+}
+
+/* ============================================================
+   بخش ۱۱: Print Styles
+   ============================================================ */
+
+@media print {
+    /* Hide non-printable elements */
+    .app-header,
+    .app-sidebar,
+    .app-bottom-nav,
+    .sidebar-overlay,
+    .chat-widget,
+    .btn-scroll-top,
+    .connection-status,
+    .modal-container,
+    .toast-container,
+    .game-top-bar,
+    .game-scoreboard,
+    .player-hand-area,
+    .game-chat-panel,
+    .game-menu-overlay,
+    .trump-selection-area,
+    .kot-declaration-area,
+    .game-result-overlay,
+    .tabs-container,
+    .pagination,
+    .stepper,
+    .breadcrumb,
+    .filter-chips,
+    .dropdown-menu,
+    .btn,
+    .file-upload-area,
+    .search-wrapper,
+    .accordion-content {
+        display: none !important;
+    }
+    
+    /* Reset backgrounds and colors */
+    * {
+        background: transparent !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+    
+    /* Body */
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+    }
+    
+    /* Container */
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+    
+    /* Main Content */
+    .app-main {
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Links */
+    a,
+    a:visited {
+        text-decoration: underline;
+        color: #000 !important;
+    }
+    
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        color: #666 !important;
+    }
+    
+    /* Images */
+    img {
+        page-break-inside: avoid;
+        max-width: 100% !important;
+    }
+    
+    /* Headings */
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+        page-break-inside: avoid;
+    }
+    
+    /* Paragraphs */
+    p {
+        orphans: 3;
+        widows: 3;
+    }
+    
+    /* Cards */
+    .card,
+    .stat-card,
+    .match-card,
+    .friend-card,
+    .event-card {
+        border: 1px solid #000 !important;
+        page-break-inside: avoid;
+    }
+    
+    /* Tables */
+    table {
+        border-collapse: collapse;
+    }
+    
+    table, th, td {
+        border: 1px solid #000 !important;
+    }
+    
+    /* Screens */
+    .screen {
+        page-break-inside: avoid;
+    }
+    
+    /* Game Table */
+    .screen-game {
+        background: #fff !important;
+    }
+    
+    .table-surface {
+        background: #fff !important;
+        border: 2px solid #000 !important;
+    }
+}
+
+/* ============================================================
+   بخش ۱۲: Accessibility - Reduced Motion
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    /* Disable all animations */
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    /* Specific elements */
+    .screen {
+        animation: none;
+    }
+    
+    .card,
+    .stat-card,
+    .match-card,
+    .friend-card,
+    .event-card,
+    .mission-card,
+    .achievement-card,
+    .leaderboard-item {
+        transition: none;
+    }
+    
+    .card:hover,
+    .stat-card:hover,
+    .match-card:hover,
+    .friend-card:hover,
+    .event-card:hover {
+        transform: none;
+    }
+    
+    .btn:hover {
+        transform: none;
+    }
+    
+    .modal-content {
+        animation: none;
+    }
+    
+    .toast {
+        animation: none;
+    }
+    
+    .player-info.active {
+        animation: none;
+    }
+    
+    .trump-indicator {
+        animation: none;
+    }
+    
+    .game-timer.warning,
+    .game-timer.danger {
+        animation: none;
+    }
+    
+    .online-indicator.in-game {
+        animation: none;
+    }
+    
+    .crown-icon {
+        animation: none;
+    }
+    
+    .confetti {
+        display: none;
+    }
+}
+
+/* ============================================================
+   بخش ۱۳: Accessibility - High Contrast
+   ============================================================ */
+
+@media (prefers-contrast: high) {
+    /* Increase border widths */
+    .card,
+    .modal-content,
+    .toast,
+    .btn,
+    .input-field {
+        border-width: 2px;
+    }
+    
+    /* Increase text contrast */
+    .text-secondary {
+        color: var(--text-primary);
+    }
+    
+    .text-tertiary {
+        color: var(--text-secondary);
+    }
+    
+    /* Increase focus indicators */
+    *:focus-visible {
+        outline-width: 3px;
+        outline-offset: 3px;
+    }
+    
+    /* Increase badge contrast */
+    .badge {
+        border: 1px solid currentColor;
+    }
+    
+    /* Increase link contrast */
+    a {
+        text-decoration: underline;
+    }
+    
+    /* Increase button contrast */
+    .btn-outline {
+        border-width: 2px;
+    }
+    
+    /* Increase card hover contrast */
+    .card:hover,
+    .stat-card:hover {
+        border-width: 2px;
+    }
+    
+    /* Increase match card contrast */
+    .match-card.win,
+    .match-card.lose {
+        border-width: 3px;
+    }
+    
+    /* Increase achievement card contrast */
+    .achievement-card.unlocked {
+        border-width: 3px;
+    }
+    
+    /* Increase player active contrast */
+    .player-info.active {
+        border-width: 3px;
+    }
+}
+
+/* ============================================================
+   بخش ۱۴: Accessibility - Dark Mode Preference
+   ============================================================ */
+
+@media (prefers-color-scheme: dark) {
+    /* Auto theme should use dark mode */
+    [data-theme="auto"] {
+        color-scheme: dark;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    /* Auto theme should use light mode */
+    [data-theme="auto"] {
+        color-scheme: light;
+    }
+}
+
+/* ============================================================
+   بخش ۱۵: Touch Devices
+   ============================================================ */
+
+@media (pointer: coarse) {
+    /* Increase touch targets */
+    button,
+    a,
+    input[type="button"],
+    input[type="submit"],
+    [role="button"] {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Increase icon buttons */
+    .btn-icon {
+        width: 44px;
+        height: 44px;
+    }
+    
+    .btn-icon.btn-small {
+        width: 40px;
+        height: 40px;
+    }
+    
+    /* Increase tab buttons */
+    .tab-btn {
+        min-height: 48px;
+    }
+    
+    /* Increase navigation items */
+    .bottom-nav-item {
+        min-height: 48px;
+    }
+    
+    .sidebar-link {
+        min-height: 48px;
+    }
+    
+    /* Increase card clickable areas */
+    .card,
+    .stat-card,
+    .match-card,
+    .friend-card,
+    .event-card {
+        cursor: pointer;
+    }
+    
+    /* Increase form elements */
+    .checkbox-input,
+    .radio-input {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .switch {
+        width: 52px;
+        height: 28px;
+    }
+}
+
+/* Mouse devices */
+@media (pointer: fine) {
+    /* Hover effects only for mouse */
+    .card:hover,
+    .stat-card:hover,
+    .match-card:hover,
+    .friend-card:hover,
+    .event-card:hover {
+        transform: translateY(-2px);
+    }
+    
+    .btn:hover {
+        transform: translateY(-1px);
+    }
+}
+
+/* ============================================================
+   بخش ۱۶: Hover Capable Devices
+   ============================================================ */
+
+@media (hover: hover) {
+    /* Show tooltips on hover */
+    .tooltip:hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
+    }
+    
+    /* Show dropdowns on hover */
+    .dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    
+    /* Hover effects */
+    .card:hover,
+    .stat-card:hover,
+    .match-card:hover,
+    .friend-card:hover,
+    .event-card:hover {
+        background-color: var(--card-bg-hover);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-dark-md);
+    }
+    
+    .btn:hover {
+        transform: translateY(-1px);
+    }
+    
+    .quick-link:hover {
+        transform: translateY(-2px);
+    }
+}
+
+/* Non-hover devices (touch) */
+@media (hover: none) {
+    /* Disable hover effects */
+    .card:hover,
+    .stat-card:hover,
+    .match-card:hover,
+    .friend-card:hover,
+    .event-card:hover {
+        transform: none;
+    }
+    
+    .btn:hover {
+        transform: none;
+    }
+    
+    /* Show active states instead */
+    .card:active,
+    .stat-card:active,
+    .match-card:active,
+    .friend-card:active,
+    .event-card:active {
+        background-color: var(--card-bg-hover);
+        transform: scale(0.98);
+    }
+    
+    .btn:active {
+        transform: scale(0.98);
+    }
+}
+
+/* ============================================================
+   بخش ۱۷: Orientation Changes
+   ============================================================ */
+
+/* Portrait */
+@media (orientation: portrait) {
+    .hero-stats {
+        flex-direction: column;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .game-modes-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Landscape */
+@media (orientation: landscape) {
+    .hero-stats {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    
+    .game-modes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ============================================================
+   بخش ۱۸: Viewport Height Issues (Mobile Browsers)
+   ============================================================ */
+
+/* Fix for mobile browsers that hide/show address bar */
+@supports (height: 100dvh) {
+    .app-container {
+        min-height: 100dvh;
+    }
+    
+    .app-shell {
+        min-height: 100dvh;
+    }
+    
+    .screen {
+        min-height: 100dvh;
+    }
+    
+    .modal-full {
+        max-height: calc(100dvh - var(--spacing-4));
+        height: calc(100dvh - var(--spacing-4));
+    }
+}
+
+/* Fallback for browsers that don't support dvh */
+@supports not (height: 100dvh) {
+    .app-container {
+        min-height: 100vh;
+    }
+    
+    .app-shell {
+        min-height: 100vh;
+    }
+    
+    .screen {
+        min-height: 100vh;
+    }
+}
+
+/* ============================================================
+   بخش ۱۹: Responsive Typography
+   ============================================================ */
+
+/* Fluid typography */
+@media (min-width: 768px) {
+    html {
+        font-size: clamp(14px, 1vw + 12px, 16px);
+    }
+}
+
+@media (min-width: 1200px) {
+    html {
+        font-size: clamp(15px, 0.8vw + 12px, 18px);
+    }
+}
+
+/* ============================================================
+   بخش ۲۰: Responsive Spacing
+   ============================================================ */
+
+/* Increase spacing on larger screens */
+@media (min-width: 1200px) {
+    :root {
+        --spacing-4: 1.25rem;
+        --spacing-6: 1.75rem;
+        --spacing-8: 2.5rem;
+    }
+}
+
+@media (min-width: 1400px) {
+    :root {
+        --spacing-4: 1.5rem;
+        --spacing-6: 2rem;
+        --spacing-8: 3rem;
+    }
+}
+
+/* ============================================================
+   بخش ۲۱: Responsive Grid
+   ============================================================ */
+
+/* Auto-fit grids */
+@media (min-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+    
+    .game-modes-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    
+    .rewards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+}
+
+@media (min-width: 1200px) {
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+    
+    .game-modes-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    
+    .rewards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+}
+
+/* ============================================================
+   بخش ۲۲: Responsive Components
+   ============================================================ */
+
+/* Modal responsive sizes */
+@media (max-width: 768px) {
+    .modal-small,
+    .modal-medium,
+    .modal-large,
+    .modal-xlarge {
+        max-width: 100%;
+    }
+    
+    .modal-full {
+        max-width: 100%;
+        max-height: 100vh;
+        height: 100vh;
+        border-radius: 0;
+    }
+}
+
+/* Table responsive */
+@media (max-width: 768px) {
+    .table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+/* Form responsive */
+@media (max-width: 768px) {
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .form-actions .btn {
+        width: 100%;
+    }
+}
+
+/* ============================================================
+   بخش ۲۳: Responsive Images
+   ============================================================ */
+
+/* Responsive images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Responsive videos */
+video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Responsive iframes */
+iframe {
+    max-width: 100%;
+}
+
+/* Responsive embeds */
+.responsive-embed {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+}
+
+.responsive-embed iframe,
+.responsive-embed object,
+.responsive-embed embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* ============================================================
+   بخش ۲۴: Responsive Utilities
+   ============================================================ */
+
+/* Display utilities */
+.d-none { display: none !important; }
+.d-block { display: block !important; }
+.d-flex { display: flex !important; }
+.d-grid { display: grid !important; }
+.d-inline { display: inline !important; }
+.d-inline-block { display: inline-block !important; }
+.d-inline-flex { display: inline-flex !important; }
+
+/* Responsive display */
+@media (max-width: 575.98px) {
+    .d-xs-none { display: none !important; }
+    .d-xs-block { display: block !important; }
+    .d-xs-flex { display: flex !important; }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .d-sm-none { display: none !important; }
+    .d-sm-block { display: block !important; }
+    .d-sm-flex { display: flex !important; }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .d-md-none { display: none !important; }
+    .d-md-block { display: block !important; }
+    .d-md-flex { display: flex !important; }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .d-lg-none { display: none !important; }
+    .d-lg-block { display: block !important; }
+    .d-lg-flex { display: flex !important; }
+}
+
+@media (min-width: 1200px) {
+    .d-xl-none { display: none !important; }
+    .d-xl-block { display: block !important; }
+    .d-xl-flex { display: flex !important; }
+}
+
+/* Text alignment responsive */
+@media (max-width: 575.98px) {
+    .text-xs-left { text-align: left !important; }
+    .text-xs-center { text-align: center !important; }
+    .text-xs-right { text-align: right !important; }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .text-sm-left { text-align: left !important; }
+    .text-sm-center { text-align: center !important; }
+    .text-sm-right { text-align: right !important; }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .text-md-left { text-align: left !important; }
+    .text-md-center { text-align: center !important; }
+    .text-md-right { text-align: right !important; }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .text-lg-left { text-align: left !important; }
+    .text-lg-center { text-align: center !important; }
+    .text-lg-right { text-align: right !important; }
+}
+
+@media (min-width: 1200px) {
+    .text-xl-left { text-align: left !important; }
+    .text-xl-center { text-align: center !important; }
+    .text-xl-right { text-align: right !important; }
+}
+
+/* ============================================================
+   بخش ۲۵: Print Utilities
+   ============================================================ */
+
+@media print {
+    .d-print-none { display: none !important; }
+    .d-print-block { display: block !important; }
+    .d-print-flex { display: flex !important; }
+    .d-print-grid { display: grid !important; }
+}
+
+/* ============================================================
+   بخش ۲۶: Responsive Game Elements
+   ============================================================ */
+
+/* Game table responsive */
+@media (max-width: 768px) {
+    .table-surface {
+        padding: var(--spacing-4);
+    }
+    
+    .opponent-area {
+        padding: var(--spacing-1);
+    }
+    
+    .player-info {
+        padding: var(--spacing-1) var(--spacing-2);
+    }
+}
+
+@media (min-width: 1200px) {
+    .table-surface {
+        padding: var(--spacing-8);
+    }
+    
+    .opponent-area {
+        padding: var(--spacing-3);
+    }
+    
+    .player-info {
+        padding: var(--spacing-3) var(--spacing-4);
+    }
+}
+
+/* Cards responsive */
+@media (max-width: 575.98px) {
+    .card {
+        width: 55px;
+        height: 82px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .card {
+        width: 65px;
+        height: 97px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .card {
+        width: 110px;
+        height: 165px;
+    }
+}
+
+/* ============================================================
+   بخش ۲۷: Responsive Navigation
+   ============================================================ */
+
+/* Sidebar responsive */
+@media (max-width: 991.98px) {
+    .app-sidebar {
+        transform: translateX(100%);
+    }
+    
+    .app-sidebar.open {
+        transform: translateX(0);
+    }
+}
+
+@media (min-width: 992px) {
+    .app-sidebar {
+        transform: translateX(0);
+    }
+    
+    .sidebar-overlay {
+        display: none;
+    }
+    
+    .app-main {
+        margin-right: var(--sidebar-width);
+    }
+}
+
+/* Bottom nav responsive */
+@media (min-width: 992px) {
+    .app-bottom-nav {
+        display: none;
+    }
+    
+    .app-main {
+        margin-bottom: 0;
+    }
+}
+
+/* ============================================================
+   بخش ۲۸: Responsive Modals
+   ============================================================ */
+
+/* Modal responsive */
+@media (max-width: 768px) {
+    .modal {
+        align-items: flex-end;
+    }
+    
+    .modal-content {
+        border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        animation: modalSlideUpMobile var(--transition-normal) var(--easing-ease-out);
+    }
+    
+    @keyframes modalSlideUpMobile {
+        from {
+            transform: translateY(100%);
+        }
+        to {
+            transform: translateY(0);
+        }
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+        gap: var(--spacing-2);
+    }
+    
+    .footer-actions {
+        width: 100%;
+        justify-content: stretch;
+    }
+    
+    .footer-actions .btn {
+        flex: 1;
+    }
+}
+
+/* ============================================================
+   بخش ۲۹: Responsive Forms
+   ============================================================ */
+
+/* Form responsive */
+@media (max-width: 768px) {
+    .form-group {
+        margin-bottom: var(--spacing-4);
+    }
+    
+    .input-field {
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+    
+    .otp-input {
+        width: 48px;
+        height: 60px;
+    }
+}
+
+@media (min-width: 768px) {
+    .form-group {
+        margin-bottom: var(--spacing-5);
+    }
+}
+
+/* ============================================================
+   بخش ۳۰: Responsive Animations
+   ============================================================ */
+
+/* Disable animations on low-end devices */
+@media (max-width: 575.98px) {
+    .card:hover,
+    .stat-card:hover,
+    .match-card:hover,
+    .friend-card:hover,
+    .event-card:hover {
+        transition: none;
+    }
+    
+    .btn:hover {
+        transition: none;
+    }
+}
+
+/* Reduce animations on mobile */
+@media (max-width: 768px) {
+    .confetti {
+        display: none;
+    }
+    
+    .animate-float,
+    .animate-pulse,
+    .animate-bounce {
+        animation-duration: 3s;
+    }
+}
+
+/* ============================================================
+   بخش ۳۱: Responsive Scrollbar
+   ============================================================ */
+
+/* Custom scrollbar for different screen sizes */
+@media (max-width: 768px) {
+    ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+}
+
+@media (min-width: 1200px) {
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+}
+
+/* ============================================================
+   بخش ۳۲: Responsive Shadows
+   ============================================================ */
+
+/* Reduce shadows on mobile for performance */
+@media (max-width: 768px) {
+    .card,
+    .stat-card,
+    .match-card,
+    .friend-card,
+    .event-card {
+        box-shadow: var(--shadow-dark-sm);
+    }
+    
+    .modal-content {
+        box-shadow: var(--shadow-dark-lg);
+    }
+    
+    .toast {
+        box-shadow: var(--shadow-dark-md);
+    }
+}
+
+@media (min-width: 1200px) {
+    .card,
+    .stat-card,
+    .match-card,
+    .friend-card,
+    .event-card {
+        box-shadow: var(--shadow-dark-md);
+    }
+    
+    .card:hover,
+    .stat-card:hover,
+    .match-card:hover,
+    .friend-card:hover,
+    .event-card:hover {
+        box-shadow: var(--shadow-dark-lg);
+    }
+    
+    .modal-content {
+        box-shadow: var(--shadow-dark-xl);
+    }
+    
+    .toast {
+        box-shadow: var(--shadow-dark-lg);
+    }
+}
+
+/* ============================================================
+   بخش ۳۳: Responsive Borders
+   ============================================================ */
+
+/* Adjust border radius for different screen sizes */
+@media (max-width: 575.98px) {
+    :root {
+        --radius-lg: 0.625rem;
+        --radius-xl: 0.875rem;
+        --radius-2xl: 1.25rem;
+        --radius-3xl: 1.5rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    :root {
+        --radius-lg: 0.875rem;
+        --radius-xl: 1.125rem;
+        --radius-2xl: 1.75rem;
+        --radius-3xl: 2.25rem;
+    }
+}
+
+/* ============================================================
+   بخش ۳۴: Responsive Opacity
+   ============================================================ */
+
+/* Reduce opacity effects on mobile for performance */
+@media (max-width: 768px) {
+    .card:hover,
+    .stat-card:hover,
+    .match-card:hover,
+    .friend-card:hover,
+    .event-card:hover {
+        opacity: 1;
+    }
+}
+
+/* ============================================================
+   بخش ۳۵: Responsive Z-Index
+   ============================================================ */
+
+/* Adjust z-index for mobile */
+@media (max-width: 768px) {
+    .app-header {
+        z-index: calc(var(--z-index-sticky) + 10);
+    }
+    
+    .app-bottom-nav {
+        z-index: calc(var(--z-index-sticky) + 10);
+    }
+    
+    .modal {
+        z-index: calc(var(--z-index-modal) + 20);
+    }
+    
+    .toast-container {
+        z-index: calc(var(--z-index-toast) + 20);
+    }
+}
+
+/* ============================================================
+   بخش ۳۶: Responsive Font Families
+   ============================================================ */
+
+/* Use system fonts on mobile for better performance */
+@media (max-width: 768px) {
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Vazirmatn', 'Tahoma', sans-serif;
+    }
+}
+
+/* ============================================================
+   بخش ۳۷: Responsive Line Heights
+   ============================================================ */
+
+/* Adjust line heights for different screen sizes */
+@media (max-width: 768px) {
+    :root {
+        --line-height-normal: 1.6;
+        --line-height-relaxed: 1.7;
+    }
+}
+
+@media (min-width: 1200px) {
+    :root {
+        --line-height-normal: 1.5;
+        --line-height-relaxed: 1.625;
+    }
+}
+
+/* ============================================================
+   بخش ۳۸: Responsive Letter Spacing
+   ============================================================ */
+
+/* Adjust letter spacing for different screen sizes */
+@media (max-width: 768px) {
+    :root {
+        --letter-spacing-normal: 0.01em;
+        --letter-spacing-wide: 0.03em;
+    }
+}
+
+@media (min-width: 1200px) {
+    :root {
+        --letter-spacing-normal: 0;
+        --letter-spacing-wide: 0.025em;
+    }
+}
+
+/* ============================================================
+   بخش ۳۹: Responsive Transitions
+   ============================================================ */
+
+/* Reduce transition durations on mobile for better performance */
+@media (max-width: 768px) {
+    :root {
+        --transition-fastest: 80ms;
+        --transition-fast: 120ms;
+        --transition-normal: 200ms;
+        --transition-slow: 300ms;
+        --transition-slower: 450ms;
+    }
+}
+
+/* ============================================================
+   بخش ۴۰: Final Responsive Checks
+   ============================================================ */
+
+/* Ensure proper rendering on all devices */
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Prevent horizontal scroll */
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+/* Ensure proper box sizing */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Smooth scrolling */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+/* Focus visible for keyboard navigation */
+*:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Remove focus outline for mouse users */
+*:focus:not(:focus-visible) {
+    outline: none;
+}
