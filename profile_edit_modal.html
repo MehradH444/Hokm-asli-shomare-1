@@ -1,0 +1,717 @@
+<div id="profile-edit-modal" class="modal modal-medium" data-modal-name="profile-edit" style="display: none;">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-header-right">
+                <span class="modal-icon">✏️</span>
+                <h3 class="modal-title">ویرایش پروفایل</h3>
+            </div>
+            <div class="modal-header-left">
+                <button class="btn-icon btn-small btn-close-modal" id="btn-close-profile-edit" aria-label="بستن">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="modal-body">
+            <div class="profile-edit-tabs">
+                <button class="profile-tab-btn active" data-tab="profile" id="tab-edit-profile">
+                    <span class="tab-icon">👤</span>
+                    <span class="tab-text">پروفایل</span>
+                </button>
+                <button class="profile-tab-btn" data-tab="account" id="tab-edit-account">
+                    <span class="tab-icon">🔐</span>
+                    <span class="tab-text">حساب</span>
+                </button>
+                <button class="profile-tab-btn" data-tab="privacy" id="tab-edit-privacy">
+                    <span class="tab-icon">🔒</span>
+                    <span class="tab-text">حریم خصوصی</span>
+                </button>
+                <button class="profile-tab-btn" data-tab="appearance" id="tab-edit-appearance">
+                    <span class="tab-icon">🎨</span>
+                    <span class="tab-text">ظاهر</span>
+                </button>
+            </div>
+
+            <section class="profile-edit-section active" id="profile-edit-section-profile" data-tab="profile">
+                <div class="edit-avatar-section">
+                    <h4 class="edit-section-title">آواتار</h4>
+                    <div class="avatar-edit-container">
+                        <div class="current-avatar-wrapper">
+                            <span id="edit-current-avatar" class="avatar avatar-xlarge">👤</span>
+                            <button class="btn-change-avatar" id="btn-edit-change-avatar" aria-label="تغییر آواتار">
+                                <span class="icon">📷</span>
+                            </button>
+                        </div>
+                        <div class="avatar-edit-info">
+                            <p class="avatar-hint">آواتار شما در پروفایل و بازی نمایش داده می‌شود</p>
+                            <div class="avatar-actions">
+                                <button class="btn btn-outline btn-small" id="btn-edit-upload-avatar">
+                                    <span class="btn-icon">📤</span>
+                                    <span class="btn-text">آپلود تصویر</span>
+                                </button>
+                                <button class="btn btn-outline btn-small" id="btn-edit-choose-avatar">
+                                    <span class="btn-icon">🎭</span>
+                                    <span class="btn-text">انتخاب از گالری</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="avatar-gallery" id="edit-avatar-gallery" style="display: none;">
+                        <h5 class="gallery-title">آواتارهای موجود</h5>
+                        <div class="avatar-gallery-grid">
+                            <button class="avatar-option selected" data-avatar="1">
+                                <span class="avatar avatar-large">👤</span>
+                            </button>
+                            <button class="avatar-option" data-avatar="2">
+                                <span class="avatar avatar-large">👨</span>
+                            </button>
+                            <button class="avatar-option" data-avatar="3">
+                                <span class="avatar avatar-large">👩</span>
+                            </button>
+                            <button class="avatar-option" data-avatar="4">
+                                <span class="avatar avatar-large"></span>
+                            </button>
+                            <button class="avatar-option" data-avatar="5">
+                                <span class="avatar avatar-large">👱</span>
+                            </button>
+                            <button class="avatar-option" data-avatar="6">
+                                <span class="avatar avatar-large">🧕</span>
+                            </button>
+                            <button class="avatar-option" data-avatar="7">
+                                <span class="avatar avatar-large">🦸</span>
+                            </button>
+                            <button class="avatar-option" data-avatar="8">
+                                <span class="avatar avatar-large"></span>
+                            </button>
+                            <button class="avatar-option locked" data-avatar="9">
+                                <span class="avatar avatar-large">🦹</span>
+                                <span class="lock-icon">🔒</span>
+                            </button>
+                            <button class="avatar-option locked" data-avatar="10">
+                                <span class="avatar avatar-large">🧙</span>
+                                <span class="lock-icon">🔒</span>
+                            </button>
+                            <button class="avatar-option locked" data-avatar="11">
+                                <span class="avatar avatar-large">🧛</span>
+                                <span class="lock-icon">🔒</span>
+                            </button>
+                            <button class="avatar-option locked" data-avatar="12">
+                                <span class="avatar avatar-large">🦸‍♀️</span>
+                                <span class="lock-icon">🔒</span>
+                            </button>
+                        </div>
+                        <p class="gallery-hint">آواتارهای بیشتر را از فروشگاه کسب کنید</p>
+                    </div>
+                </div>
+
+                <div class="edit-form-section">
+                    <h4 class="edit-section-title">اطلاعات پروفایل</h4>
+                    <form id="form-edit-profile" class="profile-edit-form">
+                        <div class="form-group">
+                            <label for="edit-username" class="form-label">نام کاربری</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">👤</span>
+                                <input
+                                    type="text"
+                                    id="edit-username"
+                                    name="username"
+                                    class="input-field"
+                                    readonly
+                                    value="player123"
+                                >
+                                <span class="readonly-badge">غیرقابل تغییر</span>
+                            </div>
+                            <span class="form-hint">نام کاربری قابل تغییر نیست</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-display-name" class="form-label">نام نمایشی</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">✨</span>
+                                <input
+                                    type="text"
+                                    id="edit-display-name"
+                                    name="displayName"
+                                    class="input-field"
+                                    placeholder="نامی که دیگران می‌بینند"
+                                    maxlength="30"
+                                    value="بازیکن"
+                                    data-validate="displayName"
+                                >
+                            </div>
+                            <span class="form-hint">این نام در بازی و پروفایل نمایش داده می‌شود</span>
+                            <span class="form-error" id="error-edit-display-name"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-bio" class="form-label">بیوگرافی</label>
+                            <div class="input-wrapper textarea-wrapper">
+                                <textarea
+                                    id="edit-bio"
+                                    name="bio"
+                                    class="input-field textarea-field"
+                                    placeholder="چند کلمه درباره خودتان بنویسید..."
+                                    maxlength="500"
+                                    rows="3"
+                                ></textarea>
+                                <span class="char-counter">
+                                    <span id="edit-bio-char-count">0</span> / ۵۰۰
+                                </span>
+                            </div>
+                            <span class="form-hint">بیوگرافی در پروفایل شما نمایش داده می‌شود</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-title" class="form-label">عنوان</label>
+                            <div class="input-wrapper select-wrapper">
+                                <span class="input-icon">👑</span>
+                                <select id="edit-title" name="title" class="input-field select-field">
+                                    <option value="">بدون عنوان</option>
+                                    <option value="beginner" selected>تازه‌کار</option>
+                                    <option value="amateur">آماتور</option>
+                                    <option value="professional">حرفه‌ای</option>
+                                    <option value="master">استاد</option>
+                                    <option value="legend">افسانه</option>
+                                    <option value="champion">قهرمان</option>
+                                </select>
+                            </div>
+                            <span class="form-hint">عنوان شما در پروفایل نمایش داده می‌شود</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-country" class="form-label">کشور</label>
+                            <div class="input-wrapper select-wrapper">
+                                <span class="input-icon">🌍</span>
+                                <select id="edit-country" name="country" class="input-field select-field">
+                                    <option value="IR" selected>ایران</option>
+                                    <option value="AF">افغانستان</option>
+                                    <option value="TJ">تاجیکستان</option>
+                                    <option value="TR">ترکیه</option>
+                                    <option value="IQ">عراق</option>
+                                    <option value="other">سایر</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="edit-social-section">
+                    <h4 class="edit-section-title">لینک‌های اجتماعی</h4>
+                    <form id="form-edit-social" class="social-edit-form">
+                        <div class="form-group">
+                            <label for="edit-telegram" class="form-label">تلگرام</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">✈️</span>
+                                <input
+                                    type="text"
+                                    id="edit-telegram"
+                                    name="telegram"
+                                    class="input-field"
+                                    placeholder="@username"
+                                    maxlength="50"
+                                >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-instagram" class="form-label">اینستاگرام</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">📷</span>
+                                <input
+                                    type="text"
+                                    id="edit-instagram"
+                                    name="instagram"
+                                    class="input-field"
+                                    placeholder="@username"
+                                    maxlength="50"
+                                >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-website" class="form-label">وب‌سایت</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">🌐</span>
+                                <input
+                                    type="url"
+                                    id="edit-website"
+                                    name="website"
+                                    class="input-field"
+                                    placeholder="https://example.com"
+                                    maxlength="100"
+                                >
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section class="profile-edit-section" id="profile-edit-section-account" data-tab="account" style="display: none;">
+                <div class="edit-account-section">
+                    <h4 class="edit-section-title">اطلاعات حساب</h4>
+                    <form id="form-edit-account" class="account-edit-form">
+                        <div class="form-group">
+                            <label for="edit-email" class="form-label">ایمیل</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">📧</span>
+                                <input
+                                    type="email"
+                                    id="edit-email"
+                                    name="email"
+                                    class="input-field"
+                                    value="user@example.com"
+                                    data-validate="email"
+                                >
+                                <button type="button" class="btn-verify-email" id="btn-verify-email" style="display: none;">
+                                    <span class="icon">✅</span>
+                                    <span class="text">تأیید</span>
+                                </button>
+                            </div>
+                            <span class="form-verified" id="email-verified-badge" style="display: none;">
+                                <span class="icon">✅</span>
+                                <span class="text">ایمیل تأیید شده</span>
+                            </span>
+                            <span class="form-error" id="error-edit-email"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-phone" class="form-label">شماره موبایل</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">📱</span>
+                                <input
+                                    type="tel"
+                                    id="edit-phone"
+                                    name="phone"
+                                    class="input-field"
+                                    placeholder="09123456789"
+                                    maxlength="11"
+                                    data-validate="phone"
+                                >
+                                <button type="button" class="btn-verify-phone" id="btn-verify-phone" style="display: none;">
+                                    <span class="icon">✅</span>
+                                    <span class="text">تأیید</span>
+                                </button>
+                            </div>
+                            <span class="form-verified" id="phone-verified-badge" style="display: none;">
+                                <span class="icon">✅</span>
+                                <span class="text">شماره تأیید شده</span>
+                            </span>
+                            <span class="form-error" id="error-edit-phone"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-birthdate" class="form-label">تاریخ تولد</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">🎂</span>
+                                <input
+                                    type="text"
+                                    id="edit-birthdate"
+                                    name="birthdate"
+                                    class="input-field"
+                                    placeholder="۱۳۷۵/۰۶/۱۵"
+                                    maxlength="10"
+                                >
+                            </div>
+                            <span class="form-hint">تاریخ تولد شما برای کاربران دیگر نمایش داده نمی‌شود</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-gender" class="form-label">جنسیت</label>
+                            <div class="input-wrapper select-wrapper">
+                                <span class="input-icon">⚧</span>
+                                <select id="edit-gender" name="gender" class="input-field select-field">
+                                    <option value="">ترجیح می‌دهم نگویم</option>
+                                    <option value="male">مرد</option>
+                                    <option value="female">زن</option>
+                                    <option value="other">سایر</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="edit-password-section">
+                    <h4 class="edit-section-title">تغییر رمز عبور</h4>
+                    <form id="form-edit-password" class="password-edit-form">
+                        <div class="form-group">
+                            <label for="edit-current-password" class="form-label">رمز عبور فعلی</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">🔒</span>
+                                <input
+                                    type="password"
+                                    id="edit-current-password"
+                                    name="currentPassword"
+                                    class="input-field"
+                                    placeholder="رمز عبور فعلی"
+                                    autocomplete="current-password"
+                                    required
+                                >
+                                <button type="button" class="btn-toggle-password" data-target="edit-current-password" aria-label="نمایش رمز">
+                                    <span class="icon-eye">👁️</span>
+                                </button>
+                            </div>
+                            <span class="form-error" id="error-edit-current-password"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-new-password" class="form-label">رمز عبور جدید</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">🔑</span>
+                                <input
+                                    type="password"
+                                    id="edit-new-password"
+                                    name="newPassword"
+                                    class="input-field"
+                                    placeholder="رمز عبور جدید"
+                                    autocomplete="new-password"
+                                    minlength="8"
+                                    maxlength="128"
+                                    data-validate="password"
+                                >
+                                <button type="button" class="btn-toggle-password" data-target="edit-new-password" aria-label="نمایش رمز">
+                                    <span class="icon-eye">👁️</span>
+                                </button>
+                            </div>
+                            <div class="password-strength" id="edit-password-strength">
+                                <div class="strength-bar">
+                                    <div class="strength-fill" id="edit-strength-fill"></div>
+                                </div>
+                                <span class="strength-text" id="edit-strength-text">ضعیف</span>
+                            </div>
+                            <span class="form-hint">حداقل ۸ کاراکتر شامل حرف بزرگ، کوچک و عدد</span>
+                            <span class="form-error" id="error-edit-new-password"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-confirm-password" class="form-label">تکرار رمز عبور جدید</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">🔑</span>
+                                <input
+                                    type="password"
+                                    id="edit-confirm-password"
+                                    name="confirmPassword"
+                                    class="input-field"
+                                    placeholder="تکرار رمز عبور جدید"
+                                    autocomplete="new-password"
+                                >
+                                <button type="button" class="btn-toggle-password" data-target="edit-confirm-password" aria-label="نمایش رمز">
+                                    <span class="icon-eye">👁️</span>
+                                </button>
+                            </div>
+                            <span class="form-error" id="error-edit-confirm-password"></span>
+                        </div>
+
+                        <button type="button" id="btn-change-password" class="btn btn-primary btn-block">
+                            <span class="btn-icon">🔐</span>
+                            <span class="btn-text">تغییر رمز عبور</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="edit-security-section">
+                    <h4 class="edit-section-title">امنیت حساب</h4>
+                    <div class="security-options">
+                        <div class="security-option">
+                            <div class="option-info">
+                                <span class="option-icon">🔐</span>
+                                <div class="option-text">
+                                    <span class="option-title">احراز هویت دو مرحله‌ای</span>
+                                    <span class="option-desc">افزایش امنیت با تأیید دو مرحله‌ای</span>
+                                </div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="edit-two-factor">
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <div class="security-option">
+                            <div class="option-info">
+                                <span class="option-icon">🔔</span>
+                                <div class="option-text">
+                                    <span class="option-title">اعلان ورود</span>
+                                    <span class="option-desc">دریافت اعلان هنگام ورود به حساب</span>
+                                </div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="edit-login-notification" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <button type="button" id="btn-view-active-sessions" class="btn btn-outline btn-block">
+                        <span class="btn-icon">📱</span>
+                        <span class="btn-text">مشاهده نشست‌های فعال</span>
+                    </button>
+                </div>
+            </section>
+
+            <section class="profile-edit-section" id="profile-edit-section-privacy" data-tab="privacy" style="display: none;">
+                <div class="edit-privacy-section">
+                    <h4 class="edit-section-title">حریم خصوصی</h4>
+                    <div class="privacy-options">
+                        <div class="privacy-option">
+                            <div class="option-info">
+                                <span class="option-icon">👁️</span>
+                                <div class="option-text">
+                                    <span class="option-title">قابلیت مشاهده پروفایل</span>
+                                    <span class="option-desc">چه کسانی می‌توانند پروفایل شما را ببینند</span>
+                                </div>
+                            </div>
+                            <select id="edit-profile-visibility" class="setting-select">
+                                <option value="public" selected>عمومی</option>
+                                <option value="friends">فقط دوستان</option>
+                                <option value="private">خصوصی</option>
+                            </select>
+                        </div>
+                        <div class="privacy-option">
+                            <div class="option-info">
+                                <span class="option-icon">🟢</span>
+                                <div class="option-text">
+                                    <span class="option-title">نمایش وضعیت آنلاین</span>
+                                    <span class="option-desc">نمایش وضعیت آنلاین بودن شما</span>
+                                </div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="edit-show-online-status" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <div class="privacy-option">
+                            <div class="option-info">
+                                <span class="option-icon">📜</span>
+                                <div class="option-text">
+                                    <span class="option-title">نمایش تاریخچه بازی</span>
+                                    <span class="option-desc">نمایش تاریخچه بازی‌های شما</span>
+                                </div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="edit-show-game-history" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <div class="privacy-option">
+                            <div class="option-info">
+                                <span class="option-icon">📊</span>
+                                <div class="option-text">
+                                    <span class="option-title">نمایش آمار</span>
+                                    <span class="option-desc">نمایش آمار بازی شما</span>
+                                </div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="edit-show-statistics" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <div class="privacy-option">
+                            <div class="option-info">
+                                <span class="option-icon">👥</span>
+                                <div class="option-text">
+                                    <span class="option-title">اجازه درخواست دوستی</span>
+                                    <span class="option-desc">دریافت درخواست دوستی از دیگران</span>
+                                </div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="edit-allow-friend-requests" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <div class="privacy-option">
+                            <div class="option-info">
+                                <span class="option-icon">🎮</span>
+                                <div class="option-text">
+                                    <span class="option-title">اجازه دعوت به بازی</span>
+                                    <span class="option-desc">دریافت دعوت به بازی از دیگران</span>
+                                </div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="edit-allow-game-invites" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <div class="privacy-option">
+                            <div class="option-info">
+                                <span class="option-icon">💬</span>
+                                <div class="option-text">
+                                    <span class="option-title">اجازه پیام</span>
+                                    <span class="option-desc">دریافت پیام از دیگران</span>
+                                </div>
+                            </div>
+                            <select id="edit-allow-messages" class="setting-select">
+                                <option value="everyone">همه</option>
+                                <option value="friends" selected>فقط دوستان</option>
+                                <option value="none">هیچ‌کس</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="edit-data-section">
+                    <h4 class="edit-section-title">داده‌ها و حریم خصوصی</h4>
+                    <div class="data-options">
+                        <div class="data-option">
+                            <div class="option-info">
+                                <span class="option-icon">📈</span>
+                                <div class="option-text">
+                                    <span class="option-title">جمع‌آوری تحلیل</span>
+                                    <span class="option-desc">ارسال داده‌های استفاده برای بهبود</span>
+                                </div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="edit-data-analytics" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <div class="data-option">
+                            <div class="option-info">
+                                <span class="option-icon">🐛</span>
+                                <div class="option-text">
+                                    <span class="option-title">گزارش خطا</span>
+                                    <span class="option-desc">ارسال گزارش خطا برای رفع مشکلات</span>
+                                </div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="edit-data-crash-reports" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="data-actions">
+                        <button type="button" id="btn-download-my-data" class="btn btn-outline btn-block">
+                            <span class="btn-icon">📥</span>
+                            <span class="btn-text">دانلود داده‌های من</span>
+                        </button>
+                        <button type="button" id="btn-delete-my-data" class="btn btn-danger btn-outline btn-block">
+                            <span class="btn-icon">🗑️</span>
+                            <span class="btn-text">حذف داده‌های من</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="profile-edit-section" id="profile-edit-section-appearance" data-tab="appearance" style="display: none;">
+                <div class="edit-appearance-section">
+                    <h4 class="edit-section-title">ظاهر پروفایل</h4>
+                    <div class="appearance-options">
+                        <div class="appearance-option">
+                            <div class="option-info">
+                                <span class="option-icon">️</span>
+                                <div class="option-text">
+                                    <span class="option-title">قاب پروفایل</span>
+                                    <span class="option-desc">قاب دور آواتار شما</span>
+                                </div>
+                            </div>
+                            <div class="frame-selector" id="edit-frame-selector">
+                                <button class="frame-option selected" data-frame="none">
+                                    <span class="frame-preview">هیچ</span>
+                                </button>
+                                <button class="frame-option" data-frame="bronze">
+                                    <span class="frame-preview bronze">🥉</span>
+                                </button>
+                                <button class="frame-option" data-frame="silver">
+                                    <span class="frame-preview silver">🥈</span>
+                                </button>
+                                <button class="frame-option" data-frame="gold">
+                                    <span class="frame-preview gold">🥇</span>
+                                </button>
+                                <button class="frame-option locked" data-frame="platinum">
+                                    <span class="frame-preview platinum"></span>
+                                    <span class="lock-icon">🔒</span>
+                                </button>
+                                <button class="frame-option locked" data-frame="diamond">
+                                    <span class="frame-preview diamond">💎</span>
+                                    <span class="lock-icon">🔒</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="appearance-option">
+                            <div class="option-info">
+                                <span class="option-icon">🎨</span>
+                                <div class="option-text">
+                                    <span class="option-title">پس‌زمینه پروفایل</span>
+                                    <span class="option-desc">رنگ پس‌زمینه پروفایل شما</span>
+                                </div>
+                            </div>
+                            <div class="background-selector" id="edit-background-selector">
+                                <button class="bg-option selected" data-bg="default" style="background: linear-gradient(135deg, #0d2924, #1a3d36);"></button>
+                                <button class="bg-option" data-bg="blue" style="background: linear-gradient(135deg, #1e3a8a, #3b82f6);"></button>
+                                <button class="bg-option" data-bg="purple" style="background: linear-gradient(135deg, #581c87, #a855f7);"></button>
+                                <button class="bg-option" data-bg="red" style="background: linear-gradient(135deg, #7f1d1d, #ef4444);"></button>
+                                <button class="bg-option" data-bg="orange" style="background: linear-gradient(135deg, #7c2d12, #f97316);"></button>
+                                <button class="bg-option" data-bg="green" style="background: linear-gradient(135deg, #14532d, #22c55e);"></button>
+                                <button class="bg-option locked" data-bg="gold" style="background: linear-gradient(135deg, #78350f, #fbbf24);">
+                                    <span class="lock-icon">🔒</span>
+                                </button>
+                                <button class="bg-option locked" data-bg="rainbow" style="background: linear-gradient(135deg, #ef4444, #f97316, #fbbf24, #22c55e, #3b82f6, #a855f7);">
+                                    <span class="lock-icon">🔒</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="appearance-option">
+                            <div class="option-info">
+                                <span class="option-icon">🏅</span>
+                                <div class="option-text">
+                                    <span class="option-title">نشان پروفایل</span>
+                                    <span class="option-desc">نشان ویژه در پروفایل شما</span>
+                                </div>
+                            </div>
+                            <div class="badge-selector" id="edit-badge-selector">
+                                <button class="badge-option selected" data-badge="none">
+                                    <span class="badge-preview">هیچ</span>
+                                </button>
+                                <button class="badge-option" data-badge="first-win">
+                                    <span class="badge-preview">🏆</span>
+                                </button>
+                                <button class="badge-option" data-badge="veteran">
+                                    <span class="badge-preview">⭐</span>
+                                </button>
+                                <button class="badge-option" data-badge="champion">
+                                    <span class="badge-preview">👑</span>
+                                </button>
+                                <button class="badge-option locked" data-badge="legend">
+                                    <span class="badge-preview"></span>
+                                    <span class="lock-icon">🔒</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="edit-preview-section">
+                    <h4 class="edit-section-title">پیش‌نمایش</h4>
+                    <div class="profile-preview-card" id="edit-profile-preview">
+                        <div class="preview-cover" id="preview-cover" style="background: linear-gradient(135deg, #0d2924, #1a3d36);"></div>
+                        <div class="preview-info">
+                            <div class="preview-avatar-wrapper">
+                                <span id="preview-avatar" class="avatar avatar-large">👤</span>
+                                <span class="preview-frame" id="preview-frame"></span>
+                            </div>
+                            <div class="preview-details">
+                                <h4 class="preview-name" id="preview-name">بازیکن</h4>
+                                <p class="preview-title" id="preview-title">تازه‌کار</p>
+                                <div class="preview-badges" id="preview-badges">
+                                    <span class="preview-badge">🏆</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="modal-footer">
+            <div class="footer-info">
+                <span class="footer-text" id="profile-edit-status">تغییرات ذخیره نشده</span>
+            </div>
+            <div class="footer-actions">
+                <button class="btn btn-outline" id="btn-cancel-profile-edit">
+                    <span class="btn-text">انصراف</span>
+                </button>
+                <button class="btn btn-primary" id="btn-save-profile-edit">
+                    <span class="btn-icon">💾</span>
+                    <span class="btn-text">ذخیره تغییرات</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
