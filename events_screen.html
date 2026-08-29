@@ -1,0 +1,900 @@
+<div id="events-screen" class="screen screen-events" data-screen-name="events">
+    <div class="screen-content">
+        <header class="screen-header">
+            <button class="btn-back" data-route="home" aria-label="بازگشت">
+                <span class="icon">→</span>
+            </button>
+            <h1 class="screen-title">رویدادها</h1>
+            <div class="header-spacer"></div>
+        </header>
+
+        <section class="events-hero">
+            <div class="hero-background"></div>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-icon">🎪</span>
+                    <span class="badge-text">رویدادهای ویژه</span>
+                </div>
+                <h2 class="hero-title">رویدادهای بازی</h2>
+                <p class="hero-subtitle">در رویدادهای ویژه شرکت کنید و جوایز منحصر به فرد کسب کنید</p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="stat-icon">🎯</span>
+                        <span class="stat-value" id="events-active-count">۳</span>
+                        <span class="stat-label">فعال</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-icon">📅</span>
+                        <span class="stat-value" id="events-upcoming-count">۲</span>
+                        <span class="stat-label">آینده</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-icon">✅</span>
+                        <span class="stat-value" id="events-completed-count">۱۵</span>
+                        <span class="stat-label">تکمیل شده</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="events-featured" id="events-featured-section">
+            <div class="section-header">
+                <h3 class="section-title">رویداد ویژه</h3>
+                <span class="badge featured-badge">ویژه</span>
+            </div>
+            <div class="featured-event-card" data-event-id="featured-1">
+                <div class="featured-banner">
+                    <div class="banner-overlay"></div>
+                    <div class="banner-content">
+                        <span class="banner-badge limited">محدود</span>
+                        <h3 class="banner-title">جشنواره بهاره ۱۴۰۵</h3>
+                        <p class="banner-subtitle">با شرکت در بازی‌های ویژه، جوایز ارزشمند کسب کنید</p>
+                        <div class="banner-timer">
+                            <span class="timer-icon">⏰</span>
+                            <span class="timer-text">۲ روز و ۱۴ ساعت باقی‌مانده</span>
+                        </div>
+                        <div class="banner-rewards">
+                            <div class="reward-item">
+                                <span class="reward-icon">🪙</span>
+                                <span class="reward-value">۱۰,۰۰۰</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-icon">💎</span>
+                                <span class="reward-value">۵۰۰</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-icon"></span>
+                                <span class="reward-value">عنوان ویژه</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-large btn-participate-event" data-event-id="featured-1">
+                            <span class="btn-icon">🎯</span>
+                            <span class="btn-text">شرکت در رویداد</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="events-tabs">
+            <div class="tabs-container">
+                <button class="tab-btn active" data-tab="active" id="tab-events-active">
+                    <span class="tab-icon">⚡</span>
+                    <span class="tab-text">فعال</span>
+                    <span class="tab-badge" id="badge-events-active">۳</span>
+                </button>
+                <button class="tab-btn" data-tab="upcoming" id="tab-events-upcoming">
+                    <span class="tab-icon">📅</span>
+                    <span class="tab-text">آینده</span>
+                    <span class="tab-badge" id="badge-events-upcoming">۲</span>
+                </button>
+                <button class="tab-btn" data-tab="registered" id="tab-events-registered">
+                    <span class="tab-icon">✅</span>
+                    <span class="tab-text">ثبت‌نام شده</span>
+                </button>
+                <button class="tab-btn" data-tab="completed" id="tab-events-completed">
+                    <span class="tab-icon">🏁</span>
+                    <span class="tab-text">تکمیل شده</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="events-filters">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label for="events-type-filter" class="filter-label">نوع:</label>
+                    <select id="events-type-filter" class="filter-select">
+                        <option value="all">همه انواع</option>
+                        <option value="daily">روزانه</option>
+                        <option value="weekly">هفتگی</option>
+                        <option value="monthly">ماهانه</option>
+                        <option value="special">ویژه</option>
+                        <option value="limited">محدود</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="events-sort-filter" class="filter-label">مرتب‌سازی:</label>
+                    <select id="events-sort-filter" class="filter-select">
+                        <option value="newest">جدیدترین</option>
+                        <option value="ending-soon">زودتر پایان می‌یابد</option>
+                        <option value="most-participants">بیشترین شرکت‌کننده</option>
+                        <option value="highest-reward">بیشترین جایزه</option>
+                    </select>
+                </div>
+                <button class="btn-icon btn-small" id="btn-refresh-events" aria-label="بروزرسانی">
+                    <span class="icon">🔄</span>
+                </button>
+            </div>
+            <div class="search-row">
+                <div class="input-wrapper search-wrapper">
+                    <span class="input-icon">🔍</span>
+                    <input
+                        type="text"
+                        id="events-search-input"
+                        class="input-field"
+                        placeholder="جستجوی رویداد..."
+                        maxlength="50"
+                    >
+                    <button class="btn-clear-search" id="btn-clear-events-search" style="display: none;">
+                        <span class="icon">✕</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="events-active" id="events-active-section">
+            <div class="section-header">
+                <h3 class="section-title">رویدادهای فعال</h3>
+            </div>
+            <div id="active-events-list" class="events-list">
+                <div class="event-card active" data-event-id="e1" data-type="weekly">
+                    <div class="event-header">
+                        <div class="event-icon-wrapper weekly">
+                            <span class="event-icon">🏆</span>
+                        </div>
+                        <div class="event-info">
+                            <h4 class="event-title">چالش هفتگی</h4>
+                            <p class="event-desc">در این رویداد هفتگی شرکت کنید و جوایز ویژه بگیرید</p>
+                            <div class="event-meta">
+                                <span class="event-type-badge weekly">هفتگی</span>
+                                <span class="event-participants">
+                                    <span class="participants-icon">👥</span>
+                                    <span class="participants-count">۴۵۰</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="event-status">
+                            <span class="status-badge active">
+                                <span class="pulse-dot"></span>
+                                فعال
+                            </span>
+                        </div>
+                    </div>
+                    <div class="event-progress-section">
+                        <div class="progress-info">
+                            <span class="progress-label">پیشرفت شما</span>
+                            <span class="progress-text"><span id="event-e1-progress">۵</span> از ۵۰ بازی</span>
+                        </div>
+                        <div class="progress-bar-large">
+                            <div class="progress-fill" id="event-e1-bar" style="width: 30%;"></div>
+                        </div>
+                        <div class="progress-details">
+                            <span class="progress-rank">رتبه شما: <strong>۱۲</strong> از ۴۵۰</span>
+                            <span class="progress-percent">۳۰٪</span>
+                        </div>
+                    </div>
+                    <div class="event-rewards-preview">
+                        <h5 class="rewards-title">جوایز برتر:</h5>
+                        <div class="rewards-list">
+                            <div class="reward-item">
+                                <span class="reward-rank"></span>
+                                <span class="reward-prize">۲۵,۰۰۰ 🪙 + ۲۵۰ 💎</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-rank">🥈</span>
+                                <span class="reward-prize">۱۰,۰۰۰ 🪙 + ۱۰ 💎</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-rank">🥉</span>
+                                <span class="reward-prize">۵,۰۰۰  + ۵۰ 💎</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-timer">
+                        <span class="timer-icon">⏰</span>
+                        <span class="timer-text">پایان در: </span>
+                        <span class="timer-value" id="event-e1-timer"> روز و ۱۲ ساعت</span>
+                    </div>
+                    <div class="event-actions">
+                        <button class="btn btn-primary btn-block btn-view-event" data-event-id="e1">
+                            <span class="btn-icon">👁️</span>
+                            <span class="btn-text">مشاهده جزئیات</span>
+                        </button>
+                        <button class="btn btn-outline btn-small btn-event-leaderboard" data-event-id="e1">
+                            <span class="btn-icon">🏆</span>
+                            <span class="btn-text">رتبه‌بندی</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="event-card active" data-event-id="e2" data-type="daily">
+                    <div class="event-header">
+                        <div class="event-icon-wrapper daily">
+                            <span class="event-icon"></span>
+                        </div>
+                        <div class="event-info">
+                            <h4 class="event-title">چالش روزانه</h4>
+                            <p class="event-desc">هر روز یک چالش جدید با جوایز فوری</p>
+                            <div class="event-meta">
+                                <span class="event-type-badge daily">روزانه</span>
+                                <span class="event-participants">
+                                    <span class="participants-icon">👥</span>
+                                    <span class="participants-count">۱,۲۳۴</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="event-status">
+                            <span class="status-badge active">
+                                <span class="pulse-dot"></span>
+                                فعال
+                            </span>
+                        </div>
+                    </div>
+                    <div class="event-progress-section">
+                        <div class="progress-info">
+                            <span class="progress-label">پیشرفت شما</span>
+                            <span class="progress-text"><span id="event-e2-progress">۳</span> از ۵ بازی</span>
+                        </div>
+                        <div class="progress-bar-large">
+                            <div class="progress-fill" id="event-e2-bar" style="width: 60%;"></div>
+                        </div>
+                        <div class="progress-details">
+                            <span class="progress-rank">رتبه شما: <strong>۴۵</strong> از ۱,۲۳۴</span>
+                            <span class="progress-percent">۶۰٪</span>
+                        </div>
+                    </div>
+                    <div class="event-rewards-preview">
+                        <h5 class="rewards-title">جوایز:</h5>
+                        <div class="rewards-list">
+                            <div class="reward-item">
+                                <span class="reward-rank"></span>
+                                <span class="reward-prize">۵,۰۰ 🪙 + ۵۰ </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-timer">
+                        <span class="timer-icon"></span>
+                        <span class="timer-text">پایان در: </span>
+                        <span class="timer-value" id="event-e2-timer">۸ ساعت و ۲۳ دقیقه</span>
+                    </div>
+                    <div class="event-actions">
+                        <button class="btn btn-primary btn-block btn-view-event" data-event-id="e2">
+                            <span class="btn-icon">️</span>
+                            <span class="btn-text">مشاهده جزئیات</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="event-card active" data-event-id="e3" data-type="special">
+                    <div class="event-header">
+                        <div class="event-icon-wrapper special">
+                            <span class="event-icon">🎪</span>
+                        </div>
+                        <div class="event-info">
+                            <h4 class="event-title">مسابقه ویژه نوروز</h4>
+                            <p class="event-desc">به مناسبت عید نوروز، مسابقه ویژه با جوایز بزرگ</p>
+                            <div class="event-meta">
+                                <span class="event-type-badge special">ویژه</span>
+                                <span class="event-participants">
+                                    <span class="participants-icon">👥</span>
+                                    <span class="participants-count">۲۶</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="event-status">
+                            <span class="status-badge active">
+                                <span class="pulse-dot"></span>
+                                فعال
+                            </span>
+                        </div>
+                    </div>
+                    <div class="event-progress-section">
+                        <div class="progress-info">
+                            <span class="progress-label">پیشرفت شما</span>
+                            <span class="progress-text"><span id="event-e3-progress">۰</span> از ۱۰ بازی</span>
+                        </div>
+                        <div class="progress-bar-large">
+                            <div class="progress-fill" id="event-e3-bar" style="width: 0%;"></div>
+                        </div>
+                        <div class="progress-details">
+                            <span class="progress-rank">هنوز رتبه‌ای ندارید</span>
+                            <span class="progress-percent">۰٪</span>
+                        </div>
+                    </div>
+                    <div class="event-rewards-preview">
+                        <h5 class="rewards-title">جوایز برتر:</h5>
+                        <div class="rewards-list">
+                            <div class="reward-item">
+                                <span class="reward-rank">🥇</span>
+                                <span class="reward-prize">۵۰,۰۰۰ 🪙 + ۱,۰۰۰ 💎 + عنوان قهرمان</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-rank">🥈</span>
+                                <span class="reward-prize">۲۰,۰۰۰ 🪙 + ۵۰۰ 💎</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-rank">🥉</span>
+                                <span class="reward-prize">۱۰,۰۰۰ 🪙 + ۲۵۰ 💎</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-timer">
+                        <span class="timer-icon">⏰</span>
+                        <span class="timer-text">پایان در: </span>
+                        <span class="timer-value" id="event-e3-timer">۰ روز</span>
+                    </div>
+                    <div class="event-actions">
+                        <button class="btn btn-primary btn-block btn-participate-event" data-event-id="e3">
+                            <span class="btn-icon">🎯</span>
+                            <span class="btn-text">شرکت در رویداد</span>
+                        </button>
+                        <button class="btn btn-outline btn-small btn-view-event" data-event-id="e3">
+                            <span class="btn-icon">👁️</span>
+                            <span class="btn-text">جزئیات</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="events-upcoming" id="events-upcoming-section" style="display: none;">
+            <div class="section-header">
+                <h3 class="section-title">رویدادهای آینده</h3>
+            </div>
+            <div id="upcoming-events-list" class="events-list">
+                <div class="event-card upcoming" data-event-id="u1" data-type="monthly">
+                    <div class="event-header">
+                        <div class="event-icon-wrapper monthly">
+                            <span class="event-icon">️</span>
+                        </div>
+                        <div class="event-info">
+                            <h4 class="event-title">مسابقات ماهانه اردیبهشت</h4>
+                            <p class="event-desc">مسابقات بزرگ ماهانه با جوایز ارزشمند</p>
+                            <div class="event-meta">
+                                <span class="event-type-badge monthly">ماهانه</span>
+                                <span class="event-participants">
+                                    <span class="participants-icon">👥</span>
+                                    <span class="participants-count">۲۰ ثبت‌نام</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="event-status">
+                            <span class="status-badge upcoming">آینده</span>
+                        </div>
+                    </div>
+                    <div class="event-start-info">
+                        <div class="start-info-item">
+                            <span class="info-icon"></span>
+                            <span class="info-text">شروع: ۱ اردیبهشت ۱۴۰۵</span>
+                        </div>
+                        <div class="start-info-item">
+                            <span class="info-icon">⏰</span>
+                            <span class="info-text">مدت: ۰ روز</span>
+                        </div>
+                        <div class="start-info-item">
+                            <span class="info-icon">🎁</span>
+                            <span class="info-text">ورودی: ۱,۰۰۰ 🪙</span>
+                        </div>
+                    </div>
+                    <div class="event-rewards-preview">
+                        <h5 class="rewards-title">جوایز برتر:</h5>
+                        <div class="rewards-list">
+                            <div class="reward-item">
+                                <span class="reward-rank">🥇</span>
+                                <span class="reward-prize">۱۰۰,۰۰ 🪙 + ۵,۰۰۰ 💎</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-actions">
+                        <button class="btn btn-primary btn-block btn-register-event" data-event-id="u1">
+                            <span class="btn-icon"></span>
+                            <span class="btn-text">پیش ثبت‌نام</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="event-card upcoming" data-event-id="u2" data-type="limited">
+                    <div class="event-header">
+                        <div class="event-icon-wrapper limited">
+                            <span class="event-icon"></span>
+                        </div>
+                        <div class="event-info">
+                            <h4 class="event-title">رویداد محدود تابستانه</h4>
+                            <p class="event-desc">فقط برای مدت محدود - آیتم‌های انحصاری</p>
+                            <div class="event-meta">
+                                <span class="event-type-badge limited">محدود</span>
+                                <span class="event-participants">
+                                    <span class="participants-icon">👥</span>
+                                    <span class="participants-count">ظرفیت: ۵۰۰</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="event-status">
+                            <span class="status-badge upcoming">آینده</span>
+                        </div>
+                    </div>
+                    <div class="event-start-info">
+                        <div class="start-info-item">
+                            <span class="info-icon">📅</span>
+                            <span class="info-text">شروع: ۱ تیر ۱۴۰۵</span>
+                        </div>
+                        <div class="start-info-item">
+                            <span class="info-icon">⏰</span>
+                            <span class="info-text">مدت:  روز</span>
+                        </div>
+                        <div class="start-info-item">
+                            <span class="info-icon"></span>
+                            <span class="info-text">ورودی: رایگان</span>
+                        </div>
+                    </div>
+                    <div class="event-rewards-preview">
+                        <h5 class="rewards-title">جوایز انحصاری:</h5>
+                        <div class="rewards-list">
+                            <div class="reward-item">
+                                <span class="reward-rank"></span>
+                                <span class="reward-prize">آواتار انحصاری تابستانه</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-rank">️</span>
+                                <span class="reward-prize">قاب پروفایل ویژه</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-actions">
+                        <button class="btn btn-outline btn-block btn-notify-event" data-event-id="u2">
+                            <span class="btn-icon">🔔</span>
+                            <span class="btn-text">اعلان شروع رویداد</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="events-registered" id="events-registered-section" style="display: none;">
+            <div class="section-header">
+                <h3 class="section-title">رویدادهای ثبت‌نام شده</h3>
+            </div>
+            <div id="registered-events-list" class="events-list">
+                <div class="empty-state" id="events-registered-empty">
+                    <span class="empty-icon">📝</span>
+                    <h4 class="empty-title">هنوز در رویدادی ثبت‌نام نکرده‌اید</h4>
+                    <p class="empty-desc">از بخش "فعال" یا "آینده" یک رویداد انتخاب کنید</p>
+                    <button class="btn btn-primary" id="btn-go-to-active-events">
+                        مشاهده رویدادها
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="events-completed" id="events-completed-section" style="display: none;">
+            <div class="section-header">
+                <h3 class="section-title">رویدادهای تکمیل شده</h3>
+            </div>
+            <div id="completed-events-list" class="events-list">
+                <div class="event-card completed" data-event-id="c1">
+                    <div class="event-header">
+                        <div class="event-icon-wrapper completed">
+                            <span class="event-icon">🏁</span>
+                        </div>
+                        <div class="event-info">
+                            <h4 class="event-title">چالش هفتگی گذشته</h4>
+                            <p class="event-desc">تکمیل شده در ۱۴۵/۰۶/۰۱</p>
+                            <div class="event-meta">
+                                <span class="event-type-badge weekly">هفتگی</span>
+                                <span class="completed-badge">تکمیل شده</span>
+                            </div>
+                        </div>
+                        <div class="event-result">
+                            <span class="result-badge rank-5">رتبه ۵</span>
+                        </div>
+                    </div>
+                    <div class="event-reward-claimed">
+                        <div class="reward-item">
+                            <span class="reward-icon">🪙</span>
+                            <span class="reward-value">+۱۰,۰۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">💎</span>
+                            <span class="reward-value">+۱۰۰</span>
+                        </div>
+                        <span class="claimed-badge">✅ دریافت شد</span>
+                    </div>
+                    <div class="event-actions">
+                        <button class="btn btn-outline btn-small btn-view-results" data-event-id="c1">
+                            مشاهده نتایج
+                        </button>
+                    </div>
+                </div>
+
+                <div class="event-card completed" data-event-id="c2">
+                    <div class="event-header">
+                        <div class="event-icon-wrapper completed">
+                            <span class="event-icon">🏁</span>
+                        </div>
+                        <div class="event-info">
+                            <h4 class="event-title">مسابقه ویژه عید</h4>
+                            <p class="event-desc">تکمیل شده در ۱۰۵/۰۱/۵</p>
+                            <div class="event-meta">
+                                <span class="event-type-badge special">ویژه</span>
+                                <span class="completed-badge">تکمیل شده</span>
+                            </div>
+                        </div>
+                        <div class="event-result">
+                            <span class="result-badge rank-1">🥇 قهرمان</span>
+                        </div>
+                    </div>
+                    <div class="event-reward-claimed">
+                        <div class="reward-item">
+                            <span class="reward-icon">🪙</span>
+                            <span class="reward-value">+۵۰,۰۰۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">💎</span>
+                            <span class="reward-value">+۱,۰۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">👑</span>
+                            <span class="reward-value">عنوان قهرمان</span>
+                        </div>
+                        <span class="claimed-badge">✅ دریافت شد</span>
+                    </div>
+                    <div class="event-actions">
+                        <button class="btn btn-outline btn-small btn-view-results" data-event-id="c2">
+                            مشاهده نتایج
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="events-detail-modal" id="events-detail-modal" style="display: none;">
+            <div class="modal-overlay"></div>
+            <div class="modal-content event-detail-modal">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="event-detail-title">جزئیات رویداد</h3>
+                    <button class="btn-icon btn-close-modal" id="btn-close-event-detail" aria-label="بستن">
+                        <span class="icon">✕</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="event-detail-banner" id="event-detail-banner">
+                        <span class="event-detail-icon" id="event-detail-icon">🏆</span>
+                        <span class="event-detail-type" id="event-detail-type">هفتگی</span>
+                    </div>
+                    <div class="event-detail-info">
+                        <h4 class="detail-title" id="event-detail-name">نام رویداد</h4>
+                        <p class="detail-description" id="event-detail-description">توضیحات رویداد</p>
+                        <div class="detail-meta-grid">
+                            <div class="meta-item">
+                                <span class="meta-icon"></span>
+                                <div class="meta-content">
+                                    <span class="meta-label">شروع</span>
+                                    <span class="meta-value" id="event-detail-start">-</span>
+                                </div>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">⏰</span>
+                                <div class="meta-content">
+                                    <span class="meta-label">پایان</span>
+                                    <span class="meta-value" id="event-detail-end">-</span>
+                                </div>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">👥</span>
+                                <div class="meta-content">
+                                    <span class="meta-label">شرکت‌کنندگان</span>
+                                    <span class="meta-value" id="event-detail-participants">-</span>
+                                </div>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon"></span>
+                                <div class="meta-content">
+                                    <span class="meta-label">ورودی</span>
+                                    <span class="meta-value" id="event-detail-entry-fee">-</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="event-detail-rewards">
+                        <h5 class="rewards-title">جوایز:</h5>
+                        <div class="rewards-grid" id="event-detail-rewards-list">
+                            <div class="reward-card">
+                                <span class="reward-rank">🥇</span>
+                                <span class="reward-prize">۵,۰۰۰  + ۲۵۰ 💎</span>
+                            </div>
+                            <div class="reward-card">
+                                <span class="reward-rank">🥈</span>
+                                <span class="reward-prize">۱۰,۰۰ 🪙 + ۱۰۰ 💎</span>
+                            </div>
+                            <div class="reward-card">
+                                <span class="reward-rank">🥉</span>
+                                <span class="reward-prize">۵,۰۰ 🪙 + ۵۰ 💎</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="event-detail-rules">
+                        <h5 class="rules-title">قوانین:</h5>
+                        <ul class="rules-list" id="event-detail-rules-list">
+                            <li>هر بازیکن می‌تواند نامحدود بازی کند</li>
+                            <li>امتیاز بر اساس تعداد برد محاسبه می‌شود</li>
+                            <li>در صورت تساوی، نرخ برد ملاک است</li>
+                        </ul>
+                    </div>
+
+                    <div class="event-detail-progress" id="event-detail-progress-section">
+                        <h5 class="progress-title">پیشرفت شما:</h5>
+                        <div class="progress-info">
+                            <span class="progress-label">بازی‌های انجام شده</span>
+                            <span class="progress-text"><span id="event-detail-my-progress">۱۵</span> از ۵۰</span>
+                        </div>
+                        <div class="progress-bar-large">
+                            <div class="progress-fill" id="event-detail-my-bar" style="width: 30%;"></div>
+                        </div>
+                        <div class="progress-stats">
+                            <div class="progress-stat">
+                                <span class="stat-label">رتبه:</span>
+                                <span class="stat-value" id="event-detail-my-rank">۱۲</span>
+                            </div>
+                            <div class="progress-stat">
+                                <span class="stat-label">برد:</span>
+                                <span class="stat-value" id="event-detail-my-wins">۱۰</span>
+                            </div>
+                            <div class="progress-stat">
+                                <span class="stat-label">نرخ برد:</span>
+                                <span class="stat-value" id="event-detail-my-winrate">۶۷٪</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="event-detail-actions" id="event-detail-actions">
+                        <button class="btn btn-primary btn-block btn-participate-detail" id="btn-participate-detail">
+                            <span class="btn-icon"></span>
+                            <span class="btn-text">شرکت در رویداد</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="events-leaderboard-modal" id="events-leaderboard-modal" style="display: none;">
+            <div class="modal-overlay"></div>
+            <div class="modal-content event-leaderboard-modal">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="leaderboard-event-title">رتبه‌بندی رویداد</h3>
+                    <button class="btn-icon btn-close-modal" id="btn-close-event-leaderboard" aria-label="بستن">
+                        <span class="icon">✕</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="leaderboard-podium" id="event-leaderboard-podium">
+                        <div class="podium-player second">
+                            <div class="podium-avatar-wrapper">
+                                <span class="avatar avatar-large"></span>
+                                <span class="podium-rank">🥈</span>
+                            </div>
+                            <div class="podium-info">
+                                <span class="podium-name">بازیکن دوم</span>
+                                <span class="podium-score">۴ بازی</span>
+                            </div>
+                            <div class="podium-base second-place"></div>
+                        </div>
+                        <div class="podium-player first">
+                            <div class="podium-avatar-wrapper">
+                                <span class="avatar avatar-large">👨</span>
+                                <span class="podium-rank">🥇</span>
+                                <div class="crown-icon">👑</div>
+                            </div>
+                            <div class="podium-info">
+                                <span class="podium-name">استاد بزرگ</span>
+                                <span class="podium-score">۵۰ بازی</span>
+                            </div>
+                            <div class="podium-base first-place"></div>
+                        </div>
+                        <div class="podium-player third">
+                            <div class="podium-avatar-wrapper">
+                                <span class="avatar avatar-large">👨</span>
+                                <span class="podium-rank">🥉</span>
+                            </div>
+                            <div class="podium-info">
+                                <span class="podium-name">قهرمان</span>
+                                <span class="podium-score">۴۲ بازی</span>
+                            </div>
+                            <div class="podium-base third-place"></div>
+                        </div>
+                    </div>
+
+                    <div class="leaderboard-list" id="event-leaderboard-list">
+                        <div class="leaderboard-item" data-rank="4">
+                            <span class="rank-number">۴</span>
+                            <span class="avatar avatar-small">👩</span>
+                            <span class="player-name">بازیکن ۴</span>
+                            <span class="player-score">۴۰ بازی</span>
+                        </div>
+                        <div class="leaderboard-item" data-rank="5">
+                            <span class="rank-number"></span>
+                            <span class="avatar avatar-small">👨</span>
+                            <span class="player-name">بازیکن </span>
+                            <span class="player-score">۳۸ بازی</span>
+                        </div>
+                        <div class="leaderboard-item current-user" data-rank="12">
+                            <span class="rank-number">۲</span>
+                            <span class="avatar avatar-small">👤</span>
+                            <span class="player-name">شما</span>
+                            <span class="player-score">۵ بازی</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="events-register-modal" id="events-register-modal" style="display: none;">
+            <div class="modal-overlay"></div>
+            <div class="modal-content event-register-modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">ثبت‌نام در رویداد</h3>
+                    <button class="btn-icon btn-close-modal" id="btn-close-event-register" aria-label="بستن">
+                        <span class="icon">✕</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="register-event-summary" id="register-event-summary">
+                        <h4 class="summary-name" id="register-event-name">نام رویداد</h4>
+                        <div class="summary-details">
+                            <div class="detail-row">
+                                <span class="detail-label">نوع:</span>
+                                <span class="detail-value" id="register-event-type">هفتگی</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">مدت:</span>
+                                <span class="detail-value" id="register-event-duration"> روز</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">شرکت‌کنندگان:</span>
+                                <span class="detail-value" id="register-event-participants">۴۵۰ / ۱۰۰۰</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">ورودی:</span>
+                                <span class="detail-value" id="register-event-fee">۵۰۰ 🪙</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="register-warning">
+                        <span class="warning-icon">⚠️</span>
+                        <p class="warning-text">
+                            با ثبت‌نام، مبلغ ورودی از حساب شما کسر می‌شود.
+                            در صورت انصراف قبل از شروع، ۵۰٪ مبلغ بازگردانده می‌شود.
+                        </p>
+                    </div>
+                    <div class="register-balance">
+                        <span class="balance-label">موجودی شما:</span>
+                        <span class="balance-value" id="register-balance-value">۵,۰۰۰ </span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline" id="btn-cancel-event-register">
+                        انصراف
+                    </button>
+                    <button class="btn btn-primary" id="btn-confirm-event-register">
+                        <span class="btn-icon">✅</span>
+                        <span class="btn-text">تأیید ثبت‌نام</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="events-rewards-structure">
+            <div class="section-header">
+                <h3 class="section-title">ساختار جوایز رویدادها</h3>
+            </div>
+            <div class="rewards-structure">
+                <div class="reward-tier first">
+                    <div class="tier-icon">🥇</div>
+                    <div class="tier-info">
+                        <h4 class="tier-name">مقام اول</h4>
+                        <p class="tier-reward">بیشترین جایزه + عنوان ویژه</p>
+                    </div>
+                </div>
+                <div class="reward-tier second">
+                    <div class="tier-icon">🥈</div>
+                    <div class="tier-info">
+                        <h4 class="tier-name">مقام دوم</h4>
+                        <p class="tier-reward">جایزه بالا</p>
+                    </div>
+                </div>
+                <div class="reward-tier third">
+                    <div class="tier-icon">🥉</div>
+                    <div class="tier-info">
+                        <h4 class="tier-name">مقام سوم</h4>
+                        <p class="tier-reward">جایزه متوسط</p>
+                    </div>
+                </div>
+                <div class="reward-tier participation">
+                    <div class="tier-icon">🎁</div>
+                    <div class="tier-info">
+                        <h4 class="tier-name">جایزه شرکت</h4>
+                        <p class="tier-reward">برای همه شرکت‌کنندگان</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="events-rules">
+            <div class="section-header">
+                <h3 class="section-title">قوانین رویدادها</h3>
+            </div>
+            <div class="rules-list">
+                <div class="rule-item">
+                    <span class="rule-icon">📝</span>
+                    <div class="rule-content">
+                        <h4 class="rule-title">ثبت‌نام و ورودی</h4>
+                        <p class="rule-desc">برخی رویدادها نیاز به پرداخت ورودی دارند</p>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">🎮</span>
+                    <div class="rule-content">
+                        <h4 class="rule-title">محاسبه امتیاز</h4>
+                        <p class="rule-desc">امتیاز بر اساس تعداد بازی و برد محاسبه می‌شود</p>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">⏰</span>
+                    <div class="rule-content">
+                        <h4 class="rule-title">زمان‌بندی</h4>
+                        <p class="rule-desc">هر رویداد زمان شروع و پایان مشخصی دارد</p>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon"></span>
+                    <div class="rule-content">
+                        <h4 class="rule-title">انصراف</h4>
+                        <p class="rule-desc">انصراف قبل از شروع با بازگشت ۵۰٪ ورودی ممکن است</p>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">🎁</span>
+                    <div class="rule-content">
+                        <h4 class="rule-title">توزیع جوایز</h4>
+                        <p class="rule-desc">جوایز پس از پایان رویداد به صورت خودکار توزیع می‌شوند</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="events-tips">
+            <div class="section-header">
+                <h3 class="section-title">نکات رویدادها</h3>
+            </div>
+            <div class="tips-list">
+                <div class="tip-item">
+                    <span class="tip-icon">💡</span>
+                    <p class="tip-text">قبل از ثبت‌نام، قوانین و جوایز رویداد را بررسی کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">⏰</span>
+                    <p class="tip-text">به زمان شروع و پایان رویداد توجه کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🎯</span>
+                    <p class="tip-text">با رویدادهای روزانه شروع کنید و به تدریج به رویدادهای بزرگ‌تر بروید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon"></span>
+                    <p class="tip-text">رتبه بالاتر = جوایز بیشتر</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
