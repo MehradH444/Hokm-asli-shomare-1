@@ -1,0 +1,688 @@
+<div id="inventory-screen" class="screen screen-inventory" data-screen-name="inventory">
+    <div class="screen-content">
+        <header class="screen-header">
+            <button class="btn-back" data-route="home" aria-label="بازگشت">
+                <span class="icon">→</span>
+            </button>
+            <h1 class="screen-title">موجودی</h1>
+            <div class="header-currency">
+                <div class="currency-display coins">
+                    <span class="currency-icon"></span>
+                    <span id="inventory-coins" class="currency-value">۵,۰۰۰</span>
+                </div>
+                <div class="currency-display gems">
+                    <span class="currency-icon"></span>
+                    <span id="inventory-gems" class="currency-value">۱۵۰</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="inventory-hero">
+            <div class="hero-background"></div>
+            <div class="hero-content">
+                <div class="hero-icon"></div>
+                <h2 class="hero-title">موجودی شما</h2>
+                <p class="hero-subtitle">تمام آیتم‌های خود را مدیریت کنید</p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="stat-icon">🎒</span>
+                        <span class="stat-value" id="inventory-total-items">۰</span>
+                        <span class="stat-label">کل آیتم‌ها</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-icon">✅</span>
+                        <span class="stat-value" id="inventory-equipped">۰</span>
+                        <span class="stat-label">فعال</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-icon">🆕</span>
+                        <span class="stat-value" id="inventory-new">۰</span>
+                        <span class="stat-label">جدید</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="inventory-tabs">
+            <div class="tabs-container">
+                <button class="tab-btn active" data-category="all" id="tab-inv-all">
+                    <span class="tab-icon">🎒</span>
+                    <span class="tab-text">همه</span>
+                    <span class="tab-badge" id="badge-inv-all">۰</span>
+                </button>
+                <button class="tab-btn" data-category="avatars" id="tab-inv-avatars">
+                    <span class="tab-icon"></span>
+                    <span class="tab-text">آواتار</span>
+                    <span class="tab-badge" id="badge-inv-avatars">۰</span>
+                </button>
+                <button class="tab-btn" data-category="card-backs" id="tab-inv-card-backs">
+                    <span class="tab-icon">🃏</span>
+                    <span class="tab-text">پشت کارت</span>
+                    <span class="tab-badge" id="badge-inv-card-backs">۰</span>
+                </button>
+                <button class="tab-btn" data-category="frames" id="tab-inv-frames">
+                    <span class="tab-icon">️</span>
+                    <span class="tab-text">قاب</span>
+                    <span class="tab-badge" id="badge-inv-frames">۰</span>
+                </button>
+                <button class="tab-btn" data-category="themes" id="tab-inv-themes">
+                    <span class="tab-icon">🎨</span>
+                    <span class="tab-text">تم</span>
+                    <span class="tab-badge" id="badge-inv-themes">۰</span>
+                </button>
+                <button class="tab-btn" data-category="emotes" id="tab-inv-emotes">
+                    <span class="tab-icon">😀</span>
+                    <span class="tab-text">ایموجی</span>
+                    <span class="tab-badge" id="badge-inv-emotes">۰</span>
+                </button>
+                <button class="tab-btn" data-category="titles" id="tab-inv-titles">
+                    <span class="tab-icon">👑</span>
+                    <span class="tab-text">عنوان</span>
+                    <span class="tab-badge" id="badge-inv-titles">۰</span>
+                </button>
+                <button class="tab-btn" data-category="badges" id="tab-inv-badges">
+                    <span class="tab-icon">🏅</span>
+                    <span class="tab-text">نشان</span>
+                    <span class="tab-badge" id="badge-inv-badges">۰</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="inventory-filters">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label for="inv-rarity-filter" class="filter-label">کمیابی:</label>
+                    <select id="inv-rarity-filter" class="filter-select">
+                        <option value="all">همه</option>
+                        <option value="common">معمولی</option>
+                        <option value="rare">کمیاب</option>
+                        <option value="epic">حماسی</option>
+                        <option value="legendary">افسانه‌ای</option>
+                        <option value="mythic">اسطوره‌ای</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="inv-sort-filter" class="filter-label">مرتب‌سازی:</label>
+                    <select id="inv-sort-filter" class="filter-select">
+                        <option value="newest">جدیدترین</option>
+                        <option value="rarity">کمیابی</option>
+                        <option value="name">نام</option>
+                        <option value="equipped">فعال</option>
+                    </select>
+                </div>
+                <button class="btn-icon btn-small" id="btn-refresh-inventory" aria-label="بروزرسانی">
+                    <span class="icon">🔄</span>
+                </button>
+            </div>
+            <div class="search-row">
+                <div class="input-wrapper search-wrapper">
+                    <span class="input-icon">🔍</span>
+                    <input
+                        type="text"
+                        id="inventory-search-input"
+                        class="input-field"
+                        placeholder="جستجوی آیتم..."
+                        maxlength="50"
+                    >
+                    <button class="btn-clear-search" id="btn-clear-inventory-search" style="display: none;">
+                        <span class="icon">✕</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="inventory-equipped-section">
+            <div class="section-header">
+                <h3 class="section-title">آیتم‌های فعال</h3>
+            </div>
+            <div id="inventory-equipped-list" class="equipped-list">
+                <div class="equipped-item" data-item-id="avatar-1" data-type="avatar">
+                    <div class="equipped-icon-wrapper">
+                        <span class="item-icon">👤</span>
+                        <span class="equipped-badge">فعال</span>
+                    </div>
+                    <div class="equipped-info">
+                        <h4 class="item-name">آواتار کلاسیک</h4>
+                        <span class="item-type">آواتار</span>
+                    </div>
+                    <button class="btn btn-small btn-outline btn-unequip" data-item-id="avatar-1">
+                        غیرفعال
+                    </button>
+                </div>
+
+                <div class="equipped-item" data-item-id="card-back-1" data-type="card-back">
+                    <div class="equipped-icon-wrapper">
+                        <span class="item-icon">🃏</span>
+                        <span class="equipped-badge">فعال</span>
+                    </div>
+                    <div class="equipped-info">
+                        <h4 class="item-name">پشت کارت کلاسیک</h4>
+                        <span class="item-type">پشت کارت</span>
+                    </div>
+                    <button class="btn btn-small btn-outline btn-unequip" data-item-id="card-back-1">
+                        غیرفعال
+                    </button>
+                </div>
+
+                <div class="equipped-item" data-item-id="frame-1" data-type="frame">
+                    <div class="equipped-icon-wrapper">
+                        <span class="item-icon">️</span>
+                        <span class="equipped-badge">فعال</span>
+                    </div>
+                    <div class="equipped-info">
+                        <h4 class="item-name">قاب نقره‌ای</h4>
+                        <span class="item-type">قاب</span>
+                    </div>
+                    <button class="btn btn-small btn-outline btn-unequip" data-item-id="frame-1">
+                        غیرفعال
+                    </button>
+                </div>
+
+                <div class="equipped-item" data-item-id="theme-1" data-type="theme">
+                    <div class="equipped-icon-wrapper">
+                        <span class="item-icon">🎨</span>
+                        <span class="equipped-badge">فعال</span>
+                    </div>
+                    <div class="equipped-info">
+                        <h4 class="item-name">تم پیش‌فرض</h4>
+                        <span class="item-type">تم</span>
+                    </div>
+                    <button class="btn btn-small btn-outline btn-unequip" data-item-id="theme-1">
+                        غیرفعال
+                    </button>
+                </div>
+
+                <div class="equipped-item" data-item-id="title-1" data-type="title">
+                    <div class="equipped-icon-wrapper">
+                        <span class="item-icon">👑</span>
+                        <span class="equipped-badge">فعال</span>
+                    </div>
+                    <div class="equipped-info">
+                        <h4 class="item-name">بازیکن تازه‌کار</h4>
+                        <span class="item-type">عنوان</span>
+                    </div>
+                    <button class="btn btn-small btn-outline btn-unequip" data-item-id="title-1">
+                        غیرفعال
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="inventory-items-section">
+            <div class="section-header">
+                <h3 class="section-title" id="inventory-list-title">همه آیتم‌ها</h3>
+                <span class="total-count" id="inventory-list-count">۰ آیتم</span>
+            </div>
+
+            <div id="inventory-items-grid" class="inventory-items-grid">
+                <div class="inventory-item-card owned equipped" data-item-id="avatar-1" data-category="avatars" data-rarity="common">
+                    <div class="item-image">
+                        <span class="item-icon">👤</span>
+                        <span class="rarity-badge common">معمولی</span>
+                        <span class="equipped-tag">✅ فعال</span>
+                    </div>
+                    <div class="item-info">
+                        <h4 class="item-name">آواتار کلاسیک</h4>
+                        <p class="item-desc">آواتار پیش‌فرض بازی</p>
+                        <div class="item-meta">
+                            <span class="item-type">آواتار</span>
+                            <span class="item-acquired">📅 ۴۰۵/۰۶/۰۱</span>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-outline btn-small btn-unequip-item" data-item-id="avatar-1">
+                            غیرفعال
+                        </button>
+                    </div>
+                </div>
+
+                <div class="inventory-item-card owned" data-item-id="avatar-2" data-category="avatars" data-rarity="common">
+                    <div class="item-image">
+                        <span class="item-icon">👨</span>
+                        <span class="rarity-badge common">معمولی</span>
+                        <span class="new-badge">جدید</span>
+                    </div>
+                    <div class="item-info">
+                        <h4 class="item-name">آواتار مردانه</h4>
+                        <p class="item-desc">آواتار مردانه شیک</p>
+                        <div class="item-meta">
+                            <span class="item-type">آواتار</span>
+                            <span class="item-acquired">📅 ۱۴۰۵/۰۶/۰۵</span>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-primary btn-small btn-equip-item" data-item-id="avatar-2">
+                            استفاده
+                        </button>
+                    </div>
+                </div>
+
+                <div class="inventory-item-card owned" data-item-id="avatar-3" data-category="avatars" data-rarity="common">
+                    <div class="item-image">
+                        <span class="item-icon">👩</span>
+                        <span class="rarity-badge common">معمولی</span>
+                    </div>
+                    <div class="item-info">
+                        <h4 class="item-name">آواتار زنانه</h4>
+                        <p class="item-desc">آواتار زنانه زیبا</p>
+                        <div class="item-meta">
+                            <span class="item-type">آواتار</span>
+                            <span class="item-acquired">📅 ۱۴۰۵/۰۶/۰۵</span>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-primary btn-small btn-equip-item" data-item-id="avatar-3">
+                            استفاده
+                        </button>
+                    </div>
+                </div>
+
+                <div class="inventory-item-card owned" data-item-id="avatar-4" data-category="avatars" data-rarity="rare">
+                    <div class="item-image">
+                        <span class="item-icon"></span>
+                        <span class="rarity-badge rare">کمیاب</span>
+                    </div>
+                    <div class="item-info">
+                        <h4 class="item-name">آواتار فضایی</h4>
+                        <p class="item-desc">آواتار با تم فضایی</p>
+                        <div class="item-meta">
+                            <span class="item-type">آواتار</span>
+                            <span class="item-acquired">📅 ۱۴۰۵/۰/۱۰</span>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-primary btn-small btn-equip-item" data-item-id="avatar-4">
+                            استفاده
+                        </button>
+                    </div>
+                </div>
+
+                <div class="inventory-item-card owned equipped" data-item-id="card-back-1" data-category="card-backs" data-rarity="common">
+                    <div class="item-image">
+                        <span class="item-icon">🃏</span>
+                        <span class="rarity-badge common">معمولی</span>
+                        <span class="equipped-tag">✅ فعال</span>
+                    </div>
+                    <div class="item-info">
+                        <h4 class="item-name">پشت کارت کلاسیک</h4>
+                        <p class="item-desc">طرح کلاسیک پشت کارت</p>
+                        <div class="item-meta">
+                            <span class="item-type">پشت کارت</span>
+                            <span class="item-acquired">📅 ۱۴۰۵/۰/۰۱</span>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-outline btn-small btn-unequip-item" data-item-id="card-back-1">
+                            غیرفعال
+                        </button>
+                    </div>
+                </div>
+
+                <div class="inventory-item-card owned" data-item-id="card-back-2" data-category="card-backs" data-rarity="rare">
+                    <div class="item-image">
+                        <span class="item-icon">🎴</span>
+                        <span class="rarity-badge rare">کمیاب</span>
+                    </div>
+                    <div class="item-info">
+                        <h4 class="item-name">پشت کارت طلایی</h4>
+                        <p class="item-desc">طرح طلایی لوکس</p>
+                        <div class="item-meta">
+                            <span class="item-type">پشت کارت</span>
+                            <span class="item-acquired"> ۱۴۰۵/۶/۱۲</span>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-primary btn-small btn-equip-item" data-item-id="card-back-2">
+                            استفاده
+                        </button>
+                    </div>
+                </div>
+
+                <div class="inventory-item-card owned equipped" data-item-id="frame-1" data-category="frames" data-rarity="common">
+                    <div class="item-image">
+                        <span class="item-icon">️</span>
+                        <span class="rarity-badge common">معمولی</span>
+                        <span class="equipped-tag">✅ فعال</span>
+                    </div>
+                    <div class="item-info">
+                        <h4 class="item-name">قاب نقره‌ای</h4>
+                        <p class="item-desc">قاب پروفایل نقره‌ای</p>
+                        <div class="item-meta">
+                            <span class="item-type">قاب</span>
+                            <span class="item-acquired">📅 ۱۴۰۵/۰۶/۰۵</span>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-outline btn-small btn-unequip-item" data-item-id="frame-1">
+                            غیرفعال
+                        </button>
+                    </div>
+                </div>
+
+                <div class="inventory-item-card owned" data-item-id="frame-2" data-category="frames" data-rarity="epic">
+                    <div class="item-image">
+                        <span class="item-icon">️</span>
+                        <span class="rarity-badge epic">حماسی</span>
+                    </div>
+                    <div class="item-info">
+                        <h4 class="item-name">قاب الماسی</h4>
+                        <p class="item-desc">قاب پروفایل الماسی درخشان</p>
+                        <div class="item-meta">
+                            <span class="item-type">قاب</span>
+                            <span class="item-acquired">📅 ۱۴۰۵/۰۶/۱۵</span>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-primary btn-small btn-equip-item" data-item-id="frame-2">
+                            استفاده
+                        </button>
+                    </div>
+                </div>
+
+                <div class="inventory-item-card owned equipped" data-item-id="theme-1" data-category="themes" data-rarity="common">
+                    <div class="item-image">
+                        <span class="item-icon">🎨</span>
+                        <span class="rarity-badge common">معمولی</span>
+                        <span class="equipped-tag">✅ فعال</span>
+                    </div>
+                    <div class="item-info">
+                        <h4 class="item-name">تم پیش‌فرض</h4>
+                        <p class="item-desc">تم استاندارد بازی</p>
+                        <div class="item-meta">
+                            <span class="item-type">تم</span>
+                            <span class="item-acquired">📅 ۱۴۰۵/۰/۰۱</span>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-outline btn-small btn-unequip-item" data-item-id="theme-1">
+                            غیرفعال
+                        </button>
+                    </div>
+                </div>
+
+                <div class="inventory-item-card owned" data-item-id="theme-2" data-category="themes" data-rarity="rare">
+                    <div class="item-image">
+                        <span class="item-icon">🌙</span>
+                        <span class="rarity-badge rare">کمیاب</span>
+                    </div>
+                    <div class="item-info">
+                        <h4 class="item-name">تم شب</h4>
+                        <p class="item-desc">تم تاریک با رنگ‌های شب</p>
+                        <div class="item-meta">
+                            <span class="item-type">تم</span>
+                            <span class="item-acquired">📅 ۱۴۰۵/۰۶/۱۸</span>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-primary btn-small btn-equip-item" data-item-id="theme-2">
+                            استفاده
+                        </button>
+                    </div>
+                </div>
+
+                <div class="inventory-item-card owned" data-item-id="emote-1" data-category="emotes" data-rarity="common">
+                    <div class="item-image">
+                        <span class="item-icon">😀</span>
+                        <span class="rarity-badge common">معمولی</span>
+                    </div>
+                    <div class="item-info">
+                        <h4 class="item-name">پک ایموجی خنده</h4>
+                        <p class="item-desc"> ایموجی خنده‌دار</p>
+                        <div class="item-meta">
+                            <span class="item-type">ایموجی</span>
+                            <span class="item-acquired">📅 ۱۴۰۵/۰/۰۸</span>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-primary btn-small btn-view-emotes" data-item-id="emote-1">
+                            مشاهده
+                        </button>
+                    </div>
+                </div>
+
+                <div class="inventory-item-card owned equipped" data-item-id="title-1" data-category="titles" data-rarity="common">
+                    <div class="item-image">
+                        <span class="item-icon">👑</span>
+                        <span class="rarity-badge common">معمولی</span>
+                        <span class="equipped-tag">✅ فعال</span>
+                    </div>
+                    <div class="item-info">
+                        <h4 class="item-name">بازیکن تازه‌کار</h4>
+                        <p class="item-desc">عنوان پیش‌فرض</p>
+                        <div class="item-meta">
+                            <span class="item-type">عنوان</span>
+                            <span class="item-acquired">📅 ۱۴۰۵/۰۶/۰۱</span>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-outline btn-small btn-unequip-item" data-item-id="title-1">
+                            غیرفعال
+                        </button>
+                    </div>
+                </div>
+
+                <div class="inventory-item-card owned" data-item-id="badge-1" data-category="badges" data-rarity="rare">
+                    <div class="item-image">
+                        <span class="item-icon">🏅</span>
+                        <span class="rarity-badge rare">کمیاب</span>
+                    </div>
+                    <div class="item-info">
+                        <h4 class="item-name">نشان اولین برد</h4>
+                        <p class="item-desc">نشان کسب شده با اولین برد</p>
+                        <div class="item-meta">
+                            <span class="item-type">نشان</span>
+                            <span class="item-acquired">📅 ۱۴۰۵/۰۶/۰۱</span>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-primary btn-small btn-view-badge" data-item-id="badge-1">
+                            مشاهده
+                        </button>
+                    </div>
+                </div>
+
+                <div class="inventory-item-card owned" data-item-id="badge-2" data-category="badges" data-rarity="epic">
+                    <div class="item-image">
+                        <span class="item-icon">🏆</span>
+                        <span class="rarity-badge epic">حماسی</span>
+                    </div>
+                    <div class="item-info">
+                        <h4 class="item-name">نشان قهرمان</h4>
+                        <p class="item-desc">نشان کسب شده با برد تورنمنت</p>
+                        <div class="item-meta">
+                            <span class="item-type">نشان</span>
+                            <span class="item-acquired">📅 ۱۴۰۵/۰۶/۲۰</span>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-primary btn-small btn-view-badge" data-item-id="badge-2">
+                            مشاهده
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="load-more-container" id="inventory-load-more-container">
+                <button class="btn btn-outline btn-block" id="btn-load-more-inventory">
+                    <span class="btn-icon">️</span>
+                    <span class="btn-text">بارگذاری بیشتر</span>
+                </button>
+            </div>
+
+            <div class="empty-state" id="inventory-empty-state" style="display: none;">
+                <span class="empty-icon">🎒</span>
+                <h4 class="empty-title">آیتمی یافت نشد</h4>
+                <p class="empty-desc">فیلترها را تغییر دهید یا عبارت جستجو را اصلاح کنید</p>
+                <button class="btn btn-primary" id="btn-go-to-shop">
+                    <span class="btn-icon">🛒</span>
+                    <span class="btn-text">رفتن به فروشگاه</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="inventory-item-detail-modal" id="inventory-item-detail-modal" style="display: none;">
+            <div class="modal-overlay"></div>
+            <div class="modal-content item-detail-modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">جزئیات آیتم</h3>
+                    <button class="btn-icon btn-close-modal" id="btn-close-item-detail" aria-label="بستن">
+                        <span class="icon">✕</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="item-detail-preview">
+                        <div class="item-detail-image" id="item-detail-image">
+                            <span class="item-detail-icon" id="item-detail-icon">👤</span>
+                        </div>
+                        <div class="item-detail-info">
+                            <h4 class="item-detail-name" id="item-detail-name">نام آیتم</h4>
+                            <p class="item-detail-desc" id="item-detail-desc">توضیحات آیتم</p>
+                            <div class="item-detail-meta">
+                                <span class="rarity-badge" id="item-detail-rarity">معمولی</span>
+                                <span class="item-detail-type" id="item-detail-type">آواتار</span>
+                                <span class="item-detail-acquired" id="item-detail-acquired">📅 ۱۴۰۵/۰/۰۱</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item-detail-stats" id="item-detail-stats-section">
+                        <h5 class="stats-title">ویژگی‌ها:</h5>
+                        <div class="stats-list" id="item-detail-stats-list">
+                            <div class="stat-row">
+                                <span class="stat-label">نوع:</span>
+                                <span class="stat-value" id="item-stat-type">آواتار</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">کمیابی:</span>
+                                <span class="stat-value" id="item-stat-rarity">معمولی</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">وضعیت:</span>
+                                <span class="stat-value" id="item-stat-status">فعال</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">تاریخ کسب:</span>
+                                <span class="stat-value" id="item-stat-acquired">۱۴۵/۰۶/۰</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item-detail-actions" id="item-detail-actions">
+                        <button class="btn btn-primary btn-block btn-equip-detail" id="btn-equip-detail">
+                            <span class="btn-icon">✅</span>
+                            <span class="btn-text">استفاده</span>
+                        </button>
+                        <button class="btn btn-outline btn-block btn-unequip-detail" id="btn-unequip-detail" style="display: none;">
+                            <span class="btn-icon"></span>
+                            <span class="btn-text">غیرفعال کردن</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="inventory-collection-progress">
+            <div class="section-header">
+                <h3 class="section-title">پیشرفت مجموعه</h3>
+            </div>
+            <div class="collection-grid">
+                <div class="collection-item">
+                    <div class="collection-icon"></div>
+                    <div class="collection-info">
+                        <h4 class="collection-name">آواتارها</h4>
+                        <div class="collection-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 25%;"></div>
+                            </div>
+                            <span class="progress-text"> از ۸</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="collection-item">
+                    <div class="collection-icon">🃏</div>
+                    <div class="collection-info">
+                        <h4 class="collection-name">پشت کارت‌ها</h4>
+                        <div class="collection-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 20%;"></div>
+                            </div>
+                            <span class="progress-text"> از ۵</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="collection-item">
+                    <div class="collection-icon">️</div>
+                    <div class="collection-info">
+                        <h4 class="collection-name">قاب‌ها</h4>
+                        <div class="collection-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 33%;"></div>
+                            </div>
+                            <span class="progress-text"> از ۶</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="collection-item">
+                    <div class="collection-icon">🎨</div>
+                    <div class="collection-info">
+                        <h4 class="collection-name">تم‌ها</h4>
+                        <div class="collection-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 40%;"></div>
+                            </div>
+                            <span class="progress-text"> از ۵</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="collection-item">
+                    <div class="collection-icon">😀</div>
+                    <div class="collection-info">
+                        <h4 class="collection-name">ایموجی‌ها</h4>
+                        <div class="collection-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 15%;"></div>
+                            </div>
+                            <span class="progress-text"> از ۱۰</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="collection-item">
+                    <div class="collection-icon"></div>
+                    <div class="collection-info">
+                        <h4 class="collection-name">عنوان‌ها</h4>
+                        <div class="collection-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 10%;"></div>
+                            </div>
+                            <span class="progress-text"> از ۱۰</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="inventory-tips">
+            <div class="section-header">
+                <h3 class="section-title">نکات موجودی</h3>
+            </div>
+            <div class="tips-list">
+                <div class="tip-item">
+                    <span class="tip-icon">💡</span>
+                    <p class="tip-text">آیتم‌های جدید را از فروشگاه یا پاداش‌ها کسب کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">✅</span>
+                    <p class="tip-text">آیتم‌های مورد علاقه خود را فعال کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🎯</span>
+                    <p class="tip-text">مجموعه کامل هر دسته، پاداش ویژه دارد</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon"></span>
+                    <p class="tip-text">آیتم‌های کمیاب‌تر از دستاوردها و تورنمنت‌ها به دست می‌آیند</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
