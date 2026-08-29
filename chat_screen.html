@@ -1,0 +1,728 @@
+<div id="chat-screen" class="screen screen-chat" data-screen-name="chat">
+    <div class="screen-content">
+        <header class="screen-header">
+            <button class="btn-back" data-route="home" aria-label="بازگشت">
+                <span class="icon">→</span>
+            </button>
+            <h1 class="screen-title">چت</h1>
+            <div class="header-actions">
+                <button class="btn-icon btn-small" id="btn-chat-search" aria-label="جستجو">
+                    <span class="icon">🔍</span>
+                </button>
+                <button class="btn-icon btn-small" id="btn-chat-settings" aria-label="تنظیمات">
+                    <span class="icon">️</span>
+                </button>
+            </div>
+        </header>
+
+        <section class="chat-channels">
+            <div class="channels-scroll">
+                <button class="channel-btn active" data-channel="public" id="channel-public">
+                    <span class="channel-icon">🌐</span>
+                    <span class="channel-text">عمومی</span>
+                    <span class="channel-badge" id="badge-public">۱۲</span>
+                </button>
+                <button class="channel-btn" data-channel="private" id="channel-private">
+                    <span class="channel-icon">💬</span>
+                    <span class="channel-text">خصوصی</span>
+                    <span class="channel-badge" id="badge-private">۳</span>
+                </button>
+                <button class="channel-btn" data-channel="room" id="channel-room">
+                    <span class="channel-icon">🎮</span>
+                    <span class="channel-text">اتاق</span>
+                </button>
+                <button class="channel-btn" data-channel="union" id="channel-union">
+                    <span class="channel-icon">🏅</span>
+                    <span class="channel-text">اتحادیه</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="chat-private-list" id="chat-private-list-section" style="display: none;">
+            <div class="section-header">
+                <h3 class="section-title">گفتگوهای خصوصی</h3>
+                <button class="btn-icon btn-small" id="btn-new-private-chat" aria-label="گفتگوی جدید">
+                    <span class="icon">✏️</span>
+                </button>
+            </div>
+            <div id="private-chats-list" class="private-chats-list">
+                <div class="private-chat-item" data-friend-id="f1">
+                    <div class="chat-avatar-wrapper">
+                        <span class="avatar avatar-medium">👨</span>
+                        <span class="online-indicator"></span>
+                    </div>
+                    <div class="chat-info">
+                        <h4 class="chat-name">علی رضایی</h4>
+                        <p class="chat-last-message">سلام! خوبی؟</p>
+                    </div>
+                    <div class="chat-meta">
+                        <span class="chat-time">۱۴:۳۰</span>
+                        <span class="unread-badge">۲</span>
+                    </div>
+                </div>
+                <div class="private-chat-item" data-friend-id="f2">
+                    <div class="chat-avatar-wrapper">
+                        <span class="avatar avatar-medium">👩</span>
+                        <span class="online-indicator"></span>
+                    </div>
+                    <div class="chat-info">
+                        <h4 class="chat-name">مریم احمدی</h4>
+                        <p class="chat-last-message">بازی دیشب عالی بود!</p>
+                    </div>
+                    <div class="chat-meta">
+                        <span class="chat-time">۱۲:۱۵</span>
+                        <span class="unread-badge">۱</span>
+                    </div>
+                </div>
+                <div class="private-chat-item" data-friend-id="f3">
+                    <div class="chat-avatar-wrapper">
+                        <span class="avatar avatar-medium">👨</span>
+                        <span class="online-indicator offline"></span>
+                    </div>
+                    <div class="chat-info">
+                        <h4 class="chat-name">رضا محمدی</h4>
+                        <p class="chat-last-message">فردا بازی می‌کنیم؟</p>
+                    </div>
+                    <div class="chat-meta">
+                        <span class="chat-time">دیروز</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="chat-messages-section" id="chat-messages-section">
+            <div class="chat-header-info" id="chat-header-info">
+                <div class="chat-header-right">
+                    <span class="chat-channel-icon">🌐</span>
+                    <div class="chat-header-text">
+                        <h3 class="chat-channel-name">چت عمومی</h3>
+                        <p class="chat-online-count"><span id="chat-online-count">۱۲۴</span> نفر آنلاین</p>
+                    </div>
+                </div>
+                <button class="btn-icon btn-small" id="btn-chat-info" aria-label="اطلاعات">
+                    <span class="icon">ℹ️</span>
+                </button>
+            </div>
+
+            <div class="chat-search-bar" id="chat-search-bar" style="display: none;">
+                <div class="input-wrapper search-wrapper">
+                    <span class="input-icon">🔍</span>
+                    <input
+                        type="text"
+                        id="chat-search-input"
+                        class="input-field"
+                        placeholder="جستجو در پیام‌ها..."
+                        maxlength="50"
+                    >
+                    <button class="btn-clear-search" id="btn-clear-chat-search">
+                        <span class="icon">✕</span>
+                    </button>
+                </div>
+                <button class="btn btn-small" id="btn-close-chat-search">بستن</button>
+            </div>
+
+            <div class="chat-date-divider">
+                <span class="date-text">امروز</span>
+            </div>
+
+            <div id="chat-messages-container" class="chat-messages-container">
+                <div class="chat-message other" data-message-id="msg1">
+                    <div class="message-avatar-wrapper">
+                        <span class="avatar avatar-small">👨</span>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-author">علی رضایی</span>
+                            <span class="message-tier-badge bronze">برنز</span>
+                            <span class="message-time">۱۴:۳۰</span>
+                        </div>
+                        <div class="message-body">
+                            <p class="message-text">سلام به همه! کسی هست بازی کنیم؟</p>
+                        </div>
+                        <div class="message-footer">
+                            <div class="message-reactions">
+                                <button class="reaction-btn" data-emoji="👍">
+                                    <span class="emoji">👍</span>
+                                    <span class="count"></span>
+                                </button>
+                            </div>
+                            <div class="message-actions">
+                                <button class="action-btn btn-reply" data-message-id="msg1" aria-label="پاسخ">
+                                    <span class="icon">↩️</span>
+                                </button>
+                                <button class="action-btn btn-react" data-message-id="msg1" aria-label="واکنش">
+                                    <span class="icon">😀</span>
+                                </button>
+                                <button class="action-btn btn-report" data-message-id="msg1" aria-label="گزارش">
+                                    <span class="icon">⚠️</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message other" data-message-id="msg2">
+                    <div class="message-avatar-wrapper">
+                        <span class="avatar avatar-small">👩</span>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-author">مریم احمدی</span>
+                            <span class="message-tier-badge silver">نقره</span>
+                            <span class="message-time">۱۴:۳۲</span>
+                        </div>
+                        <div class="message-body">
+                            <div class="reply-preview">
+                                <span class="reply-author">علی رضایی:</span>
+                                <span class="reply-text">سلام به همه! کسی هست بازی کنیم؟</span>
+                            </div>
+                            <p class="message-text">من هستم! بیا بازی کنیم 🎮</p>
+                        </div>
+                        <div class="message-footer">
+                            <div class="message-reactions">
+                                <button class="reaction-btn" data-emoji="❤️">
+                                    <span class="emoji">❤️</span>
+                                    <span class="count">۲</span>
+                                </button>
+                            </div>
+                            <div class="message-actions">
+                                <button class="action-btn btn-reply" data-message-id="msg2" aria-label="پاسخ">
+                                    <span class="icon">↩️</span>
+                                </button>
+                                <button class="action-btn btn-react" data-message-id="msg2" aria-label="واکنش">
+                                    <span class="icon">😀</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message self" data-message-id="msg3">
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-author">شما</span>
+                            <span class="message-time">۱۴:۳۳</span>
+                            <span class="message-status read">✓✓</span>
+                        </div>
+                        <div class="message-body">
+                            <p class="message-text">منم میام! اتاق بسازم؟</p>
+                        </div>
+                        <div class="message-footer">
+                            <div class="message-reactions">
+                                <button class="reaction-btn" data-emoji="👍">
+                                    <span class="emoji">👍</span>
+                                    <span class="count">۱</span>
+                                </button>
+                            </div>
+                            <div class="message-actions">
+                                <button class="action-btn btn-edit" data-message-id="msg3" aria-label="ویرایش">
+                                    <span class="icon">✏️</span>
+                                </button>
+                                <button class="action-btn btn-delete" data-message-id="msg3" aria-label="حذف">
+                                    <span class="icon">️</span>
+                                </button>
+                                <button class="action-btn btn-react" data-message-id="msg3" aria-label="واکنش">
+                                    <span class="icon">😀</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message other" data-message-id="msg4">
+                    <div class="message-avatar-wrapper">
+                        <span class="avatar avatar-small">👨</span>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-author">رضا محمدی</span>
+                            <span class="message-tier-badge gold">طلا</span>
+                            <span class="message-time">۱۴:۳۵</span>
+                        </div>
+                        <div class="message-body">
+                            <p class="message-text emoji-only">🎊🔥</p>
+                        </div>
+                        <div class="message-footer">
+                            <div class="message-reactions">
+                                <button class="reaction-btn" data-emoji="🔥">
+                                    <span class="emoji">🔥</span>
+                                    <span class="count">۵</span>
+                                </button>
+                                <button class="reaction-btn" data-emoji="❤️">
+                                    <span class="emoji">❤️</span>
+                                    <span class="count">۳</span>
+                                </button>
+                            </div>
+                            <div class="message-actions">
+                                <button class="action-btn btn-reply" data-message-id="msg4" aria-label="پاسخ">
+                                    <span class="icon">↩️</span>
+                                </button>
+                                <button class="action-btn btn-react" data-message-id="msg4" aria-label="واکنش">
+                                    <span class="icon">😀</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message system" data-message-id="msg5">
+                    <div class="message-content">
+                        <div class="message-body">
+                            <p class="message-text system-text">
+                                <span class="system-icon">🏆</span>
+                                <span class="system-text-content">علی رضایی به لیگ نقره ارتقا یافت!</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message other" data-message-id="msg6">
+                    <div class="message-avatar-wrapper">
+                        <span class="avatar avatar-small">👩</span>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-author">مریم احمدی</span>
+                            <span class="message-tier-badge silver">نقره</span>
+                            <span class="message-time">۱۴:۴۰</span>
+                            <span class="edited-badge">ویرایش شده</span>
+                        </div>
+                        <div class="message-body">
+                            <p class="message-text">اتاق رو بساز، کد رو بفرست </p>
+                        </div>
+                        <div class="message-footer">
+                            <div class="message-actions">
+                                <button class="action-btn btn-reply" data-message-id="msg6" aria-label="پاسخ">
+                                    <span class="icon">↩️</span>
+                                </button>
+                                <button class="action-btn btn-react" data-message-id="msg6" aria-label="واکنش">
+                                    <span class="icon">😀</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message other sticker" data-message-id="msg7">
+                    <div class="message-avatar-wrapper">
+                        <span class="avatar avatar-small">👨</span>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-author">رضا محمدی</span>
+                            <span class="message-time">۱۴:۴۲</span>
+                        </div>
+                        <div class="message-body sticker-body">
+                            <div class="sticker-image">
+                                <span class="sticker-emoji"></span>
+                            </div>
+                        </div>
+                        <div class="message-footer">
+                            <div class="message-actions">
+                                <button class="action-btn btn-reply" data-message-id="msg7" aria-label="پاسخ">
+                                    <span class="icon">↩️</span>
+                                </button>
+                                <button class="action-btn btn-react" data-message-id="msg7" aria-label="واکنش">
+                                    <span class="icon">😀</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-scroll-bottom" id="btn-scroll-bottom" style="display: none;" aria-label="پایین">
+                <span class="icon">⬇️</span>
+                <span class="new-count" id="new-messages-count">۰</span>
+            </button>
+
+            <div class="typing-indicator" id="typing-indicator" style="display: none;">
+                <div class="typing-dots">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <span class="typing-text" id="typing-text">علی در حال تایپ است...</span>
+            </div>
+        </section>
+
+        <section class="chat-input-section">
+            <div class="reply-preview" id="reply-preview" style="display: none;">
+                <div class="reply-content">
+                    <span class="reply-label">پاسخ به:</span>
+                    <span class="reply-author" id="reply-author-name">علی رضایی</span>
+                    <span class="reply-text" id="reply-text-preview">سلام به همه!</span>
+                </div>
+                <button class="btn-cancel-reply" id="btn-cancel-reply" aria-label="لغو پاسخ">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+
+            <div class="edit-preview" id="edit-preview" style="display: none;">
+                <div class="edit-content">
+                    <span class="edit-label">✏️ در حال ویرایش:</span>
+                    <span class="edit-text" id="edit-text-preview">متن پیام</span>
+                </div>
+                <button class="btn-cancel-edit" id="btn-cancel-edit" aria-label="لغو ویرایش">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+
+            <div class="quick-messages-bar" id="quick-messages-bar">
+                <div class="quick-messages-scroll">
+                    <button class="quick-msg-btn" data-message="سلام">سلام</button>
+                    <button class="quick-msg-btn" data-message="خسته نباشید">خسته نباشید</button>
+                    <button class="quick-msg-btn" data-message="دستت درد نکنه">دستت درد نکنه</button>
+                    <button class="quick-msg-btn" data-message="ایول!">ایول!</button>
+                    <button class="quick-msg-btn" data-message="بازی خوبی بود">بازی خوبی بود</button>
+                    <button class="quick-msg-btn" data-message="دوباره؟">دوباره؟</button>
+                    <button class="quick-msg-btn" data-message="موفق باشی">موفق باشی</button>
+                    <button class="quick-msg-btn" data-message="GG">GG</button>
+                </div>
+                <button class="btn-toggle-quick" id="btn-toggle-quick" aria-label="پیام‌های سریع">
+                    <span class="icon">⚡</span>
+                </button>
+            </div>
+
+            <div class="chat-input-container">
+                <button class="btn-attachment" id="btn-attachment" aria-label="پیوست">
+                    <span class="icon"></span>
+                </button>
+                <div class="input-wrapper chat-input-wrapper">
+                    <textarea
+                        id="chat-message-input"
+                        class="input-field chat-textarea"
+                        placeholder="پیام خود را بنویسید..."
+                        maxlength="250"
+                        rows="1"
+                    ></textarea>
+                    <span class="char-counter" id="chat-char-counter">۰/۲۵</span>
+                </div>
+                <button class="btn-emoji" id="btn-emoji-picker" aria-label="ایموجی">
+                    <span class="icon">😀</span>
+                </button>
+                <button class="btn-sticker" id="btn-sticker-picker" aria-label="استیکر">
+                    <span class="icon">🎭</span>
+                </button>
+                <button class="btn-send" id="btn-send-message" aria-label="ارسال">
+                    <span class="icon">📤</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="emoji-picker-panel" id="emoji-picker-panel" style="display: none;">
+            <div class="picker-header">
+                <h4 class="picker-title">ایموجی‌ها</h4>
+                <button class="btn-close-picker" id="btn-close-emoji-picker" aria-label="بستن">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+            <div class="picker-search">
+                <div class="input-wrapper search-wrapper">
+                    <span class="input-icon">🔍</span>
+                    <input
+                        type="text"
+                        id="emoji-search-input"
+                        class="input-field"
+                        placeholder="جستجوی ایموجی..."
+                        maxlength="30"
+                    >
+                </div>
+            </div>
+            <div class="emoji-categories">
+                <button class="emoji-category-btn active" data-category="smileys">😀</button>
+                <button class="emoji-category-btn" data-category="people">👥</button>
+                <button class="emoji-category-btn" data-category="nature">🌿</button>
+                <button class="emoji-category-btn" data-category="food">🍕</button>
+                <button class="emoji-category-btn" data-category="activities">⚽</button>
+                <button class="emoji-category-btn" data-category="objects">💡</button>
+                <button class="emoji-category-btn" data-category="symbols">❤️</button>
+                <button class="emoji-category-btn" data-category="flags"></button>
+            </div>
+            <div class="emoji-grid" id="emoji-grid">
+                <button class="emoji-item" data-emoji="😀">😀</button>
+                <button class="emoji-item" data-emoji="😂">😂</button>
+                <button class="emoji-item" data-emoji="🥰">🥰</button>
+                <button class="emoji-item" data-emoji="😍">😍</button>
+                <button class="emoji-item" data-emoji="🤩"></button>
+                <button class="emoji-item" data-emoji="😎">😎</button>
+                <button class="emoji-item" data-emoji="🤔">🤔</button>
+                <button class="emoji-item" data-emoji="😢">😢</button>
+                <button class="emoji-item" data-emoji="😭">😭</button>
+                <button class="emoji-item" data-emoji="😡">😡</button>
+                <button class="emoji-item" data-emoji="🤯">🤯</button>
+                <button class="emoji-item" data-emoji="">🥳</button>
+                <button class="emoji-item" data-emoji="😴">😴</button>
+                <button class="emoji-item" data-emoji="🤮">🤮</button>
+                <button class="emoji-item" data-emoji="">👍</button>
+                <button class="emoji-item" data-emoji="">👎</button>
+                <button class="emoji-item" data-emoji="❤️">❤️</button>
+                <button class="emoji-item" data-emoji="🔥"></button>
+                <button class="emoji-item" data-emoji="⭐">⭐</button>
+                <button class="emoji-item" data-emoji="🎉">🎉</button>
+                <button class="emoji-item" data-emoji="🎊">🎊</button>
+                <button class="emoji-item" data-emoji="💯">💯</button>
+                <button class="emoji-item" data-emoji="✅">✅</button>
+                <button class="emoji-item" data-emoji="">❌</button>
+            </div>
+            <div class="emoji-favorites" id="emoji-favorites">
+                <h5 class="favorites-title">مورد علاقه‌ها</h5>
+                <div class="favorites-grid" id="favorites-grid"></div>
+            </div>
+        </section>
+
+        <section class="sticker-picker-panel" id="sticker-picker-panel" style="display: none;">
+            <div class="picker-header">
+                <h4 class="picker-title">استیکرها</h4>
+                <button class="btn-close-picker" id="btn-close-sticker-picker" aria-label="بستن">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+            <div class="sticker-categories">
+                <button class="sticker-category-btn active" data-pack="default">پیش‌فرض</button>
+                <button class="sticker-category-btn" data-pack="gaming">بازی</button>
+                <button class="sticker-category-btn" data-pack="emotions">احساسات</button>
+                <button class="sticker-category-btn" data-pack="animals">حیوانات</button>
+            </div>
+            <div class="sticker-grid" id="sticker-grid">
+                <button class="sticker-item" data-sticker-id="s1">
+                    <span class="sticker-emoji">🎮</span>
+                </button>
+                <button class="sticker-item" data-sticker-id="s2">
+                    <span class="sticker-emoji">🏆</span>
+                </button>
+                <button class="sticker-item" data-sticker-id="s3">
+                    <span class="sticker-emoji"></span>
+                </button>
+                <button class="sticker-item" data-sticker-id="s4">
+                    <span class="sticker-emoji">🔥</span>
+                </button>
+                <button class="sticker-item" data-sticker-id="s5">
+                    <span class="sticker-emoji">💪</span>
+                </button>
+                <button class="sticker-item" data-sticker-id="s6">
+                    <span class="sticker-emoji">👑</span>
+                </button>
+                <button class="sticker-item locked" data-sticker-id="s7">
+                    <span class="sticker-emoji">🎭</span>
+                    <span class="sticker-lock">🔒</span>
+                </button>
+                <button class="sticker-item locked" data-sticker-id="s8">
+                    <span class="sticker-emoji">🦄</span>
+                    <span class="sticker-lock">🔒</span>
+                </button>
+            </div>
+            <div class="sticker-shop-link">
+                <a href="#/shop" class="shop-link" data-route="shop">
+                    <span class="shop-icon">🛒</span>
+                    <span class="shop-text">مشاهده استیکرهای بیشتر در فروشگاه</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="reaction-picker-panel" id="reaction-picker-panel" style="display: none;">
+            <div class="reaction-picker-header">
+                <span class="reaction-picker-label">واکنش خود را انتخاب کنید</span>
+            </div>
+            <div class="reaction-picker-grid">
+                <button class="reaction-picker-item" data-emoji="👍">👍</button>
+                <button class="reaction-picker-item" data-emoji="❤️">❤️</button>
+                <button class="reaction-picker-item" data-emoji="😂">😂</button>
+                <button class="reaction-picker-item" data-emoji="😮">😮</button>
+                <button class="reaction-picker-item" data-emoji="">😢</button>
+                <button class="reaction-picker-item" data-emoji="🔥">🔥</button>
+                <button class="reaction-picker-item" data-emoji="🎉">🎉</button>
+                <button class="reaction-picker-more" id="btn-more-reactions">
+                    <span class="icon">➕</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="chat-settings-panel" id="chat-settings-panel" style="display: none;">
+            <div class="settings-overlay"></div>
+            <div class="settings-content">
+                <div class="settings-header">
+                    <h3 class="settings-title">تنظیمات چت</h3>
+                    <button class="btn-close-settings" id="btn-close-chat-settings" aria-label="بستن">
+                        <span class="icon">✕</span>
+                    </button>
+                </div>
+                <div class="settings-list">
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-icon">🔔</span>
+                            <div class="setting-text">
+                                <span class="setting-title">اعلان‌های چت</span>
+                                <span class="setting-desc">دریافت اعلان برای پیام‌های جدید</span>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="setting-chat-notif" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-icon">🔊</span>
+                            <div class="setting-text">
+                                <span class="setting-title">صدای پیام</span>
+                                <span class="setting-desc">پخش صدا هنگام دریافت پیام</span>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="setting-chat-sound" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-icon">📳</span>
+                            <div class="setting-text">
+                                <span class="setting-title">ویبره</span>
+                                <span class="setting-desc">لرزش هنگام دریافت پیام</span>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="setting-chat-vibrate" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-icon">👁️</span>
+                            <div class="setting-text">
+                                <span class="setting-title">نمایش وضعیت خوانده شده</span>
+                                <span class="setting-desc">نمایش تیک آبی برای پیام‌های خوانده شده</span>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="setting-read-receipts" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-icon">🔒</span>
+                            <div class="setting-text">
+                                <span class="setting-title">فیلتر محتوای نامناسب</span>
+                                <span class="setting-desc">پنهان کردن پیام‌های نامناسب</span>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="setting-content-filter" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-icon">🎨</span>
+                            <div class="setting-text">
+                                <span class="setting-title">اندازه فونت</span>
+                                <span class="setting-desc">اندازه متن پیام‌ها</span>
+                            </div>
+                        </div>
+                        <select id="setting-font-size" class="setting-select">
+                            <option value="small">کوچک</option>
+                            <option value="medium" selected>متوسط</option>
+                            <option value="large">بزرگ</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="settings-actions">
+                    <button class="btn btn-danger btn-block" id="btn-clear-chat-history">
+                        <span class="btn-icon">️</span>
+                        <span class="btn-text">پاک کردن تاریخچه چت</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="report-modal" id="chat-report-modal" style="display: none;">
+            <div class="modal-overlay"></div>
+            <div class="modal-content report-modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">گزارش پیام</h3>
+                    <button class="btn-icon btn-close-modal" id="btn-close-report-modal" aria-label="بستن">
+                        <span class="icon">✕</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="reported-message" id="reported-message-preview">
+                        <span class="reported-author">علی رضایی:</span>
+                        <span class="reported-text">متن پیام گزارش شده</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">دلیل گزارش</label>
+                        <div class="report-reasons">
+                            <label class="reason-option">
+                                <input type="radio" name="report-reason" value="spam">
+                                <span class="reason-text">اسپم</span>
+                            </label>
+                            <label class="reason-option">
+                                <input type="radio" name="report-reason" value="abuse">
+                                <span class="reason-text">توهین</span>
+                            </label>
+                            <label class="reason-option">
+                                <input type="radio" name="report-reason" value="inappropriate">
+                                <span class="reason-text">محتوای نامناسب</span>
+                            </label>
+                            <label class="reason-option">
+                                <input type="radio" name="report-reason" value="cheating">
+                                <span class="reason-text">تقلب</span>
+                            </label>
+                            <label class="reason-option">
+                                <input type="radio" name="report-reason" value="other">
+                                <span class="reason-text">سایر</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="report-description" class="form-label">توضیحات (اختیاری)</label>
+                        <div class="input-wrapper textarea-wrapper">
+                            <textarea
+                                id="report-description"
+                                class="input-field textarea-field"
+                                placeholder="توضیحات بیشتر..."
+                                maxlength="500"
+                                rows="3"
+                            ></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline" id="btn-cancel-report">
+                        انصراف
+                    </button>
+                    <button class="btn btn-danger" id="btn-submit-report">
+                        <span class="btn-icon">⚠️</span>
+                        <span class="btn-text">ارسال گزارش</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="chat-tips">
+            <div class="section-header">
+                <h3 class="section-title">نکات چت</h3>
+            </div>
+            <div class="tips-list">
+                <div class="tip-item">
+                    <span class="tip-icon">💡</span>
+                    <p class="tip-text">برای پاسخ به پیام، روی آیکون ↩️ کلیک کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">😀</span>
+                    <p class="tip-text">با واکنش‌های ایموجی به پیام‌ها پاسخ دهید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">⚠️</span>
+                    <p class="tip-text">پیام‌های نامناسب را گزارش دهید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">⚡</span>
+                    <p class="tip-text">از پیام‌های سریع برای پاسخ‌های رایج استفاده کنید</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
