@@ -1,0 +1,345 @@
+<div id="game-screen" class="screen screen-game" data-screen-name="game">
+    <div class="screen-content">
+        <header class="game-top-bar">
+            <div class="game-info-left">
+                <button id="btn-game-menu" class="btn-icon btn-small" aria-label="منوی بازی">
+                    <span class="icon">☰</span>
+                </button>
+                <div class="game-mode-badge" id="game-mode-badge">
+                    <span class="mode-icon">🎴</span>
+                    <span class="mode-text">کلاسیک</span>
+                </div>
+            </div>
+            <div class="game-info-center">
+                <div class="game-timer" id="game-timer">
+                    <span class="timer-icon">⏱️</span>
+                    <span class="timer-value" id="timer-value">۳۰</span>
+                </div>
+            </div>
+            <div class="game-info-right">
+                <button id="btn-game-chat" class="btn-icon btn-small" aria-label="چت">
+                    <span class="icon"></span>
+                </button>
+                <button id="btn-game-settings" class="btn-icon btn-small" aria-label="تنظیمات">
+                    <span class="icon">⚙️</span>
+                </button>
+            </div>
+        </header>
+
+        <section class="game-table">
+            <div class="table-surface">
+                <div class="table-center">
+                    <div class="trump-indicator" id="trump-indicator" style="display: none;">
+                        <span class="trump-label">حکم:</span>
+                        <span class="trump-suit" id="trump-suit"></span>
+                    </div>
+                    <div class="round-info" id="round-info">
+                        <span class="round-label">راند</span>
+                        <span class="round-value" id="round-number">۱</span>
+                        <span class="round-separator">/</span>
+                        <span class="round-total" id="round-total">۲</span>
+                    </div>
+                </div>
+
+                <div class="opponent-area opponent-top" id="opponent-top">
+                    <div class="player-info player-top">
+                        <div class="player-avatar-wrapper">
+                            <span class="avatar avatar-medium" id="avatar-top">👤</span>
+                            <span class="player-status" id="status-top"></span>
+                        </div>
+                        <div class="player-details">
+                            <span class="player-name" id="name-top">حریف بالا</span>
+                            <span class="player-team" id="team-top">تیم </span>
+                        </div>
+                        <div class="player-cards-count">
+                            <span class="cards-icon"></span>
+                            <span class="cards-count" id="cards-top">۱۳</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="opponent-area opponent-right" id="opponent-right">
+                    <div class="player-info player-right">
+                        <div class="player-avatar-wrapper">
+                            <span class="avatar avatar-medium" id="avatar-right"></span>
+                            <span class="player-status" id="status-right"></span>
+                        </div>
+                        <div class="player-details">
+                            <span class="player-name" id="name-right">حریف راست</span>
+                            <span class="player-team" id="team-right">تیم </span>
+                        </div>
+                        <div class="player-cards-count">
+                            <span class="cards-icon"></span>
+                            <span class="cards-count" id="cards-right">۱</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="opponent-area opponent-left" id="opponent-left">
+                    <div class="player-info player-left">
+                        <div class="player-avatar-wrapper">
+                            <span class="avatar avatar-medium" id="avatar-left">👤</span>
+                            <span class="player-status" id="status-left"></span>
+                        </div>
+                        <div class="player-details">
+                            <span class="player-name" id="name-left">حریف چپ</span>
+                            <span class="player-team" id="team-left">تیم ۱</span>
+                        </div>
+                        <div class="player-cards-count">
+                            <span class="cards-icon"></span>
+                            <span class="cards-count" id="cards-left">۱۳</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trick-area" id="trick-area">
+                    <div class="played-card-slot slot-top" id="slot-top"></div>
+                    <div class="played-card-slot slot-right" id="slot-right"></div>
+                    <div class="played-card-slot slot-bottom" id="slot-bottom"></div>
+                    <div class="played-card-slot slot-left" id="slot-left"></div>
+                    <div class="trick-winner-indicator" id="trick-winner" style="display: none;">
+                        <span class="winner-icon">👑</span>
+                        <span class="winner-text" id="winner-text"></span>
+                    </div>
+                </div>
+
+                <div class="dealer-indicator" id="dealer-indicator" style="display: none;">
+                    <span class="dealer-icon"></span>
+                    <span class="dealer-text">دیلر</span>
+                </div>
+
+                <div class="hakem-indicator" id="hakem-indicator" style="display: none;">
+                    <span class="hakem-icon">👑</span>
+                    <span class="hakem-text">حاکم</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="game-scoreboard" id="game-scoreboard">
+            <div class="score-team team-1">
+                <div class="team-header">
+                    <span class="team-name" id="team-1-name">تیم شما</span>
+                    <span class="team-badge" id="team-1-badge">تیم ۱</span>
+                </div>
+                <div class="team-score">
+                    <span class="score-value" id="score-team-1">۰</span>
+                    <span class="score-label">امتیاز</span>
+                </div>
+                <div class="team-tricks">
+                    <span class="tricks-label">دست‌ها:</span>
+                    <span class="tricks-value" id="tricks-team-1">۰</span>
+                </div>
+            </div>
+            <div class="score-divider">
+                <span class="divider-text">VS</span>
+            </div>
+            <div class="score-team team-2">
+                <div class="team-header">
+                    <span class="team-name" id="team-2-name">تیم حریف</span>
+                    <span class="team-badge" id="team-2-badge">تیم ۲</span>
+                </div>
+                <div class="team-score">
+                    <span class="score-value" id="score-team-2">۰</span>
+                    <span class="score-label">امتیاز</span>
+                </div>
+                <div class="team-tricks">
+                    <span class="tricks-label">دست‌ها:</span>
+                    <span class="tricks-value" id="tricks-team-2">۰</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="player-hand-area" id="player-hand-area">
+            <div class="hand-info">
+                <div class="player-status-indicator" id="player-turn-indicator" style="display: none;">
+                    <span class="turn-icon">🎯</span>
+                    <span class="turn-text">نوبت شما</span>
+                </div>
+                <div class="hand-cards-count">
+                    <span class="cards-icon">🃏</span>
+                    <span class="cards-count" id="player-cards-count">۱۳</span>
+                </div>
+            </div>
+            <div class="hand-container" id="player-hand">
+                <div class="hand-cards" id="hand-cards"></div>
+            </div>
+            <div class="hand-actions" id="hand-actions">
+                <button id="btn-sort-hand" class="btn-icon btn-small" aria-label="مرتب‌سازی">
+                    <span class="icon">🔢</span>
+                </button>
+                <button id="btn-show-probabilities" class="btn-icon btn-small" aria-label="احتمالات">
+                    <span class="icon"></span>
+                </button>
+            </div>
+        </section>
+
+        <section class="trump-selection-area" id="trump-selection-area" style="display: none;">
+            <div class="trump-selection-overlay"></div>
+            <div class="trump-selection-panel">
+                <h3 class="trump-title">حکم را انتخاب کنید</h3>
+                <p class="trump-subtitle">یکی از چهار خال را به عنوان حکم انتخاب کنید</p>
+                <div class="trump-options" id="trump-options">
+                    <button class="trump-option" data-suit="spades" id="btn-trump-spades">
+                        <span class="suit-icon suit-spades"></span>
+                        <span class="suit-name">پیک</span>
+                    </button>
+                    <button class="trump-option" data-suit="hearts" id="btn-trump-hearts">
+                        <span class="suit-icon suit-hearts"></span>
+                        <span class="suit-name">دل</span>
+                    </button>
+                    <button class="trump-option" data-suit="diamonds" id="btn-trump-diamonds">
+                        <span class="suit-icon suit-diamonds"></span>
+                        <span class="suit-name">خشت</span>
+                    </button>
+                    <button class="trump-option" data-suit="clubs" id="btn-trump-clubs">
+                        <span class="suit-icon suit-clubs"></span>
+                        <span class="suit-name">گشنیز</span>
+                    </button>
+                </div>
+                <div class="trump-auto" id="trump-auto-section">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" id="auto-trump" class="checkbox-input">
+                        <span class="checkbox-label">انتخاب خودکار بر اساس دست</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <section class="kot-declaration-area" id="kot-declaration-area" style="display: none;">
+            <div class="kot-panel">
+                <h3 class="kot-title">اعلام کت</h3>
+                <p class="kot-subtitle">آیا مطمئن هستید که می‌خواهید کت اعلام کنید؟</p>
+                <div class="kot-actions">
+                    <button id="btn-declare-kot" class="btn btn-primary">
+                        <span class="btn-icon">👑</span>
+                        <span class="btn-text">اعلام کت</span>
+                    </button>
+                    <button id="btn-declare-double-kot" class="btn btn-warning">
+                        <span class="btn-icon">👑</span>
+                        <span class="btn-text">اعلام کت دبل</span>
+                    </button>
+                    <button id="btn-cancel-kot" class="btn btn-outline">
+                        <span class="btn-text">انصراف</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="game-chat-panel" id="game-chat-panel" style="display: none;">
+            <div class="chat-panel-header">
+                <h4 class="chat-title">چت بازی</h4>
+                <button id="btn-close-game-chat" class="btn-icon btn-small" aria-label="بستن چت">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+            <div class="chat-messages" id="game-chat-messages"></div>
+            <div class="quick-messages" id="game-quick-messages">
+                <button class="quick-msg-btn" data-message="سلام">سلام</button>
+                <button class="quick-msg-btn" data-message="خسته نباشید">خسته نباشید</button>
+                <button class="quick-msg-btn" data-message="دستت درد نکنه">دستت درد نکنه</button>
+                <button class="quick-msg-btn" data-message="ایول!">ایول!</button>
+                <button class="quick-msg-btn" data-message="GG">GG</button>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="game-chat-input" class="input-field" placeholder="پیام خود را بنویسید..." maxlength="250">
+                <button id="btn-send-game-chat" class="btn btn-primary btn-small">
+                    <span class="icon">📤</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="game-menu-overlay" id="game-menu-overlay" style="display: none;">
+            <div class="game-menu-panel">
+                <div class="menu-header">
+                    <h3 class="menu-title">منوی بازی</h3>
+                    <button id="btn-close-game-menu" class="btn-icon btn-small" aria-label="بستن منو">
+                        <span class="icon">✕</span>
+                    </button>
+                </div>
+                <div class="menu-items">
+                    <button class="menu-item" id="btn-menu-resume">
+                        <span class="menu-icon">▶️</span>
+                        <span class="menu-text">ادامه بازی</span>
+                    </button>
+                    <button class="menu-item" id="btn-menu-pause">
+                        <span class="menu-icon">️</span>
+                        <span class="menu-text">توقف بازی</span>
+                    </button>
+                    <button class="menu-item" id="btn-menu-sound">
+                        <span class="menu-icon"></span>
+                        <span class="menu-text">صدا</span>
+                        <span class="menu-toggle" id="sound-toggle">روشن</span>
+                    </button>
+                    <button class="menu-item" id="btn-menu-settings">
+                        <span class="menu-icon">⚙️</span>
+                        <span class="menu-text">تنظیمات</span>
+                    </button>
+                    <button class="menu-item" id="btn-menu-surrender">
+                        <span class="menu-icon">️</span>
+                        <span class="menu-text">تسلیم شدن</span>
+                    </button>
+                    <button class="menu-item danger" id="btn-menu-leave">
+                        <span class="menu-icon"></span>
+                        <span class="menu-text">ترک بازی</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="last-trick-panel" id="last-trick-panel" style="display: none;">
+            <div class="last-trick-header">
+                <h4 class="last-trick-title">آخرین دست</h4>
+                <button id="btn-close-last-trick" class="btn-icon btn-small" aria-label="بستن">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+            <div class="last-trick-cards" id="last-trick-cards"></div>
+        </section>
+
+        <div id="game-result-overlay" class="game-result-overlay" style="display: none;">
+            <div class="game-result-panel">
+                <div class="result-icon" id="result-icon">🏆</div>
+                <h2 class="result-title" id="result-title">پیروزی!</h2>
+                <p class="result-subtitle" id="result-subtitle">تبریک می‌گوییم</p>
+                <div class="result-stats">
+                    <div class="result-stat">
+                        <span class="stat-label">امتیاز شما</span>
+                        <span class="stat-value" id="result-score">۷</span>
+                    </div>
+                    <div class="result-stat">
+                        <span class="stat-label">امتیاز حریف</span>
+                        <span class="stat-value" id="result-opponent-score">۳</span>
+                    </div>
+                    <div class="result-stat">
+                        <span class="stat-label">مدت بازی</span>
+                        <span class="stat-value" id="result-duration">۵:۳۰</span>
+                    </div>
+                </div>
+                <div class="result-rewards" id="result-rewards">
+                    <div class="reward-item">
+                        <span class="reward-icon">🪙</span>
+                        <span class="reward-value" id="reward-coins">+۵۰</span>
+                    </div>
+                    <div class="reward-item">
+                        <span class="reward-icon">⭐</span>
+                        <span class="reward-value" id="reward-xp">+۲۵</span>
+                    </div>
+                    <div class="reward-item" id="reward-rating-item">
+                        <span class="reward-icon"></span>
+                        <span class="reward-value" id="reward-rating">+۱۵</span>
+                    </div>
+                </div>
+                <div class="result-actions">
+                    <button id="btn-play-again" class="btn btn-primary btn-large">
+                        <span class="btn-icon">🔄</span>
+                        <span class="btn-text">بازی مجدد</span>
+                    </button>
+                    <button id="btn-return-home" class="btn btn-outline btn-large" data-route="home">
+                        <span class="btn-icon"></span>
+                        <span class="btn-text">بازگشت به خانه</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
