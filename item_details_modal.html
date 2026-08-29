@@ -1,0 +1,490 @@
+<div id="item-details-modal" class="modal modal-medium" data-modal-name="item-details" style="display: none;">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-header-right">
+                <span class="modal-icon" id="item-modal-icon">🎁</span>
+                <h3 class="modal-title">جزئیات آیتم</h3>
+            </div>
+            <div class="modal-header-left">
+                <button class="btn-icon btn-small" id="btn-item-share" aria-label="اشتراک‌گذاری">
+                    <span class="icon">📤</span>
+                </button>
+                <button class="btn-icon btn-small btn-close-modal" id="btn-close-item-details" aria-label="بستن">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="modal-body">
+            <div class="item-details-layout">
+                <div class="item-preview-section">
+                    <div class="item-preview-wrapper" id="item-preview-wrapper">
+                        <div class="item-preview-bg" id="item-preview-bg"></div>
+                        <div class="item-preview-content">
+                            <span class="item-preview-icon" id="item-preview-icon">👤</span>
+                        </div>
+                        <div class="item-rarity-badge" id="item-rarity-badge">
+                            <span class="rarity-icon">⚪</span>
+                            <span class="rarity-text">معمولی</span>
+                        </div>
+                        <div class="item-rotation-controls">
+                            <button class="btn-rotate" id="btn-rotate-left" aria-label="چرخش به چپ">
+                                <span class="icon">↺</span>
+                            </button>
+                            <button class="btn-rotate" id="btn-rotate-right" aria-label="چرخش به راست">
+                                <span class="icon">↻</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="item-quick-stats">
+                        <div class="quick-stat">
+                            <span class="stat-icon">📅</span>
+                            <span class="stat-label">تاریخ کسب</span>
+                            <span class="stat-value" id="item-acquired-date">-</span>
+                        </div>
+                        <div class="quick-stat">
+                            <span class="stat-icon">🎯</span>
+                            <span class="stat-label">منبع</span>
+                            <span class="stat-value" id="item-source">فروشگاه</span>
+                        </div>
+                        <div class="quick-stat">
+                            <span class="stat-icon">👥</span>
+                            <span class="stat-label">مالکان</span>
+                            <span class="stat-value" id="item-owners-count">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-info-section">
+                    <div class="item-title-section">
+                        <h2 class="item-title" id="item-detail-name">نام آیتم</h2>
+                        <div class="item-badges">
+                            <span class="item-type-badge" id="item-type-badge">آواتار</span>
+                            <span class="item-rarity-badge-small common" id="item-rarity-small">معمولی</span>
+                            <span class="item-limited-badge" id="item-limited-badge" style="display: none;">
+                                <span class="icon">⏰</span>
+                                <span class="text">محدود</span>
+                            </span>
+                            <span class="item-new-badge" id="item-new-badge" style="display: none;">جدید</span>
+                        </div>
+                    </div>
+
+                    <div class="item-description">
+                        <p class="description-text" id="item-detail-description">
+                            توضیحات آیتم در اینجا نمایش داده می‌شود. این آیتم یک آیتم ویژه است که می‌توانید از آن در بازی استفاده کنید.
+                        </p>
+                    </div>
+
+                    <div class="item-attributes" id="item-attributes-section">
+                        <h4 class="attributes-title">ویژگی‌ها</h4>
+                        <div class="attributes-grid" id="item-attributes-grid">
+                            <div class="attribute-item">
+                                <span class="attribute-label">نوع:</span>
+                                <span class="attribute-value" id="attr-type">آواتار</span>
+                            </div>
+                            <div class="attribute-item">
+                                <span class="attribute-label">کمیابی:</span>
+                                <span class="attribute-value" id="attr-rarity">معمولی</span>
+                            </div>
+                            <div class="attribute-item">
+                                <span class="attribute-label">وضعیت:</span>
+                                <span class="attribute-value" id="attr-status">غیرفعال</span>
+                            </div>
+                            <div class="attribute-item">
+                                <span class="attribute-label">قابلیت معامله:</span>
+                                <span class="attribute-value" id="attr-tradeable">خیر</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item-preview-section-visual" id="item-visual-preview-section">
+                        <h4 class="preview-title">پیش‌نمایش</h4>
+                        <div class="visual-preview-container" id="item-visual-preview">
+                            <div class="preview-card">
+                                <div class="preview-card-header">
+                                    <span class="preview-card-name">بازیکن</span>
+                                    <span class="preview-card-title">تازه‌کار</span>
+                                </div>
+                                <div class="preview-card-avatar">
+                                    <span id="visual-preview-avatar" class="avatar avatar-large">👤</span>
+                                </div>
+                                <div class="preview-card-stats">
+                                    <span class="preview-stat">🏆 ۱۰۰۰</span>
+                                    <span class="preview-stat">⭐ ۵۰٪</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item-pricing-section" id="item-pricing-section">
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <span class="pricing-label">قیمت:</span>
+                                <div class="pricing-value" id="item-price-display">
+                                    <span class="price-icon" id="price-icon">🪙</span>
+                                    <span class="price-amount" id="price-amount">۱۰۰</span>
+                                </div>
+                            </div>
+                            <div class="pricing-original" id="pricing-original" style="display: none;">
+                                <span class="original-label">قیمت اصلی:</span>
+                                <span class="original-value" id="original-price">۲۰۰</span>
+                                <span class="discount-badge" id="discount-badge">-۵۰٪</span>
+                            </div>
+                            <div class="pricing-balance">
+                                <span class="balance-label">موجودی شما:</span>
+                                <span class="balance-value" id="user-balance">۵,۰۰۰ 🪙</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item-owned-section" id="item-owned-section" style="display: none;">
+                        <div class="owned-card">
+                            <div class="owned-header">
+                                <span class="owned-icon">✅</span>
+                                <span class="owned-text">شما این آیتم را دارید</span>
+                            </div>
+                            <div class="owned-info">
+                                <div class="owned-stat">
+                                    <span class="stat-label">تاریخ کسب:</span>
+                                    <span class="stat-value" id="owned-acquired-date">۱۴۰۵/۰۶/۰۵</span>
+                                </div>
+                                <div class="owned-stat">
+                                    <span class="stat-label">وضعیت:</span>
+                                    <span class="stat-value" id="owned-status">غیرفعال</span>
+                                </div>
+                                <div class="owned-stat">
+                                    <span class="stat-label">دفعات استفاده:</span>
+                                    <span class="stat-value" id="owned-usage-count">۰</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item-actions-section" id="item-actions-section">
+                <div class="actions-primary" id="item-primary-actions">
+                    <button class="btn btn-primary btn-large btn-block" id="btn-item-buy">
+                        <span class="btn-icon">🛒</span>
+                        <span class="btn-text" id="btn-buy-text">خرید آیتم</span>
+                    </button>
+                </div>
+                <div class="actions-secondary" id="item-secondary-actions">
+                    <button class="btn btn-outline btn-block" id="btn-item-equip" style="display: none;">
+                        <span class="btn-icon">✅</span>
+                        <span class="btn-text">استفاده</span>
+                    </button>
+                    <button class="btn btn-outline btn-block" id="btn-item-unequip" style="display: none;">
+                        <span class="btn-icon">❌</span>
+                        <span class="btn-text">غیرفعال کردن</span>
+                    </button>
+                    <button class="btn btn-outline btn-block" id="btn-item-trade" style="display: none;">
+                        <span class="btn-icon">🔄</span>
+                        <span class="btn-text">معامله</span>
+                    </button>
+                    <button class="btn btn-outline btn-block" id="btn-item-gift" style="display: none;">
+                        <span class="btn-icon">🎁</span>
+                        <span class="btn-text">هدیه به دوست</span>
+                    </button>
+                    <button class="btn btn-danger btn-outline btn-block" id="btn-item-sell" style="display: none;">
+                        <span class="btn-icon">💰</span>
+                        <span class="btn-text">فروش</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="item-similar-section" id="item-similar-section">
+                <div class="section-header">
+                    <h4 class="section-title">آیتم‌های مشابه</h4>
+                    <button class="btn-link" id="btn-view-all-similar">مشاهده همه ←</button>
+                </div>
+                <div class="similar-items-carousel" id="similar-items-carousel">
+                    <div class="similar-item-card" data-item-id="similar-1">
+                        <div class="similar-item-image">
+                            <span class="item-icon">👨</span>
+                            <span class="rarity-badge common">معمولی</span>
+                        </div>
+                        <div class="similar-item-info">
+                            <span class="item-name">آواتار مردانه</span>
+                            <span class="item-price">۱۰۰ 🪙</span>
+                        </div>
+                    </div>
+                    <div class="similar-item-card" data-item-id="similar-2">
+                        <div class="similar-item-image">
+                            <span class="item-icon">👩</span>
+                            <span class="rarity-badge common">معمولی</span>
+                        </div>
+                        <div class="similar-item-info">
+                            <span class="item-name">آواتار زنانه</span>
+                            <span class="item-price">۱۰۰ 🪙</span>
+                        </div>
+                    </div>
+                    <div class="similar-item-card" data-item-id="similar-3">
+                        <div class="similar-item-image">
+                            <span class="item-icon"></span>
+                            <span class="rarity-badge rare">کمیاب</span>
+                        </div>
+                        <div class="similar-item-info">
+                            <span class="item-name">آواتار فضایی</span>
+                            <span class="item-price">۵۰۰ 🪙</span>
+                        </div>
+                    </div>
+                    <div class="similar-item-card" data-item-id="similar-4">
+                        <div class="similar-item-image">
+                            <span class="item-icon">🦸</span>
+                            <span class="rarity-badge epic">حماسی</span>
+                        </div>
+                        <div class="similar-item-info">
+                            <span class="item-name">آواتار قهرمان</span>
+                            <span class="item-price">۲۵ 💎</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item-reviews-section" id="item-reviews-section">
+                <div class="section-header">
+                    <h4 class="section-title">نظرات بازیکنان</h4>
+                    <span class="reviews-count" id="reviews-count">۲۴ نظر</span>
+                </div>
+                <div class="reviews-summary">
+                    <div class="rating-display">
+                        <span class="rating-value" id="item-average-rating">۴.۵</span>
+                        <div class="rating-stars" id="item-rating-stars">
+                            <span class="star filled">⭐</span>
+                            <span class="star filled">⭐</span>
+                            <span class="star filled">⭐</span>
+                            <span class="star filled">⭐</span>
+                            <span class="star half">⭐</span>
+                        </div>
+                        <span class="rating-count">از ۲۴ نظر</span>
+                    </div>
+                    <div class="rating-breakdown">
+                        <div class="rating-bar">
+                            <span class="bar-label">۵ ⭐</span>
+                            <div class="bar-track">
+                                <div class="bar-fill" style="width: 60%;"></div>
+                            </div>
+                            <span class="bar-count">۱۴</span>
+                        </div>
+                        <div class="rating-bar">
+                            <span class="bar-label">۴ ⭐</span>
+                            <div class="bar-track">
+                                <div class="bar-fill" style="width: 25%;"></div>
+                            </div>
+                            <span class="bar-count">۶</span>
+                        </div>
+                        <div class="rating-bar">
+                            <span class="bar-label">۳ ⭐</span>
+                            <div class="bar-track">
+                                <div class="bar-fill" style="width: 10%;"></div>
+                            </div>
+                            <span class="bar-count">۲</span>
+                        </div>
+                        <div class="rating-bar">
+                            <span class="bar-label">۲ ⭐</span>
+                            <div class="bar-track">
+                                <div class="bar-fill" style="width: 5%;"></div>
+                            </div>
+                            <span class="bar-count">۱</span>
+                        </div>
+                        <div class="rating-bar">
+                            <span class="bar-label">۱ ⭐</span>
+                            <div class="bar-track">
+                                <div class="bar-fill" style="width: 0%;"></div>
+                            </div>
+                            <span class="bar-count">۰</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="reviews-list" id="reviews-list">
+                    <div class="review-item">
+                        <div class="review-header">
+                            <span class="reviewer-avatar">👨</span>
+                            <div class="reviewer-info">
+                                <span class="reviewer-name">علی رضایی</span>
+                                <div class="reviewer-rating">
+                                    <span class="star filled">⭐</span>
+                                    <span class="star filled">⭐</span>
+                                    <span class="star filled">⭐</span>
+                                    <span class="star filled">⭐</span>
+                                    <span class="star filled">⭐</span>
+                                </div>
+                            </div>
+                            <span class="review-date">۲ روز پیش</span>
+                        </div>
+                        <p class="review-text">آیتم فوق‌العاده‌ای است! کاملاً ارزش خریدش را دارد. طراحی خیلی زیباست.</p>
+                        <div class="review-actions">
+                            <button class="btn-review-action" data-review-id="r1">
+                                <span class="icon">👍</span>
+                                <span class="count">۱۲</span>
+                            </button>
+                            <button class="btn-review-action" data-review-id="r1">
+                                <span class="icon">💬</span>
+                                <span class="text">پاسخ</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="review-item">
+                        <div class="review-header">
+                            <span class="reviewer-avatar">👩</span>
+                            <div class="reviewer-info">
+                                <span class="reviewer-name">مریم احمدی</span>
+                                <div class="reviewer-rating">
+                                    <span class="star filled">⭐</span>
+                                    <span class="star filled">⭐</span>
+                                    <span class="star filled">⭐</span>
+                                    <span class="star filled">⭐</span>
+                                    <span class="star">⭐</span>
+                                </div>
+                            </div>
+                            <span class="review-date">۵ روز پیش</span>
+                        </div>
+                        <p class="review-text">خیلی خوبه، فقط کاش قیمت کمتری داشت. در کل راضی هستم.</p>
+                        <div class="review-actions">
+                            <button class="btn-review-action" data-review-id="r2">
+                                <span class="icon">👍</span>
+                                <span class="count">۸</span>
+                            </button>
+                            <button class="btn-review-action" data-review-id="r2">
+                                <span class="icon">💬</span>
+                                <span class="text">پاسخ</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-outline btn-block btn-small" id="btn-load-more-reviews">
+                    <span class="btn-text">بارگذاری نظرات بیشتر</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <div class="footer-info">
+                <span class="footer-text" id="item-modal-status"></span>
+            </div>
+            <div class="footer-actions">
+                <button class="btn btn-outline" id="btn-close-item-modal">
+                    <span class="btn-text">بستن</span>
+                </button>
+                <button class="btn btn-primary" id="btn-confirm-item-action">
+                    <span class="btn-icon">🛒</span>
+                    <span class="btn-text" id="btn-confirm-text">خرید</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Purchase Confirmation Sub-modal -->
+    <div class="item-purchase-confirm" id="item-purchase-confirm" style="display: none;">
+        <div class="confirm-overlay"></div>
+        <div class="confirm-content">
+            <div class="confirm-header">
+                <span class="confirm-icon">🛒</span>
+                <h4 class="confirm-title">تأیید خرید</h4>
+            </div>
+            <div class="confirm-body">
+                <div class="confirm-item-summary">
+                    <span class="confirm-item-icon" id="confirm-item-icon">👤</span>
+                    <div class="confirm-item-info">
+                        <span class="confirm-item-name" id="confirm-item-name">نام آیتم</span>
+                        <span class="confirm-item-price" id="confirm-item-price">۱۰۰ 🪙</span>
+                    </div>
+                </div>
+                <div class="confirm-balance-info">
+                    <div class="balance-row">
+                        <span class="balance-label">موجودی فعلی:</span>
+                        <span class="balance-value" id="confirm-current-balance">۵,۰۰۰ 🪙</span>
+                    </div>
+                    <div class="balance-row">
+                        <span class="balance-label">هزینه:</span>
+                        <span class="balance-value cost" id="confirm-cost">-۱۰۰ 🪙</span>
+                    </div>
+                    <div class="balance-row total">
+                        <span class="balance-label">موجودی پس از خرید:</span>
+                        <span class="balance-value" id="confirm-remaining-balance">۴,۹۰۰ 🪙</span>
+                    </div>
+                </div>
+                <div class="confirm-warning">
+                    <span class="warning-icon">⚠️</span>
+                    <p class="warning-text">پس از خرید، آیتم به موجودی شما اضافه می‌شود و قابل بازگشت نیست.</p>
+                </div>
+            </div>
+            <div class="confirm-actions">
+                <button class="btn btn-outline" id="btn-cancel-purchase">
+                    <span class="btn-text">انصراف</span>
+                </button>
+                <button class="btn btn-primary" id="btn-final-confirm-purchase">
+                    <span class="btn-icon">✅</span>
+                    <span class="btn-text">تأیید و خرید</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gift to Friend Sub-modal -->
+    <div class="item-gift-friend" id="item-gift-friend" style="display: none;">
+        <div class="confirm-overlay"></div>
+        <div class="confirm-content">
+            <div class="confirm-header">
+                <span class="confirm-icon">🎁</span>
+                <h4 class="confirm-title">هدیه به دوست</h4>
+            </div>
+            <div class="confirm-body">
+                <div class="gift-item-summary">
+                    <span class="gift-item-icon" id="gift-item-icon">👤</span>
+                    <div class="gift-item-info">
+                        <span class="gift-item-name" id="gift-item-name">نام آیتم</span>
+                        <span class="gift-item-price" id="gift-item-price">۱۰۰ 🪙</span>
+                    </div>
+                </div>
+                <div class="gift-friends-list">
+                    <h5 class="friends-title">دوست خود را انتخاب کنید:</h5>
+                    <div class="friends-grid" id="gift-friends-grid">
+                        <label class="friend-option">
+                            <input type="radio" name="gift-friend" value="f1">
+                            <span class="friend-avatar">👨</span>
+                            <span class="friend-name">علی</span>
+                        </label>
+                        <label class="friend-option">
+                            <input type="radio" name="gift-friend" value="f2">
+                            <span class="friend-avatar">👩</span>
+                            <span class="friend-name">مریم</span>
+                        </label>
+                        <label class="friend-option">
+                            <input type="radio" name="gift-friend" value="f3">
+                            <span class="friend-avatar">👨</span>
+                            <span class="friend-name">رضا</span>
+                        </label>
+                        <label class="friend-option">
+                            <input type="radio" name="gift-friend" value="f4">
+                            <span class="friend-avatar">👩</span>
+                            <span class="friend-name">زهرا</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="gift-message-section">
+                    <label for="gift-message" class="form-label">پیام شما (اختیاری):</label>
+                    <textarea
+                        id="gift-message"
+                        class="input-field textarea-field"
+                        placeholder="پیام خود را بنویسید..."
+                        maxlength="200"
+                        rows="2"
+                    ></textarea>
+                </div>
+            </div>
+            <div class="confirm-actions">
+                <button class="btn btn-outline" id="btn-cancel-gift">
+                    <span class="btn-text">انصراف</span>
+                </button>
+                <button class="btn btn-primary" id="btn-confirm-gift">
+                    <span class="btn-icon">🎁</span>
+                    <span class="btn-text">ارسال هدیه</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
