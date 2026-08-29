@@ -1,0 +1,614 @@
+<div id="tournament-screen" class="screen screen-tournament" data-screen-name="tournament">
+    <div class="screen-content">
+        <header class="screen-header">
+            <button class="btn-back" data-route="home" aria-label="بازگشت">
+                <span class="icon">→</span>
+            </button>
+            <h1 class="screen-title">تورنمنت</h1>
+            <div class="header-spacer"></div>
+        </header>
+
+        <section class="tournament-hero">
+            <div class="hero-background"></div>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-icon">🏆</span>
+                    <span class="badge-text">مسابقات ویژه</span>
+                </div>
+                <h2 class="hero-title">تورنمنت‌های حکم</h2>
+                <p class="hero-subtitle">با بهترین بازیکنان رقابت کنید و جوایز بزرگ ببرید</p>
+            </div>
+        </section>
+
+        <section class="tournament-stats">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">🏆</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="tournament-won" class="stat-value">۰</span>
+                        <span class="stat-label">تورنمنت برده</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon"></span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="tournament-entered" class="stat-value"></span>
+                        <span class="stat-label">شرکت کرده</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">️</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="tournament-matches" class="stat-value">۰</span>
+                        <span class="stat-label">مسابقات انجام شده</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">💰</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="tournament-prize-earned" class="stat-value"></span>
+                        <span class="stat-label">جایزه کسب شده</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tournament-tabs">
+            <div class="tabs-container">
+                <button class="tab-btn active" data-tab="available" id="tab-available">
+                    <span class="tab-icon"></span>
+                    <span class="tab-text">در دسترس</span>
+                    <span class="tab-badge" id="badge-available">۳</span>
+                </button>
+                <button class="tab-btn" data-tab="active" id="tab-active">
+                    <span class="tab-icon">⚡</span>
+                    <span class="tab-text">فعال</span>
+                    <span class="tab-badge" id="badge-active">۱</span>
+                </button>
+                <button class="tab-btn" data-tab="registered" id="tab-registered">
+                    <span class="tab-icon">✅</span>
+                    <span class="tab-text">ثبت‌نام شده</span>
+                </button>
+                <button class="tab-btn" data-tab="completed" id="tab-completed">
+                    <span class="tab-icon"></span>
+                    <span class="tab-text">تکمیل شده</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="tournament-available" id="tournament-available-section">
+            <div class="section-header">
+                <h3 class="section-title">تورنمنت‌های در دسترس</h3>
+                <button class="btn-icon btn-small" id="btn-refresh-tournaments" aria-label="بروزرسانی">
+                    <span class="icon">🔄</span>
+                </button>
+            </div>
+            <div id="available-tournaments-list" class="tournaments-list">
+                <div class="tournament-card featured" data-tournament-id="t1">
+                    <div class="tournament-banner">
+                        <span class="banner-icon">🏆</span>
+                        <span class="banner-badge featured">ویژه</span>
+                    </div>
+                    <div class="tournament-info">
+                        <h4 class="tournament-name">قهرمانی هفتگی</h4>
+                        <p class="tournament-desc">بزرگترین تورنمنت هفتگی با جوایز ارزشمند</p>
+                        <div class="tournament-meta">
+                            <div class="meta-item">
+                                <span class="meta-icon">👥</span>
+                                <span class="meta-text">۱۶ بازیکن</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">🎮</span>
+                                <span class="meta-text">حذفی تک</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">🤖</span>
+                                <span class="meta-text">سطح سخت</span>
+                            </div>
+                        </div>
+                        <div class="tournament-details">
+                            <div class="detail-item">
+                                <span class="detail-label">ورودی:</span>
+                                <span class="detail-value">,۰۰۰ سکه</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">جایزه:</span>
+                                <span class="detail-value prize">۱۰,۰۰ سکه</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">شروع:</span>
+                                <span class="detail-value">۱ ساعت دیگر</span>
+                            </div>
+                        </div>
+                        <div class="tournament-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%;"></div>
+                            </div>
+                            <span class="progress-text">۲ از ۱۶ بازیکن ثبت‌نام کرده‌اند</span>
+                        </div>
+                        <div class="tournament-actions">
+                            <button class="btn btn-primary btn-block btn-register-tournament" data-tournament-id="t1">
+                                <span class="btn-icon">📝</span>
+                                <span class="btn-text">ثبت‌نام در تورنمنت</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tournament-card" data-tournament-id="t2">
+                    <div class="tournament-banner">
+                        <span class="banner-icon"></span>
+                        <span class="banner-badge quick">سریع</span>
+                    </div>
+                    <div class="tournament-info">
+                        <h4 class="tournament-name">تورنمنت سریع روزانه</h4>
+                        <p class="tournament-desc">تورنمنت سریع با ۸ بازیکن</p>
+                        <div class="tournament-meta">
+                            <div class="meta-item">
+                                <span class="meta-icon">👥</span>
+                                <span class="meta-text">۸ بازیکن</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">🎮</span>
+                                <span class="meta-text">حذفی تک</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">🤖</span>
+                                <span class="meta-text">سطح معمولی</span>
+                            </div>
+                        </div>
+                        <div class="tournament-details">
+                            <div class="detail-item">
+                                <span class="detail-label">ورودی:</span>
+                                <span class="detail-value">۵۰۰ سکه</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">جایزه:</span>
+                                <span class="detail-value prize">۳,۰۰۰ سکه</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">شروع:</span>
+                                <span class="detail-value">۳ دقیقه دیگر</span>
+                            </div>
+                        </div>
+                        <div class="tournament-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%;"></div>
+                            </div>
+                            <span class="progress-text">ظرفیت تکمیل شد</span>
+                        </div>
+                        <div class="tournament-actions">
+                            <button class="btn btn-outline btn-block" disabled>
+                                <span class="btn-text">ظرفیت تکمیل شد</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tournament-card" data-tournament-id="t3">
+                    <div class="tournament-banner">
+                        <span class="banner-icon">🌟</span>
+                        <span class="banner-badge monthly">ماهانه</span>
+                    </div>
+                    <div class="tournament-info">
+                        <h4 class="tournament-name">گرند پریکس ماهانه</h4>
+                        <p class="tournament-desc">بزرگترین تورنمنت ماه با ۳۲ بازیکن</p>
+                        <div class="tournament-meta">
+                            <div class="meta-item">
+                                <span class="meta-icon"></span>
+                                <span class="meta-text">۳۲ بازیکن</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">🎮</span>
+                                <span class="meta-text">حذفی دوگانه</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">🤖</span>
+                                <span class="meta-text">سطح حرفه‌ای</span>
+                            </div>
+                        </div>
+                        <div class="tournament-details">
+                            <div class="detail-item">
+                                <span class="detail-label">ورودی:</span>
+                                <span class="detail-value">۲,۰۰۰ سکه</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">جایزه:</span>
+                                <span class="detail-value prize">۵۰,۰۰ سکه</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">شروع:</span>
+                                <span class="detail-value">۱ روز دیگر</span>
+                            </div>
+                        </div>
+                        <div class="tournament-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%;"></div>
+                            </div>
+                            <span class="progress-text">۲۴ از ۳ بازیکن ثبت‌نام کرده‌اند</span>
+                        </div>
+                        <div class="tournament-actions">
+                            <button class="btn btn-primary btn-block btn-register-tournament" data-tournament-id="t3">
+                                <span class="btn-icon">📝</span>
+                                <span class="btn-text">ثبت‌نام در تورنمنت</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tournament-active" id="tournament-active-section" style="display: none;">
+            <div class="section-header">
+                <h3 class="section-title">تورنمنت‌های فعال</h3>
+            </div>
+            <div id="active-tournaments-list" class="tournaments-list">
+                <div class="tournament-card active" data-tournament-id="t-active-1">
+                    <div class="active-indicator">
+                        <span class="pulse-dot"></span>
+                        <span class="active-text">در حال برگزاری</span>
+                    </div>
+                    <div class="tournament-info">
+                        <h4 class="tournament-name">قهرمانی هفتگی</h4>
+                        <div class="tournament-meta">
+                            <div class="meta-item">
+                                <span class="meta-icon">👥</span>
+                                <span class="meta-text">۶ بازیکن</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">⏱️</span>
+                                <span class="meta-text">مرحله: یک‌چهارم نهایی</span>
+                            </div>
+                        </div>
+                        <div class="tournament-bracket-preview">
+                            <div class="bracket-match">
+                                <span class="player-name">شما</span>
+                                <span class="vs-text">VS</span>
+                                <span class="player-name">حریف</span>
+                            </div>
+                        </div>
+                        <div class="tournament-actions">
+                            <button class="btn btn-primary btn-block btn-view-bracket" data-tournament-id="t-active-1">
+                                <span class="btn-icon">🌳</span>
+                                <span class="btn-text">مشاهده جدول مسابقات</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tournament-registered" id="tournament-registered-section" style="display: none;">
+            <div class="section-header">
+                <h3 class="section-title">تورنمنت‌های ثبت‌نام شده</h3>
+            </div>
+            <div id="registered-tournaments-list" class="tournaments-list">
+                <div class="empty-state">
+                    <span class="empty-icon"></span>
+                    <h4 class="empty-title">هنوز در تورنمنتی ثبت‌نام نکرده‌اید</h4>
+                    <p class="empty-desc">از بخش "در دسترس" یک تورنمنت انتخاب کنید</p>
+                    <button class="btn btn-primary" id="btn-go-to-available">
+                        مشاهده تورنمنت‌ها
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="tournament-completed" id="tournament-completed-section" style="display: none;">
+            <div class="section-header">
+                <h3 class="section-title">تورنمنت‌های تکمیل شده</h3>
+            </div>
+            <div id="completed-tournaments-list" class="tournaments-list">
+                <div class="tournament-card completed" data-tournament-id="t-completed-1">
+                    <div class="completed-badge">
+                        <span class="badge-icon">🏆</span>
+                        <span class="badge-text">قهرمان</span>
+                    </div>
+                    <div class="tournament-info">
+                        <h4 class="tournament-name">قهرمانی هفته گذشته</h4>
+                        <div class="tournament-meta">
+                            <div class="meta-item">
+                                <span class="meta-icon">📅</span>
+                                <span class="meta-text"> روز پیش</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">🏅</span>
+                                <span class="meta-text">مقام اول</span>
+                            </div>
+                        </div>
+                        <div class="tournament-reward">
+                            <span class="reward-icon"></span>
+                            <span class="reward-value">+۱۰,۰۰۰ سکه</span>
+                        </div>
+                        <div class="tournament-actions">
+                            <button class="btn btn-outline btn-small btn-view-results" data-tournament-id="t-completed-1">
+                                مشاهده نتایج
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tournament-bracket-view" id="tournament-bracket-section" style="display: none;">
+            <div class="section-header">
+                <button class="btn-back-small" id="btn-back-from-bracket" aria-label="بازگشت">
+                    <span class="icon">→</span>
+                </button>
+                <h3 class="section-title">جدول مسابقات</h3>
+            </div>
+            <div class="bracket-container" id="bracket-container">
+                <div class="bracket-round" data-round="1">
+                    <h4 class="round-title">یک‌هشتم نهایی</h4>
+                    <div class="bracket-matches">
+                        <div class="bracket-match">
+                            <div class="match-player winner">
+                                <span class="player-name">شما</span>
+                                <span class="player-score">۷</span>
+                            </div>
+                            <div class="match-player">
+                                <span class="player-name">بازیکن ۲</span>
+                                <span class="player-score">۳</span>
+                            </div>
+                        </div>
+                        <div class="bracket-match">
+                            <div class="match-player">
+                                <span class="player-name">بازیکن </span>
+                                <span class="player-score">۵</span>
+                            </div>
+                            <div class="match-player winner">
+                                <span class="player-name">بازیکن ۴</span>
+                                <span class="player-score">۷</span>
+                            </div>
+                        </div>
+                        <div class="bracket-match">
+                            <div class="match-player winner">
+                                <span class="player-name">بازیکن </span>
+                                <span class="player-score">۷</span>
+                            </div>
+                            <div class="match-player">
+                                <span class="player-name">بازیکن ۶</span>
+                                <span class="player-score">۲</span>
+                            </div>
+                        </div>
+                        <div class="bracket-match">
+                            <div class="match-player">
+                                <span class="player-name">بازیکن ۷</span>
+                                <span class="player-score">۴</span>
+                            </div>
+                            <div class="match-player winner">
+                                <span class="player-name">بازیکن ۸</span>
+                                <span class="player-score">۷</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bracket-round" data-round="2">
+                    <h4 class="round-title">یک‌چهارم نهایی</h4>
+                    <div class="bracket-matches">
+                        <div class="bracket-match">
+                            <div class="match-player">
+                                <span class="player-name">شما</span>
+                                <span class="player-score">-</span>
+                            </div>
+                            <div class="match-player">
+                                <span class="player-name">بازیکن ۴</span>
+                                <span class="player-score">-</span>
+                            </div>
+                        </div>
+                        <div class="bracket-match">
+                            <div class="match-player">
+                                <span class="player-name">بازیکن </span>
+                                <span class="player-score">-</span>
+                            </div>
+                            <div class="match-player">
+                                <span class="player-name">بازیکن ۸</span>
+                                <span class="player-score">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bracket-round" data-round="3">
+                    <h4 class="round-title">نیمه‌نهایی</h4>
+                    <div class="bracket-matches">
+                        <div class="bracket-match">
+                            <div class="match-player">
+                                <span class="player-name">TBD</span>
+                                <span class="player-score">-</span>
+                            </div>
+                            <div class="match-player">
+                                <span class="player-name">TBD</span>
+                                <span class="player-score">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bracket-round" data-round="4">
+                    <h4 class="round-title">نهایی</h4>
+                    <div class="bracket-matches">
+                        <div class="bracket-match final">
+                            <div class="match-player">
+                                <span class="player-name">TBD</span>
+                                <span class="player-score">-</span>
+                            </div>
+                            <div class="match-player">
+                                <span class="player-name">TBD</span>
+                                <span class="player-score">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tournament-register-modal" id="tournament-register-section" style="display: none;">
+            <div class="modal-overlay"></div>
+            <div class="modal-content register-modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">ثبت‌نام در تورنمنت</h3>
+                    <button class="btn-icon btn-close-modal" id="btn-close-register-modal" aria-label="بستن">
+                        <span class="icon">✕</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="tournament-summary" id="register-tournament-summary">
+                        <h4 class="summary-name">قهرمانی هفتگی</h4>
+                        <div class="summary-details">
+                            <div class="detail-row">
+                                <span class="detail-label">نوع:</span>
+                                <span class="detail-value">حذفی تک</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">تعداد بازیکن:</span>
+                                <span class="detail-value">۱۶ نفر</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">سطح AI:</span>
+                                <span class="detail-value">سخت</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">ورودی:</span>
+                                <span class="detail-value">۱,۰۰۰ سکه</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">جایزه اول:</span>
+                                <span class="detail-value prize">۱۰,۰۰ سکه</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">زمان شروع:</span>
+                                <span class="detail-value">۱ ساعت دیگر</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="register-warning">
+                        <span class="warning-icon">⚠️</span>
+                        <p class="warning-text">
+                            با ثبت‌نام، مبلغ ورودی از حساب شما کسر می‌شود.
+                            در صورت انصراف قبل از شروع، ۵۰٪ مبلغ بازگردانده می‌شود.
+                        </p>
+                    </div>
+                    <div class="register-balance">
+                        <span class="balance-label">موجودی شما:</span>
+                        <span class="balance-value" id="register-balance-value">۵,۰۰۰ سکه</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline" id="btn-cancel-register">
+                        انصراف
+                    </button>
+                    <button class="btn btn-primary" id="btn-confirm-register">
+                        <span class="btn-icon">✅</span>
+                        <span class="btn-text">تأیید ثبت‌نام</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="tournament-rewards-info">
+            <div class="section-header">
+                <h3 class="section-title">ساختار جوایز</h3>
+            </div>
+            <div class="rewards-structure">
+                <div class="reward-tier first">
+                    <div class="tier-icon">🥇</div>
+                    <div class="tier-info">
+                        <h4 class="tier-name">مقام اول</h4>
+                        <p class="tier-reward">۵۰٪ جایزه + عنوان قهرمان</p>
+                    </div>
+                </div>
+                <div class="reward-tier second">
+                    <div class="tier-icon">🥈</div>
+                    <div class="tier-info">
+                        <h4 class="tier-name">مقام دوم</h4>
+                        <p class="tier-reward">۳۰٪ جایزه</p>
+                    </div>
+                </div>
+                <div class="reward-tier third">
+                    <div class="tier-icon"></div>
+                    <div class="tier-info">
+                        <h4 class="tier-name">مقام سوم و چهارم</h4>
+                        <p class="tier-reward">۰٪ جایزه</p>
+                    </div>
+                </div>
+                <div class="reward-tier other">
+                    <div class="tier-icon">🏅</div>
+                    <div class="tier-info">
+                        <h4 class="tier-name">سایر مقام‌ها</h4>
+                        <p class="tier-reward">۵٪ جایزه</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tournament-rules">
+            <div class="section-header">
+                <h3 class="section-title">قوانین تورنمنت</h3>
+            </div>
+            <div class="rules-list">
+                <div class="rule-item">
+                    <span class="rule-icon"></span>
+                    <div class="rule-content">
+                        <h4 class="rule-title">ثبت‌نام و ورودی</h4>
+                        <p class="rule-desc">برای شرکت در تورنمنت باید مبلغ ورودی را بپردازید</p>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">🎮</span>
+                    <div class="rule-content">
+                        <h4 class="rule-title">سیستم حذفی</h4>
+                        <p class="rule-desc">بازیکنان در هر مرحله با هم رقابت می‌کنند و بازنده حذف می‌شود</p>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon"></span>
+                    <div class="rule-content">
+                        <h4 class="rule-title">زمان‌بندی</h4>
+                        <p class="rule-desc">هر مسابقه در زمان مشخصی برگزار می‌شود</p>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">🚫</span>
+                    <div class="rule-content">
+                        <h4 class="rule-title">انصراف</h4>
+                        <p class="rule-desc">انصراف قبل از شروع با بازگشت ۵۰٪ ورودی ممکن است</p>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">🏆</span>
+                    <div class="rule-content">
+                        <h4 class="rule-title">توزیع جوایز</h4>
+                        <p class="rule-desc">جوایز بلافاصله پس از پایان تورنمنت توزیع می‌شوند</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tournament-tips">
+            <div class="section-header">
+                <h3 class="section-title">نکات تورنمنت</h3>
+            </div>
+            <div class="tips-list">
+                <div class="tip-item">
+                    <span class="tip-icon">💡</span>
+                    <p class="tip-text">قبل از ثبت‌نام، قوانین و جوایز تورنمنت را بررسی کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">⏰</span>
+                    <p class="tip-text">به موقع در مسابقات حاضر شوید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🎯</span>
+                    <p class="tip-text">با تورنمنت‌های کوچک‌تر شروع کنید</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
