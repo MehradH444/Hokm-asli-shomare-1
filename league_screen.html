@@ -1,0 +1,713 @@
+<div id="league-screen" class="screen screen-league" data-screen-name="league">
+    <div class="screen-content">
+        <header class="screen-header">
+            <button class="btn-back" data-route="home" aria-label="بازگشت">
+                <span class="icon">→</span>
+            </button>
+            <h1 class="screen-title">لیگ</h1>
+            <div class="header-actions">
+                <button class="btn-icon btn-small" id="btn-league-info" aria-label="اطلاعات">
+                    <span class="icon">ℹ️</span>
+                </button>
+                <button class="btn-icon btn-small" id="btn-league-history" aria-label="تاریخچه">
+                    <span class="icon">📜</span>
+                </button>
+            </div>
+        </header>
+
+        <section class="league-hero">
+            <div class="hero-background"></div>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-icon" id="league-hero-icon">🥉</span>
+                    <span class="badge-text" id="league-hero-tier">لیگ برنز</span>
+                </div>
+                <h2 class="hero-title">سیستم لیگ</h2>
+                <p class="hero-subtitle">با کسب امتیاز به لیگ‌های بالاتر ارتقا یابید</p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="stat-icon">⭐</span>
+                        <span class="stat-value" id="league-hero-rating">۱۰۰۰</span>
+                        <span class="stat-label">امتیاز شما</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-icon">🏆</span>
+                        <span class="stat-value" id="league-hero-rank">-</span>
+                        <span class="stat-label">رتبه شما</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-icon">🎮</span>
+                        <span class="stat-value" id="league-hero-games">۰</span>
+                        <span class="stat-label">بازی</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="league-current-tier">
+            <div class="tier-card" id="current-tier-card">
+                <div class="tier-header">
+                    <div class="tier-icon-wrapper" id="current-tier-icon-wrapper">
+                        <span class="tier-icon" id="current-tier-icon"></span>
+                        <span class="tier-division" id="current-tier-division">تقسیم ۱</span>
+                    </div>
+                    <div class="tier-info">
+                        <h3 class="tier-name" id="current-tier-name">برنز</h3>
+                        <p class="tier-description" id="current-tier-desc">اولین قدم در مسیر قهرمانی</p>
+                    </div>
+                    <div class="tier-rating">
+                        <span class="rating-label">امتیاز شما</span>
+                        <span class="rating-value" id="current-tier-rating">۱۰۰</span>
+                    </div>
+                </div>
+
+                <div class="tier-progress-section">
+                    <div class="progress-info">
+                        <span class="progress-label">پیشرفت به لیگ بعدی</span>
+                        <span class="progress-text" id="tier-progress-text">۰ / ۰۰۰</span>
+                    </div>
+                    <div class="progress-bar-large">
+                        <div class="progress-fill" id="tier-progress-fill" style="width: 0%;"></div>
+                    </div>
+                    <div class="progress-details">
+                        <span class="progress-remaining" id="tier-progress-remaining">۱۰۰۰ امتیاز تا نقره</span>
+                        <span class="progress-percent" id="tier-progress-percent">۰٪</span>
+                    </div>
+                </div>
+
+                <div class="tier-actions">
+                    <div class="promotion-info" id="promotion-info">
+                        <div class="promo-icon">⬆️</div>
+                        <div class="promo-text">
+                            <span class="promo-title" id="promo-title">آماده ارتقا</span>
+                            <span class="promo-desc" id="promo-desc">برای ارتقا به نقره، ۱۰۰۰ امتیاز نیاز دارید</span>
+                        </div>
+                    </div>
+                    <div class="demotion-warning" id="demotion-warning" style="display: none;">
+                        <div class="demo-icon">️</div>
+                        <div class="demo-text">
+                            <span class="demo-title">هشدار سقوط</span>
+                            <span class="demo-desc" id="demo-desc">اگر امتیاز شما کمتر شود، به لیگ پایین‌تر سقوط می‌کنید</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="league-next-tier">
+            <div class="tier-card next-tier" id="next-tier-card">
+                <div class="tier-header">
+                    <div class="tier-icon-wrapper" id="next-tier-icon-wrapper">
+                        <span class="tier-icon" id="next-tier-icon">🥈</span>
+                        <span class="tier-badge">لیگ بعدی</span>
+                    </div>
+                    <div class="tier-info">
+                        <h3 class="tier-name" id="next-tier-name">نقره</h3>
+                        <p class="tier-description" id="next-tier-desc">پیشرفت بیشتر، جوایز بهتر</p>
+                    </div>
+                    <div class="tier-requirement">
+                        <span class="req-label">نیاز به</span>
+                        <span class="req-value" id="next-tier-requirement">۰۰۰ امتیاز</span>
+                    </div>
+                </div>
+                <div class="tier-rewards-preview">
+                    <h5 class="rewards-title">جوایز لیگ نقره:</h5>
+                    <div class="rewards-list">
+                        <div class="reward-item">
+                            <span class="reward-icon"></span>
+                            <span class="reward-value">۱,۰۰ سکه</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">⭐</span>
+                            <span class="reward-value">۱۰ XP</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">️</span>
+                            <span class="reward-value">قاب نقره‌ای</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="league-tiers-overview">
+            <div class="section-header">
+                <h3 class="section-title">همه لیگ‌ها</h3>
+            </div>
+            <div class="tiers-scroll" id="tiers-scroll">
+                <div class="tier-item bronze current" data-tier="bronze">
+                    <div class="tier-icon">🥉</div>
+                    <div class="tier-name">برنز</div>
+                    <div class="tier-range">۰-۹۹۹</div>
+                    <div class="tier-status current-badge">لیگ فعلی</div>
+                </div>
+                <div class="tier-item silver next" data-tier="silver">
+                    <div class="tier-icon">🥈</div>
+                    <div class="tier-name">نقره</div>
+                    <div class="tier-range">۱۰۰۰-۱۴۹</div>
+                    <div class="tier-status next-badge">لیگ بعدی</div>
+                </div>
+                <div class="tier-item gold" data-tier="gold">
+                    <div class="tier-icon">🥇</div>
+                    <div class="tier-name">طلا</div>
+                    <div class="tier-range">۱۵۰۰-۱۹۹</div>
+                </div>
+                <div class="tier-item platinum" data-tier="platinum">
+                    <div class="tier-icon"></div>
+                    <div class="tier-name">پلاتین</div>
+                    <div class="tier-range">۲۰۰-۲۴۹</div>
+                </div>
+                <div class="tier-item diamond" data-tier="diamond">
+                    <div class="tier-icon">💎</div>
+                    <div class="tier-name">الماس</div>
+                    <div class="tier-range">۲۵۰-۲۹۹۹</div>
+                </div>
+                <div class="tier-item master" data-tier="master">
+                    <div class="tier-icon">👑</div>
+                    <div class="tier-name">مستر</div>
+                    <div class="tier-range">۳۰۰۰+</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="league-stats">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon"></span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="league-stat-games" class="stat-value">۰</span>
+                        <span class="stat-label">بازی انجام شده</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">🏆</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="league-stat-wins" class="stat-value">۰</span>
+                        <span class="stat-label">برد</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">💔</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="league-stat-losses" class="stat-value">۰</span>
+                        <span class="stat-label">باخت</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">⭐</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="league-stat-winrate" class="stat-value">۰٪</span>
+                        <span class="stat-label">نرخ برد</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">🔥</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="league-stat-streak" class="stat-value">۰</span>
+                        <span class="stat-label">رشته فعلی</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon"></span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="league-stat-best-streak" class="stat-value">۰</span>
+                        <span class="stat-label">بهترین رشته</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="league-leaderboard">
+            <div class="section-header">
+                <h3 class="section-title">رتبه‌بندی لیگ</h3>
+                <div class="leaderboard-filters">
+                    <select id="league-lb-tier-filter" class="filter-select">
+                        <option value="all">همه لیگ‌ها</option>
+                        <option value="bronze">برنز</option>
+                        <option value="silver">نقره</option>
+                        <option value="gold">طلا</option>
+                        <option value="platinum">پلاتین</option>
+                        <option value="diamond">الماس</option>
+                        <option value="master">مستر</option>
+                    </select>
+                    <select id="league-lb-sort-filter" class="filter-select">
+                        <option value="rating">امتیاز</option>
+                        <option value="wins">تعداد برد</option>
+                        <option value="winRate">نرخ برد</option>
+                    </select>
+                    <button class="btn-icon btn-small" id="btn-refresh-league-lb" aria-label="بروزرسانی">
+                        <span class="icon">🔄</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="leaderboard-podium" id="league-podium">
+                <div class="podium-player second">
+                    <div class="podium-avatar-wrapper">
+                        <span class="avatar avatar-large" id="podium-avatar-2">👩</span>
+                        <span class="podium-rank">🥈</span>
+                    </div>
+                    <div class="podium-info">
+                        <span class="podium-name" id="podium-name-2">بازیکن دوم</span>
+                        <span class="podium-rating" id="podium-rating-2">۲۶۰</span>
+                        <span class="podium-tier" id="podium-tier-2">الماس</span>
+                    </div>
+                    <div class="podium-base second-place"></div>
+                </div>
+                <div class="podium-player first">
+                    <div class="podium-avatar-wrapper">
+                        <span class="avatar avatar-large" id="podium-avatar-1"></span>
+                        <span class="podium-rank">🥇</span>
+                        <div class="crown-icon">👑</div>
+                    </div>
+                    <div class="podium-info">
+                        <span class="podium-name" id="podium-name-1">استاد بزرگ</span>
+                        <span class="podium-rating" id="podium-rating-1">۲۸۰۰</span>
+                        <span class="podium-tier" id="podium-tier-1">مستر</span>
+                    </div>
+                    <div class="podium-base first-place"></div>
+                </div>
+                <div class="podium-player third">
+                    <div class="podium-avatar-wrapper">
+                        <span class="avatar avatar-large" id="podium-avatar-3"></span>
+                        <span class="podium-rank">🥉</span>
+                    </div>
+                    <div class="podium-info">
+                        <span class="podium-name" id="podium-name-3">قهرمان</span>
+                        <span class="podium-rating" id="podium-rating-3">۲۴۰۰</span>
+                        <span class="podium-tier" id="podium-tier-3">پلاتین</span>
+                    </div>
+                    <div class="podium-base third-place"></div>
+                </div>
+            </div>
+
+            <div id="league-leaderboard-list" class="leaderboard-list">
+                <div class="leaderboard-item" data-rank="4" data-player-id="p4">
+                    <span class="rank-number">۴</span>
+                    <span class="avatar avatar-small">👩</span>
+                    <div class="player-info">
+                        <span class="player-name">بازیکن حرفه‌ای</span>
+                        <span class="player-tier platinum">پلاتین</span>
+                    </div>
+                    <div class="player-stats">
+                        <span class="player-rating">۲۲۰</span>
+                        <span class="player-wins">۹۰ برد</span>
+                    </div>
+                    <button class="btn-view-profile btn-icon btn-small" data-player-id="p4" aria-label="مشاهده پروفایل">
+                        <span class="icon">👁️</span>
+                    </button>
+                </div>
+
+                <div class="leaderboard-item" data-rank="5" data-player-id="p5">
+                    <span class="rank-number"></span>
+                    <span class="avatar avatar-small">👨</span>
+                    <div class="player-info">
+                        <span class="player-name">بازیکن خوب</span>
+                        <span class="player-tier platinum">پلاتین</span>
+                    </div>
+                    <div class="player-stats">
+                        <span class="player-rating">۰۰۰</span>
+                        <span class="player-wins">۸۰ برد</span>
+                    </div>
+                    <button class="btn-view-profile btn-icon btn-small" data-player-id="p5" aria-label="مشاهده پروفایل">
+                        <span class="icon">👁️</span>
+                    </button>
+                </div>
+
+                <div class="leaderboard-item" data-rank="6" data-player-id="p6">
+                    <span class="rank-number"></span>
+                    <span class="avatar avatar-small">👩</span>
+                    <div class="player-info">
+                        <span class="player-name">بازیکن متوسط</span>
+                        <span class="player-tier gold">طلا</span>
+                    </div>
+                    <div class="player-stats">
+                        <span class="player-rating">۱۸۰۰</span>
+                        <span class="player-wins">۷۰ برد</span>
+                    </div>
+                    <button class="btn-view-profile btn-icon btn-small" data-player-id="p6" aria-label="مشاهده پروفایل">
+                        <span class="icon">️</span>
+                    </button>
+                </div>
+
+                <div class="leaderboard-item" data-rank="7" data-player-id="p7">
+                    <span class="rank-number">۷</span>
+                    <span class="avatar avatar-small">👨</span>
+                    <div class="player-info">
+                        <span class="player-name">بازیکن تازه‌کار</span>
+                        <span class="player-tier gold">طلا</span>
+                    </div>
+                    <div class="player-stats">
+                        <span class="player-rating">۱۶۰</span>
+                        <span class="player-wins">۶۰ برد</span>
+                    </div>
+                    <button class="btn-view-profile btn-icon btn-small" data-player-id="p7" aria-label="مشاهده پروفایل">
+                        <span class="icon">️</span>
+                    </button>
+                </div>
+
+                <div class="leaderboard-item" data-rank="8" data-player-id="p8">
+                    <span class="rank-number">۸</span>
+                    <span class="avatar avatar-small">👩</span>
+                    <div class="player-info">
+                        <span class="player-name">بازیکن جدید ۱</span>
+                        <span class="player-tier silver">نقره</span>
+                    </div>
+                    <div class="player-stats">
+                        <span class="player-rating">۴۰۰</span>
+                        <span class="player-wins">۵۰ برد</span>
+                    </div>
+                    <button class="btn-view-profile btn-icon btn-small" data-player-id="p8" aria-label="مشاهده پروفایل">
+                        <span class="icon">👁️</span>
+                    </button>
+                </div>
+
+                <div class="leaderboard-item" data-rank="9" data-player-id="p9">
+                    <span class="rank-number">۹</span>
+                    <span class="avatar avatar-small"></span>
+                    <div class="player-info">
+                        <span class="player-name">بازیکن جدید ۲</span>
+                        <span class="player-tier silver">نقره</span>
+                    </div>
+                    <div class="player-stats">
+                        <span class="player-rating">۱۲۰۰</span>
+                        <span class="player-wins">۴۰ برد</span>
+                    </div>
+                    <button class="btn-view-profile btn-icon btn-small" data-player-id="p9" aria-label="مشاهده پروفایل">
+                        <span class="icon">👁️</span>
+                    </button>
+                </div>
+
+                <div class="leaderboard-item" data-rank="10" data-player-id="p10">
+                    <span class="rank-number">۱۰</span>
+                    <span class="avatar avatar-small">👩</span>
+                    <div class="player-info">
+                        <span class="player-name">بازیکن مبتدی</span>
+                        <span class="player-tier bronze">برنز</span>
+                    </div>
+                    <div class="player-stats">
+                        <span class="player-rating">۱۰۰</span>
+                        <span class="player-wins">۳۰ برد</span>
+                    </div>
+                    <button class="btn-view-profile btn-icon btn-small" data-player-id="p10" aria-label="مشاهده پروفایل">
+                        <span class="icon">️</span>
+                    </button>
+                </div>
+
+                <div class="leaderboard-item current-user" data-rank="15" data-player-id="me">
+                    <span class="rank-number">۱۵</span>
+                    <span class="avatar avatar-small">👤</span>
+                    <div class="player-info">
+                        <span class="player-name">شما</span>
+                        <span class="player-tier bronze">برنز</span>
+                    </div>
+                    <div class="player-stats">
+                        <span class="player-rating">۱۰۰۰</span>
+                        <span class="player-wins">۰ برد</span>
+                    </div>
+                    <button class="btn-view-profile btn-icon btn-small" data-player-id="me" aria-label="مشاهده پروفایل">
+                        <span class="icon">👁️</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="load-more-container" id="league-lb-load-more">
+                <button class="btn btn-outline btn-block" id="btn-load-more-league">
+                    <span class="btn-icon">️</span>
+                    <span class="btn-text">بارگذاری بیشتر</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="league-rewards">
+            <div class="section-header">
+                <h3 class="section-title">پاداش‌های لیگ</h3>
+            </div>
+            <div class="rewards-grid">
+                <div class="reward-card bronze">
+                    <div class="reward-tier-icon">🥉</div>
+                    <div class="reward-info">
+                        <h4 class="reward-title">برنز</h4>
+                        <div class="reward-prizes">
+                            <div class="prize-item">
+                                <span class="prize-icon"></span>
+                                <span class="prize-value">۵۰۰</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-icon">⭐</span>
+                                <span class="prize-value">۵۰ XP</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reward-card silver">
+                    <div class="reward-tier-icon">🥈</div>
+                    <div class="reward-info">
+                        <h4 class="reward-title">نقره</h4>
+                        <div class="reward-prizes">
+                            <div class="prize-item">
+                                <span class="prize-icon">🪙</span>
+                                <span class="prize-value">۱,۰۰۰</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-icon">⭐</span>
+                                <span class="prize-value">۱۰ XP</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-icon">️</span>
+                                <span class="prize-value">قاب</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reward-card gold">
+                    <div class="reward-tier-icon">🥇</div>
+                    <div class="reward-info">
+                        <h4 class="reward-title">طلا</h4>
+                        <div class="reward-prizes">
+                            <div class="prize-item">
+                                <span class="prize-icon">🪙</span>
+                                <span class="prize-value">۲,۰۰۰</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-icon">⭐</span>
+                                <span class="prize-value">۲۰ XP</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-icon">️</span>
+                                <span class="prize-value">قاب</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reward-card platinum">
+                    <div class="reward-tier-icon"></div>
+                    <div class="reward-info">
+                        <h4 class="reward-title">پلاتین</h4>
+                        <div class="reward-prizes">
+                            <div class="prize-item">
+                                <span class="prize-icon">🪙</span>
+                                <span class="prize-value">۵,۰۰۰</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-icon">⭐</span>
+                                <span class="prize-value">۵۰ XP</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-icon">💎</span>
+                                <span class="prize-value">۱۰۰</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-icon">️</span>
+                                <span class="prize-value">قاب</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reward-card diamond">
+                    <div class="reward-tier-icon">💎</div>
+                    <div class="reward-info">
+                        <h4 class="reward-title">الماس</h4>
+                        <div class="reward-prizes">
+                            <div class="prize-item">
+                                <span class="prize-icon">🪙</span>
+                                <span class="prize-value">۱۰,۰۰</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-icon">⭐</span>
+                                <span class="prize-value">۱,۰۰ XP</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-icon">💎</span>
+                                <span class="prize-value">۲۵۰</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-icon">️</span>
+                                <span class="prize-value">قاب</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reward-card master">
+                    <div class="reward-tier-icon">👑</div>
+                    <div class="reward-info">
+                        <h4 class="reward-title">مستر</h4>
+                        <div class="reward-prizes">
+                            <div class="prize-item">
+                                <span class="prize-icon">🪙</span>
+                                <span class="prize-value">۲۵,۰۰۰</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-icon">⭐</span>
+                                <span class="prize-value">۲,۵۰۰ XP</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-icon">💎</span>
+                                <span class="prize-value">۵۰۰</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-icon">️</span>
+                                <span class="prize-value">قاب</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-icon">👑</span>
+                                <span class="prize-value">عنوان</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="league-season-info">
+            <div class="season-card">
+                <div class="season-header">
+                    <span class="season-icon">📅</span>
+                    <div class="season-info">
+                        <h4 class="season-title" id="league-season-title">فصل ۱</h4>
+                        <p class="season-subtitle" id="league-season-end">پایان فصل: ۲۹ روز دیگر</p>
+                    </div>
+                </div>
+                <div class="season-progress">
+                    <div class="progress-bar">
+                        <div id="league-season-progress" class="progress-fill" style="width: 3%;"></div>
+                    </div>
+                    <div class="season-stats">
+                        <div class="season-stat">
+                            <span class="stat-icon"></span>
+                            <div class="stat-info">
+                                <span class="stat-value" id="league-season-days">۹</span>
+                                <span class="stat-label">روز باقی‌مانده</span>
+                            </div>
+                        </div>
+                        <div class="season-stat">
+                            <span class="stat-icon"></span>
+                            <div class="stat-info">
+                                <span class="stat-value" id="league-season-players">۱,۲۳۴</span>
+                                <span class="stat-label">بازیکن فعال</span>
+                            </div>
+                        </div>
+                        <div class="season-stat">
+                            <span class="stat-icon">🎮</span>
+                            <div class="stat-info">
+                                <span class="stat-value" id="league-season-games">۰,۴۵۶</span>
+                                <span class="stat-label">بازی انجام شده</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="league-history" id="league-history-section" style="display: none;">
+            <div class="section-header">
+                <h3 class="section-title">تاریخچه فصل‌ها</h3>
+                <button class="btn-icon btn-small" id="btn-close-league-history" aria-label="بستن">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+            <div id="league-history-list" class="history-list">
+                <div class="history-item" data-season="1">
+                    <div class="history-icon">📅</div>
+                    <div class="history-info">
+                        <h4 class="history-title">فصل </h4>
+                        <p class="history-desc">فصل فعلی - در جریان</p>
+                        <div class="history-meta">
+                            <span class="meta-item">شروع: ۱۴۵/۰۶/۰</span>
+                            <span class="meta-item">پایان: ۱۴۰۵/۰۶/۳۰</span>
+                        </div>
+                    </div>
+                    <div class="history-result">
+                        <span class="result-badge ongoing">در جریان</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="league-rules">
+            <div class="section-header">
+                <h3 class="section-title">قوانین لیگ</h3>
+            </div>
+            <div class="rules-list">
+                <div class="rule-item">
+                    <span class="rule-icon">⭐</span>
+                    <div class="rule-content">
+                        <h4 class="rule-title">سیستم امتیازدهی</h4>
+                        <p class="rule-desc">با بردن بازی، امتیاز کسب می‌کنید و با باختن، امتیاز از دست می‌دهید</p>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">⬆️</span>
+                    <div class="rule-content">
+                        <h4 class="rule-title">ارتقا</h4>
+                        <p class="rule-desc">با رسیدن به حداقل امتیاز هر لیگ، به لیگ بالاتر ارتقا می‌یابید</p>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">️</span>
+                    <div class="rule-content">
+                        <h4 class="rule-title">سقوط</h4>
+                        <p class="rule-desc">اگر امتیاز شما کمتر از حداقل لیگ فعلی شود، به لیگ پایین‌تر سقوط می‌کنید</p>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">📅</span>
+                    <div class="rule-content">
+                        <h4 class="rule-title">فصل‌ها</h4>
+                        <p class="rule-desc">هر ماه یک فصل جدید شروع می‌شود و امتیازها ریست می‌شوند</p>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon"></span>
+                    <div class="rule-content">
+                        <h4 class="rule-title">پاداش‌ها</h4>
+                        <p class="rule-desc">در پایان فصل، بر اساس لیگ و رتبه خود پاداش دریافت می‌کنید</p>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">🏆</span>
+                    <div class="rule-content">
+                        <h4 class="rule-title">رتبه‌بندی</h4>
+                        <p class="rule-desc">بازیکنان بر اساس امتیاز در Leaderboard رتبه‌بندی می‌شوند</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="league-tips">
+            <div class="section-header">
+                <h3 class="section-title">نکات لیگ</h3>
+            </div>
+            <div class="tips-list">
+                <div class="tip-item">
+                    <span class="tip-icon">💡</span>
+                    <p class="tip-text">با بردن بازی‌های متوالی، bonus رشته برد دریافت کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🎯</span>
+                    <p class="tip-text">نرخ برد بالاتر از ۶۰٪ شما را سریع‌تر ارتقا می‌دهد</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🏆</span>
+                    <p class="tip-text">در پایان فصل، بر اساس لیگ خود پاداش دریافت کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">️</span>
+                    <p class="tip-text">مراقب سقوط به لیگ پایین‌تر باشید</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
