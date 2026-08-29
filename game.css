@@ -1,0 +1,1798 @@
+/**
+ * ============================================================
+ * HOKM MASTER - Game
+ * استایل‌های میز بازی و گیم‌پلی
+ * ============================================================
+ * 
+ * این فایل استایل‌های مربوط به میز بازی حکم شامل:
+ * Game Table، Cards، Players، Hand، Trick Area، Scoreboard،
+ * Timer، Trump Selection، Kot Declaration و ... را تعریف می‌کند.
+ * 
+ * نسخه: 1.0.0
+ * ============================================================
+ */
+
+/* ============================================================
+   بخش ۱: Game Screen Base
+   ============================================================ */
+
+.screen-game {
+    position: relative;
+    background: var(--bg-table);
+    min-height: calc(100vh - var(--header-height));
+    padding: 0;
+    overflow: hidden;
+}
+
+.screen-game .screen-content {
+    max-width: 100%;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================================
+   بخش ۲: Game Top Bar
+   ============================================================ */
+
+.game-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-3) var(--spacing-4);
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: var(--blur-md);
+    -webkit-backdrop-filter: var(--blur-md);
+    border-bottom: 1px solid var(--border-color);
+    z-index: var(--z-index-sticky);
+}
+
+.game-info-left,
+.game-info-center,
+.game-info-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+}
+
+.game-mode-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-1) var(--spacing-3);
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+.mode-icon {
+    font-size: var(--font-size-md);
+}
+
+/* Game Timer */
+.game-timer {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-4);
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-full);
+    border: 2px solid var(--border-color);
+    transition: var(--transition-all);
+}
+
+.game-timer.warning {
+    border-color: var(--color-warning);
+    animation: timerPulse 1s infinite;
+}
+
+.game-timer.danger {
+    border-color: var(--color-danger);
+    animation: timerPulse 0.5s infinite;
+}
+
+@keyframes timerPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.timer-icon {
+    font-size: var(--font-size-md);
+}
+
+.timer-value {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    min-width: 30px;
+    text-align: center;
+    font-family: var(--font-family-mono);
+}
+
+/* ============================================================
+   بخش ۳: Game Table
+   ============================================================ */
+
+.game-table {
+    flex: 1;
+    position: relative;
+    padding: var(--spacing-4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+}
+
+.table-surface {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    aspect-ratio: 4 / 3;
+    background: var(--bg-table-surface);
+    border-radius: var(--radius-3xl);
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        inset 0 0 60px rgba(0, 0, 0, 0.4),
+        0 20px 60px rgba(0, 0, 0, 0.5);
+    padding: var(--spacing-8);
+    display: grid;
+    grid-template-areas:
+        ".    top    ."
+        "left center right"
+        ".    bottom .";
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
+    gap: var(--spacing-4);
+}
+
+.table-surface::before {
+    content: '';
+    position: absolute;
+    inset: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    border-radius: calc(var(--radius-3xl) - 10px);
+    pointer-events: none;
+}
+
+.table-center {
+    grid-area: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-3);
+    position: relative;
+}
+
+/* ============================================================
+   بخش ۴: Players
+   ============================================================ */
+
+.opponent-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.opponent-top {
+    grid-area: top;
+}
+
+.opponent-right {
+    grid-area: right;
+}
+
+.opponent-left {
+    grid-area: left;
+}
+
+.opponent-bottom {
+    grid-area: bottom;
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-3);
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: var(--blur-sm);
+    -webkit-backdrop-filter: var(--blur-sm);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    transition: var(--transition-all);
+    position: relative;
+}
+
+.player-info.active {
+    background-color: rgba(16, 185, 129, 0.2);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+    animation: playerActive 2s infinite;
+}
+
+@keyframes playerActive {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(16, 185, 129, 0.6);
+    }
+}
+
+.player-info.winner {
+    background-color: rgba(255, 193, 7, 0.2);
+    border-color: var(--color-accent);
+    box-shadow: 0 0 20px rgba(255, 193, 7, 0.4);
+}
+
+.player-avatar-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.player-status {
+    position: absolute;
+    bottom: -2px;
+    left: -2px;
+    width: 12px;
+    height: 12px;
+    background-color: var(--color-success);
+    border: 2px solid var(--bg-primary);
+    border-radius: var(--radius-full);
+}
+
+.player-status.offline {
+    background-color: var(--text-tertiary);
+}
+
+.player-status.thinking {
+    background-color: var(--color-warning);
+    animation: pulse 1.5s infinite;
+}
+
+.player-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.player-name {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100px;
+}
+
+.player-team {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+}
+
+.player-cards-count {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    padding: var(--spacing-1) var(--spacing-2);
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+}
+
+.cards-icon {
+    font-size: var(--font-size-sm);
+}
+
+.cards-count {
+    font-family: var(--font-family-mono);
+}
+
+/* ============================================================
+   بخش ۵: Playing Cards
+   ============================================================ */
+
+.card {
+    position: relative;
+    width: var(--card-width);
+    height: var(--card-height);
+    background-color: var(--color-white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-normal) var(--easing-ease-in-out),
+                box-shadow var(--transition-normal) var(--easing-ease-in-out);
+    cursor: pointer;
+    user-select: none;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-xl);
+    z-index: 10;
+}
+
+.card:active {
+    transform: translateY(-5px) scale(0.98);
+}
+
+.card.playable {
+    cursor: pointer;
+}
+
+.card.playable::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+    pointer-events: none;
+    z-index: 3;
+}
+
+.card.playable:hover::after {
+    opacity: 1;
+    animation: cardPlayable 1.5s infinite;
+}
+
+@keyframes cardPlayable {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.8);
+    }
+}
+
+.card.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(0.5);
+}
+
+.card.disabled:hover {
+    transform: none;
+}
+
+/* Card Face */
+.card-face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-2);
+    background-color: var(--color-white);
+}
+
+.card-corner {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    line-height: 1;
+}
+
+.card-corner.top-left {
+    top: var(--spacing-2);
+    left: var(--spacing-2);
+}
+
+.card-corner.bottom-right {
+    bottom: var(--spacing-2);
+    right: var(--spacing-2);
+    transform: rotate(180deg);
+}
+
+.card-rank {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    font-family: var(--font-family-mono);
+}
+
+.card-suit-small {
+    font-size: var(--font-size-md);
+}
+
+.card-center {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+}
+
+/* Card Suits */
+.card.spades .card-rank,
+.card.spades .card-suit-small,
+.card.spades .card-center,
+.card.clubs .card-rank,
+.card.clubs .card-suit-small,
+.card.clubs .card-center {
+    color: var(--color-suit-spades);
+}
+
+.card.hearts .card-rank,
+.card.hearts .card-suit-small,
+.card.hearts .card-center,
+.card.diamonds .card-rank,
+.card.diamonds .card-suit-small,
+.card.diamonds .card-center {
+    color: var(--color-suit-hearts);
+}
+
+/* Trump Card */
+.card.trump {
+    border: 2px solid var(--color-trump);
+    box-shadow: 0 0 15px var(--color-trump-glow);
+}
+
+.card.trump::before {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.2) 0%, transparent 50%);
+}
+
+/* Card Back */
+.card-back {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+    font-size: 2rem;
+}
+
+.card-back::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: calc(var(--radius-md) - 2px);
+}
+
+.card-back::after {
+    content: '🎴';
+    font-size: 2.5rem;
+    opacity: 0.5;
+}
+
+/* Card Sizes */
+.card-sm {
+    width: var(--card-width-sm);
+    height: var(--card-height-sm);
+}
+
+.card-sm .card-rank {
+    font-size: var(--font-size-base);
+}
+
+.card-sm .card-center {
+    font-size: 2rem;
+}
+
+.card-lg {
+    width: var(--card-width-lg);
+    height: var(--card-height-lg);
+}
+
+.card-lg .card-rank {
+    font-size: var(--font-size-2xl);
+}
+
+.card-lg .card-center {
+    font-size: 4rem;
+}
+
+/* ============================================================
+   بخش ۶: Player Hand
+   ============================================================ */
+
+.player-hand-area {
+    position: fixed;
+    bottom: var(--bottom-nav-height);
+    left: 0;
+    right: 0;
+    padding: var(--spacing-3) var(--spacing-4);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    z-index: var(--z-index-sticky);
+}
+
+.hand-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-2);
+    padding: 0 var(--spacing-2);
+}
+
+.player-status-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-1) var(--spacing-3);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    animation: pulse 2s infinite;
+}
+
+.hand-cards-count {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-1) var(--spacing-3);
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+}
+
+.hand-container {
+    position: relative;
+    min-height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0 var(--spacing-4);
+}
+
+.hand-cards {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 140px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.hand-cards .card {
+    position: absolute;
+    bottom: 0;
+    transition: transform var(--transition-normal) var(--easing-ease-in-out),
+                margin var(--transition-normal) var(--easing-ease-in-out);
+    transform-origin: bottom center;
+}
+
+/* Fan Layout */
+.hand-cards .card:nth-child(1) { transform: translateX(calc(-50% + 0px)) rotate(-15deg); }
+.hand-cards .card:nth-child(2) { transform: translateX(calc(-50% + 30px)) rotate(-12deg); }
+.hand-cards .card:nth-child(3) { transform: translateX(calc(-50% + 60px)) rotate(-9deg); }
+.hand-cards .card:nth-child(4) { transform: translateX(calc(-50% + 90px)) rotate(-6deg); }
+.hand-cards .card:nth-child(5) { transform: translateX(calc(-50% + 120px)) rotate(-3deg); }
+.hand-cards .card:nth-child(6) { transform: translateX(-50%) rotate(0deg); }
+.hand-cards .card:nth-child(7) { transform: translateX(calc(-50% - 30px)) rotate(3deg); }
+.hand-cards .card:nth-child(8) { transform: translateX(calc(-50% - 60px)) rotate(6deg); }
+.hand-cards .card:nth-child(9) { transform: translateX(calc(-50% - 90px)) rotate(9deg); }
+.hand-cards .card:nth-child(10) { transform: translateX(calc(-50% - 120px)) rotate(12deg); }
+.hand-cards .card:nth-child(11) { transform: translateX(calc(-50% - 150px)) rotate(15deg); }
+.hand-cards .card:nth-child(12) { transform: translateX(calc(-50% - 180px)) rotate(18deg); }
+.hand-cards .card:nth-child(13) { transform: translateX(calc(-50% - 210px)) rotate(21deg); }
+
+.hand-cards .card:hover {
+    transform: translateX(-50%) translateY(-20px) rotate(0deg) scale(1.1);
+    z-index: 100;
+}
+
+/* Hand Actions */
+.hand-actions {
+    position: absolute;
+    top: var(--spacing-2);
+    left: var(--spacing-4);
+    display: flex;
+    gap: var(--spacing-2);
+}
+
+/* ============================================================
+   بخش ۷: Trick Area
+   ============================================================ */
+
+.trick-area {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    display: grid;
+    grid-template-areas:
+        ".    top    ."
+        "left .      right"
+        ".    bottom .";
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: var(--spacing-2);
+    pointer-events: none;
+}
+
+.played-card-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.slot-top { grid-area: top; }
+.slot-right { grid-area: right; }
+.slot-bottom { grid-area: bottom; }
+.slot-left { grid-area: left; }
+
+.played-card-slot .card {
+    animation: cardPlay 0.5s var(--easing-ease-out);
+}
+
+@keyframes cardPlay {
+    0% {
+        transform: scale(0.5) rotate(-10deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1) rotate(5deg);
+    }
+    100% {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+    }
+}
+
+/* Trick Winner Indicator */
+.trick-winner-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-3) var(--spacing-5);
+    background-color: rgba(255, 193, 7, 0.9);
+    color: var(--color-neutral-900);
+    border-radius: var(--radius-full);
+    font-weight: var(--font-weight-bold);
+    box-shadow: var(--shadow-dark-lg);
+    animation: winnerPop 0.5s var(--easing-bounce);
+    z-index: 10;
+}
+
+@keyframes winnerPop {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.winner-icon {
+    font-size: var(--font-size-2xl);
+}
+
+.winner-text {
+    font-size: var(--font-size-sm);
+}
+
+/* ============================================================
+   بخش ۸: Scoreboard
+   ============================================================ */
+
+.game-scoreboard {
+    position: fixed;
+    top: calc(var(--header-height) + var(--spacing-3));
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-2) var(--spacing-4);
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: var(--blur-md);
+    -webkit-backdrop-filter: var(--blur-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full);
+    z-index: var(--z-index-sticky);
+    box-shadow: var(--shadow-dark-lg);
+}
+
+.score-team {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-1) var(--spacing-3);
+}
+
+.score-team.team-1 {
+    border-left: 3px solid var(--color-primary);
+}
+
+.score-team.team-2 {
+    border-right: 3px solid var(--color-danger);
+}
+
+.team-header {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.team-name {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+}
+
+.team-badge {
+    font-size: 10px;
+    padding: 1px 6px;
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-badge);
+    color: var(--text-secondary);
+}
+
+.team-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score-value {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    line-height: 1;
+    font-family: var(--font-family-mono);
+}
+
+.score-label {
+    font-size: 10px;
+    color: var(--text-tertiary);
+}
+
+.team-tricks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+}
+
+.tricks-label {
+    color: var(--text-tertiary);
+    font-size: 10px;
+}
+
+.tricks-value {
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    font-family: var(--font-family-mono);
+}
+
+.score-divider {
+    padding: 0 var(--spacing-2);
+}
+
+.divider-text {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-tertiary);
+}
+
+/* ============================================================
+   بخش ۹: Trump Indicator
+   ============================================================ */
+
+.trump-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-4);
+    background-color: rgba(255, 193, 7, 0.2);
+    border: 2px solid var(--color-trump);
+    border-radius: var(--radius-full);
+    box-shadow: 0 0 20px var(--color-trump-glow);
+    animation: trumpGlow 2s infinite;
+}
+
+@keyframes trumpGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px var(--color-trump-glow);
+    }
+    50% {
+        box-shadow: 0 0 30px var(--color-trump-glow);
+    }
+}
+
+.trump-label {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-medium);
+}
+
+.trump-suit {
+    font-size: var(--font-size-xl);
+    color: var(--color-trump);
+    font-weight: var(--font-weight-bold);
+}
+
+/* ============================================================
+   بخش ۱۰: Round Info
+   ============================================================ */
+
+.round-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-1) var(--spacing-3);
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+}
+
+.round-label {
+    font-weight: var(--font-weight-medium);
+}
+
+.round-value {
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    font-family: var(--font-family-mono);
+}
+
+.round-separator {
+    color: var(--text-tertiary);
+}
+
+.round-total {
+    color: var(--text-tertiary);
+    font-family: var(--font-family-mono);
+}
+
+/* ============================================================
+   بخش ۱۱: Dealer & Hakem Indicators
+   ============================================================ */
+
+.dealer-indicator,
+.hakem-indicator {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    padding: var(--spacing-1) var(--spacing-2);
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-dark-sm);
+}
+
+.dealer-indicator {
+    bottom: 20px;
+    right: 20px;
+}
+
+.hakem-indicator {
+    top: 20px;
+    left: 20px;
+    background-color: var(--color-accent);
+    color: var(--color-neutral-900);
+}
+
+.dealer-icon,
+.hakem-icon {
+    font-size: var(--font-size-md);
+}
+
+/* ============================================================
+   بخش ۱۲: Trump Selection Panel
+   ============================================================ */
+
+.trump-selection-area {
+    position: fixed;
+    inset: 0;
+    background-color: var(--bg-overlay);
+    backdrop-filter: var(--blur-md);
+    -webkit-backdrop-filter: var(--blur-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-index-modal);
+    padding: var(--spacing-4);
+    animation: fadeIn var(--transition-normal) var(--easing-ease-out);
+}
+
+.trump-selection-panel {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-6);
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    box-shadow: var(--shadow-dark-xl);
+    animation: slideUp var(--transition-normal) var(--easing-bounce);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.trump-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0 0 var(--spacing-2) 0;
+}
+
+.trump-subtitle {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin: 0 0 var(--spacing-6) 0;
+}
+
+.trump-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-3);
+    margin-bottom: var(--spacing-6);
+}
+
+.trump-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-5);
+    background-color: var(--card-bg);
+    border: 2px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: var(--transition-all);
+    font-family: inherit;
+    color: var(--text-primary);
+}
+
+.trump-option:hover {
+    background-color: var(--card-bg-hover);
+    transform: translateY(-2px);
+    border-color: var(--border-color-strong);
+}
+
+.trump-option.selected {
+    background-color: var(--color-primary-light);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-primary);
+}
+
+.suit-icon {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.suit-icon.suit-spades { color: var(--color-suit-spades); }
+.suit-icon.suit-hearts { color: var(--color-suit-hearts); }
+.suit-icon.suit-diamonds { color: var(--color-suit-diamonds); }
+.suit-icon.suit-clubs { color: var(--color-suit-clubs); }
+
+.suit-name {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+}
+
+.trump-auto {
+    padding-top: var(--spacing-4);
+    border-top: 1px solid var(--border-color);
+}
+
+/* ============================================================
+   بخش ۱۳: Kot Declaration Panel
+   ============================================================ */
+
+.kot-declaration-area {
+    position: fixed;
+    inset: 0;
+    background-color: var(--bg-overlay);
+    backdrop-filter: var(--blur-md);
+    -webkit-backdrop-filter: var(--blur-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-index-modal);
+    padding: var(--spacing-4);
+}
+
+.kot-panel {
+    background-color: var(--bg-secondary);
+    border: 2px solid var(--color-accent);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-6);
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(255, 193, 7, 0.3);
+    animation: kotAppear 0.5s var(--easing-bounce);
+}
+
+@keyframes kotAppear {
+    0% {
+        transform: scale(0.5) rotate(-10deg);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+    }
+}
+
+.kot-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-accent);
+    margin: 0 0 var(--spacing-2) 0;
+}
+
+.kot-subtitle {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin: 0 0 var(--spacing-6) 0;
+}
+
+.kot-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+}
+
+/* ============================================================
+   بخش ۱۴: Game Chat Panel
+   ============================================================ */
+
+.game-chat-panel {
+    position: fixed;
+    bottom: calc(var(--bottom-nav-height) + var(--spacing-4));
+    left: var(--spacing-4);
+    width: 320px;
+    max-width: calc(100vw - var(--spacing-8));
+    height: 400px;
+    max-height: calc(100vh - var(--header-height) - var(--bottom-nav-height) - var(--spacing-8));
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-dark-lg);
+    z-index: var(--z-index-fixed);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: slideInLeft var(--transition-normal) var(--easing-ease-out);
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.chat-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-3);
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-tertiary);
+}
+
+.chat-title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.quick-messages {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-1);
+    padding: var(--spacing-2);
+    border-top: 1px solid var(--border-color);
+    background-color: var(--bg-tertiary);
+}
+
+.quick-msg-btn {
+    padding: var(--spacing-1) var(--spacing-3);
+    background-color: var(--bg-elevated);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    cursor: pointer;
+    transition: var(--transition-all);
+    font-family: inherit;
+}
+
+.quick-msg-btn:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+}
+
+.chat-input-area {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-3);
+    border-top: 1px solid var(--border-color);
+    background-color: var(--bg-tertiary);
+}
+
+/* ============================================================
+   بخش ۱۵: Game Menu Overlay
+   ============================================================ */
+
+.game-menu-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: var(--bg-overlay);
+    backdrop-filter: var(--blur-md);
+    -webkit-backdrop-filter: var(--blur-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-index-modal);
+    padding: var(--spacing-4);
+    animation: fadeIn var(--transition-normal);
+}
+
+.game-menu-panel {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-6);
+    max-width: 400px;
+    width: 100%;
+    box-shadow: var(--shadow-dark-xl);
+}
+
+.menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-6);
+}
+
+.menu-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.menu-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3) var(--spacing-4);
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: var(--transition-all);
+    font-family: inherit;
+    color: var(--text-primary);
+    width: 100%;
+    text-align: right;
+}
+
+.menu-item:hover {
+    background-color: var(--card-bg-hover);
+    transform: translateX(-2px);
+}
+
+.menu-item.danger {
+    color: var(--color-danger);
+    border-color: var(--color-danger);
+}
+
+.menu-item.danger:hover {
+    background-color: var(--color-danger-light);
+}
+
+.menu-icon {
+    font-size: var(--font-size-xl);
+    flex-shrink: 0;
+}
+
+.menu-text {
+    flex: 1;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+}
+
+.menu-toggle {
+    font-size: var(--font-size-sm);
+    color: var(--text-tertiary);
+}
+
+/* ============================================================
+   بخش ۱۶: Last Trick Panel
+   ============================================================ */
+
+.last-trick-panel {
+    position: fixed;
+    top: calc(var(--header-height) + var(--spacing-3));
+    right: var(--spacing-3);
+    width: 280px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-dark-lg);
+    z-index: var(--z-index-fixed);
+    overflow: hidden;
+}
+
+.last-trick-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-2) var(--spacing-3);
+    background-color: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.last-trick-title {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.last-trick-cards {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-3);
+}
+
+/* ============================================================
+   بخش ۱۷: Game Result Overlay
+   ============================================================ */
+
+.game-result-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: var(--bg-overlay);
+    backdrop-filter: var(--blur-lg);
+    -webkit-backdrop-filter: var(--blur-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-index-modal);
+    padding: var(--spacing-4);
+}
+
+.game-result-panel {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-8);
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    box-shadow: var(--shadow-dark-xl);
+    animation: resultAppear 0.6s var(--easing-bounce);
+}
+
+@keyframes resultAppear {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.result-icon {
+    font-size: 5rem;
+    margin-bottom: var(--spacing-4);
+    animation: resultIconBounce 1s var(--easing-bounce);
+}
+
+@keyframes resultIconBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.result-title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    margin: 0 0 var(--spacing-2) 0;
+}
+
+.game-result-panel.win .result-title {
+    color: var(--color-success);
+}
+
+.game-result-panel.lose .result-title {
+    color: var(--color-danger);
+}
+
+.result-subtitle {
+    font-size: var(--font-size-base);
+    color: var(--text-secondary);
+    margin: 0 0 var(--spacing-6) 0;
+}
+
+.result-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-3);
+    padding: var(--spacing-4);
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-6);
+}
+
+.result-stat {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+}
+
+.stat-label {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+}
+
+.stat-value {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    font-family: var(--font-family-mono);
+}
+
+.result-rewards {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-4);
+    margin-bottom: var(--spacing-6);
+}
+
+.reward-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-4);
+    background-color: var(--color-success-light);
+    border: 1px solid var(--color-success);
+    border-radius: var(--radius-full);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-success);
+}
+
+.result-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+}
+
+/* ============================================================
+   بخش ۱۸: Card Animations
+   ============================================================ */
+
+/* Deal Animation */
+@keyframes cardDeal {
+    0% {
+        transform: translate(0, -200px) rotate(0deg) scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(var(--deal-x, 0), var(--deal-y, 0)) rotate(var(--deal-rotation, 0)) scale(1);
+        opacity: 1;
+    }
+}
+
+.card.dealing {
+    animation: cardDeal 0.5s var(--easing-ease-out) forwards;
+}
+
+/* Win Animation */
+@keyframes cardWin {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.card.winning {
+    animation: cardWin 0.5s var(--easing-bounce);
+}
+
+/* Collect Animation */
+@keyframes cardCollect {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.5) translate(var(--collect-x, 0), var(--collect-y, 0));
+        opacity: 0;
+    }
+}
+
+.card.collecting {
+    animation: cardCollect 0.5s var(--easing-ease-in) forwards;
+}
+
+/* ============================================================
+   بخش ۱۹: Confetti (برای برد)
+   ============================================================ */
+
+.confetti-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: var(--z-index-max);
+    overflow: hidden;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: var(--color-accent);
+    animation: confettiFall 3s linear forwards;
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* ============================================================
+   بخش ۲۰: Responsive Game
+   ============================================================ */
+
+/* موبایل کوچک */
+@media (max-width: 360px) {
+    .card {
+        width: 60px;
+        height: 90px;
+    }
+    
+    .card-center {
+        font-size: 2rem;
+    }
+    
+    .table-surface {
+        padding: var(--spacing-4);
+    }
+    
+    .trick-area {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .game-scoreboard {
+        font-size: var(--font-size-xs);
+        padding: var(--spacing-1) var(--spacing-2);
+    }
+    
+    .score-value {
+        font-size: var(--font-size-lg);
+    }
+}
+
+/* موبایل */
+@media (max-width: 768px) {
+    .game-table {
+        min-height: 400px;
+    }
+    
+    .table-surface {
+        aspect-ratio: 3 / 4;
+        padding: var(--spacing-4);
+    }
+    
+    .card {
+        width: 70px;
+        height: 105px;
+    }
+    
+    .card-center {
+        font-size: 2.5rem;
+    }
+    
+    .hand-container {
+        min-height: 120px;
+    }
+    
+    .hand-cards {
+        height: 120px;
+    }
+    
+    .player-name {
+        max-width: 80px;
+        font-size: var(--font-size-xs);
+    }
+    
+    .game-scoreboard {
+        top: calc(var(--header-height) + var(--spacing-2));
+    }
+    
+    .trump-options {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-2);
+    }
+    
+    .trump-option {
+        padding: var(--spacing-3);
+    }
+    
+    .suit-icon {
+        font-size: 2rem;
+    }
+    
+    .game-chat-panel {
+        width: calc(100vw - var(--spacing-8));
+        left: var(--spacing-4);
+        right: var(--spacing-4);
+    }
+    
+    .last-trick-panel {
+        width: 240px;
+    }
+}
+
+/* تبلت */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .table-surface {
+        max-width: 700px;
+    }
+    
+    .card {
+        width: var(--card-width);
+        height: var(--card-height);
+    }
+}
+
+/* دسکتاپ */
+@media (min-width: 1024px) {
+    .table-surface {
+        max-width: 900px;
+    }
+    
+    .card {
+        width: var(--card-width-lg);
+        height: var(--card-height-lg);
+    }
+    
+    .trick-area {
+        width: 400px;
+        height: 400px;
+    }
+}
+
+/* Landscape */
+@media (orientation: landscape) and (max-height: 500px) {
+    .game-table {
+        min-height: 300px;
+    }
+    
+    .table-surface {
+        aspect-ratio: 16 / 9;
+    }
+    
+    .player-hand-area {
+        position: relative;
+        bottom: auto;
+    }
+    
+    .game-scoreboard {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        margin: var(--spacing-2) auto;
+    }
+}
+
+/* ============================================================
+   بخش ۲۱: Accessibility
+   ============================================================ */
+
+/* Focus states */
+.card:focus-visible,
+.trump-option:focus-visible,
+.menu-item:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .card,
+    .player-info,
+    .trump-option,
+    .kot-panel,
+    .game-result-panel {
+        animation: none;
+        transition: none;
+    }
+    
+    .game-timer.warning,
+    .game-timer.danger,
+    .player-info.active,
+    .trump-indicator {
+        animation: none;
+    }
+    
+    .confetti {
+        display: none;
+    }
+}
+
+/* High contrast */
+@media (prefers-contrast: high) {
+    .card {
+        border: 2px solid #000;
+    }
+    
+    .card.trump {
+        border-width: 4px;
+    }
+    
+    .player-info.active {
+        border-width: 3px;
+    }
+}
+
+/* ============================================================
+   بخش ۲۲: Print Game
+   ============================================================ */
+
+@media print {
+    .game-top-bar,
+    .game-scoreboard,
+    .player-hand-area,
+    .game-chat-panel,
+    .game-menu-overlay,
+    .trump-selection-area,
+    .kot-declaration-area,
+    .game-result-overlay {
+        display: none !important;
+    }
+    
+    .screen-game {
+        background: #fff;
+    }
+    
+    .table-surface {
+        background: #fff;
+        border: 2px solid #000;
+        box-shadow: none;
+    }
+}
+
+/* ============================================================
+   بخش ۲۳: Dark Mode Specific
+   ============================================================ */
+
+.theme-dark .table-surface {
+    background: var(--bg-table-surface);
+}
+
+.theme-dark .card {
+    background-color: var(--color-white);
+}
+
+/* ============================================================
+   بخش ۲۴: Game Utilities
+   ============================================================ */
+
+.game-hidden {
+    display: none !important;
+}
+
+.game-visible {
+    display: block !important;
+}
+
+.game-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.game-loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.game-loading::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: inherit;
+}
