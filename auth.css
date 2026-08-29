@@ -1,0 +1,1420 @@
+/**
+ * ============================================================
+ * HOKM MASTER - Authentication
+ * استایل‌های صفحات احراز هویت
+ * ============================================================
+ * 
+ * این فایل استایل‌های مربوط به صفحات ورود، ثبت‌نام،
+ * OTP و بازیابی رمز عبور را تعریف می‌کند.
+ * 
+ * نسخه: 1.0.0
+ * ============================================================
+ */
+
+/* ============================================================
+   بخش ۱: Auth Container
+   ============================================================ */
+
+.screen-auth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - var(--header-height) - var(--bottom-nav-height));
+    padding: var(--spacing-4);
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 480px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-8);
+    box-shadow: var(--shadow-dark-lg);
+    animation: authSlideIn var(--transition-normal) var(--easing-ease-out);
+}
+
+@keyframes authSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================================
+   بخش ۲: Auth Header
+   ============================================================ */
+
+.auth-header {
+    text-align: center;
+    margin-bottom: var(--spacing-8);
+}
+
+.auth-logo {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--spacing-4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-primary);
+    animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.logo-icon {
+    font-size: 2.5rem;
+}
+
+.auth-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0 0 var(--spacing-2) 0;
+}
+
+.auth-subtitle {
+    font-size: var(--font-size-sm);
+    color: var(--text-tertiary);
+    margin: 0;
+}
+
+/* ============================================================
+   بخش ۳: Auth Tabs
+   ============================================================ */
+
+.auth-tabs {
+    display: flex;
+    gap: var(--spacing-1);
+    background-color: var(--bg-tertiary);
+    padding: var(--spacing-1);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-6);
+}
+
+.auth-tab {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-3);
+    background-color: transparent;
+    color: var(--text-secondary);
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: var(--transition-all);
+}
+
+.auth-tab:hover {
+    background-color: var(--bg-elevated);
+    color: var(--text-primary);
+}
+
+.auth-tab.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-weight: var(--font-weight-semibold);
+    box-shadow: var(--shadow-primary);
+}
+
+.tab-icon {
+    font-size: var(--font-size-md);
+}
+
+.tab-text {
+    font-size: var(--font-size-sm);
+}
+
+/* ============================================================
+   بخش ۴: Auth Forms
+   ============================================================ */
+
+.auth-form {
+    display: none;
+    animation: formFadeIn var(--transition-normal) var(--easing-ease-out);
+}
+
+.auth-form.auth-form-active {
+    display: block;
+}
+
+@keyframes formFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ============================================================
+   بخش ۵: Form Groups
+   ============================================================ */
+
+.form-group {
+    margin-bottom: var(--spacing-5);
+}
+
+.form-label {
+    display: block;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-2);
+}
+
+.form-label.required::after {
+    content: ' *';
+    color: var(--color-danger);
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.input-wrapper .input-field {
+    width: 100%;
+    padding: var(--spacing-3) var(--spacing-4);
+    padding-right: calc(var(--spacing-4) + 28px);
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius-input);
+    font-family: inherit;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+    transition: var(--transition-all);
+    outline: none;
+    min-height: 48px;
+}
+
+.input-wrapper .input-field::placeholder {
+    color: var(--input-placeholder);
+}
+
+.input-wrapper .input-field:hover {
+    border-color: var(--border-color-strong);
+}
+
+.input-wrapper .input-field:focus {
+    background-color: var(--input-bg-focus);
+    border-color: var(--input-border-focus);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.input-wrapper .input-field.error {
+    border-color: var(--color-danger);
+    background-color: rgba(239, 68, 68, 0.05);
+}
+
+.input-wrapper .input-field.success {
+    border-color: var(--color-success);
+    background-color: rgba(16, 185, 129, 0.05);
+}
+
+.input-icon {
+    position: absolute;
+    right: var(--spacing-4);
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: var(--font-size-lg);
+    color: var(--text-tertiary);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.form-hint {
+    display: block;
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+    margin-top: var(--spacing-1);
+}
+
+.form-error {
+    display: block;
+    font-size: var(--font-size-xs);
+    color: var(--color-danger);
+    margin-top: var(--spacing-1);
+    animation: errorShake 0.5s;
+}
+
+@keyframes errorShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.form-success {
+    display: block;
+    font-size: var(--font-size-xs);
+    color: var(--color-success);
+    margin-top: var(--spacing-1);
+}
+
+/* ============================================================
+   بخش ۶: Form Options
+   ============================================================ */
+
+.form-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-6);
+    flex-wrap: wrap;
+    gap: var(--spacing-3);
+}
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-input {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color-strong);
+    border-radius: var(--radius-sm);
+    background-color: var(--input-bg);
+    cursor: pointer;
+    transition: var(--transition-all);
+    position: relative;
+    flex-shrink: 0;
+}
+
+.checkbox-input:checked {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.checkbox-input:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-white);
+    font-size: 12px;
+    font-weight: var(--font-weight-bold);
+}
+
+.checkbox-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.form-link {
+    font-size: var(--font-size-sm);
+    color: var(--text-link);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    transition: var(--transition-colors);
+}
+
+.form-link:hover {
+    color: var(--text-link-hover);
+    text-decoration: underline;
+}
+
+/* ============================================================
+   بخش ۷: Submit Button
+   ============================================================ */
+
+.btn-submit {
+    width: 100%;
+    padding: var(--spacing-4);
+    background: var(--gradient-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-input);
+    font-family: inherit;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: var(--transition-all);
+    box-shadow: var(--shadow-primary);
+    position: relative;
+    overflow: hidden;
+    min-height: 52px;
+}
+
+.btn-submit:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.5);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+.btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-text {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.btn-loading {
+    display: none;
+    position: absolute;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-submit.loading .btn-text {
+    visibility: hidden;
+}
+
+.btn-submit.loading .btn-loading {
+    display: flex;
+}
+
+.spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: var(--color-white);
+    border-radius: var(--radius-full);
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ============================================================
+   بخش ۸: Password Toggle
+   ============================================================ */
+
+.btn-toggle-password {
+    position: absolute;
+    left: var(--spacing-3);
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-tertiary);
+    padding: var(--spacing-1);
+    border-radius: var(--radius-sm);
+    transition: var(--transition-colors);
+    z-index: 2;
+}
+
+.btn-toggle-password:hover {
+    color: var(--text-primary);
+}
+
+.icon-eye {
+    font-size: var(--font-size-lg);
+}
+
+/* ============================================================
+   بخش ۹: Password Strength
+   ============================================================ */
+
+.password-strength {
+    margin-top: var(--spacing-2);
+}
+
+.strength-bar {
+    height: 4px;
+    background-color: var(--bg-elevated);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: var(--spacing-1);
+}
+
+.strength-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    transition: width var(--transition-normal) var(--easing-ease-in-out),
+                background-color var(--transition-normal) var(--easing-ease-in-out);
+    width: 0;
+}
+
+.strength-fill.weak {
+    width: 25%;
+    background-color: var(--color-danger);
+}
+
+.strength-fill.fair {
+    width: 50%;
+    background-color: var(--color-warning);
+}
+
+.strength-fill.good {
+    width: 75%;
+    background-color: var(--color-info);
+}
+
+.strength-fill.strong {
+    width: 100%;
+    background-color: var(--color-success);
+}
+
+.strength-text {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+}
+
+.strength-text.weak {
+    color: var(--color-danger);
+}
+
+.strength-text.fair {
+    color: var(--color-warning);
+}
+
+.strength-text.good {
+    color: var(--color-info);
+}
+
+.strength-text.strong {
+    color: var(--color-success);
+}
+
+/* ============================================================
+   بخش ۱۰: OTP Inputs
+   ============================================================ */
+
+.otp-inputs {
+    display: flex;
+    gap: var(--spacing-2);
+    justify-content: center;
+    direction: ltr;
+    margin: var(--spacing-6) 0;
+}
+
+.otp-input {
+    width: 52px;
+    height: 64px;
+    text-align: center;
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    border: 2px solid var(--input-border);
+    border-radius: var(--radius-md);
+    transition: var(--transition-all);
+    outline: none;
+}
+
+.otp-input::placeholder {
+    color: var(--input-placeholder);
+}
+
+.otp-input:hover {
+    border-color: var(--border-color-strong);
+}
+
+.otp-input:focus {
+    border-color: var(--color-primary);
+    background-color: var(--input-bg-focus);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    transform: translateY(-2px);
+}
+
+.otp-input.filled {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary-light);
+    animation: otpFill 0.3s var(--easing-bounce);
+}
+
+@keyframes otpFill {
+    0% {
+        transform: scale(0.9);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.otp-input.error {
+    border-color: var(--color-danger);
+    background-color: rgba(239, 68, 68, 0.05);
+    animation: otpError 0.5s;
+}
+
+@keyframes otpError {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.otp-input.success {
+    border-color: var(--color-success);
+    background-color: var(--color-success-light);
+}
+
+/* OTP Timer */
+.otp-timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+    margin: var(--spacing-4) 0;
+    font-size: var(--font-size-sm);
+    color: var(--text-tertiary);
+}
+
+.timer-countdown {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    font-size: var(--font-size-lg);
+}
+
+/* OTP Timer Circle */
+.otp-timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-3);
+    margin: var(--spacing-6) 0;
+}
+
+.timer-circle {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.timer-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.timer-bg {
+    fill: none;
+    stroke: var(--bg-elevated);
+    stroke-width: 8;
+}
+
+.timer-progress {
+    fill: none;
+    stroke: var(--color-primary);
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 283;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1s linear;
+}
+
+.timer-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.timer-countdown {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.timer-label {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+    margin-top: var(--spacing-1);
+}
+
+.timer-description {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    text-align: center;
+    margin: 0;
+}
+
+/* Resend Button */
+.btn-resend-otp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+    width: 100%;
+    padding: var(--spacing-3);
+    background-color: transparent;
+    color: var(--text-link);
+    border: none;
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: var(--transition-colors);
+    margin: var(--spacing-4) 0;
+}
+
+.btn-resend-otp:hover:not(:disabled) {
+    color: var(--text-link-hover);
+}
+
+.btn-resend-otp:disabled {
+    color: var(--text-tertiary);
+    cursor: not-allowed;
+}
+
+.resend-icon {
+    font-size: var(--font-size-md);
+}
+
+/* OTP Help */
+.otp-help {
+    text-align: center;
+    margin: var(--spacing-4) 0;
+}
+
+.btn-help {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-4);
+    background-color: transparent;
+    color: var(--text-link);
+    border: none;
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: var(--transition-colors);
+}
+
+.btn-help:hover {
+    color: var(--text-link-hover);
+}
+
+.help-icon {
+    font-size: var(--font-size-md);
+}
+
+/* OTP Alternative */
+.otp-alternative {
+    margin-top: var(--spacing-6);
+    padding-top: var(--spacing-6);
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.alternative-text {
+    font-size: var(--font-size-sm);
+    color: var(--text-tertiary);
+    margin: 0 0 var(--spacing-3) 0;
+}
+
+.alternative-methods {
+    display: flex;
+    gap: var(--spacing-3);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* OTP Context Info */
+.otp-context-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-4);
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-6);
+}
+
+.context-icon {
+    font-size: var(--font-size-3xl);
+    flex-shrink: 0;
+}
+
+.context-details {
+    flex: 1;
+}
+
+.context-text {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin: 0 0 var(--spacing-1) 0;
+    line-height: var(--line-height-relaxed);
+}
+
+.context-hint {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+    margin: 0;
+}
+
+/* OTP Security Notice */
+.otp-security-notice {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-3);
+    background-color: rgba(245, 158, 11, 0.1);
+    border: 1px solid var(--color-warning);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-6);
+    font-size: var(--font-size-xs);
+    color: var(--color-warning);
+}
+
+.security-icon {
+    font-size: var(--font-size-md);
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   بخش ۱۱: Social Login
+   ============================================================ */
+
+.auth-divider {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    margin: var(--spacing-6) 0;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-color: var(--border-color);
+}
+
+.divider-text {
+    font-size: var(--font-size-sm);
+    color: var(--text-tertiary);
+    font-weight: var(--font-weight-medium);
+}
+
+.auth-social {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    margin-bottom: var(--spacing-6);
+}
+
+.btn-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3);
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-input);
+    font-family: inherit;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: var(--transition-all);
+    min-height: 48px;
+}
+
+.btn-social:hover {
+    background-color: var(--bg-elevated);
+    border-color: var(--border-color-strong);
+    transform: translateY(-1px);
+}
+
+.btn-social:active {
+    transform: translateY(0);
+}
+
+.social-icon {
+    font-size: var(--font-size-xl);
+}
+
+.btn-google {
+    background-color: var(--color-white);
+    color: var(--color-neutral-900);
+}
+
+.btn-google:hover {
+    background-color: var(--color-neutral-100);
+}
+
+/* ============================================================
+   بخش ۱۲: Auth Footer
+   ============================================================ */
+
+.auth-footer {
+    text-align: center;
+    margin-top: var(--spacing-6);
+    padding-top: var(--spacing-6);
+    border-top: 1px solid var(--border-color);
+}
+
+.auth-footer-text {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.auth-link {
+    color: var(--text-link);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+    transition: var(--transition-colors);
+}
+
+.auth-link:hover {
+    color: var(--text-link-hover);
+    text-decoration: underline;
+}
+
+/* ============================================================
+   بخش ۱۳: Terms
+   ============================================================ */
+
+.auth-terms {
+    text-align: center;
+    margin-top: var(--spacing-4);
+}
+
+.terms-text {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+    margin: 0;
+    line-height: var(--line-height-relaxed);
+}
+
+.terms-link {
+    color: var(--text-link);
+    text-decoration: none;
+    transition: var(--transition-colors);
+}
+
+.terms-link:hover {
+    color: var(--text-link-hover);
+    text-decoration: underline;
+}
+
+/* ============================================================
+   بخش ۱۴: Guest Login
+   ============================================================ */
+
+.guest-info {
+    text-align: center;
+    margin-bottom: var(--spacing-6);
+}
+
+.guest-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-3);
+    opacity: 0.7;
+}
+
+.guest-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0 0 var(--spacing-2) 0;
+}
+
+.guest-description {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin: 0 0 var(--spacing-4) 0;
+    line-height: var(--line-height-relaxed);
+}
+
+.guest-features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    text-align: right;
+    margin-top: var(--spacing-4);
+}
+
+.guest-feature {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.feature-icon {
+    font-size: var(--font-size-md);
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   بخش ۱۵: Register Progress Steps
+   ============================================================ */
+
+.auth-progress {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-8);
+    padding: var(--spacing-4);
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-2);
+    flex: 1;
+    position: relative;
+}
+
+.progress-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: -50%;
+    right: 50%;
+    height: 2px;
+    background-color: var(--border-color);
+    z-index: 0;
+}
+
+.progress-step.active:not(:last-child)::after,
+.progress-step.completed:not(:last-child)::after {
+    background-color: var(--color-primary);
+}
+
+.step-number {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-elevated);
+    color: var(--text-tertiary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    position: relative;
+    z-index: 1;
+    transition: var(--transition-all);
+}
+
+.progress-step.active .step-number {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-primary);
+}
+
+.progress-step.completed .step-number {
+    background-color: var(--color-success);
+    color: var(--color-white);
+    border-color: var(--color-success);
+}
+
+.progress-step.completed .step-number::before {
+    content: '✓';
+}
+
+.progress-step.completed .step-number > * {
+    display: none;
+}
+
+.step-label {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-tertiary);
+    text-align: center;
+}
+
+.progress-step.active .step-label {
+    color: var(--text-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+.progress-step.completed .step-label {
+    color: var(--color-success);
+}
+
+/* ============================================================
+   بخش ۱۶: Avatar Selector
+   ============================================================ */
+
+.avatar-selector {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-3);
+    margin: var(--spacing-4) 0;
+}
+
+.avatar-option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-3);
+    background-color: var(--card-bg);
+    border: 2px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: var(--transition-all);
+}
+
+.avatar-option:hover {
+    background-color: var(--card-bg-hover);
+    transform: translateY(-2px);
+}
+
+.avatar-option.selected {
+    background-color: var(--color-primary-light);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-primary);
+}
+
+.avatar-option.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.avatar-option.locked::after {
+    content: '🔒';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    font-size: var(--font-size-xs);
+}
+
+/* ============================================================
+   بخش ۱۷: Profile Setup
+   ============================================================ */
+
+.profile-setup-info {
+    text-align: center;
+    margin-bottom: var(--spacing-6);
+}
+
+.profile-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-3);
+}
+
+.profile-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0 0 var(--spacing-2) 0;
+}
+
+.profile-description {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* ============================================================
+   بخش ۱۸: Form Actions
+   ============================================================ */
+
+.form-actions {
+    display: flex;
+    gap: var(--spacing-3);
+    margin-top: var(--spacing-6);
+}
+
+.form-actions .btn {
+    flex: 1;
+}
+
+/* ============================================================
+   بخش ۱۹: Check Username Button
+   ============================================================ */
+
+.btn-check-username {
+    position: absolute;
+    left: var(--spacing-3);
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-full);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-all);
+    z-index: 2;
+}
+
+.btn-check-username:hover {
+    background-color: var(--color-primary-hover);
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* ============================================================
+   بخش ۲۰: Textarea
+   ============================================================ */
+
+.textarea-wrapper {
+    position: relative;
+}
+
+.textarea-field {
+    min-height: 100px;
+    resize: vertical;
+    padding: var(--spacing-3) var(--spacing-4);
+    font-family: inherit;
+    line-height: var(--line-height-relaxed);
+}
+
+.char-counter {
+    position: absolute;
+    bottom: var(--spacing-2);
+    left: var(--spacing-3);
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+}
+
+/* ============================================================
+   بخش ۲۱: Responsive Auth
+   ============================================================ */
+
+/* موبایل کوچک */
+@media (max-width: 360px) {
+    .auth-container {
+        padding: var(--spacing-6);
+    }
+    
+    .auth-title {
+        font-size: var(--font-size-xl);
+    }
+    
+    .otp-input {
+        width: 44px;
+        height: 56px;
+        font-size: var(--font-size-xl);
+    }
+    
+    .avatar-selector {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .auth-tabs {
+        flex-direction: column;
+    }
+    
+    .auth-tab {
+        justify-content: flex-start;
+    }
+}
+
+/* موبایل */
+@media (max-width: 768px) {
+    .screen-auth {
+        padding: var(--spacing-3);
+    }
+    
+    .auth-container {
+        padding: var(--spacing-6);
+    }
+    
+    .auth-logo {
+        width: 64px;
+        height: 64px;
+    }
+    
+    .logo-icon {
+        font-size: 2rem;
+    }
+    
+    .auth-title {
+        font-size: var(--font-size-xl);
+    }
+    
+    .otp-inputs {
+        gap: var(--spacing-1);
+    }
+    
+    .otp-input {
+        width: 48px;
+        height: 60px;
+        font-size: var(--font-size-xl);
+    }
+    
+    .timer-circle {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .avatar-selector {
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--spacing-2);
+    }
+}
+
+/* تبلت */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .auth-container {
+        max-width: 520px;
+    }
+}
+
+/* دسکتاپ */
+@media (min-width: 1024px) {
+    .auth-container {
+        max-width: 560px;
+        padding: var(--spacing-10);
+    }
+}
+
+/* ============================================================
+   بخش ۲۲: Accessibility
+   ============================================================ */
+
+/* Focus states */
+.auth-tab:focus-visible,
+.input-field:focus-visible,
+.btn-submit:focus-visible,
+.btn-social:focus-visible,
+.checkbox-input:focus-visible,
+.otp-input:focus-visible,
+.avatar-option:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .auth-container,
+    .auth-form,
+    .auth-logo,
+    .otp-input,
+    .btn-submit,
+    .btn-social {
+        animation: none;
+        transition: none;
+    }
+}
+
+/* High contrast */
+@media (prefers-contrast: high) {
+    .input-field,
+    .btn-submit,
+    .btn-social,
+    .otp-input {
+        border-width: 2px;
+    }
+}
+
+/* ============================================================
+   بخش ۲۳: Print Auth
+   ============================================================ */
+
+@media print {
+    .screen-auth {
+        display: block;
+    }
+    
+    .auth-container {
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+    
+    .btn-submit,
+    .btn-social,
+    .auth-tabs {
+        display: none;
+    }
+}
+
+/* ============================================================
+   بخش ۲۴: Dark Mode Specific
+   ============================================================ */
+
+.theme-dark .auth-container {
+    background-color: var(--card-bg);
+    border-color: var(--card-border);
+}
+
+.theme-dark .btn-google {
+    background-color: var(--color-white);
+    color: var(--color-neutral-900);
+}
+
+/* ============================================================
+   بخش ۲۵: Auth Utilities
+   ============================================================ */
+
+.auth-hidden {
+    display: none !important;
+}
+
+.auth-visible {
+    display: block !important;
+}
+
+.auth-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.auth-loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.auth-loading::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
