@@ -1,0 +1,665 @@
+<div id="help-screen" class="screen screen-help" data-screen-name="help">
+    <div class="screen-content">
+        <header class="screen-header">
+            <button class="btn-back" data-route="home" aria-label="بازگشت">
+                <span class="icon">→</span>
+            </button>
+            <h1 class="screen-title">راهنما</h1>
+            <div class="header-actions">
+                <button class="btn-icon btn-small" id="btn-help-search" aria-label="جستجو">
+                    <span class="icon">🔍</span>
+                </button>
+                <button class="btn-icon btn-small" id="btn-help-contact" aria-label="تماس با پشتیبانی">
+                    <span class="icon">📞</span>
+                </button>
+            </div>
+        </header>
+
+        <section class="help-hero">
+            <div class="hero-background"></div>
+            <div class="hero-content">
+                <div class="hero-icon">❓</div>
+                <h2 class="hero-title">مرکز راهنما</h2>
+                <p class="hero-subtitle">پاسخ سوالات خود را پیدا کنید</p>
+                <div class="hero-search">
+                    <div class="input-wrapper search-wrapper">
+                        <span class="input-icon">🔍</span>
+                        <input
+                            type="text"
+                            id="help-search-input"
+                            class="input-field"
+                            placeholder="جستجو در راهنما..."
+                            maxlength="50"
+                        >
+                        <button class="btn-clear-search" id="btn-clear-help-search" style="display: none;">
+                            <span class="icon">✕</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="help-categories">
+            <div class="section-header">
+                <h3 class="section-title">دسته‌بندی‌ها</h3>
+            </div>
+            <div class="categories-grid">
+                <button class="category-card" data-category="getting-started" id="help-cat-started">
+                    <div class="category-icon-wrapper">
+                        <span class="category-icon">🚀</span>
+                    </div>
+                    <div class="category-info">
+                        <h4 class="category-name">شروع بازی</h4>
+                        <p class="category-desc">آشنایی با بازی حکم</p>
+                        <span class="category-count"> مقاله</span>
+                    </div>
+                </button>
+
+                <button class="category-card" data-category="rules" id="help-cat-rules">
+                    <div class="category-icon-wrapper">
+                        <span class="category-icon"></span>
+                    </div>
+                    <div class="category-info">
+                        <h4 class="category-name">قوانین بازی</h4>
+                        <p class="category-desc">قوانین کامل حکم</p>
+                        <span class="category-count">۱۲ مقاله</span>
+                    </div>
+                </button>
+
+                <button class="category-card" data-category="gameplay" id="help-cat-gameplay">
+                    <div class="category-icon-wrapper">
+                        <span class="category-icon">🎮</span>
+                    </div>
+                    <div class="category-info">
+                        <h4 class="category-name">گیم‌پلی</h4>
+                        <p class="category-desc">نحوه بازی و استراتژی</p>
+                        <span class="category-count">۱۰ مقاله</span>
+                    </div>
+                </button>
+
+                <button class="category-card" data-category="modes" id="help-cat-modes">
+                    <div class="category-icon-wrapper">
+                        <span class="category-icon">🎯</span>
+                    </div>
+                    <div class="category-info">
+                        <h4 class="category-name">حالت‌های بازی</h4>
+                        <p class="category-desc">انواع حالت‌های بازی</p>
+                        <span class="category-count">۶ مقاله</span>
+                    </div>
+                </button>
+
+                <button class="category-card" data-category="account" id="help-cat-account">
+                    <div class="category-icon-wrapper">
+                        <span class="category-icon"></span>
+                    </div>
+                    <div class="category-info">
+                        <h4 class="category-name">حساب کاربری</h4>
+                        <p class="category-desc">مدیریت حساب و پروفایل</p>
+                        <span class="category-count">۷ مقاله</span>
+                    </div>
+                </button>
+
+                <button class="category-card" data-category="shop" id="help-cat-shop">
+                    <div class="category-icon-wrapper">
+                        <span class="category-icon">🛒</span>
+                    </div>
+                    <div class="category-info">
+                        <h4 class="category-name">فروشگاه</h4>
+                        <p class="category-desc">خرید و پاداش‌ها</p>
+                        <span class="category-count">۵ مقاله</span>
+                    </div>
+                </button>
+
+                <button class="category-card" data-category="technical" id="help-cat-technical">
+                    <div class="category-icon-wrapper">
+                        <span class="category-icon">🔧</span>
+                    </div>
+                    <div class="category-info">
+                        <h4 class="category-name">فنی</h4>
+                        <p class="category-desc">مشکلات فنی و راه‌حل‌ها</p>
+                        <span class="category-count">۹ مقاله</span>
+                    </div>
+                </button>
+
+                <button class="category-card" data-category="faq" id="help-cat-faq">
+                    <div class="category-icon-wrapper">
+                        <span class="category-icon">💬</span>
+                    </div>
+                    <div class="category-info">
+                        <h4 class="category-name">سوالات متداول</h4>
+                        <p class="category-desc">پرسش‌های رایج</p>
+                        <span class="category-count">۱۵ سوال</span>
+                    </div>
+                </button>
+            </div>
+        </section>
+
+        <section class="help-quick-links">
+            <div class="section-header">
+                <h3 class="section-title">دسترسی سریع</h3>
+            </div>
+            <div class="quick-links-list">
+                <a href="#/tutorial" class="quick-link" data-route="tutorial">
+                    <span class="quick-link-icon"></span>
+                    <span class="quick-link-text">آموزش گام به گام</span>
+                    <span class="quick-link-arrow">←</span>
+                </a>
+                <a href="#/practice" class="quick-link" data-route="practice">
+                    <span class="quick-link-icon">🎓</span>
+                    <span class="quick-link-text">حالت تمرین</span>
+                    <span class="quick-link-arrow">←</span>
+                </a>
+                <a href="#/rules" class="quick-link" id="quick-link-rules">
+                    <span class="quick-link-icon">📜</span>
+                    <span class="quick-link-text">قوانین کامل بازی</span>
+                    <span class="quick-link-arrow">←</span>
+                </a>
+                <a href="#/shortcuts" class="quick-link" id="quick-link-shortcuts">
+                    <span class="quick-link-icon">⌨️</span>
+                    <span class="quick-link-text">میانبرهای صفحه کلید</span>
+                    <span class="quick-link-arrow">←</span>
+                </a>
+                <a href="#/support" class="quick-link" id="quick-link-support">
+                    <span class="quick-link-icon"></span>
+                    <span class="quick-link-text">تماس با پشتیبانی</span>
+                    <span class="quick-link-arrow">←</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="help-tutorials">
+            <div class="section-header">
+                <h3 class="section-title">آموزش‌های ویدیویی</h3>
+                <a href="#/tutorials" class="section-link" id="help-link-all-tutorials">مشاهده همه</a>
+            </div>
+            <div class="tutorials-carousel" id="help-tutorials-list">
+                <div class="tutorial-card" data-tutorial-id="t1">
+                    <div class="tutorial-thumbnail">
+                        <span class="thumbnail-icon">▶️</span>
+                        <span class="tutorial-duration">۵:۳۰</span>
+                    </div>
+                    <div class="tutorial-info">
+                        <h4 class="tutorial-title">آموزش کامل حکم</h4>
+                        <p class="tutorial-desc">یادگیری قوانین پایه در ۵ دقیقه</p>
+                        <div class="tutorial-meta">
+                            <span class="meta-item">️ ۱۲,۴۵۰ بازدید</span>
+                            <span class="meta-item">⭐ ۴.۸</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tutorial-card" data-tutorial-id="t2">
+                    <div class="tutorial-thumbnail">
+                        <span class="thumbnail-icon">▶️</span>
+                        <span class="tutorial-duration">:۱۵</span>
+                    </div>
+                    <div class="tutorial-info">
+                        <h4 class="tutorial-title">استراتژی‌های پیشرفته</h4>
+                        <p class="tutorial-desc">تکنیک‌های حرفه‌ای برای برد بیشتر</p>
+                        <div class="tutorial-meta">
+                            <span class="meta-item">️ ۸,۳۲۰ بازدید</span>
+                            <span class="meta-item">⭐ ۴.۹</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tutorial-card" data-tutorial-id="t3">
+                    <div class="tutorial-thumbnail">
+                        <span class="thumbnail-icon">▶️</span>
+                        <span class="tutorial-duration">۴:۴۵</span>
+                    </div>
+                    <div class="tutorial-info">
+                        <h4 class="tutorial-title">انتخاب حکم هوشمندانه</h4>
+                        <p class="tutorial-desc">چگونه بهترین حکم را انتخاب کنیم</p>
+                        <div class="tutorial-meta">
+                            <span class="meta-item">👁️ ۶,۷۸۰ بازدید</span>
+                            <span class="meta-item">⭐ ۴.۷</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="help-faq">
+            <div class="section-header">
+                <h3 class="section-title">سوالات متداول</h3>
+            </div>
+            <div class="faq-list" id="faq-list">
+                <div class="faq-item" data-faq-id="faq1">
+                    <button class="faq-question" aria-expanded="false">
+                        <span class="faq-text">حکم چیست و چگونه بازی می‌شود؟</span>
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer" style="display: none;">
+                        <p>حکم یک بازی کارتی ایرانی است که با  بازیکن (دو تیم دو نفره) و یک دست ۵۲ تایی کارت بازی می‌شود. هدف هر تیم کسب ۷ دست (ترجیحاً با کت) قبل از تیم حریف است.</p>
+                        <a href="#/rules" class="faq-link" data-route="rules">مطالعه قوانین کامل ←</a>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq-id="faq2">
+                    <button class="faq-question" aria-expanded="false">
+                        <span class="faq-text">چگونه حساب کاربری بسازم؟</span>
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer" style="display: none;">
+                        <p>برای ساخت حساب کاربری، روی دکمه "ثبت‌نام" در صفحه ورود کلیک کنید. می‌توانید با ایمیل یا شماره موبایل ثبت‌نام کنید. پس از تأیید کد OTP، حساب شما فعال می‌شود.</p>
+                        <a href="#/register" class="faq-link" data-route="register">رفتن به ثبت‌نام ←</a>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq-id="faq3">
+                    <button class="faq-question" aria-expanded="false">
+                        <span class="faq-text">سیستم امتیازدهی و لیگ چگونه کار می‌کند؟</span>
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer" style="display: none;">
+                        <p>با بردن بازی‌های رقابتی، امتیاز کسب می‌کنید. بر اساس امتیاز خود در یکی از لیگ‌های برنز، نقره، طلا، پلاتین، الماس یا مستر قرار می‌گیرید. هر ماه فصل جدید شروع می‌شود.</p>
+                        <a href="#/league" class="faq-link" data-route="league">مشاهده لیگ ←</a>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq-id="faq4">
+                    <button class="faq-question" aria-expanded="false">
+                        <span class="faq-text">چگونه دوست اضافه کنم؟</span>
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer" style="display: none;">
+                        <p>به بخش "دوستان" بروید و روی "افزودن دوست" کلیک کنید. می‌توانید با نام کاربری، کد دوستی ۶ رقمی یا اسکن QR Code دوست خود را پیدا کنید.</p>
+                        <a href="#/friends" class="faq-link" data-route="friends">رفتن به دوستان ←</a>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq-id="faq5">
+                    <button class="faq-question" aria-expanded="false">
+                        <span class="faq-text">سکه و الماس چگونه به دست می‌آید؟</span>
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer" style="display: none;">
+                        <p>سکه با بردن بازی‌ها، تکمیل مأموریت‌ها و دریافت پاداش روزانه به دست می‌آید. الماس از دستاوردها، تورنمنت‌ها و خرید مستقیم قابل دریافت است.</p>
+                        <a href="#/shop" class="faq-link" data-route="shop">رفتن به فروشگاه ←</a>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq-id="faq6">
+                    <button class="faq-question" aria-expanded="false">
+                        <span class="faq-text">آیا می‌توانم با دوستانم بازی کنم؟</span>
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer" style="display: none;">
+                        <p>بله! از بخش "اتاق خصوصی" یک اتاق بسازید و کد ۵ رقمی آن را با دوستانتان به اشتراک بگذارید. همچنین می‌توانید دوستان آنلاین خود را مستقیماً به بازی دعوت کنید.</p>
+                        <a href="#/private" class="faq-link" data-route="private">ساخت اتاق خصوصی ←</a>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq-id="faq7">
+                    <button class="faq-question" aria-expanded="false">
+                        <span class="faq-text">بازی آفلاین هم امکان‌پذیر است؟</span>
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer" style="display: none;">
+                        <p>بله، می‌توانید در حالت تمرین یا بازی سریع با هوش مصنوعی به صورت آفلاین بازی کنید. اما برای حالت‌های رقابتی، تورنمنت و بازی با دوستان نیاز به اتصال اینترنت دارید.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq-id="faq8">
+                    <button class="faq-question" aria-expanded="false">
+                        <span class="faq-text">چگونه گزارش تقلب ارسال کنم؟</span>
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer" style="display: none;">
+                        <p>در حین بازی، از منوی بازی گزینه "گزارش" را انتخاب کنید. دلیل گزارش و جزئیات را وارد کنید. تیم ما گزارش را بررسی و اقدام مناسب را انجام می‌دهد.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq-id="faq9">
+                    <button class="faq-question" aria-expanded="false">
+                        <span class="faq-text">آیا پیشرفت من ذخیره می‌شود؟</span>
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer" style="display: none;">
+                        <p>بله، تمام پیشرفت شما (امتیاز، لیگ، آیتم‌ها، آمار) به صورت خودکار در حساب کاربری شما ذخیره می‌شود. با ورود به همان حساب در دستگاه‌های مختلف، پیشرفت شما در دسترس خواهد بود.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq-id="faq10">
+                    <button class="faq-question" aria-expanded="false">
+                        <span class="faq-text">چگونه حساب خود را حذف کنم؟</span>
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer" style="display: none;">
+                        <p>به تنظیمات → حساب کاربری → منطقه خطر بروید و گزینه "حذف حساب" را انتخاب کنید. توجه داشته باشید که این عمل غیرقابل بازگشت است و تمام داده‌های شما حذف خواهد شد.</p>
+                        <a href="#/settings" class="faq-link" data-route="settings">رفتن به تنظیمات ←</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="help-rules-summary">
+            <div class="section-header">
+                <h3 class="section-title">خلاصه قوانین حکم</h3>
+                <a href="#/rules-full" class="section-link" id="help-link-full-rules">قوانین کامل ←</a>
+            </div>
+            <div class="rules-summary-card">
+                <div class="rule-summary-item">
+                    <div class="rule-icon">🎴</div>
+                    <div class="rule-info">
+                        <h4 class="rule-title">کارت‌ها</h4>
+                        <p class="rule-desc">۵۲ کارت استاندارد، ۱۳ کارت برای هر بازیکن</p>
+                    </div>
+                </div>
+                <div class="rule-summary-item">
+                    <div class="rule-icon"></div>
+                    <div class="rule-info">
+                        <h4 class="rule-title">بازیکنان</h4>
+                        <p class="rule-desc">۴ بازیکن در ۲ تیم دو نفره (یار روبروی هم)</p>
+                    </div>
+                </div>
+                <div class="rule-summary-item">
+                    <div class="rule-icon">👑</div>
+                    <div class="rule-info">
+                        <h4 class="rule-title">حکم</h4>
+                        <p class="rule-desc">حاکم یک خال را به عنوان حکم انتخاب می‌کند</p>
+                    </div>
+                </div>
+                <div class="rule-summary-item">
+                    <div class="rule-icon">🏆</div>
+                    <div class="rule-info">
+                        <h4 class="rule-title">هدف</h4>
+                        <p class="rule-desc">کسب ۷ دست قبل از تیم حریف</p>
+                    </div>
+                </div>
+                <div class="rule-summary-item">
+                    <div class="rule-icon">🎯</div>
+                    <div class="rule-info">
+                        <h4 class="rule-title">Follow Suit</h4>
+                        <p class="rule-desc">باید خال بازی شده را دنبال کنید (در صورت امکان)</p>
+                    </div>
+                </div>
+                <div class="rule-summary-item">
+                    <div class="rule-icon">👑</div>
+                    <div class="rule-info">
+                        <h4 class="rule-title">کت</h4>
+                        <p class="rule-desc">اعلام اینکه تیم شما همه ۷ دست را می‌برد (پاداش دوبرابر)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="help-keyboard-shortcuts">
+            <div class="section-header">
+                <h3 class="section-title">میانبرهای صفحه کلید</h3>
+            </div>
+            <div class="shortcuts-grid">
+                <div class="shortcut-item">
+                    <div class="shortcut-keys">
+                        <kbd>F1</kbd>
+                    </div>
+                    <div class="shortcut-info">
+                        <span class="shortcut-name">راهنما</span>
+                        <span class="shortcut-desc">باز کردن این صفحه</span>
+                    </div>
+                </div>
+                <div class="shortcut-item">
+                    <div class="shortcut-keys">
+                        <kbd>F2</kbd>
+                    </div>
+                    <div class="shortcut-info">
+                        <span class="shortcut-name">تنظیمات</span>
+                        <span class="shortcut-desc">باز کردن تنظیمات</span>
+                    </div>
+                </div>
+                <div class="shortcut-item">
+                    <div class="shortcut-keys">
+                        <kbd>Esc</kbd>
+                    </div>
+                    <div class="shortcut-info">
+                        <span class="shortcut-name">بازگشت</span>
+                        <span class="shortcut-desc">بستن مودال / بازگشت</span>
+                    </div>
+                </div>
+                <div class="shortcut-item">
+                    <div class="shortcut-keys">
+                        <kbd>Ctrl</kbd>
+                        <span class="shortcut-plus">+</span>
+                        <kbd>M</kbd>
+                    </div>
+                    <div class="shortcut-info">
+                        <span class="shortcut-name">صدا</span>
+                        <span class="shortcut-desc">Mute/Unmute</span>
+                    </div>
+                </div>
+                <div class="shortcut-item">
+                    <div class="shortcut-keys">
+                        <kbd>Ctrl</kbd>
+                        <span class="shortcut-plus">+</span>
+                        <kbd>P</kbd>
+                    </div>
+                    <div class="shortcut-info">
+                        <span class="shortcut-name">موسیقی</span>
+                        <span class="shortcut-desc">Pause/Resume</span>
+                    </div>
+                </div>
+                <div class="shortcut-item">
+                    <div class="shortcut-keys">
+                        <kbd>Ctrl</kbd>
+                        <span class="shortcut-plus">+</span>
+                        <kbd>N</kbd>
+                    </div>
+                    <div class="shortcut-info">
+                        <span class="shortcut-name">بازی جدید</span>
+                        <span class="shortcut-desc">شروع بازی سریع</span>
+                    </div>
+                </div>
+                <div class="shortcut-item">
+                    <div class="shortcut-keys">
+                        <kbd>Ctrl</kbd>
+                        <span class="shortcut-plus">+</span>
+                        <kbd>L</kbd>
+                    </div>
+                    <div class="shortcut-info">
+                        <span class="shortcut-name">رتبه‌بندی</span>
+                        <span class="shortcut-desc">مشاهده Leaderboard</span>
+                    </div>
+                </div>
+                <div class="shortcut-item">
+                    <div class="shortcut-keys">
+                        <kbd>Ctrl</kbd>
+                        <span class="shortcut-plus">+</span>
+                        <kbd>I</kbd>
+                    </div>
+                    <div class="shortcut-info">
+                        <span class="shortcut-name">موجودی</span>
+                        <span class="shortcut-desc">مشاهده Inventory</span>
+                    </div>
+                </div>
+                <div class="shortcut-item">
+                    <div class="shortcut-keys">
+                        <kbd>Ctrl</kbd>
+                        <span class="shortcut-plus">+</span>
+                        <kbd>S</kbd>
+                    </div>
+                    <div class="shortcut-info">
+                        <span class="shortcut-name">آمار</span>
+                        <span class="shortcut-desc">مشاهده Statistics</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="help-card-values">
+            <div class="section-header">
+                <h3 class="section-title">ارزش کارت‌ها</h3>
+            </div>
+            <div class="card-values-table">
+                <div class="table-header">
+                    <span class="col-rank">کارت</span>
+                    <span class="col-value">ارزش</span>
+                    <span class="col-desc">توضیح</span>
+                </div>
+                <div class="table-row">
+                    <span class="col-rank"><span class="card-symbol">A</span> آس</span>
+                    <span class="col-value">۱۴</span>
+                    <span class="col-desc">بالاترین کارت</span>
+                </div>
+                <div class="table-row">
+                    <span class="col-rank"><span class="card-symbol">K</span> شاه</span>
+                    <span class="col-value">۱۳</span>
+                    <span class="col-desc">دومین کارت برتر</span>
+                </div>
+                <div class="table-row">
+                    <span class="col-rank"><span class="card-symbol">Q</span> بی‌بی</span>
+                    <span class="col-value">۱۲</span>
+                    <span class="col-desc">سومین کارت برتر</span>
+                </div>
+                <div class="table-row">
+                    <span class="col-rank"><span class="card-symbol">J</span> سرباز</span>
+                    <span class="col-value">۱</span>
+                    <span class="col-desc">چهارمین کارت برتر</span>
+                </div>
+                <div class="table-row">
+                    <span class="col-rank"><span class="card-symbol">10</span> ده</span>
+                    <span class="col-value">۱۰</span>
+                    <span class="col-desc">پنجمین کارت برتر</span>
+                </div>
+                <div class="table-row highlight">
+                    <span class="col-rank"><span class="card-symbol">2</span> دو (حکم)</span>
+                    <span class="col-value">۱۵</span>
+                    <span class="col-desc">بالاترین کارت وقتی حکم است</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="help-suits">
+            <div class="section-header">
+                <h3 class="section-title">خال‌های کارت</h3>
+            </div>
+            <div class="suits-grid">
+                <div class="suit-card spades">
+                    <span class="suit-icon">♠</span>
+                    <div class="suit-info">
+                        <h4 class="suit-name">پیک (Spades)</h4>
+                        <p class="suit-desc">خال سیاه - بالاترین اولویت در تساوی</p>
+                    </div>
+                </div>
+                <div class="suit-card hearts">
+                    <span class="suit-icon">♥</span>
+                    <div class="suit-info">
+                        <h4 class="suit-name">دل (Hearts)</h4>
+                        <p class="suit-desc">خال قرمز</p>
+                    </div>
+                </div>
+                <div class="suit-card diamonds">
+                    <span class="suit-icon">♦</span>
+                    <div class="suit-info">
+                        <h4 class="suit-name">خشت (Diamonds)</h4>
+                        <p class="suit-desc">خال قرمز</p>
+                    </div>
+                </div>
+                <div class="suit-card clubs">
+                    <span class="suit-icon">♣</span>
+                    <div class="suit-info">
+                        <h4 class="suit-name">گشنیز (Clubs)</h4>
+                        <p class="suit-desc">خال سیاه</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="help-contact">
+            <div class="contact-card">
+                <div class="contact-header">
+                    <span class="contact-icon">📞</span>
+                    <div class="contact-info">
+                        <h3 class="contact-title">پاسخ سوال خود را پیدا نکردید؟</h3>
+                        <p class="contact-desc">با تیم پشتیبانی ما در تماس باشید</p>
+                    </div>
+                </div>
+                <div class="contact-methods">
+                    <a href="mailto:support@hokmmaster.com" class="contact-method">
+                        <span class="method-icon"></span>
+                        <div class="method-info">
+                            <span class="method-name">ایمیل</span>
+                            <span class="method-value">support@hokmmaster.com</span>
+                        </div>
+                    </a>
+                    <a href="https://t.me/hokmmaster" class="contact-method" target="_blank" rel="noopener">
+                        <span class="method-icon">✈️</span>
+                        <div class="method-info">
+                            <span class="method-name">تلگرام</span>
+                            <span class="method-value">@hokmmaster</span>
+                        </div>
+                    </a>
+                    <a href="https://instagram.com/hokmmaster" class="contact-method" target="_blank" rel="noopener">
+                        <span class="method-icon">📷</span>
+                        <div class="method-info">
+                            <span class="method-name">اینستاگرام</span>
+                            <span class="method-value">@hokmmaster</span>
+                        </div>
+                    </a>
+                </div>
+                <button class="btn btn-primary btn-block" id="btn-open-support-ticket">
+                    <span class="btn-icon"></span>
+                    <span class="btn-text">ارسال تیکت پشتیبانی</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="help-feedback">
+            <div class="feedback-card">
+                <div class="feedback-header">
+                    <span class="feedback-icon">💬</span>
+                    <div class="feedback-info">
+                        <h3 class="feedback-title">آیا این صفحه مفید بود؟</h3>
+                        <p class="feedback-desc">نظر شما به بهبود راهنما کمک می‌کند</p>
+                    </div>
+                </div>
+                <div class="feedback-actions">
+                    <button class="btn-feedback btn-feedback-yes" id="btn-feedback-yes">
+                        <span class="feedback-icon">👍</span>
+                        <span class="feedback-text">بله، مفید بود</span>
+                    </button>
+                    <button class="btn-feedback btn-feedback-no" id="btn-feedback-no">
+                        <span class="feedback-icon">👎</span>
+                        <span class="feedback-text">خیر، نیاز به بهبود دارد</span>
+                    </button>
+                </div>
+                <div class="feedback-form" id="feedback-form" style="display: none;">
+                    <textarea
+                        id="feedback-text"
+                        class="input-field textarea-field"
+                        placeholder="نظر خود را بنویسید..."
+                        maxlength="500"
+                        rows="3"
+                    ></textarea>
+                    <button class="btn btn-primary btn-small" id="btn-submit-feedback">
+                        <span class="btn-text">ارسال نظر</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="help-tips">
+            <div class="section-header">
+                <h3 class="section-title">نکات راهنما</h3>
+            </div>
+            <div class="tips-list">
+                <div class="tip-item">
+                    <span class="tip-icon">💡</span>
+                    <p class="tip-text">از جستجو برای پیدا کردن سریع موضوع مورد نظر استفاده کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon"></span>
+                    <p class="tip-text">آموزش‌های ویدیویی را برای یادگیری بهتر مشاهده کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🎓</span>
+                    <p class="tip-text">حالت تمرین بهترین جا برای یادگیری بدون استرس است</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon"></span>
+                    <p class="tip-text">در صورت عدم یافتن پاسخ، با پشتیبانی تماس بگیرید</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
