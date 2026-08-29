@@ -1,0 +1,1439 @@
+/**
+ * ============================================================
+ * HOKM MASTER - Modals
+ * استایل‌های مودال‌ها و پنجره‌های بازشو
+ * ============================================================
+ * 
+ * این فایل تمام استایل‌های مربوط به مودال‌ها شامل:
+ * Modal Base، Sizes، Header/Body/Footer، Backdrop،
+ * Animations، Confirmation، Form Modals و ... را تعریف می‌کند.
+ * 
+ * نسخه: 1.0.0
+ * ============================================================
+ */
+
+/* ============================================================
+   بخش ۱: Modal Base
+   ============================================================ */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-index-modal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-normal) var(--easing-ease-in-out),
+                visibility var(--transition-normal) var(--easing-ease-in-out);
+}
+
+.modal.active,
+.modal[style*="display: block"],
+.modal[style*="display:flex"] {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: var(--bg-overlay);
+    backdrop-filter: var(--blur-md);
+    -webkit-backdrop-filter: var(--blur-md);
+    z-index: -1;
+    animation: backdropFadeIn var(--transition-normal) var(--easing-ease-out);
+}
+
+@keyframes backdropFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    position: relative;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-modal);
+    box-shadow: var(--shadow-dark-xl);
+    max-height: calc(100vh - var(--spacing-8));
+    width: 100%;
+    max-width: var(--modal-width-md);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: modalSlideUp var(--transition-normal) var(--easing-ease-out);
+}
+
+@keyframes modalSlideUp {
+    from {
+        transform: translateY(30px) scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* ============================================================
+   بخش ۲: Modal Sizes
+   ============================================================ */
+
+.modal-small {
+    max-width: var(--modal-width-sm);
+}
+
+.modal-medium {
+    max-width: var(--modal-width-md);
+}
+
+.modal-large {
+    max-width: var(--modal-width-lg);
+}
+
+.modal-xlarge {
+    max-width: var(--modal-width-xl);
+}
+
+.modal-full {
+    max-width: var(--modal-width-full);
+    max-height: calc(100vh - var(--spacing-4));
+    height: calc(100vh - var(--spacing-4));
+}
+
+/* ============================================================
+   بخش ۳: Modal Header
+   ============================================================ */
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-4) var(--spacing-5);
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-tertiary);
+    flex-shrink: 0;
+}
+
+.modal-header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    flex: 1;
+    min-width: 0;
+}
+
+.modal-icon {
+    font-size: var(--font-size-2xl);
+    flex-shrink: 0;
+}
+
+.modal-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.modal-subtitle {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+    margin-top: 2px;
+}
+
+.modal-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.modal-header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    flex-shrink: 0;
+}
+
+.btn-close-modal {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: var(--text-tertiary);
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: var(--transition-all);
+}
+
+.btn-close-modal:hover {
+    background-color: var(--bg-elevated);
+    color: var(--text-primary);
+}
+
+.btn-close-modal:active {
+    transform: scale(0.95);
+}
+
+.btn-close-modal .icon {
+    font-size: var(--font-size-lg);
+}
+
+/* ============================================================
+   بخش ۴: Modal Body
+   ============================================================ */
+
+.modal-body {
+    flex: 1;
+    padding: var(--spacing-5);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.modal-body-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg);
+}
+
+.modal-body-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-body-scroll::-webkit-scrollbar-track {
+    background: var(--scrollbar-bg);
+    border-radius: var(--radius-full);
+}
+
+.modal-body-scroll::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: var(--radius-full);
+}
+
+/* ============================================================
+   بخش ۵: Modal Footer
+   ============================================================ */
+
+.modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-4) var(--spacing-5);
+    border-top: 1px solid var(--border-color);
+    background-color: var(--bg-tertiary);
+    flex-shrink: 0;
+    gap: var(--spacing-3);
+}
+
+.footer-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.footer-text {
+    font-size: var(--font-size-sm);
+    color: var(--text-tertiary);
+}
+
+.footer-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   بخش ۶: Modal Tabs
+   ============================================================ */
+
+.modal-tabs {
+    display: flex;
+    gap: var(--spacing-1);
+    padding: var(--spacing-2);
+    background-color: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-color);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    flex-shrink: 0;
+}
+
+.modal-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.modal-tab-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-4);
+    background-color: transparent;
+    color: var(--text-secondary);
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: var(--transition-all);
+    white-space: nowrap;
+    min-height: 40px;
+    position: relative;
+}
+
+.modal-tab-btn:hover {
+    background-color: var(--bg-elevated);
+    color: var(--text-primary);
+}
+
+.modal-tab-btn.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-weight: var(--font-weight-semibold);
+}
+
+.modal-tab-btn .tab-badge {
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    background-color: var(--color-danger);
+    color: var(--color-white);
+    font-size: 10px;
+    font-weight: var(--font-weight-bold);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-tab-btn.active .tab-badge {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+}
+
+/* ============================================================
+   بخش ۷: Modal Sections
+   ============================================================ */
+
+.modal-section {
+    display: none;
+    animation: sectionFadeIn var(--transition-normal) var(--easing-ease-out);
+}
+
+.modal-section.active {
+    display: block;
+}
+
+@keyframes sectionFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ============================================================
+   بخش ۸: Confirmation Modal
+   ============================================================ */
+
+.confirmation-modal .modal-content {
+    max-width: 450px;
+    text-align: center;
+}
+
+.confirmation-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--spacing-4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-full);
+    font-size: 3rem;
+    animation: confirmationPulse 2s infinite;
+}
+
+@keyframes confirmationPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.confirmation-icon.success {
+    background-color: var(--color-success-light);
+}
+
+.confirmation-icon.danger {
+    background-color: var(--color-danger-light);
+}
+
+.confirmation-icon.warning {
+    background-color: var(--color-warning-light);
+}
+
+.confirmation-icon.info {
+    background-color: var(--color-info-light);
+}
+
+.confirmation-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0 0 var(--spacing-2) 0;
+}
+
+.confirmation-message {
+    font-size: var(--font-size-base);
+    color: var(--text-secondary);
+    margin: 0 0 var(--spacing-6) 0;
+    line-height: var(--line-height-relaxed);
+}
+
+.confirmation-actions {
+    display: flex;
+    gap: var(--spacing-3);
+    justify-content: center;
+}
+
+.confirmation-actions .btn {
+    min-width: 120px;
+}
+
+/* ============================================================
+   بخش ۹: Overlay Modals (داخل مودال)
+   ============================================================ */
+
+.modal-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: var(--bg-overlay);
+    backdrop-filter: var(--blur-sm);
+    -webkit-backdrop-filter: var(--blur-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    padding: var(--spacing-4);
+    animation: overlayFadeIn var(--transition-normal) var(--easing-ease-out);
+}
+
+@keyframes overlayFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.overlay-content {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-5);
+    max-width: 400px;
+    width: 100%;
+    box-shadow: var(--shadow-dark-lg);
+    animation: overlaySlideUp var(--transition-normal) var(--easing-bounce);
+}
+
+@keyframes overlaySlideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.overlay-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    margin-bottom: var(--spacing-4);
+}
+
+.overlay-icon {
+    font-size: var(--font-size-3xl);
+    flex-shrink: 0;
+}
+
+.overlay-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.overlay-body {
+    margin-bottom: var(--spacing-4);
+}
+
+.overlay-footer {
+    display: flex;
+    gap: var(--spacing-2);
+    justify-content: flex-end;
+}
+
+/* ============================================================
+   بخش ۱۰: Form Modal
+   ============================================================ */
+
+.form-modal .modal-body {
+    padding: var(--spacing-5);
+}
+
+.form-modal .form-group {
+    margin-bottom: var(--spacing-4);
+}
+
+.form-modal .form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-modal .form-actions {
+    display: flex;
+    gap: var(--spacing-3);
+    margin-top: var(--spacing-5);
+    padding-top: var(--spacing-4);
+    border-top: 1px solid var(--border-color);
+}
+
+.form-modal .form-actions .btn {
+    flex: 1;
+}
+
+/* ============================================================
+   بخش ۱۱: Layout Modal (دو ستونه)
+   ============================================================ */
+
+.modal-layout {
+    display: flex;
+    gap: var(--spacing-5);
+    height: 100%;
+}
+
+.modal-sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    background-color: var(--bg-tertiary);
+    padding: var(--spacing-4);
+    border-left: 1px solid var(--border-color);
+    overflow-y: auto;
+}
+
+.modal-main {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-5);
+}
+
+/* Settings Modal Layout */
+.settings-modal-layout {
+    display: flex;
+    gap: 0;
+    height: 100%;
+    min-height: 500px;
+}
+
+.settings-sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    background-color: var(--bg-tertiary);
+    border-left: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-nav {
+    flex: 1;
+    padding: var(--spacing-3);
+    overflow-y: auto;
+}
+
+.settings-nav-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3);
+    background-color: transparent;
+    color: var(--text-secondary);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-all);
+    width: 100%;
+    text-align: right;
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-1);
+}
+
+.settings-nav-item:hover {
+    background-color: var(--bg-elevated);
+    color: var(--text-primary);
+}
+
+.settings-nav-item.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-weight: var(--font-weight-semibold);
+}
+
+.settings-nav-footer {
+    padding: var(--spacing-3);
+    border-top: 1px solid var(--border-color);
+}
+
+.settings-content-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-5);
+}
+
+/* Tutorial Layout */
+.tutorial-layout {
+    display: flex;
+    gap: 0;
+    height: 100%;
+    min-height: 600px;
+}
+
+.tutorial-sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    background-color: var(--bg-tertiary);
+    border-left: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.tutorial-chapters {
+    flex: 1;
+    padding: var(--spacing-3);
+    overflow-y: auto;
+}
+
+.chapters-title {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+    margin: 0 0 var(--spacing-3) 0;
+    padding: 0 var(--spacing-2);
+}
+
+.chapter-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-3);
+    background-color: transparent;
+    color: var(--text-secondary);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-all);
+    width: 100%;
+    text-align: right;
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-1);
+}
+
+.chapter-item:hover {
+    background-color: var(--bg-elevated);
+    color: var(--text-primary);
+}
+
+.chapter-item.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.chapter-item.completed {
+    color: var(--color-success);
+}
+
+.chapter-number {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-elevated);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    flex-shrink: 0;
+}
+
+.chapter-item.active .chapter-number {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+}
+
+.chapter-title {
+    flex: 1;
+    font-weight: var(--font-weight-medium);
+}
+
+.chapter-status {
+    font-size: var(--font-size-sm);
+}
+
+.tutorial-content-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-6);
+}
+
+/* ============================================================
+   بخش ۱۲: Progress Indicator
+   ============================================================ */
+
+.modal-progress {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-3);
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-full);
+}
+
+.progress-text {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.progress-bar-mini {
+    width: 100px;
+    height: 4px;
+    background-color: var(--bg-elevated);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.progress-bar-mini .progress-fill {
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-full);
+    transition: width var(--transition-normal) var(--easing-ease-in-out);
+}
+
+/* ============================================================
+   بخش ۱۳: Modal Animations Variants
+   ============================================================ */
+
+/* Zoom Animation */
+.modal-zoom .modal-content {
+    animation: modalZoom var(--transition-normal) var(--easing-bounce);
+}
+
+@keyframes modalZoom {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Slide Right Animation */
+.modal-slide-right .modal-content {
+    animation: modalSlideRight var(--transition-normal) var(--easing-ease-out);
+}
+
+@keyframes modalSlideRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Slide Left Animation */
+.modal-slide-left .modal-content {
+    animation: modalSlideLeft var(--transition-normal) var(--easing-ease-out);
+}
+
+@keyframes modalSlideLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Flip Animation */
+.modal-flip .modal-content {
+    animation: modalFlip 0.6s var(--easing-ease-out);
+}
+
+@keyframes modalFlip {
+    from {
+        transform: perspective(1000px) rotateY(-90deg);
+        opacity: 0;
+    }
+    to {
+        transform: perspective(1000px) rotateY(0);
+        opacity: 1;
+    }
+}
+
+/* ============================================================
+   بخش ۱۴: Notification Badge
+   ============================================================ */
+
+.modal-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 24px;
+    padding: 0 8px;
+    background-color: var(--color-danger);
+    color: var(--color-white);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    border-radius: var(--radius-full);
+    margin-right: var(--spacing-2);
+}
+
+/* ============================================================
+   بخش ۱۵: Modal Steps Indicator
+   ============================================================ */
+
+.modal-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-3);
+    background-color: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.step-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--bg-elevated);
+    border-radius: var(--radius-full);
+    transition: var(--transition-all);
+}
+
+.step-dot.active {
+    background-color: var(--color-primary);
+    width: 24px;
+}
+
+.step-dot.completed {
+    background-color: var(--color-success);
+}
+
+/* ============================================================
+   بخش ۱۶: Responsive Modals
+   ============================================================ */
+
+/* موبایل کوچک */
+@media (max-width: 360px) {
+    .modal {
+        padding: var(--spacing-2);
+    }
+    
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: var(--spacing-3);
+    }
+    
+    .modal-title {
+        font-size: var(--font-size-base);
+    }
+    
+    .modal-content {
+        border-radius: var(--radius-lg);
+    }
+    
+    .settings-sidebar,
+    .tutorial-sidebar {
+        width: 180px;
+    }
+    
+    .footer-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .footer-actions .btn {
+        width: 100%;
+    }
+}
+
+/* موبایل */
+@media (max-width: 768px) {
+    .modal {
+        padding: var(--spacing-3);
+        align-items: flex-end;
+    }
+    
+    .modal-content {
+        max-height: 90vh;
+        border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        animation: modalSlideUpMobile var(--transition-normal) var(--easing-ease-out);
+    }
+    
+    @keyframes modalSlideUpMobile {
+        from {
+            transform: translateY(100%);
+        }
+        to {
+            transform: translateY(0);
+        }
+    }
+    
+    .modal-large,
+    .modal-xlarge {
+        max-width: 100%;
+    }
+    
+    .modal-full {
+        max-width: 100%;
+        max-height: 100vh;
+        height: 100vh;
+        border-radius: 0;
+    }
+    
+    .modal-layout,
+    .settings-modal-layout,
+    .tutorial-layout {
+        flex-direction: column;
+    }
+    
+    .modal-sidebar,
+    .settings-sidebar,
+    .tutorial-sidebar {
+        width: 100%;
+        max-height: 200px;
+        border-left: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+        gap: var(--spacing-2);
+    }
+    
+    .footer-actions {
+        width: 100%;
+        justify-content: stretch;
+    }
+    
+    .footer-actions .btn {
+        flex: 1;
+    }
+    
+    .confirmation-actions {
+        flex-direction: column;
+    }
+    
+    .confirmation-actions .btn {
+        width: 100%;
+    }
+}
+
+/* تبلت */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .modal-content {
+        max-width: 90%;
+    }
+    
+    .settings-sidebar,
+    .tutorial-sidebar {
+        width: 220px;
+    }
+}
+
+/* دسکتاپ */
+@media (min-width: 1024px) {
+    .modal-content {
+        max-width: var(--modal-width-lg);
+    }
+    
+    .modal-large {
+        max-width: var(--modal-width-lg);
+    }
+    
+    .modal-xlarge {
+        max-width: var(--modal-width-xl);
+    }
+}
+
+/* ============================================================
+   بخش ۱۷: Accessibility
+   ============================================================ */
+
+/* Focus trap */
+.modal.active .modal-content {
+    outline: none;
+}
+
+/* Focus states */
+.btn-close-modal:focus-visible,
+.modal-tab-btn:focus-visible,
+.settings-nav-item:focus-visible,
+.chapter-item:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Keyboard navigation */
+.modal[aria-modal="true"] {
+    position: fixed;
+}
+
+/* Screen reader only */
+.modal-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .modal-content,
+    .modal-backdrop,
+    .overlay-content,
+    .modal-overlay {
+        animation: none;
+        transition: none;
+    }
+    
+    .confirmation-icon {
+        animation: none;
+    }
+}
+
+/* High contrast */
+@media (prefers-contrast: high) {
+    .modal-content {
+        border-width: 2px;
+    }
+    
+    .modal-header,
+    .modal-footer {
+        border-width: 2px;
+    }
+}
+
+/* ============================================================
+   بخش ۱۸: Dark Mode Specific
+   ============================================================ */
+
+.theme-dark .modal-content {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+.theme-dark .modal-header,
+.theme-dark .modal-footer {
+    background-color: var(--bg-tertiary);
+}
+
+/* ============================================================
+   بخش ۱۹: Print Modals
+   ============================================================ */
+
+@media print {
+    .modal,
+    .modal-backdrop {
+        display: none !important;
+    }
+}
+
+/* ============================================================
+   بخش ۲۰: Modal Utilities
+   ============================================================ */
+
+.modal-hidden {
+    display: none !important;
+}
+
+.modal-visible {
+    display: flex !important;
+}
+
+.modal-loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.modal-loading::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: inherit;
+    z-index: 100;
+}
+
+.modal-loading::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top-color: var(--color-primary);
+    border-radius: var(--radius-full);
+    animation: spin 0.8s linear infinite;
+    z-index: 101;
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Modal Scroll Lock */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* Modal Backdrop Variants */
+.modal-backdrop-light {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.modal-backdrop-dark {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-backdrop-transparent {
+    background-color: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+/* ============================================================
+   بخش ۲۱: Nested Modals
+   ============================================================ */
+
+.modal-nested {
+    z-index: calc(var(--z-index-modal) + 10);
+}
+
+.modal-nested .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* ============================================================
+   بخش ۲۲: Modal with Image Preview
+   ============================================================ */
+
+.image-preview-modal .modal-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.image-preview-modal .modal-body {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-preview-modal img {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: var(--radius-lg);
+}
+
+/* ============================================================
+   بخش ۲۳: Full Screen Modal
+   ============================================================ */
+
+.modal-fullscreen {
+    padding: 0;
+}
+
+.modal-fullscreen .modal-content {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    border: none;
+}
+
+.modal-fullscreen .modal-header {
+    border-radius: 0;
+}
+
+/* ============================================================
+   بخش ۲۴: Bottom Sheet Modal (موبایل)
+   ============================================================ */
+
+@media (max-width: 768px) {
+    .modal-bottom-sheet {
+        align-items: flex-end;
+    }
+    
+    .modal-bottom-sheet .modal-content {
+        border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        max-height: 85vh;
+        animation: bottomSheetSlideUp var(--transition-normal) var(--easing-ease-out);
+    }
+    
+    @keyframes bottomSheetSlideUp {
+        from {
+            transform: translateY(100%);
+        }
+        to {
+            transform: translateY(0);
+        }
+    }
+    
+    .modal-bottom-sheet .modal-header::before {
+        content: '';
+        position: absolute;
+        top: var(--spacing-2);
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 4px;
+        background-color: var(--border-color-strong);
+        border-radius: var(--radius-full);
+    }
+    
+    .modal-bottom-sheet .modal-header {
+        padding-top: var(--spacing-6);
+    }
+}
+
+/* ============================================================
+   بخش ۲۵: Modal Close on Backdrop Click
+   ============================================================ */
+
+.modal-clickable-backdrop {
+    cursor: pointer;
+}
+
+.modal-clickable-backdrop .modal-content {
+    cursor: default;
+}
+
+/* Prevent closing when clicking inside */
+.modal-content * {
+    cursor: default;
+}
+
+/* ============================================================
+   بخش ۲۶: Modal Transitions
+   ============================================================ */
+
+.modal-enter {
+    opacity: 0;
+}
+
+.modal-enter-active {
+    opacity: 1;
+    transition: opacity var(--transition-normal) var(--easing-ease-out);
+}
+
+.modal-exit {
+    opacity: 1;
+}
+
+.modal-exit-active {
+    opacity: 0;
+    transition: opacity var(--transition-normal) var(--easing-ease-in);
+}
+
+/* ============================================================
+   بخش ۲۷: Modal with Tabs Content
+   ============================================================ */
+
+.modal-tab-content {
+    display: none;
+    animation: tabContentFadeIn var(--transition-normal) var(--easing-ease-out);
+}
+
+.modal-tab-content.active {
+    display: block;
+}
+
+@keyframes tabContentFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================================
+   بخش ۲۸: Modal Header Variants
+   ============================================================ */
+
+.modal-header-gradient {
+    background: var(--gradient-primary);
+    color: var(--color-white);
+    border-bottom: none;
+}
+
+.modal-header-gradient .modal-title {
+    color: var(--color-white);
+}
+
+.modal-header-gradient .btn-close-modal {
+    color: var(--color-white);
+}
+
+.modal-header-gradient .btn-close-modal:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.modal-header-centered {
+    justify-content: center;
+    text-align: center;
+}
+
+.modal-header-centered .modal-header-right {
+    justify-content: center;
+}
+
+.modal-header-transparent {
+    background-color: transparent;
+    border-bottom: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+/* ============================================================
+   بخش ۲۹: Modal Footer Variants
+   ============================================================ */
+
+.modal-footer-sticky {
+    position: sticky;
+    bottom: 0;
+    z-index: 5;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-footer-centered {
+    justify-content: center;
+}
+
+.modal-footer-transparent {
+    background-color: transparent;
+    border-top: none;
+}
+
+/* ============================================================
+   بخش ۳۰: Modal Loading States
+   ============================================================ */
+
+.modal-body-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+}
+
+.modal-body-loading .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--border-color);
+    border-top-color: var(--color-primary);
+    border-radius: var(--radius-full);
+    animation: spin 0.8s linear infinite;
+}
+
+/* Skeleton Loading in Modal */
+.modal-skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+}
+
+.modal-skeleton-item {
+    height: 16px;
+    background: linear-gradient(90deg, var(--bg-tertiary) 0%, var(--bg-elevated) 50%, var(--bg-tertiary) 100%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+    border-radius: var(--radius-md);
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.modal-skeleton-title {
+    height: 24px;
+    width: 60%;
+}
+
+.modal-skeleton-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-full);
+}
