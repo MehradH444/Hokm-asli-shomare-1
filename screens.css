@@ -1,0 +1,2050 @@
+/**
+ * ============================================================
+ * HOKM MASTER - Screens
+ * استایل‌های عمومی صفحات
+ * ============================================================
+ * 
+ * این فایل استایل‌های مشترک بین تمام صفحات شامل:
+ * Hero، Stats، Section Headers، Empty States، Tips،
+ * Match Cards، Friend Cards، Event Cards و ... را تعریف می‌کند.
+ * 
+ * نسخه: 1.0.0
+ * ============================================================
+ */
+
+/* ============================================================
+   بخش ۱: Screen Base Styles
+   ============================================================ */
+
+.screen {
+    width: 100%;
+    min-height: 100%;
+    animation: screenFadeIn var(--transition-normal) var(--easing-ease-out);
+}
+
+@keyframes screenFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.screen-content {
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding-bottom: var(--spacing-8);
+}
+
+.screen-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-4) 0;
+    margin-bottom: var(--spacing-4);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-primary);
+    z-index: var(--z-index-sticky);
+    backdrop-filter: var(--blur-md);
+    -webkit-backdrop-filter: var(--blur-md);
+}
+
+.screen-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.header-spacer {
+    width: 40px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.header-currency {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+/* ============================================================
+   بخش ۲: Hero Sections
+   ============================================================ */
+
+.hero {
+    position: relative;
+    padding: var(--spacing-8) var(--spacing-4);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    margin-bottom: var(--spacing-6);
+}
+
+.hero-background {
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-bg-dark);
+    z-index: 0;
+}
+
+.hero-background::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.2), transparent 60%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+}
+
+.hero-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-2);
+}
+
+.hero-title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0;
+    line-height: var(--line-height-tight);
+}
+
+.hero-subtitle {
+    font-size: var(--font-size-base);
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: var(--line-height-relaxed);
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-4);
+    background-color: rgba(16, 185, 129, 0.2);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    width: fit-content;
+}
+
+.hero-stats {
+    display: flex;
+    gap: var(--spacing-6);
+    flex-wrap: wrap;
+    margin-top: var(--spacing-4);
+}
+
+.hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+}
+
+.hero-stat .stat-icon {
+    font-size: var(--font-size-2xl);
+}
+
+.hero-stat .stat-value {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+}
+
+.hero-stat .stat-label {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+}
+
+/* ============================================================
+   بخش ۳: Stats Grids
+   ============================================================ */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-4);
+    margin-bottom: var(--spacing-6);
+}
+
+.stat-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-card);
+    padding: var(--spacing-4);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    transition: var(--transition-all);
+}
+
+.stat-card:hover {
+    background-color: var(--card-bg-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-dark-md);
+}
+
+.stat-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+    font-size: var(--font-size-2xl);
+    flex-shrink: 0;
+}
+
+.stat-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+}
+
+.stat-value {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    line-height: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.stat-label {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+    margin-top: var(--spacing-1);
+}
+
+.stat-change {
+    font-size: var(--font-size-xs);
+    margin-top: var(--spacing-1);
+    font-weight: var(--font-weight-medium);
+}
+
+.stat-change.positive {
+    color: var(--color-success);
+}
+
+.stat-change.negative {
+    color: var(--color-danger);
+}
+
+.stat-change.neutral {
+    color: var(--text-tertiary);
+}
+
+/* Stat Card Variants */
+.stat-card.primary .stat-icon-wrapper {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+}
+
+.stat-card.success .stat-icon-wrapper {
+    background-color: var(--color-success-light);
+    color: var(--color-success);
+}
+
+.stat-card.danger .stat-icon-wrapper {
+    background-color: var(--color-danger-light);
+    color: var(--color-danger);
+}
+
+.stat-card.warning .stat-icon-wrapper {
+    background-color: var(--color-warning-light);
+    color: var(--color-warning);
+}
+
+.stat-card.info .stat-icon-wrapper {
+    background-color: var(--color-info-light);
+    color: var(--color-info);
+}
+
+.stat-card.epic .stat-icon-wrapper {
+    background: var(--gradient-accent);
+    color: var(--color-white);
+}
+
+/* ============================================================
+   بخش ۴: Section Headers
+   ============================================================ */
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-4);
+    gap: var(--spacing-3);
+}
+
+.section-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.section-link {
+    font-size: var(--font-size-sm);
+    color: var(--text-link);
+    font-weight: var(--font-weight-medium);
+    transition: var(--transition-colors);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.section-link:hover {
+    color: var(--text-link-hover);
+}
+
+.section-desc {
+    font-size: var(--font-size-sm);
+    color: var(--text-tertiary);
+    margin-top: var(--spacing-1);
+}
+
+.section-filters {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+/* ============================================================
+   بخش ۵: Empty States
+   ============================================================ */
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-12) var(--spacing-4);
+    text-align: center;
+    background-color: var(--card-bg);
+    border: 1px dashed var(--card-border);
+    border-radius: var(--radius-xl);
+    margin: var(--spacing-6) 0;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-4);
+    opacity: 0.5;
+}
+
+.empty-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin: 0 0 var(--spacing-2) 0;
+}
+
+.empty-desc {
+    font-size: var(--font-size-sm);
+    color: var(--text-tertiary);
+    margin: 0 0 var(--spacing-6) 0;
+    max-width: 400px;
+    line-height: var(--line-height-relaxed);
+}
+
+/* ============================================================
+   بخش ۶: Tips Lists
+   ============================================================ */
+
+.tips-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    margin-bottom: var(--spacing-6);
+}
+
+.tip-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3);
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    transition: var(--transition-all);
+}
+
+.tip-item:hover {
+    background-color: var(--card-bg-hover);
+    transform: translateX(-2px);
+}
+
+.tip-icon {
+    font-size: var(--font-size-xl);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.tip-text {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    line-height: var(--line-height-relaxed);
+    margin: 0;
+}
+
+/* ============================================================
+   بخش ۷: Quick Links
+   ============================================================ */
+
+.quick-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--spacing-3);
+    margin-bottom: var(--spacing-6);
+}
+
+.quick-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-4);
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition-all);
+    cursor: pointer;
+}
+
+.quick-link:hover {
+    background-color: var(--card-bg-hover);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-dark-md);
+}
+
+.quick-link-icon {
+    font-size: var(--font-size-3xl);
+}
+
+.quick-link-text {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    text-align: center;
+}
+
+/* ============================================================
+   بخش ۸: Match Cards
+   ============================================================ */
+
+.matches-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+}
+
+.matches-list-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.match-card {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3);
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    transition: var(--transition-all);
+}
+
+.match-card:hover {
+    background-color: var(--card-bg-hover);
+    transform: translateX(-2px);
+}
+
+.match-card.win {
+    border-right: 3px solid var(--color-success);
+}
+
+.match-card.lose {
+    border-right: 3px solid var(--color-danger);
+}
+
+.match-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-1);
+    min-width: 60px;
+}
+
+.result-icon {
+    font-size: var(--font-size-2xl);
+}
+
+.result-text {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+}
+
+.match-card.win .result-text {
+    color: var(--color-success);
+}
+
+.match-card.lose .result-text {
+    color: var(--color-danger);
+}
+
+.match-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+}
+
+.match-mode {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+.match-score {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+}
+
+.match-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+}
+
+.match-time {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+}
+
+.match-reward {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    color: var(--color-success);
+    font-weight: var(--font-weight-semibold);
+}
+
+/* Match Item (simplified) */
+.match-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-2) var(--spacing-3);
+    background-color: var(--card-bg);
+    border-radius: var(--radius-md);
+    transition: var(--transition-all);
+}
+
+.match-item:hover {
+    background-color: var(--card-bg-hover);
+}
+
+.match-item.win {
+    border-right: 2px solid var(--color-success);
+}
+
+.match-item.lose {
+    border-right: 2px solid var(--color-danger);
+}
+
+.match-result-icon {
+    font-size: var(--font-size-xl);
+}
+
+.match-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.match-item .match-mode {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+}
+
+.match-item .match-score {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+}
+
+.match-item .match-time {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+}
+
+/* ============================================================
+   بخش ۹: Friend Cards
+   ============================================================ */
+
+.friends-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+}
+
+.friends-list-horizontal {
+    display: flex;
+    gap: var(--spacing-3);
+    overflow-x: auto;
+    padding: var(--spacing-2) 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.friends-list-horizontal::-webkit-scrollbar {
+    display: none;
+}
+
+.friend-card {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3);
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    transition: var(--transition-all);
+}
+
+.friend-card:hover {
+    background-color: var(--card-bg-hover);
+    transform: translateY(-2px);
+}
+
+.friend-card-online {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-3);
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    min-width: 100px;
+    transition: var(--transition-all);
+}
+
+.friend-card-online:hover {
+    background-color: var(--card-bg-hover);
+    transform: translateY(-2px);
+}
+
+.friend-avatar-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.online-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    background-color: var(--color-success);
+    border: 2px solid var(--bg-secondary);
+    border-radius: var(--radius-full);
+}
+
+.online-indicator.offline {
+    background-color: var(--text-tertiary);
+}
+
+.online-indicator.in-game {
+    background-color: var(--color-warning);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+.friend-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.friend-name {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.friend-status {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: var(--radius-full);
+    background-color: currentColor;
+}
+
+.status-dot.online {
+    color: var(--color-success);
+}
+
+.status-dot.offline {
+    color: var(--text-tertiary);
+}
+
+.status-dot.in-game {
+    color: var(--color-warning);
+}
+
+.friend-meta {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+}
+
+.friend-actions {
+    display: flex;
+    gap: var(--spacing-1);
+}
+
+.btn-action {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-tertiary);
+    color: var(--text-secondary);
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: var(--transition-all);
+}
+
+.btn-action:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.btn-action .icon {
+    font-size: var(--font-size-md);
+}
+
+/* ============================================================
+   بخش ۱۰: Event Cards
+   ============================================================ */
+
+.events-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+}
+
+.events-carousel {
+    display: flex;
+    gap: var(--spacing-4);
+    overflow-x: auto;
+    padding: var(--spacing-2) 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.events-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.event-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    transition: var(--transition-all);
+    min-width: 280px;
+    flex-shrink: 0;
+}
+
+.event-card:hover {
+    background-color: var(--card-bg-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-dark-md);
+}
+
+.event-card.featured {
+    border: 2px solid var(--color-accent);
+}
+
+.event-image {
+    height: 120px;
+    background: var(--gradient-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    position: relative;
+}
+
+.event-content {
+    padding: var(--spacing-4);
+}
+
+.event-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    border-radius: var(--radius-badge);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-2);
+}
+
+.event-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0 0 var(--spacing-2) 0;
+}
+
+.event-description {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin: 0 0 var(--spacing-3) 0;
+    line-height: var(--line-height-relaxed);
+}
+
+.event-timer {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    font-size: var(--font-size-sm);
+    color: var(--text-tertiary);
+    margin-bottom: var(--spacing-3);
+}
+
+.timer-icon {
+    font-size: var(--font-size-md);
+}
+
+/* ============================================================
+   بخش ۱۱: Reward Cards
+   ============================================================ */
+
+.rewards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-4);
+    margin-bottom: var(--spacing-6);
+}
+
+.reward-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-4);
+    transition: var(--transition-all);
+}
+
+.reward-card:hover {
+    background-color: var(--card-bg-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-dark-md);
+}
+
+.reward-card.top-rank {
+    border: 2px solid var(--color-accent);
+    background: linear-gradient(135deg, var(--card-bg) 0%, rgba(255, 193, 7, 0.1) 100%);
+}
+
+.reward-tier-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-3);
+}
+
+.reward-rank {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    margin-bottom: var(--spacing-3);
+}
+
+.rank-icon {
+    font-size: var(--font-size-2xl);
+}
+
+.rank-text {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+}
+
+.reward-info {
+    flex: 1;
+}
+
+.reward-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0 0 var(--spacing-1) 0;
+}
+
+.reward-desc {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.reward-prizes {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.prize-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    font-size: var(--font-size-sm);
+    color: var(--text-primary);
+}
+
+.prize-icon {
+    font-size: var(--font-size-md);
+}
+
+.prize-value {
+    font-weight: var(--font-weight-semibold);
+}
+
+/* Daily Reward */
+.daily-reward-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-4);
+    margin-bottom: var(--spacing-6);
+}
+
+.reward-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    margin-bottom: var(--spacing-4);
+}
+
+.reward-icon-large {
+    font-size: 3rem;
+}
+
+.reward-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--spacing-2);
+}
+
+.reward-day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-1);
+    padding: var(--spacing-2);
+    background-color: var(--bg-tertiary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    transition: var(--transition-all);
+}
+
+.reward-day.completed {
+    background-color: var(--color-success-light);
+    border-color: var(--color-success);
+}
+
+.reward-day.current {
+    background-color: var(--color-primary-light);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-primary);
+}
+
+.reward-day.special {
+    background: var(--gradient-accent);
+    border-color: var(--color-accent);
+}
+
+.day-number {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-secondary);
+}
+
+.day-reward {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.btn-claim-reward {
+    margin-top: var(--spacing-1);
+    padding: 2px 8px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 10px;
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+}
+
+/* ============================================================
+   بخش ۱۲: Game Mode Cards
+   ============================================================ */
+
+.game-modes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-4);
+    margin-bottom: var(--spacing-6);
+}
+
+.game-mode-card {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-4);
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    transition: var(--transition-all);
+}
+
+.game-mode-card:hover {
+    background-color: var(--card-bg-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-dark-md);
+}
+
+.mode-icon {
+    font-size: var(--font-size-3xl);
+    flex-shrink: 0;
+}
+
+.mode-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.mode-title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0 0 var(--spacing-1) 0;
+}
+
+.mode-description {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+    margin: 0;
+}
+
+.mode-players {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    font-size: var(--font-size-xs);
+    color: var(--color-success);
+    font-weight: var(--font-weight-semibold);
+}
+
+/* ============================================================
+   بخش ۱۳: Mission Cards
+   ============================================================ */
+
+.missions-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+}
+
+.mission-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-4);
+    transition: var(--transition-all);
+}
+
+.mission-card:hover {
+    background-color: var(--card-bg-hover);
+}
+
+.mission-card.completed {
+    opacity: 0.7;
+}
+
+.mission-header {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-3);
+    margin-bottom: var(--spacing-3);
+}
+
+.mission-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+    font-size: var(--font-size-2xl);
+    flex-shrink: 0;
+}
+
+.mission-icon-wrapper.completed {
+    background-color: var(--color-success-light);
+}
+
+.mission-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.mission-title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0 0 var(--spacing-1) 0;
+}
+
+.mission-desc {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin: 0 0 var(--spacing-2) 0;
+}
+
+.mission-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.mission-type {
+    padding: 2px 8px;
+    border-radius: var(--radius-badge);
+    font-size: 10px;
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+}
+
+.mission-type.daily {
+    background-color: var(--color-info-light);
+    color: var(--color-info);
+}
+
+.mission-type.weekly {
+    background-color: var(--color-warning-light);
+    color: var(--color-warning);
+}
+
+.mission-type.monthly {
+    background-color: var(--color-danger-light);
+    color: var(--color-danger);
+}
+
+.mission-difficulty {
+    padding: 2px 8px;
+    border-radius: var(--radius-badge);
+    font-size: 10px;
+    font-weight: var(--font-weight-bold);
+}
+
+.mission-difficulty.easy {
+    background-color: var(--color-success-light);
+    color: var(--color-success);
+}
+
+.mission-difficulty.normal {
+    background-color: var(--color-info-light);
+    color: var(--color-info);
+}
+
+.mission-difficulty.hard {
+    background-color: var(--color-warning-light);
+    color: var(--color-warning);
+}
+
+.mission-difficulty.expert {
+    background-color: var(--color-danger-light);
+    color: var(--color-danger);
+}
+
+.mission-reward {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+    align-items: flex-end;
+}
+
+.reward-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+.mission-progress-section {
+    margin-bottom: var(--spacing-3);
+}
+
+.progress-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-2);
+    font-size: var(--font-size-sm);
+}
+
+.progress-label {
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-medium);
+}
+
+.progress-text {
+    color: var(--text-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+.mission-actions {
+    margin-top: var(--spacing-3);
+}
+
+/* ============================================================
+   بخش ۱۴: Achievement Cards
+   ============================================================ */
+
+.achievements-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-4);
+}
+
+.achievement-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-4);
+    transition: var(--transition-all);
+}
+
+.achievement-card:hover {
+    background-color: var(--card-bg-hover);
+    transform: translateY(-2px);
+}
+
+.achievement-card.unlocked {
+    border-color: var(--color-success);
+}
+
+.achievement-card.locked {
+    opacity: 0.6;
+}
+
+.achievement-header {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-3);
+    margin-bottom: var(--spacing-3);
+}
+
+.achievement-icon-wrapper {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+    font-size: var(--font-size-3xl);
+    flex-shrink: 0;
+}
+
+.achievement-icon-wrapper.unlocked {
+    background-color: var(--color-success-light);
+}
+
+.achievement-icon-wrapper.locked {
+    filter: grayscale(1);
+}
+
+.achievement-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.achievement-title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0 0 var(--spacing-1) 0;
+}
+
+.achievement-desc {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin: 0 0 var(--spacing-2) 0;
+}
+
+.achievement-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.achievement-status {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--spacing-1);
+}
+
+.status-badge {
+    padding: 2px 8px;
+    border-radius: var(--radius-badge);
+    font-size: 10px;
+    font-weight: var(--font-weight-bold);
+}
+
+.status-badge.unlocked {
+    background-color: var(--color-success);
+    color: var(--color-white);
+}
+
+.status-badge.claimed {
+    background-color: var(--text-tertiary);
+    color: var(--color-white);
+}
+
+.status-badge.in-progress {
+    background-color: var(--color-info);
+    color: var(--color-white);
+}
+
+.status-badge.locked {
+    background-color: var(--bg-tertiary);
+    color: var(--text-tertiary);
+}
+
+.unlocked-date {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+}
+
+.achievements-preview {
+    display: flex;
+    gap: var(--spacing-3);
+    flex-wrap: wrap;
+}
+
+.achievement-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-1);
+    padding: var(--spacing-2);
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    min-width: 80px;
+    transition: var(--transition-all);
+}
+
+.achievement-badge:hover {
+    transform: translateY(-2px);
+}
+
+.achievement-badge.unlocked {
+    border-color: var(--color-success);
+}
+
+.achievement-badge.locked {
+    opacity: 0.5;
+    filter: grayscale(1);
+}
+
+.badge-icon {
+    font-size: var(--font-size-2xl);
+}
+
+.badge-name {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary);
+    text-align: center;
+}
+
+/* ============================================================
+   بخش ۱۵: Leaderboard
+   ============================================================ */
+
+.leaderboard-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.leaderboard-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3);
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    transition: var(--transition-all);
+}
+
+.leaderboard-item:hover {
+    background-color: var(--card-bg-hover);
+}
+
+.leaderboard-item.current-user {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary-light);
+}
+
+.leaderboard-item.top-rank {
+    background: linear-gradient(135deg, var(--card-bg) 0%, rgba(255, 193, 7, 0.1) 100%);
+}
+
+.rank-number {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    flex-shrink: 0;
+}
+
+.player-cell {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    flex: 1;
+    min-width: 0;
+}
+
+.player-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
+}
+
+.player-name {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.player-league {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+}
+
+.player-league.bronze { color: var(--color-league-bronze); }
+.player-league.silver { color: var(--color-league-silver); }
+.player-league.gold { color: var(--color-league-gold); }
+.player-league.platinum { color: var(--color-league-platinum); }
+.player-league.diamond { color: var(--color-league-diamond); }
+.player-league.master { color: var(--color-league-master); }
+
+.stats-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    align-items: flex-end;
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    font-size: var(--font-size-xs);
+}
+
+.stat-label {
+    color: var(--text-tertiary);
+}
+
+.stat-value {
+    color: var(--text-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+.winrate-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 80px;
+}
+
+.winrate-bar {
+    height: 4px;
+    background-color: var(--bg-elevated);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.winrate-fill {
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-full);
+}
+
+.winrate-value {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    text-align: center;
+}
+
+/* Podium */
+.leaderboard-podium {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: var(--spacing-4);
+    margin-bottom: var(--spacing-6);
+    padding: var(--spacing-6) var(--spacing-4);
+    background-color: var(--card-bg);
+    border-radius: var(--radius-xl);
+}
+
+.podium-player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-2);
+    flex: 1;
+    max-width: 150px;
+}
+
+.podium-player.first {
+    order: 2;
+}
+
+.podium-player.second {
+    order: 1;
+}
+
+.podium-player.third {
+    order: 3;
+}
+
+.podium-avatar-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.podium-rank {
+    font-size: 2rem;
+    margin-top: var(--spacing-1);
+}
+
+.crown-icon {
+    position: absolute;
+    top: -10px;
+    font-size: var(--font-size-xl);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.podium-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.podium-name {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+}
+
+.podium-rating,
+.podium-points {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+}
+
+.podium-tier,
+.podium-league {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+}
+
+.podium-base {
+    width: 100%;
+    height: 60px;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-white);
+}
+
+.podium-base.first-place {
+    height: 100px;
+    background: var(--gradient-gold);
+}
+
+.podium-base.second-place {
+    height: 80px;
+    background: var(--gradient-silver);
+}
+
+.podium-base.third-place {
+    height: 60px;
+    background: var(--gradient-bronze);
+}
+
+/* ============================================================
+   بخش ۱۶: Currency Displays
+   ============================================================ */
+
+.currency-display {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    padding: var(--spacing-1) var(--spacing-3);
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+}
+
+.currency-display.coins {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.2) 0%, rgba(255, 143, 0, 0.2) 100%);
+    border: 1px solid var(--color-accent);
+}
+
+.currency-display.gems {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(37, 99, 235, 0.2) 100%);
+    border: 1px solid var(--color-info);
+}
+
+.currency-icon {
+    font-size: var(--font-size-md);
+}
+
+.currency-value {
+    color: var(--text-primary);
+}
+
+.btn-add-currency {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    transition: var(--transition-all);
+    margin-right: var(--spacing-1);
+}
+
+.btn-add-currency:hover {
+    background-color: var(--color-primary-hover);
+    transform: scale(1.1);
+}
+
+/* ============================================================
+   بخش ۱۷: League Cards
+   ============================================================ */
+
+.league-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-4);
+    margin-bottom: var(--spacing-6);
+}
+
+.league-card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    margin-bottom: var(--spacing-4);
+}
+
+.league-icon {
+    font-size: 3rem;
+}
+
+.league-info {
+    flex: 1;
+}
+
+.league-title {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+    margin: 0 0 var(--spacing-1) 0;
+}
+
+.league-name {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.league-progress-section {
+    margin-bottom: var(--spacing-4);
+}
+
+.league-progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--spacing-2);
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+}
+
+.league-points {
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+.league-next {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-medium);
+}
+
+/* ============================================================
+   بخش ۱۸: Announcement Cards
+   ============================================================ */
+
+.announcement-card {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-4);
+    background: linear-gradient(135deg, var(--color-info-light) 0%, var(--color-primary-light) 100%);
+    border: 1px solid var(--color-info);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-6);
+}
+
+.announcement-icon {
+    font-size: var(--font-size-3xl);
+    flex-shrink: 0;
+}
+
+.announcement-content {
+    flex: 1;
+}
+
+.announcement-title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0 0 var(--spacing-1) 0;
+}
+
+.announcement-text {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* ============================================================
+   بخش ۱۹: Quick Play Button
+   ============================================================ */
+
+.btn-quick-play {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4);
+    padding: var(--spacing-5);
+    background: var(--gradient-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-xl);
+    cursor: pointer;
+    transition: var(--transition-all);
+    box-shadow: var(--shadow-primary);
+    width: 100%;
+    text-align: right;
+    font-family: inherit;
+}
+
+.btn-quick-play:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.5);
+}
+
+.btn-quick-play:active {
+    transform: translateY(0);
+}
+
+.quick-play-icon {
+    font-size: 3rem;
+    flex-shrink: 0;
+}
+
+.quick-play-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+}
+
+.quick-play-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+}
+
+.quick-play-subtitle {
+    font-size: var(--font-size-sm);
+    opacity: 0.9;
+}
+
+.quick-play-arrow {
+    font-size: var(--font-size-2xl);
+    opacity: 0.7;
+}
+
+/* ============================================================
+   بخش ۲۰: Responsive Screens
+   ============================================================ */
+
+/* موبایل */
+@media (max-width: 768px) {
+    .hero {
+        padding: var(--spacing-6) var(--spacing-3);
+    }
+    
+    .hero-title {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .hero-stats {
+        gap: var(--spacing-4);
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-3);
+    }
+    
+    .game-modes-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .rewards-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .reward-days {
+        grid-template-columns: repeat(7, 1fr);
+        gap: var(--spacing-1);
+    }
+    
+    .day-number,
+    .day-reward {
+        font-size: 10px;
+    }
+    
+    .leaderboard-podium {
+        padding: var(--spacing-4) var(--spacing-2);
+        gap: var(--spacing-2);
+    }
+    
+    .podium-base.first-place {
+        height: 80px;
+    }
+    
+    .podium-base.second-place {
+        height: 60px;
+    }
+    
+    .podium-base.third-place {
+        height: 40px;
+    }
+    
+    .match-card {
+        flex-wrap: wrap;
+    }
+    
+    .event-card {
+        min-width: 260px;
+    }
+}
+
+/* تبلت */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .game-modes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .rewards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* دسکتاپ */
+@media (min-width: 1024px) {
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+    
+    .game-modes-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .rewards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    
+    .achievements-list {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+}
+
+/* ============================================================
+   بخش ۲۱: Accessibility
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .screen {
+        animation: none;
+    }
+    
+    .stat-card,
+    .match-card,
+    .friend-card,
+    .event-card,
+    .mission-card,
+    .achievement-card,
+    .leaderboard-item {
+        transition: none;
+    }
+    
+    .crown-icon {
+        animation: none;
+    }
+}
+
+@media (prefers-contrast: high) {
+    .match-card.win,
+    .match-card.lose,
+    .achievement-card.unlocked {
+        border-width: 3px;
+    }
+}
+
+/* ============================================================
+   بخش ۲۲: Print Screens
+   ============================================================ */
+
+@media print {
+    .screen-header,
+    .btn-quick-play,
+    .hero-background {
+        display: none !important;
+    }
+    
+    .hero {
+        background: #fff;
+        border: 1px solid #000;
+    }
+    
+    .stat-card,
+    .match-card,
+    .friend-card,
+    .event-card {
+        border: 1px solid #000;
+        box-shadow: none;
+    }
+}
