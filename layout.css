@@ -1,0 +1,1339 @@
+/**
+ * ============================================================
+ * HOKM MASTER - Layout
+ * ساختار کلی و چیدمان اپلیکیشن
+ * ============================================================
+ * 
+ * این فایل ساختار کلی اپلیکیشن شامل App Shell،
+ * Header، Sidebar، Main، Bottom Nav و Grid systems را تعریف می‌کند.
+ * 
+ * نسخه: 1.0.0
+ * ============================================================
+ */
+
+/* ============================================================
+   بخش ۱: App Container
+   ============================================================ */
+
+.app-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================================
+   بخش ۲: App Shell
+   ============================================================ */
+
+.app-shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-top: var(--safe-area-top);
+    padding-bottom: var(--safe-area-bottom);
+}
+
+/* ============================================================
+   بخش ۳: Header
+   ============================================================ */
+
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    z-index: var(--z-index-sticky);
+    backdrop-filter: var(--blur-md);
+    -webkit-backdrop-filter: var(--blur-md);
+    box-shadow: var(--shadow-dark-sm);
+    padding-top: var(--safe-area-top);
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 var(--spacing-4);
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+}
+
+.header-right,
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.header-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+}
+
+.brand-icon {
+    font-size: var(--font-size-xl);
+}
+
+.brand-text {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.header-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+.header-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background-color: transparent;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: var(--transition-colors);
+}
+
+.header-btn:hover {
+    background-color: var(--bg-tertiary);
+}
+
+.header-btn:active {
+    transform: scale(0.95);
+}
+
+.header-btn .icon {
+    font-size: var(--font-size-xl);
+}
+
+.btn-coin,
+.btn-gem {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    padding: var(--spacing-1) var(--spacing-3);
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+}
+
+.btn-coin .coin-icon,
+.btn-gem .gem-icon {
+    font-size: var(--font-size-md);
+}
+
+.coin-amount,
+.gem-amount {
+    color: var(--text-primary);
+}
+
+.btn-profile {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.badge-notification {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    background-color: var(--color-danger);
+    color: var(--color-white);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--bg-secondary);
+}
+
+/* ============================================================
+   بخش ۴: Sidebar
+   ============================================================ */
+
+.app-sidebar {
+    position: fixed;
+    top: var(--header-height);
+    right: 0;
+    width: var(--sidebar-width);
+    height: calc(100vh - var(--header-height));
+    background-color: var(--bg-secondary);
+    border-left: 1px solid var(--border-color);
+    z-index: var(--z-index-fixed);
+    transform: translateX(100%);
+    transition: transform var(--transition-normal) var(--easing-ease-in-out);
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--bg-overlay);
+    z-index: calc(var(--z-index-fixed) - 1);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-normal) var(--easing-ease-in-out),
+                visibility var(--transition-normal) var(--easing-ease-in-out);
+    backdrop-filter: var(--blur-sm);
+    -webkit-backdrop-filter: var(--blur-sm);
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-4);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-user {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+}
+
+.sidebar-user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-username {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+.sidebar-level {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+}
+
+.sidebar-content {
+    flex: 1;
+    padding: var(--spacing-4);
+    overflow-y: auto;
+}
+
+.sidebar-section {
+    margin-bottom: var(--spacing-6);
+}
+
+.sidebar-section:last-child {
+    margin-bottom: 0;
+}
+
+.sidebar-section-title {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+    margin-bottom: var(--spacing-2);
+    padding: 0 var(--spacing-2);
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3) var(--spacing-2);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    transition: var(--transition-colors);
+    margin-bottom: var(--spacing-1);
+}
+
+.sidebar-link:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+.sidebar-link.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.sidebar-icon {
+    font-size: var(--font-size-xl);
+    width: 24px;
+    text-align: center;
+}
+
+.sidebar-text {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+}
+
+.sidebar-footer {
+    padding: var(--spacing-4);
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.sidebar-version {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+}
+
+/* ============================================================
+   بخش ۵: Main Content Area
+   ============================================================ */
+
+.app-main {
+    flex: 1;
+    margin-top: var(--header-height);
+    margin-bottom: var(--bottom-nav-height);
+    min-height: calc(100vh - var(--header-height) - var(--bottom-nav-height));
+    padding: var(--spacing-4);
+    overflow-y: auto;
+    position: relative;
+}
+
+/* ============================================================
+   بخش ۶: Bottom Navigation
+   ============================================================ */
+
+.app-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--bottom-nav-height);
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    z-index: var(--z-index-sticky);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-bottom: var(--safe-area-bottom);
+    backdrop-filter: var(--blur-md);
+    -webkit-backdrop-filter: var(--blur-md);
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bottom-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-1);
+    padding: var(--spacing-2);
+    color: var(--text-tertiary);
+    transition: var(--transition-colors);
+    text-decoration: none;
+    position: relative;
+}
+
+.bottom-nav-item:hover {
+    color: var(--text-primary);
+}
+
+.bottom-nav-item.active {
+    color: var(--color-primary);
+}
+
+.bottom-nav-item.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 3px;
+    background-color: var(--color-primary);
+    border-radius: 0 0 var(--radius-full) var(--radius-full);
+}
+
+.bottom-nav-icon {
+    font-size: var(--font-size-xl);
+}
+
+.bottom-nav-text {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+}
+
+/* ============================================================
+   بخش ۷: Screen Containers
+   ============================================================ */
+
+.screens-container {
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+}
+
+.screen {
+    width: 100%;
+    min-height: 100%;
+    animation: screenFadeIn var(--transition-normal) var(--easing-ease-out);
+}
+
+@keyframes screenFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.screen-content {
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding-bottom: var(--spacing-8);
+}
+
+.screen-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-4) 0;
+    margin-bottom: var(--spacing-4);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.screen-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.header-spacer {
+    width: 40px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.header-currency {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.currency-display {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    padding: var(--spacing-1) var(--spacing-3);
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+}
+
+.currency-icon {
+    font-size: var(--font-size-md);
+}
+
+.currency-value {
+    color: var(--text-primary);
+}
+
+.btn-add-currency {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    transition: var(--transition-all);
+}
+
+.btn-add-currency:hover {
+    background-color: var(--color-primary-hover);
+    transform: scale(1.1);
+}
+
+/* ============================================================
+   بخش ۸: Grid Systems
+   ============================================================ */
+
+.grid {
+    display: grid;
+    gap: var(--grid-gap);
+}
+
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+
+.gap-0 { gap: 0; }
+.gap-1 { gap: var(--spacing-1); }
+.gap-2 { gap: var(--spacing-2); }
+.gap-3 { gap: var(--spacing-3); }
+.gap-4 { gap: var(--spacing-4); }
+.gap-6 { gap: var(--spacing-6); }
+.gap-8 { gap: var(--spacing-8); }
+
+.col-span-1 { grid-column: span 1 / span 1; }
+.col-span-2 { grid-column: span 2 / span 2; }
+.col-span-3 { grid-column: span 3 / span 3; }
+.col-span-4 { grid-column: span 4 / span 4; }
+.col-span-6 { grid-column: span 6 / span 6; }
+.col-span-12 { grid-column: span 12 / span 12; }
+
+/* ============================================================
+   بخش ۹: Flex Utilities
+   ============================================================ */
+
+.flex { display: flex; }
+.inline-flex { display: inline-flex; }
+
+.flex-row { flex-direction: row; }
+.flex-row-reverse { flex-direction: row-reverse; }
+.flex-col { flex-direction: column; }
+.flex-col-reverse { flex-direction: column-reverse; }
+
+.flex-wrap { flex-wrap: wrap; }
+.flex-nowrap { flex-wrap: nowrap; }
+.flex-wrap-reverse { flex-wrap: wrap-reverse; }
+
+.flex-1 { flex: 1 1 0%; }
+.flex-auto { flex: 1 1 auto; }
+.flex-initial { flex: 0 1 auto; }
+.flex-none { flex: none; }
+
+.flex-grow { flex-grow: 1; }
+.flex-grow-0 { flex-grow: 0; }
+.flex-shrink { flex-shrink: 1; }
+.flex-shrink-0 { flex-shrink: 0; }
+
+.items-start { align-items: flex-start; }
+.items-center { align-items: center; }
+.items-end { align-items: flex-end; }
+.items-stretch { align-items: stretch; }
+.items-baseline { align-items: baseline; }
+
+.justify-start { justify-content: flex-start; }
+.justify-center { justify-content: center; }
+.justify-end { justify-content: flex-end; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+.justify-evenly { justify-content: space-evenly; }
+
+.self-start { align-self: flex-start; }
+.self-center { align-self: center; }
+.self-end { align-self: flex-end; }
+.self-stretch { align-self: stretch; }
+
+.content-start { align-content: flex-start; }
+.content-center { align-content: center; }
+.content-end { align-content: flex-end; }
+.content-between { align-content: space-between; }
+.content-around { align-content: space-around; }
+.content-stretch { align-content: stretch; }
+
+/* ============================================================
+   بخش ۱۰: Container Widths
+   ============================================================ */
+
+.container {
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+}
+
+.container-sm {
+    max-width: 640px;
+}
+
+.container-md {
+    max-width: 768px;
+}
+
+.container-lg {
+    max-width: 1024px;
+}
+
+.container-xl {
+    max-width: 1280px;
+}
+
+.container-2xl {
+    max-width: 1536px;
+}
+
+.container-fluid {
+    max-width: 100%;
+}
+
+/* ============================================================
+   بخش ۱۱: Common Layouts
+   ============================================================ */
+
+/* Hero Section */
+.hero {
+    position: relative;
+    padding: var(--spacing-8) var(--spacing-4);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    margin-bottom: var(--spacing-6);
+}
+
+.hero-background {
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-bg-dark);
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-4);
+    margin-bottom: var(--spacing-6);
+}
+
+.stat-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-card);
+    padding: var(--spacing-4);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    transition: var(--transition-all);
+}
+
+.stat-card:hover {
+    background-color: var(--card-bg-hover);
+    transform: translateY(-2px);
+}
+
+.stat-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+    font-size: var(--font-size-2xl);
+}
+
+.stat-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.stat-value {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+    margin-top: var(--spacing-1);
+}
+
+/* Section Header */
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-4);
+}
+
+.section-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.section-link {
+    font-size: var(--font-size-sm);
+    color: var(--text-link);
+    font-weight: var(--font-weight-medium);
+    transition: var(--transition-colors);
+}
+
+.section-link:hover {
+    color: var(--text-link-hover);
+    text-decoration: none;
+}
+
+/* Empty State */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-12) var(--spacing-4);
+    text-align: center;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-4);
+    opacity: 0.5;
+}
+
+.empty-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-2);
+}
+
+.empty-desc {
+    font-size: var(--font-size-sm);
+    color: var(--text-tertiary);
+    margin-bottom: var(--spacing-6);
+    max-width: 400px;
+}
+
+/* Tips List */
+.tips-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+}
+
+.tip-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3);
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+}
+
+.tip-icon {
+    font-size: var(--font-size-xl);
+    flex-shrink: 0;
+}
+
+.tip-text {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    line-height: var(--line-height-relaxed);
+}
+
+/* ============================================================
+   بخش ۱۲: Modal Container
+   ============================================================ */
+
+.modal-container {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-index-modal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-4);
+    pointer-events: none;
+}
+
+.modal-container.active {
+    pointer-events: auto;
+}
+
+/* ============================================================
+   بخش ۱۳: Toast Container
+   ============================================================ */
+
+.toast-container-main {
+    position: fixed;
+    top: calc(var(--header-height) + var(--spacing-4));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: var(--z-index-toast);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    max-width: 400px;
+    width: calc(100% - var(--spacing-8));
+    pointer-events: none;
+}
+
+.toast-container-main > * {
+    pointer-events: auto;
+}
+
+/* ============================================================
+   بخش ۱۴: Chat Widget
+   ============================================================ */
+
+.chat-widget {
+    position: fixed;
+    bottom: calc(var(--bottom-nav-height) + var(--spacing-4));
+    left: var(--spacing-4);
+    width: 320px;
+    max-width: calc(100vw - var(--spacing-8));
+    height: 400px;
+    max-height: calc(100vh - var(--header-height) - var(--bottom-nav-height) - var(--spacing-8));
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-dark-lg);
+    z-index: var(--z-index-fixed);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-widget-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-3);
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-tertiary);
+}
+
+.chat-widget-title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+.chat-widget-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-3);
+}
+
+.chat-widget-input {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-3);
+    border-top: 1px solid var(--border-color);
+    background-color: var(--bg-tertiary);
+}
+
+/* ============================================================
+   بخش ۱۵: Scroll to Top Button
+   ============================================================ */
+
+.btn-scroll-top {
+    position: fixed;
+    bottom: calc(var(--bottom-nav-height) + var(--spacing-4));
+    right: var(--spacing-4);
+    width: 48px;
+    height: 48px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-dark-md);
+    transition: var(--transition-all);
+    z-index: var(--z-index-fixed);
+}
+
+.btn-scroll-top:hover {
+    background-color: var(--color-primary-hover);
+    transform: translateY(-2px);
+}
+
+.btn-scroll-top .icon {
+    font-size: var(--font-size-xl);
+}
+
+/* ============================================================
+   بخش ۱۶: Connection Status
+   ============================================================ */
+
+.connection-status {
+    position: fixed;
+    top: calc(var(--header-height) + var(--spacing-2));
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-danger);
+    color: var(--color-white);
+    padding: var(--spacing-2) var(--spacing-4);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    box-shadow: var(--shadow-dark-md);
+    z-index: var(--z-index-toast);
+    animation: slideDown var(--transition-normal) var(--easing-ease-out);
+}
+
+@keyframes slideDown {
+    from {
+        transform: translate(-50%, -100%);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+.connection-icon {
+    font-size: var(--font-size-md);
+}
+
+/* ============================================================
+   بخش ۱۷: App Loader
+   ============================================================ */
+
+.app-loader {
+    position: fixed;
+    inset: 0;
+    background-color: var(--bg-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-index-max);
+    transition: opacity var(--transition-slow) var(--easing-ease-out);
+}
+
+.app-loader.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-4);
+    padding: var(--spacing-8);
+}
+
+.loader-logo {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-full);
+    animation: pulse 2s var(--easing-ease-in-out) infinite;
+}
+
+.loader-icon {
+    font-size: 4rem;
+}
+
+.loader-title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.loader-subtitle {
+    font-size: var(--font-size-base);
+    color: var(--text-tertiary);
+    margin: 0;
+}
+
+.loader-progress {
+    width: 200px;
+    height: 4px;
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.loader-progress-bar {
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-full);
+    animation: loadingBar 2s var(--easing-ease-in-out) infinite;
+}
+
+@keyframes loadingBar {
+    0% {
+        width: 0%;
+        transform: translateX(0);
+    }
+    50% {
+        width: 100%;
+    }
+    100% {
+        width: 0%;
+        transform: translateX(200px);
+    }
+}
+
+.loader-status {
+    font-size: var(--font-size-sm);
+    color: var(--text-tertiary);
+    margin: 0;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+/* ============================================================
+   بخش ۱۸: Responsive Layout
+   ============================================================ */
+
+/* موبایل کوچک (≤ 360px) */
+@media (max-width: 360px) {
+    :root {
+        --header-height: 56px;
+        --bottom-nav-height: 60px;
+        --sidebar-width: 260px;
+    }
+    
+    .app-main {
+        padding: var(--spacing-3);
+    }
+    
+    .screen-title {
+        font-size: var(--font-size-xl);
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-3);
+    }
+}
+
+/* موبایل (≤ 768px) */
+@media (max-width: 768px) {
+    .grid-cols-2,
+    .grid-cols-3,
+    .grid-cols-4 {
+        grid-template-columns: 1fr;
+    }
+    
+    .header-title {
+        font-size: var(--font-size-base);
+    }
+    
+    .brand-text {
+        display: none;
+    }
+    
+    .chat-widget {
+        width: calc(100vw - var(--spacing-8));
+        left: var(--spacing-4);
+        right: var(--spacing-4);
+    }
+}
+
+/* تبلت (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .grid-cols-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .grid-cols-4 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* تبلت و بزرگتر (≥ 768px) */
+@media (min-width: 768px) {
+    .app-main {
+        padding: var(--spacing-6);
+    }
+}
+
+/* دسکتاپ (≥ 1024px) */
+@media (min-width: 1024px) {
+    .app-sidebar {
+        transform: translateX(0);
+    }
+    
+    .app-main {
+        margin-right: var(--sidebar-width);
+    }
+    
+    .sidebar-overlay {
+        display: none;
+    }
+    
+    .grid-cols-4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* دسکتاپ بزرگ (≥ 1440px) */
+@media (min-width: 1440px) {
+    .container {
+        padding-left: var(--spacing-8);
+        padding-right: var(--spacing-8);
+    }
+}
+
+/* ============================================================
+   بخش ۱۹: Landscape Mode
+   ============================================================ */
+
+@media (orientation: landscape) and (max-height: 500px) {
+    :root {
+        --header-height: 50px;
+        --bottom-nav-height: 56px;
+    }
+    
+    .app-main {
+        padding-top: var(--spacing-2);
+        padding-bottom: var(--spacing-2);
+    }
+    
+    .hero {
+        padding: var(--spacing-4) var(--spacing-3);
+    }
+}
+
+/* ============================================================
+   بخش ۲۰: Print Layout
+   ============================================================ */
+
+@media print {
+    .app-header,
+    .app-sidebar,
+    .app-bottom-nav,
+    .sidebar-overlay,
+    .chat-widget,
+    .btn-scroll-top,
+    .connection-status,
+    .modal-container,
+    .toast-container-main {
+        display: none !important;
+    }
+    
+    .app-main {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .screen {
+        page-break-inside: avoid;
+    }
+}
+
+/* ============================================================
+   بخش ۲۱: Safe Areas
+   ============================================================ */
+
+@supports (padding: max(0px)) {
+    .app-header {
+        padding-top: max(var(--safe-area-top), 0px);
+    }
+    
+    .app-bottom-nav {
+        padding-bottom: max(var(--safe-area-bottom), 0px);
+    }
+    
+    .app-main {
+        padding-left: max(var(--safe-area-left), var(--spacing-4));
+        padding-right: max(var(--safe-area-right), var(--spacing-4));
+    }
+}
+
+/* ============================================================
+   بخش ۲۲: High DPI Displays
+   ============================================================ */
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .app-header,
+    .app-bottom-nav {
+        border-width: 0.5px;
+    }
+}
+
+/* ============================================================
+   بخش ۲۳: Dark Mode Specific
+   ============================================================ */
+
+.theme-dark .app-header,
+.theme-dark .app-sidebar,
+.theme-dark .app-bottom-nav {
+    background-color: var(--bg-secondary);
+}
+
+/* ============================================================
+   بخش ۲۴: Reduced Motion
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .screen {
+        animation: none;
+    }
+    
+    .app-sidebar {
+        transition: none;
+    }
+    
+    .sidebar-overlay {
+        transition: none;
+    }
+    
+    .loader-progress-bar {
+        animation: none;
+    }
+    
+    .loader-logo {
+        animation: none;
+    }
+}
+
+/* ============================================================
+   بخش ۲۵: Utilities
+   ============================================================ */
+
+.hidden {
+    display: none !important;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.overflow-auto {
+    overflow: auto;
+}
+
+.overflow-y-auto {
+    overflow-y: auto;
+}
+
+.overflow-x-auto {
+    overflow-x: auto;
+}
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.fixed {
+    position: fixed;
+}
+
+.sticky {
+    position: sticky;
+    top: 0;
+}
+
+.inset-0 {
+    inset: 0;
+}
+
+.z-0 { z-index: 0; }
+.z-10 { z-index: 10; }
+.z-20 { z-index: 20; }
+.z-30 { z-index: 30; }
+.z-40 { z-index: 40; }
+.z-50 { z-index: 50; }
+
+.w-full { width: 100%; }
+.w-screen { width: 100vw; }
+.h-full { height: 100%; }
+.h-screen { height: 100vh; }
+.min-h-screen { min-height: 100vh; }
+
+.m-auto { margin: auto; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.my-auto { margin-top: auto; margin-bottom: auto; }
