@@ -1,0 +1,445 @@
+<div id="purchase-confirm-modal" class="modal modal-medium" data-modal-name="purchase-confirm" style="display: none;">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-header-right">
+                <span class="modal-icon">🛒</span>
+                <h3 class="modal-title">تأیید خرید</h3>
+            </div>
+            <div class="modal-header-left">
+                <button class="btn-icon btn-small btn-close-modal" id="btn-close-purchase-confirm" aria-label="بستن">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="modal-body">
+            <!-- Step 1: Order Summary -->
+            <section class="purchase-step active" id="purchase-step-summary" data-step="1">
+                <div class="purchase-item-preview">
+                    <div class="item-image-wrapper">
+                        <div class="item-image-bg" id="purchase-item-bg"></div>
+                        <span class="item-image-icon" id="purchase-item-icon">👤</span>
+                        <span class="item-rarity-badge" id="purchase-item-rarity">
+                            <span class="rarity-icon">⚪</span>
+                            <span class="rarity-text">معمولی</span>
+                        </span>
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-name" id="purchase-item-name">نام آیتم</h3>
+                        <p class="item-category" id="purchase-item-category">آواتار</p>
+                        <p class="item-description" id="purchase-item-description">
+                            توضیحات آیتم در اینجا نمایش داده می‌شود.
+                        </p>
+                        <div class="item-badges">
+                            <span class="badge limited" id="purchase-limited-badge" style="display: none;">
+                                <span class="icon">⏰</span>
+                                <span class="text">محدود</span>
+                            </span>
+                            <span class="badge new" id="purchase-new-badge" style="display: none;">جدید</span>
+                            <span class="badge discount" id="purchase-discount-badge" style="display: none;">
+                                <span class="icon">🏷️</span>
+                                <span class="text" id="purchase-discount-text">-۵۰٪</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="purchase-order-summary">
+                    <h4 class="summary-title">خلاصه سفارش</h4>
+                    <div class="summary-list">
+                        <div class="summary-row">
+                            <span class="row-label">قیمت اصلی:</span>
+                            <span class="row-value original" id="purchase-original-price">۲۰۰ 🪙</span>
+                        </div>
+                        <div class="summary-row discount" id="purchase-discount-row" style="display: none;">
+                            <span class="row-label">تخفیف:</span>
+                            <span class="row-value discount" id="purchase-discount-amount">-۱۰۰ 🪙</span>
+                        </div>
+                        <div class="summary-row" id="purchase-coupon-row" style="display: none;">
+                            <span class="row-label">کد تخفیف:</span>
+                            <span class="row-value discount" id="purchase-coupon-amount">-۰ 🪙</span>
+                        </div>
+                        <div class="summary-row" id="purchase-tax-row">
+                            <span class="row-label">مالیات (۹٪):</span>
+                            <span class="row-value" id="purchase-tax-amount">۹ 🪙</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span class="row-label">مبلغ قابل پرداخت:</span>
+                            <span class="row-value total" id="purchase-total-price">۱۰۹ 🪙</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="purchase-coupon-section">
+                    <h4 class="coupon-title">کد تخفیف</h4>
+                    <div class="coupon-input-wrapper">
+                        <div class="input-wrapper">
+                            <span class="input-icon">🏷️</span>
+                            <input
+                                type="text"
+                                id="purchase-coupon-input"
+                                class="input-field"
+                                placeholder="کد تخفیف را وارد کنید"
+                                maxlength="20"
+                            >
+                        </div>
+                        <button class="btn btn-outline btn-small" id="btn-apply-coupon">
+                            <span class="btn-text">اعمال</span>
+                        </button>
+                    </div>
+                    <div class="coupon-message success" id="coupon-success-message" style="display: none;">
+                        <span class="icon">✅</span>
+                        <span class="text" id="coupon-success-text">کد تخفیف اعمال شد</span>
+                    </div>
+                    <div class="coupon-message error" id="coupon-error-message" style="display: none;">
+                        <span class="icon">❌</span>
+                        <span class="text" id="coupon-error-text">کد تخفیف نامعتبر است</span>
+                    </div>
+                </div>
+
+                <div class="purchase-balance-section">
+                    <h4 class="balance-title">موجودی شما</h4>
+                    <div class="balance-cards">
+                        <div class="balance-card coins">
+                            <div class="balance-icon">🪙</div>
+                            <div class="balance-info">
+                                <span class="balance-label">سکه</span>
+                                <span class="balance-value" id="purchase-user-coins">۵,۰۰۰</span>
+                            </div>
+                        </div>
+                        <div class="balance-card gems">
+                            <div class="balance-icon">💎</div>
+                            <div class="balance-info">
+                                <span class="balance-label">الماس</span>
+                                <span class="balance-value" id="purchase-user-gems">۱۵۰</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="balance-after-purchase">
+                        <div class="balance-row">
+                            <span class="row-label">پس از خرید:</span>
+                            <span class="row-value" id="purchase-remaining-coins">۴,۸۹۱ 🪙</span>
+                        </div>
+                    </div>
+                    <div class="balance-warning" id="purchase-balance-warning" style="display: none;">
+                        <span class="warning-icon">⚠️</span>
+                        <span class="warning-text">موجودی شما کافی نیست</span>
+                        <button class="btn btn-primary btn-small" id="btn-go-to-shop">
+                            <span class="btn-text">خرید سکه</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 2: Payment Method -->
+            <section class="purchase-step" id="purchase-step-payment" data-step="2" style="display: none;">
+                <div class="payment-methods-section">
+                    <h4 class="section-title">روش پرداخت</h4>
+                    <div class="payment-methods-list">
+                        <label class="payment-method-option selected" data-method="coins">
+                            <input type="radio" name="payment-method" value="coins" checked>
+                            <div class="method-content">
+                                <span class="method-icon">🪙</span>
+                                <div class="method-info">
+                                    <span class="method-name">پرداخت با سکه</span>
+                                    <span class="method-desc">استفاده از سکه‌های موجود</span>
+                                </div>
+                                <span class="method-amount" id="payment-coins-amount">۱۰۹ 🪙</span>
+                            </div>
+                        </label>
+                        <label class="payment-method-option" data-method="gems">
+                            <input type="radio" name="payment-method" value="gems">
+                            <div class="method-content">
+                                <span class="method-icon">💎</span>
+                                <div class="method-info">
+                                    <span class="method-name">پرداخت با الماس</span>
+                                    <span class="method-desc">استفاده از الماس‌های موجود</span>
+                                </div>
+                                <span class="method-amount" id="payment-gems-amount">۱۱ 💎</span>
+                            </div>
+                        </label>
+                        <label class="payment-method-option" data-method="real-money">
+                            <input type="radio" name="payment-method" value="real-money">
+                            <div class="method-content">
+                                <span class="method-icon">💳</span>
+                                <div class="method-info">
+                                    <span class="method-name">پرداخت واقعی</span>
+                                    <span class="method-desc">خرید با کارت بانکی</span>
+                                </div>
+                                <span class="method-amount" id="payment-real-amount">۴۹,۰۰۰ تومان</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="payment-gateway-section" id="payment-gateway-section" style="display: none;">
+                    <h4 class="section-title">درگاه پرداخت</h4>
+                    <div class="gateway-list">
+                        <label class="gateway-option selected" data-gateway="zarinpal">
+                            <input type="radio" name="payment-gateway" value="zarinpal" checked>
+                            <div class="gateway-content">
+                                <span class="gateway-icon">💳</span>
+                                <span class="gateway-name">زرین‌پال</span>
+                            </div>
+                        </label>
+                        <label class="gateway-option" data-gateway="payir">
+                            <input type="radio" name="payment-gateway" value="payir">
+                            <div class="gateway-content">
+                                <span class="gateway-icon">💰</span>
+                                <span class="gateway-name">پی‌آی‌آر</span>
+                            </div>
+                        </label>
+                        <label class="gateway-option" data-gateway="idpay">
+                            <input type="radio" name="payment-gateway" value="idpay">
+                            <div class="gateway-content">
+                                <span class="gateway-icon">🏦</span>
+                                <span class="gateway-name">آیدی‌پی</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="payment-security-section">
+                    <div class="security-badges">
+                        <span class="security-badge">
+                            <span class="badge-icon">🔒</span>
+                            <span class="badge-text">پرداخت امن</span>
+                        </span>
+                        <span class="security-badge">
+                            <span class="badge-icon">✅</span>
+                            <span class="badge-text">تضمین بازگشت</span>
+                        </span>
+                        <span class="security-badge">
+                            <span class="badge-icon">🛡️</span>
+                            <span class="badge-text">SSL</span>
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 3: Processing -->
+            <section class="purchase-step" id="purchase-step-processing" data-step="3" style="display: none;">
+                <div class="processing-section">
+                    <div class="processing-animation">
+                        <div class="processing-spinner"></div>
+                    </div>
+                    <h3 class="processing-title" id="processing-title">در حال پردازش...</h3>
+                    <p class="processing-description" id="processing-description">
+                        لطفاً صبر کنید، سفارش شما در حال پردازش است.
+                    </p>
+                    <div class="processing-steps">
+                        <div class="processing-step active" id="proc-step-1">
+                            <span class="step-icon">🔄</span>
+                            <span class="step-text">بررسی موجودی</span>
+                        </div>
+                        <div class="processing-step" id="proc-step-2">
+                            <span class="step-icon">⏳</span>
+                            <span class="step-text">پردازش پرداخت</span>
+                        </div>
+                        <div class="processing-step" id="proc-step-3">
+                            <span class="step-icon">⏳</span>
+                            <span class="step-text">افزودن به موجودی</span>
+                        </div>
+                        <div class="processing-step" id="proc-step-4">
+                            <span class="step-icon">⏳</span>
+                            <span class="step-text">تکمیل سفارش</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 4: Success -->
+            <section class="purchase-step" id="purchase-step-success" data-step="4" style="display: none;">
+                <div class="success-section">
+                    <div class="success-animation">
+                        <div class="success-icon-wrapper">
+                            <span class="success-icon">✅</span>
+                            <div class="success-ring"></div>
+                            <div class="success-ring ring-2"></div>
+                        </div>
+                    </div>
+                    <h3 class="success-title">خرید با موفقیت انجام شد!</h3>
+                    <p class="success-description" id="success-description">
+                        آیتم با موفقیت به موجودی شما اضافه شد.
+                    </p>
+                    <div class="success-item-summary">
+                        <div class="success-item-image">
+                            <span class="item-icon" id="success-item-icon">👤</span>
+                        </div>
+                        <div class="success-item-info">
+                            <span class="item-name" id="success-item-name">نام آیتم</span>
+                            <span class="item-price" id="success-item-price">۱۰۹ 🪙</span>
+                        </div>
+                    </div>
+                    <div class="success-rewards" id="success-rewards" style="display: none;">
+                        <h4 class="rewards-title">پاداش‌های اضافی:</h4>
+                        <div class="rewards-list">
+                            <div class="reward-item">
+                                <span class="reward-icon">⭐</span>
+                                <span class="reward-value">+۱۰ XP</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-icon">🎁</span>
+                                <span class="reward-value">+۵ سکه</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="success-actions">
+                        <button class="btn btn-primary btn-block" id="btn-use-item-now">
+                            <span class="btn-icon">✅</span>
+                            <span class="btn-text">استفاده از آیتم</span>
+                        </button>
+                        <button class="btn btn-outline btn-block" id="btn-go-to-inventory">
+                            <span class="btn-icon">🎒</span>
+                            <span class="btn-text">مشاهده موجودی</span>
+                        </button>
+                        <button class="btn btn-outline btn-block" id="btn-continue-shopping">
+                            <span class="btn-icon">🛒</span>
+                            <span class="btn-text">ادامه خرید</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 5: Error -->
+            <section class="purchase-step" id="purchase-step-error" data-step="5" style="display: none;">
+                <div class="error-section">
+                    <div class="error-animation">
+                        <div class="error-icon-wrapper">
+                            <span class="error-icon">❌</span>
+                        </div>
+                    </div>
+                    <h3 class="error-title">خطا در خرید</h3>
+                    <p class="error-description" id="error-description">
+                        متأسفانه خرید شما با خطا مواجه شد.
+                    </p>
+                    <div class="error-details">
+                        <div class="error-item">
+                            <span class="error-label">کد خطا:</span>
+                            <span class="error-value" id="error-code">ERR_001</span>
+                        </div>
+                        <div class="error-item">
+                            <span class="error-label">دلیل:</span>
+                            <span class="error-value" id="error-reason">موجودی کافی نیست</span>
+                        </div>
+                    </div>
+                    <div class="error-suggestions">
+                        <h4 class="suggestions-title">پیشنهادات:</h4>
+                        <ul class="suggestions-list">
+                            <li>
+                                <span class="suggestion-icon">💰</span>
+                                <span class="suggestion-text">موجودی خود را افزایش دهید</span>
+                            </li>
+                            <li>
+                                <span class="suggestion-icon">🔄</span>
+                                <span class="suggestion-text">دوباره تلاش کنید</span>
+                            </li>
+                            <li>
+                                <span class="suggestion-icon">📞</span>
+                                <span class="suggestion-text">با پشتیبانی تماس بگیرید</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="error-actions">
+                        <button class="btn btn-primary btn-block" id="btn-retry-purchase">
+                            <span class="btn-icon">🔄</span>
+                            <span class="btn-text">تلاش مجدد</span>
+                        </button>
+                        <button class="btn btn-outline btn-block" id="btn-contact-support">
+                            <span class="btn-icon">📞</span>
+                            <span class="btn-text">تماس با پشتیبانی</span>
+                        </button>
+                        <button class="btn btn-outline btn-block" id="btn-close-error">
+                            <span class="btn-text">بستن</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="modal-footer" id="purchase-modal-footer">
+            <div class="footer-info">
+                <span class="footer-text" id="purchase-step-indicator">مرحله ۱ از ۲</span>
+            </div>
+            <div class="footer-actions">
+                <button class="btn btn-outline" id="btn-purchase-back" style="display: none;">
+                    <span class="btn-icon">→</span>
+                    <span class="btn-text">بازگشت</span>
+                </button>
+                <button class="btn btn-outline" id="btn-purchase-cancel">
+                    <span class="btn-text">انصراف</span>
+                </button>
+                <button class="btn btn-primary" id="btn-purchase-next">
+                    <span class="btn-text">ادامه</span>
+                    <span class="btn-icon">←</span>
+                </button>
+                <button class="btn btn-primary" id="btn-purchase-confirm" style="display: none;">
+                    <span class="btn-icon">✅</span>
+                    <span class="btn-text">تأیید و پرداخت</span>
+                </button>
+                <button class="btn btn-primary" id="btn-purchase-done" style="display: none;">
+                    <span class="btn-text">پایان</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms and Conditions Overlay -->
+    <div class="purchase-terms-overlay" id="purchase-terms-overlay" style="display: none;">
+        <div class="terms-content">
+            <div class="terms-header">
+                <h3 class="terms-title">قوانین و مقررات خرید</h3>
+                <button class="btn-icon btn-small" id="btn-close-terms" aria-label="بستن">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+            <div class="terms-body">
+                <div class="terms-section">
+                    <h4 class="section-title">۱. شرایط عمومی</h4>
+                    <p class="terms-text">
+                        با انجام خرید، شما شرایط و مقررات زیر را می‌پذیرید. تمامی خریدها نهایی هستند و
+                        قابل بازگشت نمی‌باشند، مگر در موارد خاص که توسط تیم پشتیبانی تأیید شود.
+                    </p>
+                </div>
+                <div class="terms-section">
+                    <h4 class="section-title">۲. آیتم‌های مجازی</h4>
+                    <p class="terms-text">
+                        آیتم‌های خریداری شده مجازی هستند و هیچ ارزش واقعی ندارند. این آیتم‌ها فقط در
+                        داخل بازی قابل استفاده هستند و قابل انتقال به خارج از بازی نمی‌باشند.
+                    </p>
+                </div>
+                <div class="terms-section">
+                    <h4 class="section-title">۳. مسئولیت کاربر</h4>
+                    <p class="terms-text">
+                        کاربر مسئول حفظ امنیت حساب کاربری خود است. در صورت دسترسی غیرمجاز به حساب
+                        و استفاده از آیتم‌ها، تیم پشتیبانی مسئولیتی ندارد.
+                    </p>
+                </div>
+                <div class="terms-section">
+                    <h4 class="section-title">۴. تخلفات</h4>
+                    <p class="terms-text">
+                        هرگونه تلاش برای سوءاستفاده از سیستم خرید، استفاده از کدهای تخفیف نامعتبر
+                        یا انجام خریدهای غیرقانونی منجر به مسدود شدن حساب خواهد شد.
+                    </p>
+                </div>
+                <div class="terms-section">
+                    <h4 class="section-title">۵. تغییرات</h4>
+                    <p class="terms-text">
+                        تیم توسعه حق تغییر این شرایط را در هر زمان برای خود محفوظ می‌دارد. تغییرات
+                        از طریق اعلان‌های درون بازی به اطلاع کاربران خواهد رسید.
+                    </p>
+                </div>
+            </div>
+            <div class="terms-footer">
+                <label class="checkbox-wrapper">
+                    <input type="checkbox" id="accept-terms-checkbox">
+                    <span class="checkbox-label">قوانین و مقررات را مطالعه کرده و می‌پذیرم</span>
+                </label>
+                <button class="btn btn-primary btn-block" id="btn-accept-terms" disabled>
+                    <span class="btn-text">تأیید و ادامه</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
