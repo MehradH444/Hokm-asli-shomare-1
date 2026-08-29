@@ -1,0 +1,772 @@
+<div id="notifications-screen" class="screen screen-notifications" data-screen-name="notifications">
+    <div class="screen-content">
+        <header class="screen-header">
+            <button class="btn-back" data-route="home" aria-label="بازگشت">
+                <span class="icon">→</span>
+            </button>
+            <h1 class="screen-title">اعلان‌ها</h1>
+            <div class="header-actions">
+                <button class="btn-icon btn-small" id="btn-mark-all-read" aria-label="خواندن همه">
+                    <span class="icon">✅</span>
+                </button>
+                <button class="btn-icon btn-small" id="btn-notif-settings" aria-label="تنظیمات">
+                    <span class="icon">️</span>
+                </button>
+            </div>
+        </header>
+
+        <section class="notifications-hero">
+            <div class="hero-background"></div>
+            <div class="hero-content">
+                <div class="hero-icon"></div>
+                <h2 class="hero-title">اعلان‌های شما</h2>
+                <p class="hero-subtitle">از آخرین رویدادها و به‌روزرسانی‌ها مطلع شوید</p>
+            </div>
+        </section>
+
+        <section class="notifications-stats">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon"></span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="notif-total" class="stat-value">۴۵</span>
+                        <span class="stat-label">کل اعلان‌ها</span>
+                    </div>
+                </div>
+                <div class="stat-card unread">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon"></span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="notif-unread" class="stat-value">۱۲</span>
+                        <span class="stat-label">خوانده نشده</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">✅</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="notif-read" class="stat-value">۳۳</span>
+                        <span class="stat-label">خوانده شده</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">📅</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="notif-today" class="stat-value">۸</span>
+                        <span class="stat-label">امروز</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="notifications-tabs">
+            <div class="tabs-container">
+                <button class="tab-btn active" data-tab="all" id="tab-notif-all">
+                    <span class="tab-icon"></span>
+                    <span class="tab-text">همه</span>
+                    <span class="tab-badge" id="badge-notif-all">۴۵</span>
+                </button>
+                <button class="tab-btn" data-tab="unread" id="tab-notif-unread">
+                    <span class="tab-icon">🔔</span>
+                    <span class="tab-text">خوانده نشده</span>
+                    <span class="tab-badge" id="badge-notif-unread">۱</span>
+                </button>
+                <button class="tab-btn" data-tab="friend_request" id="tab-notif-friend">
+                    <span class="tab-icon">👥</span>
+                    <span class="tab-text">دوستی</span>
+                </button>
+                <button class="tab-btn" data-tab="game_invite" id="tab-notif-invite">
+                    <span class="tab-icon">🎮</span>
+                    <span class="tab-text">دعوت</span>
+                </button>
+                <button class="tab-btn" data-tab="reward" id="tab-notif-reward">
+                    <span class="tab-icon">🎁</span>
+                    <span class="tab-text">پاداش</span>
+                </button>
+                <button class="tab-btn" data-tab="mission" id="tab-notif-mission">
+                    <span class="tab-icon">🎯</span>
+                    <span class="tab-text">مأموریت</span>
+                </button>
+                <button class="tab-btn" data-tab="league" id="tab-notif-league">
+                    <span class="tab-icon"></span>
+                    <span class="tab-text">لیگ</span>
+                </button>
+                <button class="tab-btn" data-tab="tournament" id="tab-notif-tournament">
+                    <span class="tab-icon"></span>
+                    <span class="tab-text">تورنمنت</span>
+                </button>
+                <button class="tab-btn" data-tab="event" id="tab-notif-event">
+                    <span class="tab-icon">🎪</span>
+                    <span class="tab-text">رویداد</span>
+                </button>
+                <button class="tab-btn" data-tab="shop" id="tab-notif-shop">
+                    <span class="tab-icon"></span>
+                    <span class="tab-text">فروشگاه</span>
+                </button>
+                <button class="tab-btn" data-tab="system" id="tab-notif-system">
+                    <span class="tab-icon">⚙️</span>
+                    <span class="tab-text">سیستمی</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="notifications-filters">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label for="notif-type-filter" class="filter-label">نوع:</label>
+                    <select id="notif-type-filter" class="filter-select">
+                        <option value="all">همه انواع</option>
+                        <option value="friend_request">درخواست دوستی</option>
+                        <option value="game_invite">دعوت به بازی</option>
+                        <option value="reward">پاداش</option>
+                        <option value="mission">مأموریت</option>
+                        <option value="league">لیگ</option>
+                        <option value="tournament">تورنمنت</option>
+                        <option value="event">رویداد</option>
+                        <option value="shop">فروشگاه</option>
+                        <option value="system">سیستمی</option>
+                        <option value="maintenance">نگهداری</option>
+                        <option value="update">به‌روزرسانی</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="notif-priority-filter" class="filter-label">اولویت:</label>
+                    <select id="notif-priority-filter" class="filter-select">
+                        <option value="all">همه</option>
+                        <option value="urgent">فوری</option>
+                        <option value="high">بالا</option>
+                        <option value="normal">معمولی</option>
+                        <option value="low">پایین</option>
+                    </select>
+                </div>
+                <button class="btn-icon btn-small" id="btn-refresh-notifications" aria-label="بروزرسانی">
+                    <span class="icon">🔄</span>
+                </button>
+            </div>
+            <div class="search-row">
+                <div class="input-wrapper search-wrapper">
+                    <span class="input-icon">🔍</span>
+                    <input
+                        type="text"
+                        id="notif-search-input"
+                        class="input-field"
+                        placeholder="جستجو در اعلان‌ها..."
+                        maxlength="50"
+                    >
+                    <button class="btn-clear-search" id="btn-clear-notif-search" style="display: none;">
+                        <span class="icon">✕</span>
+                    </button>
+                </div>
+            </div>
+            <div class="quick-actions-row">
+                <button class="btn btn-outline btn-small" id="btn-mark-all-notif-read">
+                    <span class="btn-icon">✅</span>
+                    <span class="btn-text">خواندن همه</span>
+                </button>
+                <button class="btn btn-outline btn-small" id="btn-clear-read-notif">
+                    <span class="btn-icon">🗑️</span>
+                    <span class="btn-text">حذف خوانده شده‌ها</span>
+                </button>
+                <button class="btn btn-outline btn-small" id="btn-clear-all-notif">
+                    <span class="btn-icon"></span>
+                    <span class="btn-text">پاک کردن همه</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="notifications-list-section">
+            <div class="section-header">
+                <h3 class="section-title" id="notif-list-title">همه اعلان‌ها</h3>
+                <span class="total-count" id="notif-list-count">۴۵ اعلان</span>
+            </div>
+
+            <div class="notifications-date-group" data-date="today">
+                <div class="date-divider">
+                    <span class="date-text">امروز</span>
+                </div>
+                <div id="notif-today-list" class="notifications-list">
+                    <div class="notification-card unread" data-notif-id="n1" data-type="friend_request" data-priority="high">
+                        <div class="notif-icon-wrapper friend_request">
+                            <span class="notif-icon">👥</span>
+                        </div>
+                        <div class="notif-content">
+                            <div class="notif-header">
+                                <h4 class="notif-title">درخواست دوستی جدید</h4>
+                                <span class="notif-time">۵ دقیقه پیش</span>
+                            </div>
+                            <p class="notif-message">علی رضایی درخواست دوستی فرستاد</p>
+                            <div class="notif-actions">
+                                <button class="btn btn-success btn-small btn-accept-friend" data-notif-id="n1" data-friend-id="f1">
+                                    <span class="btn-icon">✅</span>
+                                    <span class="btn-text">قبول</span>
+                                </button>
+                                <button class="btn btn-danger btn-small btn-reject-friend" data-notif-id="n1" data-friend-id="f1">
+                                    <span class="btn-icon">❌</span>
+                                    <span class="btn-text">رد</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="notif-meta">
+                            <span class="notif-type-badge friend_request">دوستی</span>
+                            <span class="unread-dot"></span>
+                        </div>
+                    </div>
+
+                    <div class="notification-card unread" data-notif-id="n2" data-type="game_invite" data-priority="high">
+                        <div class="notif-icon-wrapper game_invite">
+                            <span class="notif-icon">🎮</span>
+                        </div>
+                        <div class="notif-content">
+                            <div class="notif-header">
+                                <h4 class="notif-title">دعوت به بازی</h4>
+                                <span class="notif-time">۵ دقیقه پیش</span>
+                            </div>
+                            <p class="notif-message">مریم احمدی شما را به بازی دعوت کرد</p>
+                            <div class="notif-actions">
+                                <button class="btn btn-primary btn-small btn-accept-invite" data-notif-id="n2" data-room-id="r1">
+                                    <span class="btn-icon">🎮</span>
+                                    <span class="btn-text">پیوستن</span>
+                                </button>
+                                <button class="btn btn-outline btn-small btn-decline-invite" data-notif-id="n2">
+                                    <span class="btn-icon">❌</span>
+                                    <span class="btn-text">انصراف</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="notif-meta">
+                            <span class="notif-type-badge game_invite">دعوت</span>
+                            <span class="unread-dot"></span>
+                        </div>
+                    </div>
+
+                    <div class="notification-card unread" data-notif-id="n3" data-type="reward" data-priority="normal">
+                        <div class="notif-icon-wrapper reward">
+                            <span class="notif-icon">🎁</span>
+                        </div>
+                        <div class="notif-content">
+                            <div class="notif-header">
+                                <h4 class="notif-title">پاداش جدید</h4>
+                                <span class="notif-time"> ساعت پیش</span>
+                            </div>
+                            <p class="notif-message">شما ۵۰ سکه و ۵ XP دریافت کردید</p>
+                            <div class="notif-reward-preview">
+                                <span class="reward-item">🪙 ۵۰</span>
+                                <span class="reward-item">⭐ ۲۵</span>
+                            </div>
+                        </div>
+                        <div class="notif-meta">
+                            <span class="notif-type-badge reward">پاداش</span>
+                            <span class="unread-dot"></span>
+                        </div>
+                    </div>
+
+                    <div class="notification-card unread" data-notif-id="n4" data-type="mission" data-priority="normal">
+                        <div class="notif-icon-wrapper mission">
+                            <span class="notif-icon">🎯</span>
+                        </div>
+                        <div class="notif-content">
+                            <div class="notif-header">
+                                <h4 class="notif-title">مأموریت جدید</h4>
+                                <span class="notif-time">۲ ساعت پیش</span>
+                            </div>
+                            <p class="notif-message">مأموریت جدید در دسترس است</p>
+                        </div>
+                        <div class="notif-meta">
+                            <span class="notif-type-badge mission">مأموریت</span>
+                            <span class="unread-dot"></span>
+                        </div>
+                    </div>
+
+                    <div class="notification-card unread" data-notif-id="n5" data-type="league" data-priority="high">
+                        <div class="notif-icon-wrapper league">
+                            <span class="notif-icon"></span>
+                        </div>
+                        <div class="notif-content">
+                            <div class="notif-header">
+                                <h4 class="notif-title">ارتقا در لیگ!</h4>
+                                <span class="notif-time"> ساعت پیش</span>
+                            </div>
+                            <p class="notif-message">تبریک! شما به لیگ نقره ارتقا یافتید</p>
+                        </div>
+                        <div class="notif-meta">
+                            <span class="notif-type-badge league">لیگ</span>
+                            <span class="unread-dot"></span>
+                        </div>
+                    </div>
+
+                    <div class="notification-card unread" data-notif-id="n6" data-type="tournament" data-priority="high">
+                        <div class="notif-icon-wrapper tournament">
+                            <span class="notif-icon"></span>
+                        </div>
+                        <div class="notif-content">
+                            <div class="notif-header">
+                                <h4 class="notif-title">تورنمنت جدید</h4>
+                                <span class="notif-time">۴ ساعت پیش</span>
+                            </div>
+                            <p class="notif-message">تورنمنت هفتگی شروع شد! همین حالا ثبت‌نام کنید</p>
+                            <div class="notif-actions">
+                                <button class="btn btn-primary btn-small btn-view-tournament" data-notif-id="n6" data-tournament-id="t1">
+                                    <span class="btn-text">مشاهده</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="notif-meta">
+                            <span class="notif-type-badge tournament">تورنمنت</span>
+                            <span class="unread-dot"></span>
+                        </div>
+                    </div>
+
+                    <div class="notification-card unread" data-notif-id="n7" data-type="event" data-priority="normal">
+                        <div class="notif-icon-wrapper event">
+                            <span class="notif-icon">🎪</span>
+                        </div>
+                        <div class="notif-content">
+                            <div class="notif-header">
+                                <h4 class="notif-title">رویداد ویژه</h4>
+                                <span class="notif-time">۵ ساعت پیش</span>
+                            </div>
+                            <p class="notif-message">جشنواره بهاره شروع شد!</p>
+                        </div>
+                        <div class="notif-meta">
+                            <span class="notif-type-badge event">رویداد</span>
+                            <span class="unread-dot"></span>
+                        </div>
+                    </div>
+
+                    <div class="notification-card unread" data-notif-id="n8" data-type="shop" data-priority="low">
+                        <div class="notif-icon-wrapper shop">
+                            <span class="notif-icon">🛒</span>
+                        </div>
+                        <div class="notif-content">
+                            <div class="notif-header">
+                                <h4 class="notif-title">پیشنهاد ویژه</h4>
+                                <span class="notif-time">۶ ساعت پیش</span>
+                            </div>
+                            <p class="notif-message">۵۰٪ تخفیف روی پک آواتار ویژه!</p>
+                        </div>
+                        <div class="notif-meta">
+                            <span class="notif-type-badge shop">فروشگاه</span>
+                            <span class="unread-dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notifications-date-group" data-date="yesterday">
+                <div class="date-divider">
+                    <span class="date-text">دیروز</span>
+                </div>
+                <div id="notif-yesterday-list" class="notifications-list">
+                    <div class="notification-card read" data-notif-id="n9" data-type="system" data-priority="normal">
+                        <div class="notif-icon-wrapper system">
+                            <span class="notif-icon">⚙️</span>
+                        </div>
+                        <div class="notif-content">
+                            <div class="notif-header">
+                                <h4 class="notif-title">به‌روزرسانی سیستم</h4>
+                                <span class="notif-time">دیروز ۱۸:۳۰</span>
+                            </div>
+                            <p class="notif-message">نسخه جدید با قابلیت‌های جدید منتشر شد</p>
+                        </div>
+                        <div class="notif-meta">
+                            <span class="notif-type-badge system">سیستمی</span>
+                        </div>
+                    </div>
+
+                    <div class="notification-card read" data-notif-id="n10" data-type="maintenance" data-priority="urgent">
+                        <div class="notif-icon-wrapper maintenance">
+                            <span class="notif-icon">🔧</span>
+                        </div>
+                        <div class="notif-content">
+                            <div class="notif-header">
+                                <h4 class="notif-title">نگهداری سرور</h4>
+                                <span class="notif-time">دیروز ۱۴:۰</span>
+                            </div>
+                            <p class="notif-message">سرور به مدت ۲ ساعت برای به‌روزرسانی در دسترس نخواهد بود</p>
+                        </div>
+                        <div class="notif-meta">
+                            <span class="notif-type-badge maintenance">نگهداری</span>
+                        </div>
+                    </div>
+
+                    <div class="notification-card read" data-notif-id="n11" data-type="update" data-priority="high">
+                        <div class="notif-icon-wrapper update">
+                            <span class="notif-icon">📦</span>
+                        </div>
+                        <div class="notif-content">
+                            <div class="notif-header">
+                                <h4 class="notif-title">نسخه جدید</h4>
+                                <span class="notif-time">دیروز ۰:۰۰</span>
+                            </div>
+                            <p class="notif-message">نسخه ۱.۱.۰ در دسترس است</p>
+                            <div class="notif-actions">
+                                <button class="btn btn-primary btn-small btn-update-app" data-notif-id="n11">
+                                    <span class="btn-text">به‌روزرسانی</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="notif-meta">
+                            <span class="notif-type-badge update">به‌روزرسانی</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notifications-date-group" data-date="older">
+                <div class="date-divider">
+                    <span class="date-text">قدیمی‌تر</span>
+                </div>
+                <div id="notif-older-list" class="notifications-list">
+                    <div class="notification-card read" data-notif-id="n12" data-type="reward" data-priority="normal">
+                        <div class="notif-icon-wrapper reward">
+                            <span class="notif-icon">🎁</span>
+                        </div>
+                        <div class="notif-content">
+                            <div class="notif-header">
+                                <h4 class="notif-title">پاداش روزانه</h4>
+                                <span class="notif-time">۲ روز پیش</span>
+                            </div>
+                            <p class="notif-message">جایزه روزانه خود را دریافت کنید</p>
+                        </div>
+                        <div class="notif-meta">
+                            <span class="notif-type-badge reward">پاداش</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="load-more-container" id="notif-load-more-container">
+                <button class="btn btn-outline btn-block" id="btn-load-more-notif">
+                    <span class="btn-icon">️</span>
+                    <span class="btn-text">بارگذاری بیشتر</span>
+                </button>
+            </div>
+
+            <div class="empty-state" id="notif-empty-state" style="display: none;">
+                <span class="empty-icon"></span>
+                <h4 class="empty-title">اعلانی یافت نشد</h4>
+                <p class="empty-desc">فیلترها را تغییر دهید یا عبارت جستجو را اصلاح کنید</p>
+            </div>
+        </section>
+
+        <section class="notifications-detail-modal" id="notif-detail-modal" style="display: none;">
+            <div class="modal-overlay"></div>
+            <div class="modal-content notif-detail-modal">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="notif-detail-title">جزئیات اعلان</h3>
+                    <button class="btn-icon btn-close-modal" id="btn-close-notif-detail" aria-label="بستن">
+                        <span class="icon">✕</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="notif-detail-header">
+                        <div class="notif-detail-icon" id="notif-detail-icon">🔔</div>
+                        <div class="notif-detail-info">
+                            <h4 class="notif-detail-title" id="notif-detail-heading">عنوان اعلان</h4>
+                            <div class="notif-detail-meta">
+                                <span class="notif-detail-type" id="notif-detail-type">نوع</span>
+                                <span class="notif-detail-time" id="notif-detail-time">زمان</span>
+                                <span class="notif-detail-priority" id="notif-detail-priority">اولویت</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notif-detail-message" id="notif-detail-message">
+                        متن کامل اعلان در اینجا نمایش داده می‌شود.
+                    </div>
+                    <div class="notif-detail-data" id="notif-detail-data" style="display: none;">
+                        <h5 class="data-title">اطلاعات اضافی</h5>
+                        <div class="data-content" id="notif-detail-data-content"></div>
+                    </div>
+                    <div class="notif-detail-actions" id="notif-detail-actions">
+                        <button class="btn btn-primary btn-block" id="btn-notif-detail-action">
+                            <span class="btn-text">اقدام</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline" id="btn-mark-notif-read">
+                        <span class="btn-icon">✅</span>
+                        <span class="btn-text">علامت به عنوان خوانده شده</span>
+                    </button>
+                    <button class="btn btn-danger btn-outline" id="btn-delete-notif">
+                        <span class="btn-icon"></span>
+                        <span class="btn-text">حذف</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="notifications-settings-panel" id="notif-settings-panel" style="display: none;">
+            <div class="settings-overlay"></div>
+            <div class="settings-content">
+                <div class="settings-header">
+                    <h3 class="settings-title">تنظیمات اعلان‌ها</h3>
+                    <button class="btn-close-settings" id="btn-close-notif-settings" aria-label="بستن">
+                        <span class="icon"></span>
+                    </button>
+                </div>
+                <div class="settings-section">
+                    <h4 class="settings-section-title">کلی</h4>
+                    <div class="settings-list">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="setting-icon"></span>
+                                <div class="setting-text">
+                                    <span class="setting-title">اعلان‌ها</span>
+                                    <span class="setting-desc">فعال/غیرفعال کردن همه اعلان‌ها</span>
+                                </div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="setting-notif-enabled" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="setting-icon">🔊</span>
+                                <div class="setting-text">
+                                    <span class="setting-title">صدا</span>
+                                    <span class="setting-desc">پخش صدا برای اعلان‌ها</span>
+                                </div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="setting-notif-sound" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="setting-icon">📳</span>
+                                <div class="setting-text">
+                                    <span class="setting-title">ویبره</span>
+                                    <span class="setting-desc">لرزش هنگام دریافت اعلان</span>
+                                </div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="setting-notif-vibrate" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="setting-icon">🔔</span>
+                                <div class="setting-text">
+                                    <span class="setting-title">Push Notification</span>
+                                    <span class="setting-desc">دریافت اعلان در پس‌زمینه</span>
+                                </div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="setting-notif-push" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <h4 class="settings-section-title">انواع اعلان</h4>
+                    <div class="settings-list">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="setting-icon">👥</span>
+                                <span class="setting-title">درخواست دوستی</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="setting-notif-friend_request" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="setting-icon">🎮</span>
+                                <span class="setting-title">دعوت به بازی</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="setting-notif-game_invite" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="setting-icon">🎁</span>
+                                <span class="setting-title">پاداش</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="setting-notif-reward" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="setting-icon">🎯</span>
+                                <span class="setting-title">مأموریت</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="setting-notif-mission" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="setting-icon">🏅</span>
+                                <span class="setting-title">لیگ</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="setting-notif-league" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="setting-icon">🏆</span>
+                                <span class="setting-title">تورنمنت</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="setting-notif-tournament" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="setting-icon">🎪</span>
+                                <span class="setting-title">رویداد</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="setting-notif-event" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="setting-icon">🛒</span>
+                                <span class="setting-title">فروشگاه</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="setting-notif-shop">
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="setting-icon">⚙️</span>
+                                <span class="setting-title">سیستمی</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="setting-notif-system" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="setting-icon">🔧</span>
+                                <span class="setting-title">نگهداری</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="setting-notif-maintenance" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="setting-icon">📦</span>
+                                <span class="setting-title">به‌روزرسانی</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="setting-notif-update" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <h4 class="settings-section-title">ساعات سکوت (Quiet Hours)</h4>
+                    <div class="settings-list">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="setting-icon">🌙</span>
+                                <div class="setting-text">
+                                    <span class="setting-title">فعال‌سازی ساعات سکوت</span>
+                                    <span class="setting-desc">در این ساعات اعلان‌ها بی‌صدا می‌شوند</span>
+                                </div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="setting-quiet-hours-enabled">
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item time-setting">
+                            <div class="setting-info">
+                                <span class="setting-icon"></span>
+                                <span class="setting-title">شروع</span>
+                            </div>
+                            <input type="time" id="setting-quiet-start" value="23:00" class="time-input">
+                        </div>
+                        <div class="setting-item time-setting">
+                            <div class="setting-info">
+                                <span class="setting-icon">🌅</span>
+                                <span class="setting-title">پایان</span>
+                            </div>
+                            <input type="time" id="setting-quiet-end" value="08:00" class="time-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <h4 class="settings-section-title">محدودیت روزانه</h4>
+                    <div class="settings-list">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="setting-icon">📊</span>
+                                <div class="setting-text">
+                                    <span class="setting-title">حداکثر اعلان در روز</span>
+                                    <span class="setting-desc">تعداد اعلان‌های دریافتی در روز</span>
+                                </div>
+                            </div>
+                            <select id="setting-max-daily-notif" class="setting-select">
+                                <option value="5">۵</option>
+                                <option value="10" selected>۱</option>
+                                <option value="20">۲۰</option>
+                                <option value="50">۵۰</option>
+                                <option value="100">۱۰۰</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-actions">
+                    <button class="btn btn-primary btn-block" id="btn-save-notif-settings">
+                        <span class="btn-icon"></span>
+                        <span class="btn-text">ذخیره تنظیمات</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="notifications-tips">
+            <div class="section-header">
+                <h3 class="section-title">نکات اعلان‌ها</h3>
+            </div>
+            <div class="tips-list">
+                <div class="tip-item">
+                    <span class="tip-icon">💡</span>
+                    <p class="tip-text">اعلان‌های مهم را سریع‌تر بررسی کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🌙</span>
+                    <p class="tip-text">ساعات سکوت را برای استراحت شبانه فعال کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🔔</span>
+                    <p class="tip-text">انواع اعلان‌هایی که نمی‌خواهید را غیرفعال کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🗑️</span>
+                    <p class="tip-text">اعلان‌های قدیمی را به طور منظم پاک کنید</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
