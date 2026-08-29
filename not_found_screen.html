@@ -1,0 +1,136 @@
+<div id="not-found-screen" class="screen screen-not-found" data-screen-name="not-found">
+    <div class="screen-content">
+        <header class="screen-header">
+            <button class="btn-back" data-route="home" aria-label="بازگشت">
+                <span class="icon">→</span>
+            </button>
+            <h1 class="screen-title">صفحه یافت نشد</h1>
+            <div class="header-spacer"></div>
+        </header>
+
+        <section class="not-found-hero">
+            <div class="error-container">
+                <div class="error-animation">
+                    <div class="error-icon-wrapper">
+                        <span class="error-icon">❌</span>
+                        <div class="error-ring"></div>
+                        <div class="error-ring ring-2"></div>
+                    </div>
+                </div>
+                <div class="error-code">
+                    <span class="code-number">4</span>
+                    <span class="code-icon">🃏</span>
+                    <span class="code-number">4</span>
+                </div>
+                <h2 class="error-title">صفحه یافت نشد!</h2>
+                <p class="error-description">
+                    متأسفیم، صفحه‌ای که به دنبال آن هستید وجود ندارد یا حذف شده است.
+                    ممکن است آدرس را اشتباه وارد کرده باشید.
+                </p>
+                <div class="error-suggestions">
+                    <h4 class="suggestions-title">پیشنهادات:</h4>
+                    <ul class="suggestions-list">
+                        <li>
+                            <span class="suggestion-icon">🔍</span>
+                            <span class="suggestion-text">آدرس صفحه را بررسی کنید</span>
+                        </li>
+                        <li>
+                            <span class="suggestion-icon">🏠</span>
+                            <span class="suggestion-text">به صفحه اصلی بازگردید</span>
+                        </li>
+                        <li>
+                            <span class="suggestion-icon">📜</span>
+                            <span class="suggestion-text">از منوی ناوبری استفاده کنید</span>
+                        </li>
+                        <li>
+                            <span class="suggestion-icon">🔍</span>
+                            <span class="suggestion-text">از جستجو استفاده کنید</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="error-actions">
+                    <button class="btn btn-primary btn-large" id="btn-go-home" data-route="home">
+                        <span class="btn-icon">🏠</span>
+                        <span class="btn-text">بازگشت به صفحه اصلی</span>
+                    </button>
+                    <button class="btn btn-outline btn-large" id="btn-go-back">
+                        <span class="btn-icon">→</span>
+                        <span class="btn-text">بازگشت به صفحه قبل</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="not-found-quick-links">
+            <div class="section-header">
+                <h3 class="section-title">دسترسی سریع</h3>
+            </div>
+            <div class="quick-links-grid">
+                <a href="#/" class="quick-link-card" data-route="home">
+                    <span class="link-icon">🏠</span>
+                    <span class="link-text">صفحه اصلی</span>
+                </a>
+                <a href="#/quick-play" class="quick-link-card" data-route="quick-play">
+                    <span class="link-icon">⚡</span>
+                    <span class="link-text">بازی سریع</span>
+                </a>
+                <a href="#/profile" class="quick-link-card" data-route="profile">
+                    <span class="link-icon">👤</span>
+                    <span class="link-text">پروفایل</span>
+                </a>
+                <a href="#/shop" class="quick-link-card" data-route="shop">
+                    <span class="link-icon">🛒</span>
+                    <span class="link-text">فروشگاه</span>
+                </a>
+                <a href="#/leaderboard" class="quick-link-card" data-route="leaderboard">
+                    <span class="link-icon">🏆</span>
+                    <span class="link-text">رتبه‌بندی</span>
+                </a>
+                <a href="#/help" class="quick-link-card" data-route="help">
+                    <span class="link-icon">❓</span>
+                    <span class="link-text">راهنما</span>
+                </a>
+                <a href="#/settings" class="quick-link-card" data-route="settings">
+                    <span class="link-icon">⚙️</span>
+                    <span class="link-text">تنظیمات</span>
+                </a>
+                <a href="#/friends" class="quick-link-card" data-route="friends">
+                    <span class="link-icon">👥</span>
+                    <span class="link-text">دوستان</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="not-found-fun-fact">
+            <div class="fun-fact-card">
+                <div class="fun-fact-header">
+                    <span class="fun-fact-icon">💡</span>
+                    <h4 class="fun-fact-title">آیا می‌دانستید؟</h4>
+                </div>
+                <p class="fun-fact-text" id="fun-fact-text">
+                    بازی حکم یکی از محبوب‌ترین بازی‌های کارتی در ایران است و قدمتی بیش از ۱۰۰ سال دارد.
+                </p>
+                <button class="btn btn-outline btn-small" id="btn-new-fun-fact">
+                    <span class="btn-icon">🔄</span>
+                    <span class="btn-text">نکته بعدی</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="not-found-report">
+            <div class="report-card">
+                <div class="report-header">
+                    <span class="report-icon">🐛</span>
+                    <div class="report-info">
+                        <h4 class="report-title">فکر می‌کنید این یک خطا است؟</h4>
+                        <p class="report-desc">اگر فکر می‌کنید این صفحه باید وجود داشته باشد، به ما اطلاع دهید</p>
+                    </div>
+                </div>
+                <button class="btn btn-outline btn-block" id="btn-report-broken-link">
+                    <span class="btn-icon">📝</span>
+                    <span class="btn-text">گزارش لینک خراب</span>
+                </button>
+            </div>
+        </section>
+    </div>
+</div>
