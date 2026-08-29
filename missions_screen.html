@@ -1,0 +1,626 @@
+<div id="missions-screen" class="screen screen-missions" data-screen-name="missions">
+    <div class="screen-content">
+        <header class="screen-header">
+            <button class="btn-back" data-route="home" aria-label="بازگشت">
+                <span class="icon">→</span>
+            </button>
+            <h1 class="screen-title">مأموریت‌ها</h1>
+            <div class="header-spacer"></div>
+        </header>
+
+        <section class="missions-hero">
+            <div class="hero-background"></div>
+            <div class="hero-content">
+                <div class="hero-icon"></div>
+                <h2 class="hero-title">مأموریت‌های روزانه</h2>
+                <p class="hero-subtitle">مأموریت‌ها را تکمیل کنید و جوایز ارزشمند کسب کنید</p>
+                <div class="hero-timer">
+                    <span class="timer-icon">⏰</span>
+                    <span class="timer-text">ریست بعدی: </span>
+                    <span class="timer-value" id="missions-daily-reset">۱۲:۳۴:۵۶</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="missions-stats">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">✅</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="missions-completed-today" class="stat-value"></span>
+                        <span class="stat-label">تکمیل شده امروز</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">🎁</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="missions-rewards-claimable" class="stat-value">۰</span>
+                        <span class="stat-label">پاداش قابل دریافت</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">🔥</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="missions-current-streak" class="stat-value">۰</span>
+                        <span class="stat-label">رشته فعلی</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon"></span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="missions-best-streak" class="stat-value">۰</span>
+                        <span class="stat-label">بهترین رشته</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="missions-tabs">
+            <div class="tabs-container">
+                <button class="tab-btn active" data-tab="daily" id="tab-daily">
+                    <span class="tab-icon">📅</span>
+                    <span class="tab-text">روزانه</span>
+                    <span class="tab-badge" id="badge-daily">۳</span>
+                </button>
+                <button class="tab-btn" data-tab="weekly" id="tab-weekly">
+                    <span class="tab-icon">📆</span>
+                    <span class="tab-text">هفتگی</span>
+                    <span class="tab-badge" id="badge-weekly">۳</span>
+                </button>
+                <button class="tab-btn" data-tab="monthly" id="tab-monthly">
+                    <span class="tab-icon">🗓️</span>
+                    <span class="tab-text">ماهانه</span>
+                    <span class="tab-badge" id="badge-monthly">۲</span>
+                </button>
+                <button class="tab-btn" data-tab="completed" id="tab-completed">
+                    <span class="tab-icon">✅</span>
+                    <span class="tab-text">تکمیل شده</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="missions-daily" id="missions-daily-section">
+            <div class="section-header">
+                <h3 class="section-title">مأموریت‌های روزانه</h3>
+                <button class="btn-icon btn-small" id="btn-refresh-daily" aria-label="بروزرسانی">
+                    <span class="icon">🔄</span>
+                </button>
+            </div>
+            <div id="daily-missions-list" class="missions-list">
+                <div class="mission-card in-progress" data-mission-id="m1">
+                    <div class="mission-header">
+                        <div class="mission-icon-wrapper">
+                            <span class="mission-icon">🎮</span>
+                        </div>
+                        <div class="mission-info">
+                            <h4 class="mission-title">برنده شدن در ۳ بازی</h4>
+                            <p class="mission-desc">۳ بازی را ببرید</p>
+                            <div class="mission-meta">
+                                <span class="mission-type daily">روزانه</span>
+                                <span class="mission-difficulty easy">آسان</span>
+                            </div>
+                        </div>
+                        <div class="mission-reward">
+                            <div class="reward-item">
+                                <span class="reward-icon">🪙</span>
+                                <span class="reward-value">۰۰</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-icon">⭐</span>
+                                <span class="reward-value">۲۵</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mission-progress-section">
+                        <div class="progress-info">
+                            <span class="progress-label">پیشرفت</span>
+                            <span class="progress-text"><span id="mission-m1-progress">۲</span> از ۳</span>
+                        </div>
+                        <div class="progress-bar-large">
+                            <div class="progress-fill" id="mission-m1-bar" style="width: 66%;"></div>
+                        </div>
+                    </div>
+                    <div class="mission-actions">
+                        <button class="btn btn-primary btn-block btn-claim-mission" data-mission-id="m1" disabled>
+                            <span class="btn-icon">🎁</span>
+                            <span class="btn-text">دریافت پاداش</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mission-card in-progress" data-mission-id="m2">
+                    <div class="mission-header">
+                        <div class="mission-icon-wrapper">
+                            <span class="mission-icon">🃏</span>
+                        </div>
+                        <div class="mission-info">
+                            <h4 class="mission-title">بازی کردن ۵ بازی</h4>
+                            <p class="mission-desc">۵ بازی انجام دهید</p>
+                            <div class="mission-meta">
+                                <span class="mission-type daily">روزانه</span>
+                                <span class="mission-difficulty easy">آسان</span>
+                            </div>
+                        </div>
+                        <div class="mission-reward">
+                            <div class="reward-item">
+                                <span class="reward-icon"></span>
+                                <span class="reward-value">۱۵۰</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-icon">⭐</span>
+                                <span class="reward-value">۳۰</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mission-progress-section">
+                        <div class="progress-info">
+                            <span class="progress-label">پیشرفت</span>
+                            <span class="progress-text"><span id="mission-m2-progress">۳</span> از ۵</span>
+                        </div>
+                        <div class="progress-bar-large">
+                            <div class="progress-fill" id="mission-m2-bar" style="width: 60%;"></div>
+                        </div>
+                    </div>
+                    <div class="mission-actions">
+                        <button class="btn btn-primary btn-block btn-claim-mission" data-mission-id="m2" disabled>
+                            <span class="btn-icon">🎁</span>
+                            <span class="btn-text">دریافت پاداش</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mission-card in-progress" data-mission-id="m3">
+                    <div class="mission-header">
+                        <div class="mission-icon-wrapper">
+                            <span class="mission-icon"></span>
+                        </div>
+                        <div class="mission-info">
+                            <h4 class="mission-title">بردن ۱ دست</h4>
+                            <p class="mission-desc">۱۰ دست بازی را ببرید</p>
+                            <div class="mission-meta">
+                                <span class="mission-type daily">روزانه</span>
+                                <span class="mission-difficulty normal">معمولی</span>
+                            </div>
+                        </div>
+                        <div class="mission-reward">
+                            <div class="reward-item">
+                                <span class="reward-icon">🪙</span>
+                                <span class="reward-value">۲۰۰</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-icon">⭐</span>
+                                <span class="reward-value">۴۰</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mission-progress-section">
+                        <div class="progress-info">
+                            <span class="progress-label">پیشرفت</span>
+                            <span class="progress-text"><span id="mission-m3-progress"></span> از ۱۰</span>
+                        </div>
+                        <div class="progress-bar-large">
+                            <div class="progress-fill" id="mission-m3-bar" style="width: 40%;"></div>
+                        </div>
+                    </div>
+                    <div class="mission-actions">
+                        <button class="btn btn-primary btn-block btn-claim-mission" data-mission-id="m3" disabled>
+                            <span class="btn-icon">🎁</span>
+                            <span class="btn-text">دریافت پاداش</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="missions-weekly" id="missions-weekly-section" style="display: none;">
+            <div class="section-header">
+                <h3 class="section-title">مأموریت‌های هفتگی</h3>
+                <button class="btn-icon btn-small" id="btn-refresh-weekly" aria-label="بروزرسانی">
+                    <span class="icon">🔄</span>
+                </button>
+            </div>
+            <div id="weekly-missions-list" class="missions-list">
+                <div class="mission-card in-progress" data-mission-id="w1">
+                    <div class="mission-header">
+                        <div class="mission-icon-wrapper">
+                            <span class="mission-icon">🎯</span>
+                        </div>
+                        <div class="mission-info">
+                            <h4 class="mission-title">برنده شدن در ۲۰ بازی</h4>
+                            <p class="mission-desc">۰ بازی را در این هفته ببرید</p>
+                            <div class="mission-meta">
+                                <span class="mission-type weekly">هفتگی</span>
+                                <span class="mission-difficulty normal">معمولی</span>
+                            </div>
+                        </div>
+                        <div class="mission-reward">
+                            <div class="reward-item">
+                                <span class="reward-icon">🪙</span>
+                                <span class="reward-value">۰۰</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-icon">⭐</span>
+                                <span class="reward-value">۱۰۰</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-icon">💎</span>
+                                <span class="reward-value">۱۰</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mission-progress-section">
+                        <div class="progress-info">
+                            <span class="progress-label">پیشرفت</span>
+                            <span class="progress-text"><span id="mission-w1-progress">۱۲</span> از ۲۰</span>
+                        </div>
+                        <div class="progress-bar-large">
+                            <div class="progress-fill" id="mission-w1-bar" style="width: 60%;"></div>
+                        </div>
+                    </div>
+                    <div class="mission-actions">
+                        <button class="btn btn-primary btn-block btn-claim-mission" data-mission-id="w1" disabled>
+                            <span class="btn-icon">🎁</span>
+                            <span class="btn-text">دریافت پاداش</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mission-card in-progress" data-mission-id="w2">
+                    <div class="mission-header">
+                        <div class="mission-icon-wrapper">
+                            <span class="mission-icon">👑</span>
+                        </div>
+                        <div class="mission-info">
+                            <h4 class="mission-title">ثبت ۵ کت</h4>
+                            <p class="mission-desc"> کت در این هفته ثبت کنید</p>
+                            <div class="mission-meta">
+                                <span class="mission-type weekly">هفتگی</span>
+                                <span class="mission-difficulty hard">سخت</span>
+                            </div>
+                        </div>
+                        <div class="mission-reward">
+                            <div class="reward-item">
+                                <span class="reward-icon"></span>
+                                <span class="reward-value">۱,۰۰</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-icon">⭐</span>
+                                <span class="reward-value">۲۰۰</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-icon">💎</span>
+                                <span class="reward-value">۲۵</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mission-progress-section">
+                        <div class="progress-info">
+                            <span class="progress-label">پیشرفت</span>
+                            <span class="progress-text"><span id="mission-w2-progress">۲</span> از ۵</span>
+                        </div>
+                        <div class="progress-bar-large">
+                            <div class="progress-fill" id="mission-w2-bar" style="width: 40%;"></div>
+                        </div>
+                    </div>
+                    <div class="mission-actions">
+                        <button class="btn btn-primary btn-block btn-claim-mission" data-mission-id="w2" disabled>
+                            <span class="btn-icon"></span>
+                            <span class="btn-text">دریافت پاداش</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mission-card in-progress" data-mission-id="w3">
+                    <div class="mission-header">
+                        <div class="mission-icon-wrapper">
+                            <span class="mission-icon">🏅</span>
+                        </div>
+                        <div class="mission-info">
+                            <h4 class="mission-title">بازی ۱۰ Ranked</h4>
+                            <p class="mission-desc">۱۰ بازی رقابتی انجام دهید</p>
+                            <div class="mission-meta">
+                                <span class="mission-type weekly">هفتگی</span>
+                                <span class="mission-difficulty normal">معمولی</span>
+                            </div>
+                        </div>
+                        <div class="mission-reward">
+                            <div class="reward-item">
+                                <span class="reward-icon"></span>
+                                <span class="reward-value">۷۵۰</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-icon">⭐</span>
+                                <span class="reward-value">۱۵۰</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mission-progress-section">
+                        <div class="progress-info">
+                            <span class="progress-label">پیشرفت</span>
+                            <span class="progress-text"><span id="mission-w3-progress"></span> از ۱۰</span>
+                        </div>
+                        <div class="progress-bar-large">
+                            <div class="progress-fill" id="mission-w3-bar" style="width: 60%;"></div>
+                        </div>
+                    </div>
+                    <div class="mission-actions">
+                        <button class="btn btn-primary btn-block btn-claim-mission" data-mission-id="w3" disabled>
+                            <span class="btn-icon">🎁</span>
+                            <span class="btn-text">دریافت پاداش</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="missions-monthly" id="missions-monthly-section" style="display: none;">
+            <div class="section-header">
+                <h3 class="section-title">مأموریت‌های ماهانه</h3>
+                <button class="btn-icon btn-small" id="btn-refresh-monthly" aria-label="بروزرسانی">
+                    <span class="icon">🔄</span>
+                </button>
+            </div>
+            <div id="monthly-missions-list" class="missions-list">
+                <div class="mission-card in-progress" data-mission-id="mo1">
+                    <div class="mission-header">
+                        <div class="mission-icon-wrapper">
+                            <span class="mission-icon"></span>
+                        </div>
+                        <div class="mission-info">
+                            <h4 class="mission-title">برنده شدن در ۱۰۰ بازی</h4>
+                            <p class="mission-desc">۱۰۰ بازی را در این ماه ببرید</p>
+                            <div class="mission-meta">
+                                <span class="mission-type monthly">ماهانه</span>
+                                <span class="mission-difficulty hard">سخت</span>
+                            </div>
+                        </div>
+                        <div class="mission-reward">
+                            <div class="reward-item">
+                                <span class="reward-icon">🪙</span>
+                                <span class="reward-value">۲,۰۰</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-icon">⭐</span>
+                                <span class="reward-value">۵۰۰</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-icon">💎</span>
+                                <span class="reward-value">۵۰</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mission-progress-section">
+                        <div class="progress-info">
+                            <span class="progress-label">پیشرفت</span>
+                            <span class="progress-text"><span id="mission-mo1-progress">۴۵</span> از ۱۰</span>
+                        </div>
+                        <div class="progress-bar-large">
+                            <div class="progress-fill" id="mission-mo1-bar" style="width: 45%;"></div>
+                        </div>
+                    </div>
+                    <div class="mission-actions">
+                        <button class="btn btn-primary btn-block btn-claim-mission" data-mission-id="mo1" disabled>
+                            <span class="btn-icon">🎁</span>
+                            <span class="btn-text">دریافت پاداش</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mission-card in-progress" data-mission-id="mo2">
+                    <div class="mission-header">
+                        <div class="mission-icon-wrapper">
+                            <span class="mission-icon"></span>
+                        </div>
+                        <div class="mission-info">
+                            <h4 class="mission-title">کسب ۲۰,۰۰ سکه</h4>
+                            <p class="mission-desc">۲۰,۰۰۰ سکه در این ماه کسب کنید</p>
+                            <div class="mission-meta">
+                                <span class="mission-type monthly">ماهانه</span>
+                                <span class="mission-difficulty expert">حرفه‌ای</span>
+                            </div>
+                        </div>
+                        <div class="mission-reward">
+                            <div class="reward-item">
+                                <span class="reward-icon">🪙</span>
+                                <span class="reward-value">,۰۰۰</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-icon">⭐</span>
+                                <span class="reward-value">۱,۰۰</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-icon"></span>
+                                <span class="reward-value">۱۰۰</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mission-progress-section">
+                        <div class="progress-info">
+                            <span class="progress-label">پیشرفت</span>
+                            <span class="progress-text"><span id="mission-mo2-progress">۸,۵۰۰</span> از ۲۰,۰۰</span>
+                        </div>
+                        <div class="progress-bar-large">
+                            <div class="progress-fill" id="mission-mo2-bar" style="width: 42%;"></div>
+                        </div>
+                    </div>
+                    <div class="mission-actions">
+                        <button class="btn btn-primary btn-block btn-claim-mission" data-mission-id="mo2" disabled>
+                            <span class="btn-icon">🎁</span>
+                            <span class="btn-text">دریافت پاداش</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="missions-completed" id="missions-completed-section" style="display: none;">
+            <div class="section-header">
+                <h3 class="section-title">مأموریت‌های تکمیل شده</h3>
+            </div>
+            <div id="completed-missions-list" class="missions-list">
+                <div class="mission-card completed" data-mission-id="c1">
+                    <div class="mission-header">
+                        <div class="mission-icon-wrapper completed">
+                            <span class="mission-icon">✅</span>
+                        </div>
+                        <div class="mission-info">
+                            <h4 class="mission-title">برنده شدن در ۳ بازی</h4>
+                            <p class="mission-desc">تکمیل شده در ۱۴۰۵/۰۶/۰۸</p>
+                            <div class="mission-meta">
+                                <span class="mission-type daily">روزانه</span>
+                                <span class="completed-badge">تکمیل شده</span>
+                            </div>
+                        </div>
+                        <div class="mission-reward claimed">
+                            <div class="reward-item">
+                                <span class="reward-icon"></span>
+                                <span class="reward-value">۱۰۰</span>
+                            </div>
+                            <span class="claimed-badge">✅ دریافت شد</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mission-card completed" data-mission-id="c2">
+                    <div class="mission-header">
+                        <div class="mission-icon-wrapper completed">
+                            <span class="mission-icon">✅</span>
+                        </div>
+                        <div class="mission-info">
+                            <h4 class="mission-title">بازی کردن ۵ بازی</h4>
+                            <p class="mission-desc">تکمیل شده در ۱۴۰۵/۰۶/۰۷</p>
+                            <div class="mission-meta">
+                                <span class="mission-type daily">روزانه</span>
+                                <span class="completed-badge">تکمیل شده</span>
+                            </div>
+                        </div>
+                        <div class="mission-reward claimed">
+                            <div class="reward-item">
+                                <span class="reward-icon">🪙</span>
+                                <span class="reward-value">۵۰</span>
+                            </div>
+                            <span class="claimed-badge">✅ دریافت شد</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mission-card completed unclaimed" data-mission-id="c3">
+                    <div class="mission-header">
+                        <div class="mission-icon-wrapper completed">
+                            <span class="mission-icon">🎁</span>
+                        </div>
+                        <div class="mission-info">
+                            <h4 class="mission-title">بردن ۱۰ دست</h4>
+                            <p class="mission-desc">تکمیل شده در ۱۰۵/۰۶/۶</p>
+                            <div class="mission-meta">
+                                <span class="mission-type daily">روزانه</span>
+                                <span class="unclaimed-badge">پاداش دریافت نشده</span>
+                            </div>
+                        </div>
+                        <div class="mission-reward">
+                            <div class="reward-item">
+                                <span class="reward-icon"></span>
+                                <span class="reward-value">۲۰۰</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mission-actions">
+                        <button class="btn btn-primary btn-block btn-claim-mission" data-mission-id="c3">
+                            <span class="btn-icon">🎁</span>
+                            <span class="btn-text">دریافت پاداش</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="missions-claim-all" id="missions-claim-all-section">
+            <div class="claim-all-card">
+                <div class="claim-all-info">
+                    <span class="claim-all-icon">🎁</span>
+                    <div class="claim-all-text">
+                        <h4 class="claim-all-title">دریافت همه پاداش‌ها</h4>
+                        <p class="claim-all-desc" id="claim-all-count">۳ پاداش قابل دریافت</p>
+                    </div>
+                </div>
+                <div class="claim-all-total">
+                    <div class="total-item">
+                        <span class="total-icon">🪙</span>
+                        <span class="total-value" id="claim-all-coins">۴۵</span>
+                    </div>
+                    <div class="total-item">
+                        <span class="total-icon">⭐</span>
+                        <span class="total-value" id="claim-all-xp">۹۵</span>
+                    </div>
+                    <div class="total-item">
+                        <span class="total-icon">💎</span>
+                        <span class="total-value" id="claim-all-gems">۱۰</span>
+                    </div>
+                </div>
+                <button id="btn-claim-all-missions" class="btn btn-primary btn-block btn-large">
+                    <span class="btn-icon"></span>
+                    <span class="btn-text">دریافت همه پاداش‌ها</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="missions-refresh-info">
+            <div class="refresh-info-card">
+                <div class="refresh-info-header">
+                    <span class="refresh-icon">🔄</span>
+                    <h4 class="refresh-title">تعویض مأموریت</h4>
+                </div>
+                <p class="refresh-desc">
+                    می‌توانید مأموریت‌های فعلی را با پرداخت سکه تعویض کنید.
+                    هر تعویض هزینه دارد.
+                </p>
+                <div class="refresh-costs">
+                    <div class="cost-item">
+                        <span class="cost-type">روزانه</span>
+                        <span class="cost-value">۰ 🪙</span>
+                    </div>
+                    <div class="cost-item">
+                        <span class="cost-type">هفتگی</span>
+                        <span class="cost-value">۲۰۰ 🪙</span>
+                    </div>
+                    <div class="cost-item">
+                        <span class="cost-type">ماهانه</span>
+                        <span class="cost-value">۵۰ 🪙</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="missions-tips">
+            <div class="section-header">
+                <h3 class="section-title">نکات مأموریت‌ها</h3>
+            </div>
+            <div class="tips-list">
+                <div class="tip-item">
+                    <span class="tip-icon">💡</span>
+                    <p class="tip-text">مأموریت‌های روزانه هر ۲۴ ساعت ریست می‌شوند</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🔥</span>
+                    <p class="tip-text">تکمیل متوالی مأموریت‌ها، bonus رشته برد می‌دهد</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🎯</span>
+                    <p class="tip-text">مأموریت‌های سخت‌تر پاداش بیشتری دارند</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon"></span>
+                    <p class="tip-text">پاداش‌های دریافت نشده بعد از ریست از بین می‌روند</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
