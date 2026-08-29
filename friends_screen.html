@@ -1,0 +1,621 @@
+<div id="friends-screen" class="screen screen-friends" data-screen-name="friends">
+    <div class="screen-content">
+        <header class="screen-header">
+            <button class="btn-back" data-route="home" aria-label="بازگشت">
+                <span class="icon">→</span>
+            </button>
+            <h1 class="screen-title">دوستان</h1>
+            <div class="header-spacer"></div>
+        </header>
+
+        <section class="friends-hero">
+            <div class="hero-background"></div>
+            <div class="hero-content">
+                <div class="hero-icon">👥</div>
+                <h2 class="hero-title">دوستان شما</h2>
+                <p class="hero-subtitle">با دوستانتان بازی کنید و از بازی لذت ببرید</p>
+            </div>
+        </section>
+
+        <section class="friends-stats">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">👥</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="friends-total" class="stat-value">۰</span>
+                        <span class="stat-label">کل دوستان</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">🟢</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="friends-online" class="stat-value">۰</span>
+                        <span class="stat-label">آنلاین</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">🎮</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="friends-in-game" class="stat-value">۰</span>
+                        <span class="stat-label">در بازی</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">📨</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="friends-pending" class="stat-value">۰</span>
+                        <span class="stat-label">درخواست‌ها</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="friends-pending-requests" id="friends-pending-section">
+            <div class="section-header">
+                <h3 class="section-title">درخواست‌های دوستی</h3>
+                <span class="badge-count" id="pending-requests-count">۳</span>
+            </div>
+            <div id="pending-requests-list" class="pending-requests-list">
+                <div class="request-card" data-request-id="req1">
+                    <div class="request-avatar-wrapper">
+                        <span class="avatar avatar-medium">👨</span>
+                    </div>
+                    <div class="request-info">
+                        <h4 class="request-name">علی رضایی</h4>
+                        <p class="request-meta">
+                            <span class="request-level">سطح ۱۵</span>
+                            <span class="request-league">نقره</span>
+                        </p>
+                        <p class="request-message">سلام! بیا با هم بازی کنیم</p>
+                    </div>
+                    <div class="request-actions">
+                        <button class="btn btn-success btn-small btn-accept-request" data-request-id="req1">
+                            <span class="btn-icon">✅</span>
+                            <span class="btn-text">قبول</span>
+                        </button>
+                        <button class="btn btn-danger btn-small btn-reject-request" data-request-id="req1">
+                            <span class="btn-icon">❌</span>
+                            <span class="btn-text">رد</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="request-card" data-request-id="req2">
+                    <div class="request-avatar-wrapper">
+                        <span class="avatar avatar-medium">👩</span>
+                    </div>
+                    <div class="request-info">
+                        <h4 class="request-name">مریم احمدی</h4>
+                        <p class="request-meta">
+                            <span class="request-level">سطح ۲۲</span>
+                            <span class="request-league">طلا</span>
+                        </p>
+                    </div>
+                    <div class="request-actions">
+                        <button class="btn btn-success btn-small btn-accept-request" data-request-id="req2">
+                            <span class="btn-icon">✅</span>
+                            <span class="btn-text">قبول</span>
+                        </button>
+                        <button class="btn btn-danger btn-small btn-reject-request" data-request-id="req2">
+                            <span class="btn-icon">❌</span>
+                            <span class="btn-text">رد</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="request-card" data-request-id="req3">
+                    <div class="request-avatar-wrapper">
+                        <span class="avatar avatar-medium">👨</span>
+                    </div>
+                    <div class="request-info">
+                        <h4 class="request-name">رضا محمدی</h4>
+                        <p class="request-meta">
+                            <span class="request-level">سطح ۸</span>
+                            <span class="request-league">برنز</span>
+                        </p>
+                        <p class="request-message">از بازی شما لذت بردم، دوست می‌شویم؟</p>
+                    </div>
+                    <div class="request-actions">
+                        <button class="btn btn-success btn-small btn-accept-request" data-request-id="req3">
+                            <span class="btn-icon">✅</span>
+                            <span class="btn-text">قبول</span>
+                        </button>
+                        <button class="btn btn-danger btn-small btn-reject-request" data-request-id="req3">
+                            <span class="btn-icon">❌</span>
+                            <span class="btn-text">رد</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="friends-tabs">
+            <div class="tabs-container">
+                <button class="tab-btn active" data-tab="all" id="tab-friends-all">
+                    <span class="tab-icon">👥</span>
+                    <span class="tab-text">همه</span>
+                    <span class="tab-badge" id="badge-friends-all">۲۵</span>
+                </button>
+                <button class="tab-btn" data-tab="online" id="tab-friends-online">
+                    <span class="tab-icon">🟢</span>
+                    <span class="tab-text">آنلاین</span>
+                    <span class="tab-badge" id="badge-friends-online">۸</span>
+                </button>
+                <button class="tab-btn" data-tab="in-game" id="tab-friends-ingame">
+                    <span class="tab-icon">🎮</span>
+                    <span class="tab-text">در بازی</span>
+                    <span class="tab-badge" id="badge-friends-ingame">۳</span>
+                </button>
+                <button class="tab-btn" data-tab="offline" id="tab-friends-offline">
+                    <span class="tab-icon">⚫</span>
+                    <span class="tab-text">آفلاین</span>
+                </button>
+                <button class="tab-btn" data-tab="favorites" id="tab-friends-favorites">
+                    <span class="tab-icon">⭐</span>
+                    <span class="tab-text">مورد علاقه</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="friends-search">
+            <div class="search-container">
+                <div class="input-wrapper search-wrapper">
+                    <span class="input-icon">🔍</span>
+                    <input
+                        type="text"
+                        id="friends-search-input"
+                        class="input-field"
+                        placeholder="جستجوی دوست..."
+                        maxlength="30"
+                    >
+                    <button class="btn-clear-search" id="btn-clear-friends-search" style="display: none;">
+                        <span class="icon">✕</span>
+                    </button>
+                </div>
+                <button class="btn btn-primary btn-small" id="btn-add-friend">
+                    <span class="btn-icon">➕</span>
+                    <span class="btn-text">افزودن دوست</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="friends-filters">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label for="friends-sort-filter" class="filter-label">مرتب‌سازی:</label>
+                    <select id="friends-sort-filter" class="filter-select">
+                        <option value="online">آنلاین بودن</option>
+                        <option value="name">نام</option>
+                        <option value="level">سطح</option>
+                        <option value="lastActive">آخرین فعالیت</option>
+                    </select>
+                </div>
+                <button class="btn-icon btn-small" id="btn-refresh-friends" aria-label="بروزرسانی">
+                    <span class="icon">🔄</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="friends-list-section">
+            <div class="section-header">
+                <h3 class="section-title" id="friends-list-title">همه دوستان</h3>
+                <span class="total-count" id="friends-list-count">۲۵ دوست</span>
+            </div>
+            <div id="friends-list" class="friends-list">
+                <div class="friend-card online" data-friend-id="f1">
+                    <div class="friend-avatar-wrapper">
+                        <span class="avatar avatar-large">👨</span>
+                        <span class="online-indicator"></span>
+                        <button class="btn-favorite" data-friend-id="f1" aria-label="افزودن به مورد علاقه">
+                            <span class="icon">⭐</span>
+                        </button>
+                    </div>
+                    <div class="friend-info">
+                        <h4 class="friend-name">علی رضایی</h4>
+                        <p class="friend-status">
+                            <span class="status-icon">🟢</span>
+                            <span class="status-text">آنلاین</span>
+                        </p>
+                        <p class="friend-meta">
+                            <span class="meta-item">سطح ۱۵</span>
+                            <span class="meta-separator">•</span>
+                            <span class="meta-item">نقره</span>
+                        </p>
+                    </div>
+                    <div class="friend-actions">
+                        <button class="btn-action btn-chat" data-friend-id="f1" aria-label="چت">
+                            <span class="icon">💬</span>
+                        </button>
+                        <button class="btn-action btn-invite" data-friend-id="f1" aria-label="دعوت به بازی">
+                            <span class="icon">🎮</span>
+                        </button>
+                        <button class="btn-action btn-profile" data-friend-id="f1" aria-label="مشاهده پروفایل">
+                            <span class="icon">👁️</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="friend-card in-game" data-friend-id="f2">
+                    <div class="friend-avatar-wrapper">
+                        <span class="avatar avatar-large">👩</span>
+                        <span class="online-indicator in-game"></span>
+                        <button class="btn-favorite active" data-friend-id="f2" aria-label="حذف از مورد علاقه">
+                            <span class="icon">⭐</span>
+                        </button>
+                    </div>
+                    <div class="friend-info">
+                        <h4 class="friend-name">مریم احمدی</h4>
+                        <p class="friend-status">
+                            <span class="status-icon">🎮</span>
+                            <span class="status-text">در حال بازی</span>
+                        </p>
+                        <p class="friend-meta">
+                            <span class="meta-item">سطح ۲۲</span>
+                            <span class="meta-separator">•</span>
+                            <span class="meta-item">طلا</span>
+                        </p>
+                    </div>
+                    <div class="friend-actions">
+                        <button class="btn-action btn-watch" data-friend-id="f2" aria-label="تماشای بازی">
+                            <span class="icon">👀</span>
+                        </button>
+                        <button class="btn-action btn-chat" data-friend-id="f2" aria-label="چت">
+                            <span class="icon">💬</span>
+                        </button>
+                        <button class="btn-action btn-profile" data-friend-id="f2" aria-label="مشاهده پروفایل">
+                            <span class="icon">👁️</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="friend-card online" data-friend-id="f3">
+                    <div class="friend-avatar-wrapper">
+                        <span class="avatar avatar-large">👨</span>
+                        <span class="online-indicator"></span>
+                        <button class="btn-favorite" data-friend-id="f3" aria-label="افزودن به مورد علاقه">
+                            <span class="icon">⭐</span>
+                        </button>
+                    </div>
+                    <div class="friend-info">
+                        <h4 class="friend-name">رضا محمدی</h4>
+                        <p class="friend-status">
+                            <span class="status-icon">🟢</span>
+                            <span class="status-text">آنلاین</span>
+                        </p>
+                        <p class="friend-meta">
+                            <span class="meta-item">سطح ۸</span>
+                            <span class="meta-separator">•</span>
+                            <span class="meta-item">برنز</span>
+                        </p>
+                    </div>
+                    <div class="friend-actions">
+                        <button class="btn-action btn-chat" data-friend-id="f3" aria-label="چت">
+                            <span class="icon">💬</span>
+                        </button>
+                        <button class="btn-action btn-invite" data-friend-id="f3" aria-label="دعوت به بازی">
+                            <span class="icon">🎮</span>
+                        </button>
+                        <button class="btn-action btn-profile" data-friend-id="f3" aria-label="مشاهده پروفایل">
+                            <span class="icon">👁️</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="friend-card offline" data-friend-id="f4">
+                    <div class="friend-avatar-wrapper">
+                        <span class="avatar avatar-large">👩</span>
+                        <span class="online-indicator offline"></span>
+                        <button class="btn-favorite" data-friend-id="f4" aria-label="افزودن به مورد علاقه">
+                            <span class="icon">⭐</span>
+                        </button>
+                    </div>
+                    <div class="friend-info">
+                        <h4 class="friend-name">زهرا کریمی</h4>
+                        <p class="friend-status">
+                            <span class="status-icon">⚫</span>
+                            <span class="status-text">آفلاین - ۲ ساعت پیش</span>
+                        </p>
+                        <p class="friend-meta">
+                            <span class="meta-item">سطح ۱۸</span>
+                            <span class="meta-separator">•</span>
+                            <span class="meta-item">نقره</span>
+                        </p>
+                    </div>
+                    <div class="friend-actions">
+                        <button class="btn-action btn-chat" data-friend-id="f4" aria-label="چت">
+                            <span class="icon">💬</span>
+                        </button>
+                        <button class="btn-action btn-profile" data-friend-id="f4" aria-label="مشاهده پروفایل">
+                            <span class="icon">👁️</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="friend-card offline" data-friend-id="f5">
+                    <div class="friend-avatar-wrapper">
+                        <span class="avatar avatar-large">👨</span>
+                        <span class="online-indicator offline"></span>
+                        <button class="btn-favorite" data-friend-id="f5" aria-label="افزودن به مورد علاقه">
+                            <span class="icon">⭐</span>
+                        </button>
+                    </div>
+                    <div class="friend-info">
+                        <h4 class="friend-name">حسین نوری</h4>
+                        <p class="friend-status">
+                            <span class="status-icon">⚫</span>
+                            <span class="status-text">آفلاین - ۱ روز پیش</span>
+                        </p>
+                        <p class="friend-meta">
+                            <span class="meta-item">سطح ۵</span>
+                            <span class="meta-separator">•</span>
+                            <span class="meta-item">برنز</span>
+                        </p>
+                    </div>
+                    <div class="friend-actions">
+                        <button class="btn-action btn-chat" data-friend-id="f5" aria-label="چت">
+                            <span class="icon">💬</span>
+                        </button>
+                        <button class="btn-action btn-profile" data-friend-id="f5" aria-label="مشاهده پروفایل">
+                            <span class="icon">👁️</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="load-more-container" id="friends-load-more-container">
+                <button class="btn btn-outline btn-block" id="btn-load-more-friends">
+                    <span class="btn-icon">⬇️</span>
+                    <span class="btn-text">بارگذاری بیشتر</span>
+                </button>
+            </div>
+
+            <div class="empty-state" id="friends-empty-state" style="display: none;">
+                <span class="empty-icon">👥</span>
+                <h4 class="empty-title">دوستی یافت نشد</h4>
+                <p class="empty-desc">عبارت جستجو را تغییر دهید یا فیلترها را بررسی کنید</p>
+                <button class="btn btn-primary" id="btn-add-first-friend">
+                    <span class="btn-icon">➕</span>
+                    <span class="btn-text">افزودن دوست</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="friends-add-modal" id="friends-add-modal" style="display: none;">
+            <div class="modal-overlay"></div>
+            <div class="modal-content add-friend-modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">افزودن دوست</h3>
+                    <button class="btn-icon btn-close-modal" id="btn-close-add-friend" aria-label="بستن">
+                        <span class="icon">✕</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="add-method-tabs">
+                        <button class="method-tab active" data-method="username">
+                            <span class="method-icon">👤</span>
+                            <span class="method-text">نام کاربری</span>
+                        </button>
+                        <button class="method-tab" data-method="code">
+                            <span class="method-icon">🔗</span>
+                            <span class="method-text">کد دوستی</span>
+                        </button>
+                        <button class="method-tab" data-method="qr">
+                            <span class="method-icon">📱</span>
+                            <span class="method-text">QR Code</span>
+                        </button>
+                    </div>
+
+                    <div class="add-method-content" id="add-by-username">
+                        <div class="form-group">
+                            <label for="friend-username-input" class="form-label">نام کاربری</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">👤</span>
+                                <input
+                                    type="text"
+                                    id="friend-username-input"
+                                    class="input-field"
+                                    placeholder="نام کاربری دوست را وارد کنید"
+                                    maxlength="30"
+                                >
+                            </div>
+                            <span class="form-error" id="error-friend-username"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="friend-message-input" class="form-label">پیام (اختیاری)</label>
+                            <div class="input-wrapper textarea-wrapper">
+                                <textarea
+                                    id="friend-message-input"
+                                    class="input-field textarea-field"
+                                    placeholder="پیام خود را بنویسید..."
+                                    maxlength="200"
+                                    rows="3"
+                                ></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="add-method-content" id="add-by-code" style="display: none;">
+                        <div class="form-group">
+                            <label for="friend-code-input" class="form-label">کد دوستی</label>
+                            <div class="friend-code-inputs" id="friend-code-inputs">
+                                <input type="text" class="friend-code-digit" maxlength="1" data-index="0" aria-label="رقم ۱">
+                                <input type="text" class="friend-code-digit" maxlength="1" data-index="1" aria-label="رقم ۲">
+                                <input type="text" class="friend-code-digit" maxlength="1" data-index="2" aria-label="رقم ۳">
+                                <input type="text" class="friend-code-digit" maxlength="1" data-index="3" aria-label="رقم ۴">
+                                <input type="text" class="friend-code-digit" maxlength="1" data-index="4" aria-label="رقم ۵">
+                                <input type="text" class="friend-code-digit" maxlength="1" data-index="5" aria-label="رقم ۶">
+                            </div>
+                            <input type="hidden" id="friend-code-input" name="friendCode">
+                            <span class="form-error" id="error-friend-code"></span>
+                        </div>
+                        <p class="method-hint">کد دوستی ۶ رقمی را از دوست خود دریافت کنید</p>
+                    </div>
+
+                    <div class="add-method-content" id="add-by-qr" style="display: none;">
+                        <div class="qr-scanner-container">
+                            <div class="qr-scanner-frame">
+                                <div class="qr-scanner-overlay"></div>
+                                <div class="qr-scanner-line"></div>
+                            </div>
+                            <p class="scanner-hint">QR Code دوست خود را اسکن کنید</p>
+                            <button class="btn btn-outline btn-block" id="btn-start-camera">
+                                <span class="btn-icon">📷</span>
+                                <span class="btn-text">شروع دوربین</span>
+                            </button>
+                        </div>
+                        <div class="my-qr-code" id="my-qr-section">
+                            <h4 class="qr-title">یا کد خود را به اشتراک بگذارید</h4>
+                            <div class="qr-code-display">
+                                <div class="qr-code-image" id="my-qr-code">
+                                    <span class="qr-placeholder">QR Code شما</span>
+                                </div>
+                            </div>
+                            <div class="qr-actions">
+                                <button class="btn btn-outline btn-small" id="btn-download-qr">
+                                    <span class="btn-icon">⬇️</span>
+                                    <span class="btn-text">دانلود</span>
+                                </button>
+                                <button class="btn btn-outline btn-small" id="btn-share-qr">
+                                    <span class="btn-icon">📤</span>
+                                    <span class="btn-text">اشتراک‌گذاری</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="search-results" id="friend-search-results" style="display: none;">
+                        <h4 class="results-title">نتایج جستجو</h4>
+                        <div class="results-list" id="search-results-list">
+                            <div class="search-result-item" data-player-id="p1">
+                                <span class="avatar avatar-medium">👨</span>
+                                <div class="result-info">
+                                    <span class="result-name">علی رضایی</span>
+                                    <span class="result-meta">سطح ۱۵ • نقره</span>
+                                </div>
+                                <button class="btn btn-primary btn-small btn-send-request" data-player-id="p1">
+                                    درخواست
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline" id="btn-cancel-add-friend">
+                        انصراف
+                    </button>
+                    <button class="btn btn-primary" id="btn-send-friend-request">
+                        <span class="btn-icon">📨</span>
+                        <span class="btn-text">ارسال درخواست</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="friends-invite-modal" id="friends-invite-modal" style="display: none;">
+            <div class="modal-overlay"></div>
+            <div class="modal-content invite-modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">دعوت به بازی</h3>
+                    <button class="btn-icon btn-close-modal" id="btn-close-invite-modal" aria-label="بستن">
+                        <span class="icon">✕</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="invite-friend-info" id="invite-friend-info">
+                        <span class="avatar avatar-large">👨</span>
+                        <div class="invite-info">
+                            <h4 class="invite-name">علی رضایی</h4>
+                            <p class="invite-status">آنلاین</p>
+                        </div>
+                    </div>
+                    <div class="invite-game-options">
+                        <h4 class="options-title">نوع بازی</h4>
+                        <div class="game-options-list">
+                            <label class="game-option selected">
+                                <input type="radio" name="invite-game-type" value="quick" checked>
+                                <div class="option-content">
+                                    <span class="option-icon">⚡</span>
+                                    <span class="option-name">بازی سریع</span>
+                                </div>
+                            </label>
+                            <label class="game-option">
+                                <input type="radio" name="invite-game-type" value="classic">
+                                <div class="option-content">
+                                    <span class="option-icon">🎴</span>
+                                    <span class="option-name">کلاسیک</span>
+                                </div>
+                            </label>
+                            <label class="game-option">
+                                <input type="radio" name="invite-game-type" value="ranked">
+                                <div class="option-content">
+                                    <span class="option-icon">🏆</span>
+                                    <span class="option-name">رقابتی</span>
+                                </div>
+                            </label>
+                            <label class="game-option">
+                                <input type="radio" name="invite-game-type" value="private">
+                                <div class="option-content">
+                                    <span class="option-icon">🏠</span>
+                                    <span class="option-name">اتاق خصوصی</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="invite-message">
+                        <label for="invite-message-input" class="form-label">پیام دعوت (اختیاری)</label>
+                        <div class="input-wrapper textarea-wrapper">
+                            <textarea
+                                id="invite-message-input"
+                                class="input-field textarea-field"
+                                placeholder="پیام خود را بنویسید..."
+                                maxlength="200"
+                                rows="2"
+                            ></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline" id="btn-cancel-invite">
+                        انصراف
+                    </button>
+                    <button class="btn btn-primary" id="btn-send-invite">
+                        <span class="btn-icon">🎮</span>
+                        <span class="btn-text">ارسال دعوت</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="friends-tips">
+            <div class="section-header">
+                <h3 class="section-title">نکات دوستان</h3>
+            </div>
+            <div class="tips-list">
+                <div class="tip-item">
+                    <span class="tip-icon">💡</span>
+                    <p class="tip-text">دوستان آنلاین را می‌توانید فوراً به بازی دعوت کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">👀</span>
+                    <p class="tip-text">می‌توانید بازی دوستان خود را تماشا کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">⭐</span>
+                    <p class="tip-text">دوستان مورد علاقه را در بالای لیست ببینید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🎁</span>
+                    <p class="tip-text">با بازی کردن با دوستان، پاداش اضافی دریافت کنید</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
