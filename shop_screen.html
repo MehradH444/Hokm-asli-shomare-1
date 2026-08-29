@@ -1,0 +1,530 @@
+<div id="shop-screen" class="screen screen-shop" data-screen-name="shop">
+    <div class="screen-content">
+        <header class="screen-header">
+            <button class="btn-back" data-route="home" aria-label="بازگشت">
+                <span class="icon">→</span>
+            </button>
+            <h1 class="screen-title">فروشگاه</h1>
+            <div class="header-currency">
+                <div class="currency-display coins">
+                    <span class="currency-icon"></span>
+                    <span id="shop-coins" class="currency-value">۵,۰۰۰</span>
+                    <button class="btn-add-currency" id="btn-buy-coins" aria-label="خرید سکه">
+                        <span class="icon">+</span>
+                    </button>
+                </div>
+                <div class="currency-display gems">
+                    <span class="currency-icon"></span>
+                    <span id="shop-gems" class="currency-value">۱۵۰</span>
+                    <button class="btn-add-currency" id="btn-buy-gems" aria-label="خرید الماس">
+                        <span class="icon">+</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <section class="shop-daily-deal" id="shop-daily-deal">
+            <div class="daily-deal-banner">
+                <div class="deal-badge">
+                    <span class="badge-icon">⏰</span>
+                    <span class="badge-text">پیشنهاد ویژه روز</span>
+                </div>
+                <div class="deal-content">
+                    <div class="deal-image">
+                        <span class="deal-icon">🎨</span>
+                        <span class="deal-discount">-۵۰٪</span>
+                    </div>
+                    <div class="deal-info">
+                        <h3 class="deal-title">پک آواتار ویژه</h3>
+                        <p class="deal-description">۵ آواتار انحصاری با تخفیف ویژه</p>
+                        <div class="deal-pricing">
+                            <span class="original-price">۱,۰۰۰ 🪙</span>
+                            <span class="discounted-price">۰۰ 🪙</span>
+                        </div>
+                        <div class="deal-timer">
+                            <span class="timer-icon">⏱️</span>
+                            <span class="timer-text" id="deal-countdown">۲۳:۴۵:۱۲</span>
+                        </div>
+                        <button class="btn btn-primary btn-small btn-buy-deal" data-item-id="daily-deal-1">
+                            <span class="btn-icon">🛒</span>
+                            <span class="btn-text">خرید فوری</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="shop-categories">
+            <div class="categories-scroll">
+                <button class="category-btn active" data-category="all" id="cat-all">
+                    <span class="category-icon">🏪</span>
+                    <span class="category-text">همه</span>
+                </button>
+                <button class="category-btn" data-category="avatars" id="cat-avatars">
+                    <span class="category-icon">👤</span>
+                    <span class="category-text">آواتار</span>
+                </button>
+                <button class="category-btn" data-category="card-backs" id="cat-card-backs">
+                    <span class="category-icon">🃏</span>
+                    <span class="category-text">پشت کارت</span>
+                </button>
+                <button class="category-btn" data-category="frames" id="cat-frames">
+                    <span class="category-icon">️</span>
+                    <span class="category-text">قاب</span>
+                </button>
+                <button class="category-btn" data-category="themes" id="cat-themes">
+                    <span class="category-icon">🎨</span>
+                    <span class="category-text">تم</span>
+                </button>
+                <button class="category-btn" data-category="emotes" id="cat-emotes">
+                    <span class="category-icon">😀</span>
+                    <span class="category-text">ایموجی</span>
+                </button>
+                <button class="category-btn" data-category="titles" id="cat-titles">
+                    <span class="category-icon">👑</span>
+                    <span class="category-text">عنوان</span>
+                </button>
+                <button class="category-btn" data-category="bundles" id="cat-bundles">
+                    <span class="category-icon">📦</span>
+                    <span class="category-text">پک</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="shop-featured" id="shop-featured-section">
+            <div class="section-header">
+                <h3 class="section-title">محصولات ویژه</h3>
+                <button class="btn-link" id="btn-view-all-featured">مشاهده همه</button>
+            </div>
+            <div class="featured-carousel" id="featured-carousel">
+                <div class="featured-card rare" data-item-id="feat-1">
+                    <div class="featured-image">
+                        <span class="item-icon">👑</span>
+                        <span class="rarity-badge rare">کمیاب</span>
+                    </div>
+                    <div class="featured-info">
+                        <h4 class="item-name">عنوان قهرمان</h4>
+                        <p class="item-desc">عنوان انحصاری برای قهرمانان</p>
+                        <div class="item-pricing">
+                            <span class="price">۲,۵۰۰ 🪙</span>
+                        </div>
+                        <button class="btn btn-primary btn-small btn-buy-item" data-item-id="feat-1" data-price="2500" data-currency="coins">
+                            خرید
+                        </button>
+                    </div>
+                </div>
+                <div class="featured-card epic" data-item-id="feat-2">
+                    <div class="featured-image">
+                        <span class="item-icon">️</span>
+                        <span class="rarity-badge epic">حماسی</span>
+                    </div>
+                    <div class="featured-info">
+                        <h4 class="item-name">قاب طلایی</h4>
+                        <p class="item-desc">قاب پروفایل طلایی لوکس</p>
+                        <div class="item-pricing">
+                            <span class="price">۵۰ 💎</span>
+                        </div>
+                        <button class="btn btn-primary btn-small btn-buy-item" data-item-id="feat-2" data-price="50" data-currency="gems">
+                            خرید
+                        </button>
+                    </div>
+                </div>
+                <div class="featured-card legendary" data-item-id="feat-3">
+                    <div class="featured-image">
+                        <span class="item-icon">🎨</span>
+                        <span class="rarity-badge legendary">افسانه‌ای</span>
+                    </div>
+                    <div class="featured-info">
+                        <h4 class="item-name">تم اژدها</h4>
+                        <p class="item-desc">تم بازی انحصاری با طراحی اژدها</p>
+                        <div class="item-pricing">
+                            <span class="price">۱۰۰ 💎</span>
+                        </div>
+                        <button class="btn btn-primary btn-small btn-buy-item" data-item-id="feat-3" data-price="100" data-currency="gems">
+                            خرید
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="shop-products" id="shop-products-section">
+            <div class="section-header">
+                <h3 class="section-title" id="products-section-title">همه محصولات</h3>
+                <div class="filter-options">
+                    <select id="shop-sort-select" class="filter-select">
+                        <option value="popular">محبوب‌ترین</option>
+                        <option value="newest">جدیدترین</option>
+                        <option value="price-low">ارزان‌ترین</option>
+                        <option value="price-high">گران‌ترین</option>
+                    </select>
+                </div>
+            </div>
+            <div class="products-grid" id="products-grid">
+                <div class="product-card owned" data-item-id="avatar-1" data-category="avatars">
+                    <div class="product-image">
+                        <span class="item-icon">👤</span>
+                        <span class="owned-badge">✅ دارید</span>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="item-name">آواتار کلاسیک</h4>
+                        <p class="item-desc">آواتار استاندارد بازی</p>
+                        <div class="item-meta">
+                            <span class="rarity common">معمولی</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-item-id="avatar-2" data-category="avatars">
+                    <div class="product-image">
+                        <span class="item-icon">👨</span>
+                        <span class="rarity-badge common">معمولی</span>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="item-name">آواتار مردانه</h4>
+                        <p class="item-desc">آواتار مردانه شیک</p>
+                        <div class="item-pricing">
+                            <span class="price">۱۰۰ 🪙</span>
+                        </div>
+                        <button class="btn btn-primary btn-small btn-buy-item" data-item-id="avatar-2" data-price="100" data-currency="coins">
+                            خرید
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-item-id="avatar-3" data-category="avatars">
+                    <div class="product-image">
+                        <span class="item-icon">👩</span>
+                        <span class="rarity-badge common">معمولی</span>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="item-name">آواتار زنانه</h4>
+                        <p class="item-desc">آواتار زنانه زیبا</p>
+                        <div class="item-pricing">
+                            <span class="price">۱۰۰ 🪙</span>
+                        </div>
+                        <button class="btn btn-primary btn-small btn-buy-item" data-item-id="avatar-3" data-price="100" data-currency="coins">
+                            خرید
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-item-id="avatar-4" data-category="avatars">
+                    <div class="product-image">
+                        <span class="item-icon"></span>
+                        <span class="rarity-badge rare">کمیاب</span>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="item-name">آواتار فضایی</h4>
+                        <p class="item-desc">آواتار با تم فضایی</p>
+                        <div class="item-pricing">
+                            <span class="price">۵۰۰ </span>
+                        </div>
+                        <button class="btn btn-primary btn-small btn-buy-item" data-item-id="avatar-4" data-price="500" data-currency="coins">
+                            خرید
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-item-id="card-back-1" data-category="card-backs">
+                    <div class="product-image">
+                        <span class="item-icon">🃏</span>
+                        <span class="rarity-badge common">معمولی</span>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="item-name">پشت کارت کلاسیک</h4>
+                        <p class="item-desc">طرح کلاسیک پشت کارت</p>
+                        <div class="item-pricing">
+                            <span class="price">۲۰ 🪙</span>
+                        </div>
+                        <button class="btn btn-primary btn-small btn-buy-item" data-item-id="card-back-1" data-price="200" data-currency="coins">
+                            خرید
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-item-id="card-back-2" data-category="card-backs">
+                    <div class="product-image">
+                        <span class="item-icon">🎴</span>
+                        <span class="rarity-badge rare">کمیاب</span>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="item-name">پشت کارت طلایی</h4>
+                        <p class="item-desc">طرح طلایی لوکس</p>
+                        <div class="item-pricing">
+                            <span class="price">۰ 💎</span>
+                        </div>
+                        <button class="btn btn-primary btn-small btn-buy-item" data-item-id="card-back-2" data-price="30" data-currency="gems">
+                            خرید
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-item-id="frame-1" data-category="frames">
+                    <div class="product-image">
+                        <span class="item-icon">️</span>
+                        <span class="rarity-badge common">معمولی</span>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="item-name">قاب نقره‌ای</h4>
+                        <p class="item-desc">قاب پروفایل نقره‌ای</p>
+                        <div class="item-pricing">
+                            <span class="price">۳۰۰ 🪙</span>
+                        </div>
+                        <button class="btn btn-primary btn-small btn-buy-item" data-item-id="frame-1" data-price="300" data-currency="coins">
+                            خرید
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-item-id="frame-2" data-category="frames">
+                    <div class="product-image">
+                        <span class="item-icon">️</span>
+                        <span class="rarity-badge epic">حماسی</span>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="item-name">قاب الماسی</h4>
+                        <p class="item-desc">قاب پروفایل الماسی درخشان</p>
+                        <div class="item-pricing">
+                            <span class="price">۷ 💎</span>
+                        </div>
+                        <button class="btn btn-primary btn-small btn-buy-item" data-item-id="frame-2" data-price="75" data-currency="gems">
+                            خرید
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-item-id="theme-1" data-category="themes">
+                    <div class="product-image">
+                        <span class="item-icon">🎨</span>
+                        <span class="rarity-badge rare">کمیاب</span>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="item-name">تم شب</h4>
+                        <p class="item-desc">تم تاریک با رنگ‌های شب</p>
+                        <div class="item-pricing">
+                            <span class="price">۴۰ 💎</span>
+                        </div>
+                        <button class="btn btn-primary btn-small btn-buy-item" data-item-id="theme-1" data-price="40" data-currency="gems">
+                            خرید
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-item-id="emote-1" data-category="emotes">
+                    <div class="product-image">
+                        <span class="item-icon">😀</span>
+                        <span class="rarity-badge common">معمولی</span>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="item-name">پک ایموجی خنده</h4>
+                        <p class="item-desc"> ایموجی خنده‌دار</p>
+                        <div class="item-pricing">
+                            <span class="price">۵۰ 🪙</span>
+                        </div>
+                        <button class="btn btn-primary btn-small btn-buy-item" data-item-id="emote-1" data-price="150" data-currency="coins">
+                            خرید
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-item-id="title-1" data-category="titles">
+                    <div class="product-image">
+                        <span class="item-icon">👑</span>
+                        <span class="rarity-badge epic">حماسی</span>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="item-name">عنوان استاد</h4>
+                        <p class="item-desc">عنوان انحصاری استاد</p>
+                        <div class="item-pricing">
+                            <span class="price">,۰۰۰ 🪙</span>
+                        </div>
+                        <button class="btn btn-primary btn-small btn-buy-item" data-item-id="title-1" data-price="1000" data-currency="coins">
+                            خرید
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card bundle" data-item-id="bundle-1" data-category="bundles">
+                    <div class="product-image">
+                        <span class="item-icon">📦</span>
+                        <span class="rarity-badge legendary">افسانه‌ای</span>
+                        <span class="bundle-badge">پک ویژه</span>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="item-name">پک شروع حرفه‌ای</h4>
+                        <p class="item-desc">۳ آواتار + ۲ قاب + ۱ تم</p>
+                        <div class="item-pricing">
+                            <span class="original-price">۲,۰۰ 🪙</span>
+                            <span class="discounted-price">۱,۰۰ 🪙</span>
+                            <span class="discount-badge">-۴۰٪</span>
+                        </div>
+                        <button class="btn btn-primary btn-small btn-buy-item" data-item-id="bundle-1" data-price="1200" data-currency="coins">
+                            خرید پک
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="shop-currency-packages" id="shop-currency-section">
+            <div class="section-header">
+                <h3 class="section-title">خرید سکه و الماس</h3>
+            </div>
+            <div class="currency-packages">
+                <div class="package-card" data-package-id="coins-1">
+                    <div class="package-icon">🪙</div>
+                    <div class="package-amount">
+                        <span class="amount-value">۱,۰۰۰</span>
+                        <span class="amount-label">سکه</span>
+                    </div>
+                    <div class="package-price">
+                        <span class="price-value">۴۹,۰۰۰</span>
+                        <span class="price-currency">تومان</span>
+                    </div>
+                    <button class="btn btn-primary btn-block btn-buy-package" data-package-id="coins-1">
+                        خرید
+                    </button>
+                </div>
+                <div class="package-card popular" data-package-id="coins-2">
+                    <div class="popular-badge">محبوب</div>
+                    <div class="package-icon"></div>
+                    <div class="package-amount">
+                        <span class="amount-value">۵,۰۰</span>
+                        <span class="amount-label">سکه</span>
+                    </div>
+                    <div class="package-price">
+                        <span class="price-value">۱۹,۰۰</span>
+                        <span class="price-currency">تومان</span>
+                    </div>
+                    <button class="btn btn-primary btn-block btn-buy-package" data-package-id="coins-2">
+                        خرید
+                    </button>
+                </div>
+                <div class="package-card" data-package-id="coins-3">
+                    <div class="package-icon"></div>
+                    <div class="package-amount">
+                        <span class="amount-value">۱۵,۰۰</span>
+                        <span class="amount-label">سکه</span>
+                    </div>
+                    <div class="package-price">
+                        <span class="price-value">۴۹,۰۰</span>
+                        <span class="price-currency">تومان</span>
+                    </div>
+                    <button class="btn btn-primary btn-block btn-buy-package" data-package-id="coins-3">
+                        خرید
+                    </button>
+                </div>
+                <div class="package-card" data-package-id="gems-1">
+                    <div class="package-icon">💎</div>
+                    <div class="package-amount">
+                        <span class="amount-value">۱۰۰</span>
+                        <span class="amount-label">الماس</span>
+                    </div>
+                    <div class="package-price">
+                        <span class="price-value">۹۹,۰۰۰</span>
+                        <span class="price-currency">تومان</span>
+                    </div>
+                    <button class="btn btn-primary btn-block btn-buy-package" data-package-id="gems-1">
+                        خرید
+                    </button>
+                </div>
+                <div class="package-card" data-package-id="gems-2">
+                    <div class="package-icon"></div>
+                    <div class="package-amount">
+                        <span class="amount-value">۵۰۰</span>
+                        <span class="amount-label">الماس</span>
+                    </div>
+                    <div class="package-price">
+                        <span class="price-value">۳۹۹,۰۰</span>
+                        <span class="price-currency">تومان</span>
+                    </div>
+                    <button class="btn btn-primary btn-block btn-buy-package" data-package-id="gems-2">
+                        خرید
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="shop-my-items" id="shop-my-items-section">
+            <div class="section-header">
+                <h3 class="section-title">آیتم‌های من</h3>
+                <a href="#/inventory" class="section-link" data-route="inventory">مشاهده موجودی کامل</a>
+            </div>
+            <div class="my-items-preview" id="my-items-preview">
+                <div class="my-item-card">
+                    <span class="item-icon">👤</span>
+                    <span class="item-name">آواتار کلاسیک</span>
+                    <button class="btn-equip btn-small" data-item-id="avatar-1">استفاده</button>
+                </div>
+                <div class="my-item-card equipped">
+                    <span class="item-icon">🃏</span>
+                    <span class="item-name">پشت کارت کلاسیک</span>
+                    <span class="equipped-badge">✅ فعال</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="shop-purchase-modal" id="shop-purchase-modal" style="display: none;">
+            <div class="modal-overlay"></div>
+            <div class="modal-content purchase-modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">تأیید خرید</h3>
+                    <button class="btn-icon btn-close-modal" id="btn-close-purchase-modal" aria-label="بستن">
+                        <span class="icon">✕</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="purchase-item-preview" id="purchase-item-preview">
+                        <span class="item-icon" id="purchase-item-icon"></span>
+                        <h4 class="item-name" id="purchase-item-name">نام آیتم</h4>
+                        <p class="item-desc" id="purchase-item-desc">توضیحات آیتم</p>
+                    </div>
+                    <div class="purchase-pricing">
+                        <div class="price-row">
+                            <span class="price-label">قیمت:</span>
+                            <span class="price-value" id="purchase-price">۱۰۰ 🪙</span>
+                        </div>
+                        <div class="balance-row">
+                            <span class="balance-label">موجودی شما:</span>
+                            <span class="balance-value" id="purchase-balance">,۰۰۰ 🪙</span>
+                        </div>
+                    </div>
+                    <div class="purchase-warning">
+                        <span class="warning-icon">⚠️</span>
+                        <p class="warning-text">پس از خرید، آیتم به موجودی شما اضافه می‌شود و قابل بازگشت نیست.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline" id="btn-cancel-purchase">
+                        انصراف
+                    </button>
+                    <button class="btn btn-primary" id="btn-confirm-purchase">
+                        <span class="btn-icon">🛒</span>
+                        <span class="btn-text">تأیید خرید</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="shop-tips">
+            <div class="section-header">
+                <h3 class="section-title">نکات فروشگاه</h3>
+            </div>
+            <div class="tips-list">
+                <div class="tip-item">
+                    <span class="tip-icon">💡</span>
+                    <p class="tip-text">پیشنهادات ویژه روز را از دست ندهید!</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">📦</span>
+                    <p class="tip-text">پک‌های ویژه معمولاً تخفیف بیشتری دارند</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon"></span>
+                    <p class="tip-text">الماس‌ها برای آیتم‌های کمیاب‌تر استفاده می‌شوند</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
