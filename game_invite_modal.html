@@ -1,0 +1,499 @@
+<div id="game-invite-modal" class="modal modal-medium" data-modal-name="game-invite" style="display: none;">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-header-right">
+                <span class="modal-icon">🎮</span>
+                <h3 class="modal-title">دعوت به بازی</h3>
+            </div>
+            <div class="modal-header-left">
+                <button class="btn-icon btn-small btn-close-modal" id="btn-close-game-invite" aria-label="بستن">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="modal-body">
+            <section class="invite-step active" id="invite-step-friends" data-step="1">
+                <div class="invite-context">
+                    <div class="context-icon">🎮</div>
+                    <div class="context-info">
+                        <h4 class="context-title">دوست خود را به بازی دعوت کنید</h4>
+                        <p class="context-desc">از لیست دوستان آنلاین خود انتخاب کنید</p>
+                    </div>
+                </div>
+
+                <div class="invite-game-type-section">
+                    <h4 class="section-title">نوع بازی</h4>
+                    <div class="game-type-grid">
+                        <label class="game-type-option selected" data-type="quick">
+                            <input type="radio" name="invite-game-type" value="quick" checked>
+                            <div class="type-content">
+                                <span class="type-icon">⚡</span>
+                                <span class="type-name">بازی سریع</span>
+                                <span class="type-desc">شروع فوری</span>
+                            </div>
+                        </label>
+                        <label class="game-type-option" data-type="classic">
+                            <input type="radio" name="invite-game-type" value="classic">
+                            <div class="type-content">
+                                <span class="type-icon">🎴</span>
+                                <span class="type-name">کلاسیک</span>
+                                <span class="type-desc">بازی استاندارد</span>
+                            </div>
+                        </label>
+                        <label class="game-type-option" data-type="ranked">
+                            <input type="radio" name="invite-game-type" value="ranked">
+                            <div class="type-content">
+                                <span class="type-icon">🏆</span>
+                                <span class="type-name">رقابتی</span>
+                                <span class="type-desc">کسب امتیاز</span>
+                            </div>
+                        </label>
+                        <label class="game-type-option" data-type="private">
+                            <input type="radio" name="invite-game-type" value="private">
+                            <div class="type-content">
+                                <span class="type-icon">🏠</span>
+                                <span class="type-name">خصوصی</span>
+                                <span class="type-desc">اتاق خصوصی</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="invite-friends-section">
+                    <div class="section-header">
+                        <h4 class="section-title">دوستان آنلاین</h4>
+                        <span class="online-count" id="invite-online-count">۸ نفر آنلاین</span>
+                    </div>
+                    <div class="invite-search">
+                        <div class="input-wrapper search-wrapper">
+                            <span class="input-icon">🔍</span>
+                            <input
+                                type="text"
+                                id="invite-friends-search"
+                                class="input-field"
+                                placeholder="جستجوی دوست..."
+                                maxlength="30"
+                            >
+                        </div>
+                    </div>
+                    <div class="invite-filters">
+                        <button class="filter-chip active" data-filter="all">همه</button>
+                        <button class="filter-chip" data-filter="online">آنلاین</button>
+                        <button class="filter-chip" data-filter="in-game">در بازی</button>
+                        <button class="filter-chip" data-filter="favorites">مورد علاقه</button>
+                    </div>
+                    <div class="invite-friends-list" id="invite-friends-list">
+                        <label class="friend-invite-option" data-friend-id="f1">
+                            <input type="checkbox" name="invite-friends" value="f1">
+                            <div class="friend-content">
+                                <div class="friend-avatar-wrapper">
+                                    <span class="avatar avatar-medium">👨</span>
+                                    <span class="online-indicator"></span>
+                                    <span class="favorite-star">⭐</span>
+                                </div>
+                                <div class="friend-info">
+                                    <span class="friend-name">علی رضایی</span>
+                                    <span class="friend-status">
+                                        <span class="status-dot online"></span>
+                                        <span class="status-text">آنلاین</span>
+                                    </span>
+                                    <span class="friend-meta">سطح ۱۵ • نقره</span>
+                                </div>
+                                <div class="friend-check">
+                                    <span class="check-icon">✓</span>
+                                </div>
+                            </div>
+                        </label>
+
+                        <label class="friend-invite-option" data-friend-id="f2">
+                            <input type="checkbox" name="invite-friends" value="f2">
+                            <div class="friend-content">
+                                <div class="friend-avatar-wrapper">
+                                    <span class="avatar avatar-medium">👩</span>
+                                    <span class="online-indicator in-game"></span>
+                                    <span class="favorite-star">⭐</span>
+                                </div>
+                                <div class="friend-info">
+                                    <span class="friend-name">مریم احمدی</span>
+                                    <span class="friend-status">
+                                        <span class="status-dot in-game"></span>
+                                        <span class="status-text">در حال بازی</span>
+                                    </span>
+                                    <span class="friend-meta">سطح ۲۲ • طلا</span>
+                                </div>
+                                <div class="friend-check">
+                                    <span class="check-icon">✓</span>
+                                </div>
+                            </div>
+                        </label>
+
+                        <label class="friend-invite-option" data-friend-id="f3">
+                            <input type="checkbox" name="invite-friends" value="f3">
+                            <div class="friend-content">
+                                <div class="friend-avatar-wrapper">
+                                    <span class="avatar avatar-medium">👨</span>
+                                    <span class="online-indicator"></span>
+                                </div>
+                                <div class="friend-info">
+                                    <span class="friend-name">رضا محمدی</span>
+                                    <span class="friend-status">
+                                        <span class="status-dot online"></span>
+                                        <span class="status-text">آنلاین</span>
+                                    </span>
+                                    <span class="friend-meta">سطح ۸ • برنز</span>
+                                </div>
+                                <div class="friend-check">
+                                    <span class="check-icon">✓</span>
+                                </div>
+                            </div>
+                        </label>
+
+                        <label class="friend-invite-option" data-friend-id="f4">
+                            <input type="checkbox" name="invite-friends" value="f4">
+                            <div class="friend-content">
+                                <div class="friend-avatar-wrapper">
+                                    <span class="avatar avatar-medium">👩</span>
+                                    <span class="online-indicator"></span>
+                                </div>
+                                <div class="friend-info">
+                                    <span class="friend-name">زهرا کریمی</span>
+                                    <span class="friend-status">
+                                        <span class="status-dot online"></span>
+                                        <span class="status-text">آنلاین</span>
+                                    </span>
+                                    <span class="friend-meta">سطح ۱۸ • نقره</span>
+                                </div>
+                                <div class="friend-check">
+                                    <span class="check-icon">✓</span>
+                                </div>
+                            </div>
+                        </label>
+
+                        <label class="friend-invite-option disabled" data-friend-id="f5">
+                            <input type="checkbox" name="invite-friends" value="f5" disabled>
+                            <div class="friend-content">
+                                <div class="friend-avatar-wrapper">
+                                    <span class="avatar avatar-medium">👨</span>
+                                    <span class="online-indicator offline"></span>
+                                </div>
+                                <div class="friend-info">
+                                    <span class="friend-name">حسین نوری</span>
+                                    <span class="friend-status">
+                                        <span class="status-dot offline"></span>
+                                        <span class="status-text">آفلاین - ۲ ساعت پیش</span>
+                                    </span>
+                                    <span class="friend-meta">سطح ۵ • برنز</span>
+                                </div>
+                                <div class="friend-check">
+                                    <span class="check-icon">✓</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="selected-friends-preview" id="selected-friends-preview" style="display: none;">
+                        <div class="preview-header">
+                            <span class="preview-title">انتخاب شده:</span>
+                            <span class="preview-count" id="selected-count">۰ نفر</span>
+                        </div>
+                        <div class="selected-friends-tags" id="selected-friends-tags"></div>
+                    </div>
+                </div>
+
+                <div class="invite-message-section">
+                    <h4 class="section-title">پیام دعوت (اختیاری)</h4>
+                    <div class="quick-messages">
+                        <button class="quick-msg-btn" data-message="بیا بازی کنیم!">بیا بازی کنیم!</button>
+                        <button class="quick-msg-btn" data-message="یه بازی حکم؟">یه بازی حکم؟</button>
+                        <button class="quick-msg-btn" data-message="منتظرت هستم!">منتظرت هستم!</button>
+                        <button class="quick-msg-btn" data-message="بیا تیم بشیم!">بیا تیم بشیم!</button>
+                    </div>
+                    <div class="input-wrapper textarea-wrapper">
+                        <textarea
+                            id="invite-message-input"
+                            class="input-field textarea-field"
+                            placeholder="پیام خود را بنویسید..."
+                            maxlength="200"
+                            rows="3"
+                        ></textarea>
+                        <span class="char-counter">
+                            <span id="invite-msg-char-count">0</span> / ۲۰۰
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="invite-step" id="invite-step-confirm" data-step="2" style="display: none;">
+                <div class="confirm-section">
+                    <div class="confirm-icon-wrapper">
+                        <span class="confirm-icon">🎮</span>
+                    </div>
+                    <h3 class="confirm-title">تأیید دعوت</h3>
+                    <p class="confirm-desc">لطفاً اطلاعات زیر را بررسی کنید</p>
+
+                    <div class="confirm-details">
+                        <div class="detail-row">
+                            <span class="detail-label">نوع بازی:</span>
+                            <span class="detail-value" id="confirm-game-type">
+                                <span class="type-icon">⚡</span>
+                                <span class="type-text">بازی سریع</span>
+                            </span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">تعداد دعوت‌شوندگان:</span>
+                            <span class="detail-value" id="confirm-friends-count">۱ نفر</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">دعوت‌شوندگان:</span>
+                            <div class="detail-friends" id="confirm-friends-list">
+                                <div class="confirm-friend">
+                                    <span class="avatar avatar-small">👨</span>
+                                    <span class="friend-name">علی رضایی</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-row" id="confirm-message-row" style="display: none;">
+                            <span class="detail-label">پیام:</span>
+                            <span class="detail-value message" id="confirm-message">بیا بازی کنیم!</span>
+                        </div>
+                    </div>
+
+                    <div class="confirm-warning">
+                        <span class="warning-icon">⚠️</span>
+                        <p class="warning-text">
+                            پس از ارسال دعوت، به دوستان شما اعلان ارسال می‌شود.
+                            آن‌ها می‌توانند دعوت را قبول یا رد کنند.
+                        </p>
+                    </div>
+
+                    <div class="confirm-options">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" id="invite-auto-join" checked>
+                            <span class="checkbox-label">شروع خودکار بازی پس از پذیرش همه دعوت‌ها</span>
+                        </label>
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" id="invite-notify-me" checked>
+                            <span class="checkbox-label">اعلان پاسخ دعوت‌شوندگان</span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <section class="invite-step" id="invite-step-sending" data-step="3" style="display: none;">
+                <div class="sending-section">
+                    <div class="sending-animation">
+                        <div class="sending-spinner"></div>
+                    </div>
+                    <h3 class="sending-title">در حال ارسال دعوت...</h3>
+                    <p class="sending-desc">لطفاً صبر کنید</p>
+                    <div class="sending-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="invite-progress-fill" style="width: 0%;"></div>
+                        </div>
+                        <span class="progress-text" id="invite-progress-text">۰ از ۰</span>
+                    </div>
+                    <div class="sending-status-list" id="sending-status-list">
+                        <div class="status-item pending" data-friend-id="f1">
+                            <span class="avatar avatar-small">👨</span>
+                            <span class="friend-name">علی رضایی</span>
+                            <span class="status-icon">⏳</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="invite-step" id="invite-step-success" data-step="4" style="display: none;">
+                <div class="success-section">
+                    <div class="success-animation">
+                        <div class="success-icon-wrapper">
+                            <span class="success-icon">✅</span>
+                            <div class="success-ring"></div>
+                        </div>
+                    </div>
+                    <h3 class="success-title">دعوت ارسال شد!</h3>
+                    <p class="success-desc" id="invite-success-desc">
+                        دعوت شما با موفقیت ارسال شد. منتظر پاسخ دوستان خود باشید.
+                    </p>
+                    <div class="success-results" id="invite-results-list">
+                        <div class="result-item sent" data-friend-id="f1">
+                            <span class="avatar avatar-small">👨</span>
+                            <span class="friend-name">علی رضایی</span>
+                            <span class="result-status">
+                                <span class="status-icon">✅</span>
+                                <span class="status-text">ارسال شد</span>
+                            </span>
+                        </div>
+                        <div class="result-item sent" data-friend-id="f2">
+                            <span class="avatar avatar-small">👩</span>
+                            <span class="friend-name">مریم احمدی</span>
+                            <span class="result-status">
+                                <span class="status-icon">✅</span>
+                                <span class="status-text">ارسال شد</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="success-timer">
+                        <span class="timer-icon">⏰</span>
+                        <span class="timer-text">مهلت پاسخ: </span>
+                        <span class="timer-value" id="invite-response-timer">۶۰ ثانیه</span>
+                    </div>
+                    <div class="success-actions">
+                        <button class="btn btn-primary btn-block" id="btn-wait-for-response">
+                            <span class="btn-icon">⏳</span>
+                            <span class="btn-text">در انتظار پاسخ</span>
+                        </button>
+                        <button class="btn btn-outline btn-block" id="btn-cancel-invite">
+                            <span class="btn-icon">❌</span>
+                            <span class="btn-text">لغو دعوت</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="invite-step" id="invite-step-error" data-step="5" style="display: none;">
+                <div class="error-section">
+                    <div class="error-animation">
+                        <div class="error-icon-wrapper">
+                            <span class="error-icon">❌</span>
+                        </div>
+                    </div>
+                    <h3 class="error-title">خطا در ارسال دعوت</h3>
+                    <p class="error-desc" id="invite-error-desc">
+                        متأسفانه ارسال دعوت با خطا مواجه شد.
+                    </p>
+                    <div class="error-details">
+                        <div class="error-item">
+                            <span class="error-label">کد خطا:</span>
+                            <span class="error-value" id="invite-error-code">ERR_INV_001</span>
+                        </div>
+                        <div class="error-item">
+                            <span class="error-label">دلیل:</span>
+                            <span class="error-value" id="invite-error-reason">اتصال اینترنت ضعیف</span>
+                        </div>
+                    </div>
+                    <div class="error-suggestions">
+                        <h4 class="suggestions-title">پیشنهادات:</h4>
+                        <ul class="suggestions-list">
+                            <li>
+                                <span class="suggestion-icon">📶</span>
+                                <span class="suggestion-text">اتصال اینترنت خود را بررسی کنید</span>
+                            </li>
+                            <li>
+                                <span class="suggestion-icon">🔄</span>
+                                <span class="suggestion-text">دوباره تلاش کنید</span>
+                            </li>
+                            <li>
+                                <span class="suggestion-icon">👥</span>
+                                <span class="suggestion-text">دوستان دیگری را دعوت کنید</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="error-actions">
+                        <button class="btn btn-primary btn-block" id="btn-retry-invite">
+                            <span class="btn-icon">🔄</span>
+                            <span class="btn-text">تلاش مجدد</span>
+                        </button>
+                        <button class="btn btn-outline btn-block" id="btn-close-error-invite">
+                            <span class="btn-text">بستن</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="modal-footer" id="invite-modal-footer">
+            <div class="footer-info">
+                <span class="footer-text" id="invite-step-indicator">مرحله ۱ از ۲</span>
+            </div>
+            <div class="footer-actions">
+                <button class="btn btn-outline" id="btn-invite-back" style="display: none;">
+                    <span class="btn-icon">→</span>
+                    <span class="btn-text">بازگشت</span>
+                </button>
+                <button class="btn btn-outline" id="btn-invite-cancel">
+                    <span class="btn-text">انصراف</span>
+                </button>
+                <button class="btn btn-primary" id="btn-invite-next" disabled>
+                    <span class="btn-text">ادامه</span>
+                    <span class="btn-icon">←</span>
+                </button>
+                <button class="btn btn-primary" id="btn-invite-send" style="display: none;">
+                    <span class="btn-icon">📤</span>
+                    <span class="btn-text">ارسال دعوت</span>
+                </button>
+                <button class="btn btn-primary" id="btn-invite-done" style="display: none;">
+                    <span class="btn-text">پایان</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Invite Response Overlay -->
+    <div class="invite-response-overlay" id="invite-response-overlay" style="display: none;">
+        <div class="response-content">
+            <div class="response-header">
+                <h3 class="response-title">پاسخ دعوت‌ها</h3>
+                <button class="btn-icon btn-small" id="btn-close-response" aria-label="بستن">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+            <div class="response-body">
+                <div class="response-list" id="response-list">
+                    <div class="response-item accepted" data-friend-id="f1">
+                        <span class="avatar avatar-medium">👨</span>
+                        <div class="response-info">
+                            <span class="friend-name">علی رضایی</span>
+                            <span class="response-status accepted">
+                                <span class="status-icon">✅</span>
+                                <span class="status-text">پذیرفت</span>
+                            </span>
+                            <span class="response-time">۵ ثانیه پیش</span>
+                        </div>
+                    </div>
+                    <div class="response-item pending" data-friend-id="f2">
+                        <span class="avatar avatar-medium">👩</span>
+                        <div class="response-info">
+                            <span class="friend-name">مریم احمدی</span>
+                            <span class="response-status pending">
+                                <span class="status-icon">⏳</span>
+                                <span class="status-text">در انتظار</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="response-item rejected" data-friend-id="f3">
+                        <span class="avatar avatar-medium">👨</span>
+                        <div class="response-info">
+                            <span class="friend-name">رضا محمدی</span>
+                            <span class="response-status rejected">
+                                <span class="status-icon">❌</span>
+                                <span class="status-text">رد کرد</span>
+                            </span>
+                            <span class="response-time">۱۰ ثانیه پیش</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="response-summary">
+                    <div class="summary-item accepted">
+                        <span class="summary-icon">✅</span>
+                        <span class="summary-text"><span id="response-accepted-count">۱</span> پذیرفتند</span>
+                    </div>
+                    <div class="summary-item pending">
+                        <span class="summary-icon">⏳</span>
+                        <span class="summary-text"><span id="response-pending-count">۱</span> در انتظار</span>
+                    </div>
+                    <div class="summary-item rejected">
+                        <span class="summary-icon">❌</span>
+                        <span class="summary-text"><span id="response-rejected-count">۱</span> رد کردند</span>
+                    </div>
+                </div>
+            </div>
+            <div class="response-footer">
+                <button class="btn btn-primary btn-block" id="btn-start-game-with-accepted">
+                    <span class="btn-icon">🎮</span>
+                    <span class="btn-text">شروع بازی با پذیرفته‌ها</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
