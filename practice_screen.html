@@ -1,0 +1,506 @@
+<div id="practice-screen" class="screen screen-practice" data-screen-name="practice">
+    <div class="screen-content">
+        <header class="screen-header">
+            <button class="btn-back" data-route="home" aria-label="بازگشت">
+                <span class="icon">→</span>
+            </button>
+            <h1 class="screen-title">حالت تمرین</h1>
+            <div class="header-spacer"></div>
+        </header>
+
+        <section class="practice-intro">
+            <div class="intro-icon">🎓</div>
+            <h2 class="intro-title">یادگیری و تمرین</h2>
+            <p class="intro-description">
+                بدون نگرانی از از دست دادن امتیاز، بازی کنید و مهارت‌های خود را تقویت کنید.
+                از سناریوهای آموزشی و تمرین آزاد استفاده کنید.
+            </p>
+        </section>
+
+        <section class="practice-stats">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon"></span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="practice-total-games" class="stat-value">۰</span>
+                        <span class="stat-label">بازی تمرینی</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">✅</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="practice-correct-moves" class="stat-value">۰</span>
+                        <span class="stat-label">حرکت صحیح</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">💡</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="practice-hints-used" class="stat-value">۰</span>
+                        <span class="stat-label">راهنمایی استفاده شده</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">↩️</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="practice-undos-used" class="stat-value">۰</span>
+                        <span class="stat-label">بازگشت به عقب</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="practice-modes" id="practice-modes-section">
+            <div class="section-header">
+                <h3 class="section-title">نوع تمرین</h3>
+            </div>
+            <div class="mode-cards">
+                <button class="mode-card selected" data-mode="free" id="btn-practice-free">
+                    <div class="mode-card-content">
+                        <span class="mode-icon">🎮</span>
+                        <div class="mode-info">
+                            <h4 class="mode-title">تمرین آزاد</h4>
+                            <p class="mode-desc">بازی آزاد با AI در سطح دلخواه</p>
+                        </div>
+                        <span class="mode-check"></span>
+                    </div>
+                </button>
+                <button class="mode-card" data-mode="scenario" id="btn-practice-scenario">
+                    <div class="mode-card-content">
+                        <span class="mode-icon">🎯</span>
+                        <div class="mode-info">
+                            <h4 class="mode-title">سناریوی تمرینی</h4>
+                            <p class="mode-desc">سناریوهای خاص برای یادگیری</p>
+                        </div>
+                        <span class="mode-check"></span>
+                    </div>
+                </button>
+                <button class="mode-card" data-mode="tutorial" id="btn-practice-tutorial">
+                    <div class="mode-card-content">
+                        <span class="mode-icon">📚</span>
+                        <div class="mode-info">
+                            <h4 class="mode-title">آموزش گام به گام</h4>
+                            <p class="mode-desc">یادگیری قوانین و استراتژی</p>
+                        </div>
+                        <span class="mode-check"></span>
+                    </div>
+                </button>
+            </div>
+        </section>
+
+        <section class="practice-free-setup" id="practice-free-section">
+            <div class="section-header">
+                <h3 class="section-title">تنظیمات تمرین آزاد</h3>
+            </div>
+            <div class="setup-options">
+                <div class="form-group">
+                    <label class="form-label">سطح هوش مصنوعی</label>
+                    <div class="level-selector">
+                        <label class="level-option">
+                            <input type="radio" name="practice-ai-level" value="beginner">
+                            <div class="level-content">
+                                <span class="level-icon">🌱</span>
+                                <span class="level-name">مبتدی</span>
+                            </div>
+                        </label>
+                        <label class="level-option">
+                            <input type="radio" name="practice-ai-level" value="easy">
+                            <div class="level-content">
+                                <span class="level-icon">😊</span>
+                                <span class="level-name">آسان</span>
+                            </div>
+                        </label>
+                        <label class="level-option selected">
+                            <input type="radio" name="practice-ai-level" value="normal" checked>
+                            <div class="level-content">
+                                <span class="level-icon">😐</span>
+                                <span class="level-name">معمولی</span>
+                            </div>
+                        </label>
+                        <label class="level-option">
+                            <input type="radio" name="practice-ai-level" value="hard">
+                            <div class="level-content">
+                                <span class="level-icon">😤</span>
+                                <span class="level-name">سخت</span>
+                            </div>
+                        </label>
+                        <label class="level-option">
+                            <input type="radio" name="practice-ai-level" value="expert">
+                            <div class="level-content">
+                                <span class="level-icon">🔥</span>
+                                <span class="level-name">حرفه‌ای</span>
+                            </div>
+                        </label>
+                        <label class="level-option">
+                            <input type="radio" name="practice-ai-level" value="master">
+                            <div class="level-content">
+                                <span class="level-icon">👑</span>
+                                <span class="level-name">استاد</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">تعداد حریفان AI</label>
+                    <div class="option-cards">
+                        <label class="option-card">
+                            <input type="radio" name="practice-ai-count" value="1">
+                            <div class="option-content">
+                                <span class="option-value"></span>
+                                <span class="option-desc">۲ نفره</span>
+                            </div>
+                        </label>
+                        <label class="option-card selected">
+                            <input type="radio" name="practice-ai-count" value="3" checked>
+                            <div class="option-content">
+                                <span class="option-value">۳</span>
+                                <span class="option-desc"> نفره</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">امکانات کمکی</label>
+                    <div class="features-list">
+                        <label class="feature-item">
+                            <input type="checkbox" id="practice-show-cards" checked>
+                            <span class="feature-icon">👁️</span>
+                            <span class="feature-text">نمایش کارت‌های حریف</span>
+                        </label>
+                        <label class="feature-item">
+                            <input type="checkbox" id="practice-show-probabilities">
+                            <span class="feature-icon">📊</span>
+                            <span class="feature-text">نمایش احتمالات</span>
+                        </label>
+                        <label class="feature-item">
+                            <input type="checkbox" id="practice-unlimited-time" checked>
+                            <span class="feature-icon">⏱️</span>
+                            <span class="feature-text">بدون محدودیت زمانی</span>
+                        </label>
+                        <label class="feature-item">
+                            <input type="checkbox" id="practice-allow-undo" checked>
+                            <span class="feature-icon">↩️</span>
+                            <span class="feature-text">امکان بازگشت به عقب</span>
+                        </label>
+                        <label class="feature-item">
+                            <input type="checkbox" id="practice-allow-hint" checked>
+                            <span class="feature-icon">💡</span>
+                            <span class="feature-text">امکان دریافت راهنمایی</span>
+                        </label>
+                        <label class="feature-item">
+                            <input type="checkbox" id="practice-auto-restart" checked>
+                            <span class="feature-icon"></span>
+                            <span class="feature-text">شروع مجدد خودکار</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <button id="btn-start-free-practice" class="btn btn-primary btn-block btn-large btn-play">
+                <span class="btn-icon"></span>
+                <span class="btn-text">شروع تمرین آزاد</span>
+            </button>
+        </section>
+
+        <section class="practice-scenarios" id="practice-scenarios-section" style="display: none;">
+            <div class="section-header">
+                <h3 class="section-title">سناریوهای تمرینی</h3>
+            </div>
+            <div class="scenarios-list" id="scenarios-list">
+                <div class="scenario-card" data-scenario-id="trump_selection">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">🎯</span>
+                        <div class="scenario-info">
+                            <h4 class="scenario-title">انتخاب حکم</h4>
+                            <p class="scenario-desc">تمرین انتخاب بهترین حکم</p>
+                        </div>
+                        <span class="scenario-difficulty easy">آسان</span>
+                    </div>
+                    <div class="scenario-footer">
+                        <div class="scenario-stats">
+                            <span class="stat-item">
+                                <span class="stat-icon">🎮</span>
+                                <span class="stat-value">۵ بار</span>
+                            </span>
+                            <span class="stat-item">
+                                <span class="stat-icon">⭐</span>
+                                <span class="stat-value">۳ ستاره</span>
+                            </span>
+                        </div>
+                        <button class="btn btn-primary btn-small btn-start-scenario" data-scenario-id="trump_selection">
+                            شروع
+                        </button>
+                    </div>
+                </div>
+
+                <div class="scenario-card" data-scenario-id="follow_suit">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">🃏</span>
+                        <div class="scenario-info">
+                            <h4 class="scenario-title">رعایت خال</h4>
+                            <p class="scenario-desc">تمرین Follow Suit</p>
+                        </div>
+                        <span class="scenario-difficulty easy">آسان</span>
+                    </div>
+                    <div class="scenario-footer">
+                        <div class="scenario-stats">
+                            <span class="stat-item">
+                                <span class="stat-icon">🎮</span>
+                                <span class="stat-value">۳ بار</span>
+                            </span>
+                            <span class="stat-item">
+                                <span class="stat-icon">⭐</span>
+                                <span class="stat-value">۲ ستاره</span>
+                            </span>
+                        </div>
+                        <button class="btn btn-primary btn-small btn-start-scenario" data-scenario-id="follow_suit">
+                            شروع
+                        </button>
+                    </div>
+                </div>
+
+                <div class="scenario-card" data-scenario-id="trump_management">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">👑</span>
+                        <div class="scenario-info">
+                            <h4 class="scenario-title">مدیریت حکم</h4>
+                            <p class="scenario-desc">تمرین استفاده بهینه از حکم</p>
+                        </div>
+                        <span class="scenario-difficulty medium">متوسط</span>
+                    </div>
+                    <div class="scenario-footer">
+                        <div class="scenario-stats">
+                            <span class="stat-item">
+                                <span class="stat-icon"></span>
+                                <span class="stat-value">۲ بار</span>
+                            </span>
+                            <span class="stat-item">
+                                <span class="stat-icon">⭐</span>
+                                <span class="stat-value">۱ ستاره</span>
+                            </span>
+                        </div>
+                        <button class="btn btn-primary btn-small btn-start-scenario" data-scenario-id="trump_management">
+                            شروع
+                        </button>
+                    </div>
+                </div>
+
+                <div class="scenario-card" data-scenario-id="endgame">
+                    <div class="scenario-header">
+                        <span class="scenario-icon">🏁</span>
+                        <div class="scenario-info">
+                            <h4 class="scenario-title">پایان بازی</h4>
+                            <p class="scenario-desc">تمرین استراتژی پایان بازی</p>
+                        </div>
+                        <span class="scenario-difficulty hard">سخت</span>
+                    </div>
+                    <div class="scenario-footer">
+                        <div class="scenario-stats">
+                            <span class="stat-item">
+                                <span class="stat-icon">🎮</span>
+                                <span class="stat-value">۱ بار</span>
+                            </span>
+                            <span class="stat-item">
+                                <span class="stat-icon">⭐</span>
+                                <span class="stat-value">۰ ستاره</span>
+                            </span>
+                        </div>
+                        <button class="btn btn-primary btn-small btn-start-scenario" data-scenario-id="endgame">
+                            شروع
+                        </button>
+                    </div>
+                </div>
+
+                <div class="scenario-card" data-scenario-id="kot_scenario">
+                    <div class="scenario-header">
+                        <span class="scenario-icon"></span>
+                        <div class="scenario-info">
+                            <h4 class="scenario-title">سناریوی کت</h4>
+                            <p class="scenario-desc">تمرین شرایط کت</p>
+                        </div>
+                        <span class="scenario-difficulty expert">حرفه‌ای</span>
+                    </div>
+                    <div class="scenario-footer">
+                        <div class="scenario-stats">
+                            <span class="stat-item">
+                                <span class="stat-icon"></span>
+                                <span class="stat-value">۰ بار</span>
+                            </span>
+                            <span class="stat-item">
+                                <span class="stat-icon">⭐</span>
+                                <span class="stat-value">۰ ستاره</span>
+                            </span>
+                        </div>
+                        <button class="btn btn-primary btn-small btn-start-scenario" data-scenario-id="kot_scenario">
+                            شروع
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="practice-tutorials" id="practice-tutorials-section" style="display: none;">
+            <div class="section-header">
+                <h3 class="section-title">آموزش‌های گام به گام</h3>
+            </div>
+            <div class="tutorials-list" id="tutorials-list">
+                <div class="tutorial-card" data-tutorial-id="rules_basics">
+                    <div class="tutorial-header">
+                        <span class="tutorial-icon">📖</span>
+                        <div class="tutorial-info">
+                            <h4 class="tutorial-title">قوانین پایه حکم</h4>
+                            <p class="tutorial-desc">آشنایی با قوانین اصلی بازی</p>
+                        </div>
+                        <span class="tutorial-duration">۱۰ دقیقه</span>
+                    </div>
+                    <div class="tutorial-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%;"></div>
+                        </div>
+                        <span class="progress-text">تکمیل شده ✅</span>
+                    </div>
+                    <div class="tutorial-footer">
+                        <div class="tutorial-steps">
+                            <span> مرحله</span>
+                        </div>
+                        <button class="btn btn-outline btn-small btn-start-tutorial" data-tutorial-id="rules_basics">
+                            مرور مجدد
+                        </button>
+                    </div>
+                </div>
+
+                <div class="tutorial-card" data-tutorial-id="card_values">
+                    <div class="tutorial-header">
+                        <span class="tutorial-icon">🎴</span>
+                        <div class="tutorial-info">
+                            <h4 class="tutorial-title">ارزش کارت‌ها</h4>
+                            <p class="tutorial-desc">آشنایی با ارزش کارت‌ها در حکم</p>
+                        </div>
+                        <span class="tutorial-duration"> دقیقه</span>
+                    </div>
+                    <div class="tutorial-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%;"></div>
+                        </div>
+                        <span class="progress-text">تکمیل شده ✅</span>
+                    </div>
+                    <div class="tutorial-footer">
+                        <div class="tutorial-steps">
+                            <span>۴ مرحله</span>
+                        </div>
+                        <button class="btn btn-outline btn-small btn-start-tutorial" data-tutorial-id="card_values">
+                            مرور مجدد
+                        </button>
+                    </div>
+                </div>
+
+                <div class="tutorial-card" data-tutorial-id="trump_basics">
+                    <div class="tutorial-header">
+                        <span class="tutorial-icon"></span>
+                        <div class="tutorial-info">
+                            <h4 class="tutorial-title">مبانی حکم</h4>
+                            <p class="tutorial-desc">آشنایی با مفهوم حکم و Trump</p>
+                        </div>
+                        <span class="tutorial-duration">۲ دقیقه</span>
+                    </div>
+                    <div class="tutorial-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%;"></div>
+                        </div>
+                        <span class="progress-text">۶۰٪ تکمیل شده</span>
+                    </div>
+                    <div class="tutorial-footer">
+                        <div class="tutorial-steps">
+                            <span>۶ مرحله</span>
+                        </div>
+                        <button class="btn btn-primary btn-small btn-start-tutorial" data-tutorial-id="trump_basics">
+                            ادامه
+                        </button>
+                    </div>
+                </div>
+
+                <div class="tutorial-card" data-tutorial-id="scoring_system">
+                    <div class="tutorial-header">
+                        <span class="tutorial-icon">📊</span>
+                        <div class="tutorial-info">
+                            <h4 class="tutorial-title">سیستم امتیازدهی</h4>
+                            <p class="tutorial-desc">آشنایی با نحوه امتیازدهی</p>
+                        </div>
+                        <span class="tutorial-duration">۱۰ دقیقه</span>
+                    </div>
+                    <div class="tutorial-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%;"></div>
+                        </div>
+                        <span class="progress-text">شروع نشده</span>
+                    </div>
+                    <div class="tutorial-footer">
+                        <div class="tutorial-steps">
+                            <span> مرحله</span>
+                        </div>
+                        <button class="btn btn-primary btn-small btn-start-tutorial" data-tutorial-id="scoring_system">
+                            شروع
+                        </button>
+                    </div>
+                </div>
+
+                <div class="tutorial-card locked" data-tutorial-id="advanced_strategy">
+                    <div class="tutorial-header">
+                        <span class="tutorial-icon"></span>
+                        <div class="tutorial-info">
+                            <h4 class="tutorial-title">استراتژی پیشرفته</h4>
+                            <p class="tutorial-desc">تکنیک‌های پیشرفته بازی</p>
+                        </div>
+                        <span class="tutorial-duration">۲۰ دقیقه</span>
+                    </div>
+                    <div class="tutorial-lock">
+                        <span class="lock-icon"></span>
+                        <span class="lock-text">نیاز به تکمیل آموزش‌های قبلی</span>
+                    </div>
+                    <div class="tutorial-footer">
+                        <div class="tutorial-steps">
+                            <span>۱۰ مرحله</span>
+                        </div>
+                        <button class="btn btn-outline btn-small" disabled>
+                            قفل
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="practice-tips">
+            <div class="section-header">
+                <h3 class="section-title">نکات تمرین</h3>
+            </div>
+            <div class="tips-list">
+                <div class="tip-item">
+                    <span class="tip-icon"></span>
+                    <p class="tip-text">از امکانات کمکی مثل نمایش کارت حریف و راهنمایی استفاده کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">↩️</span>
+                    <p class="tip-text">با بازگشت به عقب، اشتباهات خود را تحلیل کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🎯</span>
+                    <p class="tip-text">سناریوها را به ترتیب سختی انجام دهید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">📚</span>
+                    <p class="tip-text">ابتدا آموزش‌ها را کامل کنید سپس به تمرین آزاد بپردازید</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
