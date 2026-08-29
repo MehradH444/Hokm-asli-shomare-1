@@ -4,29 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#0d2924">
-    <meta name="color-scheme" content="dark">
-    <meta name="description" content="حکم مستر - بازی آنلاین حکم ایرانی با هوش مصنوعی پیشرفته">
-    <meta name="keywords" content="حکم, بازی حکم, حکم آنلاین, کارت, بازی کارتی, Hokm">
-    <meta name="author" content="Hokm Master Team">
-    <meta name="robots" content="index, follow">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="حکم مستر">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Hokm Master">
-    <meta name="msapplication-TileColor" content="#0d2924">
-    <meta name="msapplication-tap-highlight" content="no">
-    <meta property="og:title" content="حکم مستر - بازی آنلاین حکم">
-    <meta property="og:description" content="بازی حکم ایرانی با هوش مصنوعی پیشرفته و حالت‌های مختلف بازی">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="fa_IR">
     <title>حکم مستر - Hokm Master</title>
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
-    <link rel="apple-touch-icon" href="/icon-192.png">
-    <link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
-    <link rel="apple-touch-icon" sizes="512x512" href="/icon-512.png">
+    
+    <!-- Font Vazirmatn -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- CSS Files -->
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/typography.css">
@@ -42,279 +27,168 @@
     <link rel="stylesheet" href="css/themes.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/utilities.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* استایل موقت برای تست */
+        .screen { display: none; }
+        .screen.active { display: block; animation: fadeInUp 0.4s ease-out; }
+        #app-loader.hidden { opacity: 0; pointer-events: none; transition: opacity 0.5s; }
+    </style>
 </head>
 <body class="app-body theme-dark">
     <div id="app" class="app-container">
+        
+        <!-- Loader -->
         <div id="app-loader" class="app-loader">
             <div class="loader-content">
-                <div class="loader-logo">
-                    <span class="loader-icon"></span>
-                </div>
+                <div class="loader-logo"><span class="loader-icon">🃏</span></div>
                 <h1 class="loader-title">حکم مستر</h1>
                 <p class="loader-subtitle">Hokm Master</p>
-                <div class="loader-progress">
-                    <div class="loader-progress-bar"></div>
-                </div>
+                <div class="loader-progress"><div class="loader-progress-bar"></div></div>
                 <p class="loader-status">در حال بارگذاری...</p>
             </div>
         </div>
-        <header id="app-header" class="app-header" role="banner">
+
+        <!-- Header -->
+        <header id="app-header" class="app-header">
             <div class="header-content">
                 <div class="header-right">
-                    <button id="btn-menu" class="header-btn btn-icon" aria-label="منو">
-                        <span class="icon">☰</span>
-                    </button>
+                    <button id="btn-menu" class="header-btn btn-icon" aria-label="منو"><span class="icon">☰</span></button>
                     <div class="header-brand">
                         <span class="brand-icon">🃏</span>
                         <span class="brand-text">حکم مستر</span>
                     </div>
                 </div>
-                <div class="header-center">
-                    <div id="header-title" class="header-title">صفحه اصلی</div>
-                </div>
                 <div class="header-left">
-                    <button id="btn-notifications" class="header-btn btn-icon" aria-label="اعلان‌ها">
-                        <span class="icon"></span>
-                        <span id="notif-badge" class="badge badge-notification" style="display: none;">0</span>
-                    </button>
-                    <button id="btn-coins" class="header-btn btn-coin" aria-label="سکه‌ها">
-                        <span class="coin-icon"></span>
-                        <span id="header-coins" class="coin-amount">0</span>
-                    </button>
-                    <button id="btn-gems" class="header-btn btn-gem" aria-label="الماس‌ها">
-                        <span class="gem-icon">💎</span>
-                        <span id="header-gems" class="gem-amount">0</span>
-                    </button>
-                    <button id="btn-profile" class="header-btn btn-profile" aria-label="پروفایل">
-                        <span id="header-avatar" class="avatar avatar-small">👤</span>
-                    </button>
+                    <button class="header-btn btn-coin"><span class="coin-icon">🪙</span><span class="coin-amount">۵,۰۰۰</span></button>
+                    <button class="header-btn btn-gem"><span class="gem-icon">💎</span><span class="gem-amount">۱۵۰</span></button>
+                    <button class="header-btn btn-profile"><span class="avatar avatar-small">👤</span></button>
                 </div>
             </div>
         </header>
-        <nav id="app-sidebar" class="app-sidebar" role="navigation" aria-label="منوی اصلی">
+
+        <!-- Sidebar -->
+        <div id="sidebar-overlay" class="sidebar-overlay"></div>
+        <nav id="app-sidebar" class="app-sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-user">
-                    <span id="sidebar-avatar" class="avatar avatar-large">👤</span>
+                    <span class="avatar avatar-large">👤</span>
                     <div class="sidebar-user-info">
-                        <div id="sidebar-username" class="sidebar-username">مهمان</div>
-                        <div id="sidebar-level" class="sidebar-level">سطح ۱</div>
+                        <div class="sidebar-username">بازیکن مهمان</div>
+                        <div class="sidebar-level">سطح ۱</div>
                     </div>
                 </div>
-                <button id="btn-close-sidebar" class="btn-icon" aria-label="بستن منو">
-                    <span class="icon">✕</span>
-                </button>
+                <button id="btn-close-sidebar" class="btn-icon" aria-label="بستن"><span class="icon">✕</span></button>
             </div>
             <div class="sidebar-content">
                 <div class="sidebar-section">
                     <div class="sidebar-section-title">بازی</div>
-                    <a href="#/quick-play" class="sidebar-link" data-route="quick-play">
-                        <span class="sidebar-icon">⚡</span>
-                        <span class="sidebar-text">بازی سریع</span>
-                    </a>
-                    <a href="#/classic" class="sidebar-link" data-route="classic">
-                        <span class="sidebar-icon">🎴</span>
-                        <span class="sidebar-text">بازی کلاسیک</span>
-                    </a>
-                    <a href="#/ranked" class="sidebar-link" data-route="ranked">
-                        <span class="sidebar-icon">🏆</span>
-                        <span class="sidebar-text">بازی رقابتی</span>
-                    </a>
-                    <a href="#/private" class="sidebar-link" data-route="private">
-                        <span class="sidebar-icon">🏠</span>
-                        <span class="sidebar-text">اتاق خصوصی</span>
-                    </a>
-                    <a href="#/practice" class="sidebar-link" data-route="practice">
-                        <span class="sidebar-icon">🎓</span>
-                        <span class="sidebar-text">تمرین</span>
-                    </a>
-                    <a href="#/tournament" class="sidebar-link" data-route="tournament">
-                        <span class="sidebar-icon"></span>
-                        <span class="sidebar-text">تورنمنت</span>
-                    </a>
+                    <a href="#" class="sidebar-link" onclick="showToast('بازی سریع', 'info')"><span class="sidebar-icon">⚡</span><span class="sidebar-text">بازی سریع</span></a>
+                    <a href="#" class="sidebar-link" onclick="showToast('بازی کلاسیک', 'info')"><span class="sidebar-icon">🎴</span><span class="sidebar-text">بازی کلاسیک</span></a>
                 </div>
-                <div class="sidebar-section">
-                    <div class="sidebar-section-title">پیشرفت</div>
-                    <a href="#/league" class="sidebar-link" data-route="league">
-                        <span class="sidebar-icon">🏅</span>
-                        <span class="sidebar-text">لیگ</span>
-                    </a>
-                    <a href="#/season" class="sidebar-link" data-route="season">
-                        <span class="sidebar-icon"></span>
-                        <span class="sidebar-text">فصل</span>
-                    </a>
-                    <a href="#/missions" class="sidebar-link" data-route="missions">
-                        <span class="sidebar-icon">🎯</span>
-                        <span class="sidebar-text">مأموریت‌ها</span>
-                    </a>
-                    <a href="#/achievements" class="sidebar-link" data-route="achievements">
-                        <span class="sidebar-icon">🏅</span>
-                        <span class="sidebar-text">دستاوردها</span>
-                    </a>
-                    <a href="#/statistics" class="sidebar-link" data-route="statistics">
-                        <span class="sidebar-icon">📊</span>
-                        <span class="sidebar-text">آمار</span>
-                    </a>
-                    <a href="#/match-history" class="sidebar-link" data-route="match-history">
-                        <span class="sidebar-icon">📜</span>
-                        <span class="sidebar-text">تاریخچه بازی</span>
-                    </a>
-                </div>
-                <div class="sidebar-section">
-                    <div class="sidebar-section-title">اجتماعی</div>
-                    <a href="#/friends" class="sidebar-link" data-route="friends">
-                        <span class="sidebar-icon">👥</span>
-                        <span class="sidebar-text">دوستان</span>
-                    </a>
-                    <a href="#/chat" class="sidebar-link" data-route="chat">
-                        <span class="sidebar-icon">💬</span>
-                        <span class="sidebar-text">چت</span>
-                    </a>
-                    <a href="#/leaderboard" class="sidebar-link" data-route="leaderboard">
-                        <span class="sidebar-icon"></span>
-                        <span class="sidebar-text">رتبه‌بندی</span>
-                    </a>
-                    <a href="#/events" class="sidebar-link" data-route="events">
-                        <span class="sidebar-icon"></span>
-                        <span class="sidebar-text">رویدادها</span>
-                    </a>
-                </div>
-                <div class="sidebar-section">
-                    <div class="sidebar-section-title">حساب</div>
-                    <a href="#/profile" class="sidebar-link" data-route="profile">
-                        <span class="sidebar-icon">👤</span>
-                        <span class="sidebar-text">پروفایل</span>
-                    </a>
-                    <a href="#/inventory" class="sidebar-link" data-route="inventory">
-                        <span class="sidebar-icon">🎒</span>
-                        <span class="sidebar-text">موجودی</span>
-                    </a>
-                    <a href="#/shop" class="sidebar-link" data-route="shop">
-                        <span class="sidebar-icon"></span>
-                        <span class="sidebar-text">فروشگاه</span>
-                    </a>
-                    <a href="#/settings" class="sidebar-link" data-route="settings">
-                        <span class="sidebar-icon">⚙️</span>
-                        <span class="sidebar-text">تنظیمات</span>
-                    </a>
-                    <a href="#/help" class="sidebar-link" data-route="help">
-                        <span class="sidebar-icon">❓</span>
-                        <span class="sidebar-text">راهنما</span>
-                    </a>
-                    <a href="#/about" class="sidebar-link" data-route="about">
-                        <span class="sidebar-icon">️</span>
-                        <span class="sidebar-text">درباره</span>
-                    </a>
-                </div>
-            </div>
-            <div class="sidebar-footer">
-                <div class="sidebar-version">نسخه ۱.۰.۰</div>
             </div>
         </nav>
-        <div id="sidebar-overlay" class="sidebar-overlay"></div>
-        <main id="app-main" class="app-main" role="main">
-            <div id="screens-container" class="screens-container"></div>
-            <div id="modal-container" class="modal-container"></div>
+
+        <!-- Main Content -->
+        <main id="app-main" class="app-main">
+            <div id="screens-container" class="screens-container">
+                
+                <!-- Home Screen (Hardcoded for testing) -->
+                <div id="home-screen" class="screen active" data-screen-name="home">
+                    <div class="screen-content">
+                        <section class="hero">
+                            <div class="hero-background"></div>
+                            <div class="hero-content">
+                                <h1 class="hero-title">به حکم مستر خوش آمدید!</h1>
+                                <p class="hero-subtitle">بازی حکم آنلاین با هوش مصنوعی پیشرفته و حالت‌های مختلف</p>
+                                <button class="btn-quick-play" onclick="showToast('در حال جستجوی حریف...', 'success')">
+                                    <span class="quick-play-icon">⚡</span>
+                                    <div class="quick-play-text">
+                                        <span class="quick-play-title">بازی سریع</span>
+                                        <span class="quick-play-subtitle">شروع فوری بازی</span>
+                                    </div>
+                                    <span class="quick-play-arrow">←</span>
+                                </button>
+                            </div>
+                        </section>
+
+                        <section class="game-modes-section" style="margin-top: 2rem;">
+                            <div class="section-header"><h2 class="section-title">حالت‌های بازی</h2></div>
+                            <div class="game-modes-grid">
+                                <button class="game-mode-card" onclick="showToast('حالت کلاسیک انتخاب شد', 'info')">
+                                    <span class="mode-icon">🎴</span>
+                                    <div class="mode-info"><h3 class="mode-title">کلاسیک</h3><p class="mode-description">بازی استاندارد حکم</p></div>
+                                </button>
+                                <button class="game-mode-card" onclick="showToast('حالت رقابتی انتخاب شد', 'info')">
+                                    <span class="mode-icon">🏆</span>
+                                    <div class="mode-info"><h3 class="mode-title">رقابتی</h3><p class="mode-description">کسب امتیاز و لیگ</p></div>
+                                </button>
+                                <button class="game-mode-card" onclick="showToast('اتاق خصوصی', 'info')">
+                                    <span class="mode-icon">🏠</span>
+                                    <div class="mode-info"><h3 class="mode-title">خصوصی</h3><p class="mode-description">بازی با دوستان</p></div>
+                                </button>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- Toast Container -->
             <div id="toast-container" class="toast-container-main"></div>
         </main>
-        <nav id="app-bottom-nav" class="app-bottom-nav" role="navigation" aria-label="ناوبری اصلی">
-            <a href="#/" class="bottom-nav-item" data-route="home">
-                <span class="bottom-nav-icon">🏠</span>
-                <span class="bottom-nav-text">خانه</span>
-            </a>
-            <a href="#/quick-play" class="bottom-nav-item" data-route="quick-play">
-                <span class="bottom-nav-icon">⚡</span>
-                <span class="bottom-nav-text">بازی</span>
-            </a>
-            <a href="#/shop" class="bottom-nav-item" data-route="shop">
-                <span class="bottom-nav-icon">🛒</span>
-                <span class="bottom-nav-text">فروشگاه</span>
-            </a>
-            <a href="#/leaderboard" class="bottom-nav-item" data-route="leaderboard">
-                <span class="bottom-nav-icon">🏆</span>
-                <span class="bottom-nav-text">رتبه</span>
-            </a>
-            <a href="#/profile" class="bottom-nav-item" data-route="profile">
-                <span class="bottom-nav-icon">👤</span>
-                <span class="bottom-nav-text">پروفایل</span>
-            </a>
+
+        <!-- Bottom Navigation -->
+        <nav id="app-bottom-nav" class="app-bottom-nav">
+            <a href="#" class="bottom-nav-item active" onclick="setActiveNav(this)"><span class="bottom-nav-icon">🏠</span><span class="bottom-nav-text">خانه</span></a>
+            <a href="#" class="bottom-nav-item" onclick="setActiveNav(this); showToast('بازی', 'info')"><span class="bottom-nav-icon">⚡</span><span class="bottom-nav-text">بازی</span></a>
+            <a href="#" class="bottom-nav-item" onclick="setActiveNav(this); showToast('فروشگاه', 'info')"><span class="bottom-nav-icon">🛒</span><span class="bottom-nav-text">فروشگاه</span></a>
+            <a href="#" class="bottom-nav-item" onclick="setActiveNav(this); showToast('رتبه‌بندی', 'info')"><span class="bottom-nav-icon">🏆</span><span class="bottom-nav-text">رتبه</span></a>
+            <a href="#" class="bottom-nav-item" onclick="setActiveNav(this); showToast('پروفایل', 'info')"><span class="bottom-nav-icon">👤</span><span class="bottom-nav-text">پروفایل</span></a>
         </nav>
-        <div id="chat-widget" class="chat-widget" style="display: none;">
-            <div class="chat-widget-header">
-                <span class="chat-widget-title">چت</span>
-                <button id="btn-close-chat-widget" class="btn-icon btn-small" aria-label="بستن چت">
-                    <span class="icon">✕</span>
-                </button>
-            </div>
-            <div id="chat-widget-messages" class="chat-widget-messages"></div>
-            <div class="chat-widget-input">
-                <input type="text" id="chat-widget-input" class="input-field" placeholder="پیام خود را بنویسید..." maxlength="250">
-                <button id="btn-send-chat-widget" class="btn btn-primary btn-small" aria-label="ارسال">
-                    <span class="icon">📤</span>
-                </button>
-            </div>
-        </div>
-        <button id="btn-scroll-top" class="btn-scroll-top" style="display: none;" aria-label="بازگشت به بالا">
-            <span class="icon">↑</span>
-        </button>
-        <div id="connection-status" class="connection-status" style="display: none;">
-            <span class="connection-icon">⚠️</span>
-            <span class="connection-text">اتصال قطع شد</span>
-        </div>
     </div>
-    <script src="js/core/config.js"></script>
-    <script src="js/core/utils.js"></script>
-    <script src="js/core/events.js"></script>
-    <script src="js/core/storage.js"></script>
-    <script src="js/auth/auth.js"></script>
-    <script src="js/auth/otp.js"></script>
-    <script src="js/auth/session.js"></script>
-    <script src="js/game/cards.js"></script>
-    <script src="js/game/rules.js"></script>
-    <script src="js/game/scoring.js"></script>
-    <script src="js/game/turns.js"></script>
-    <script src="js/game/validation.js"></script>
-    <script src="js/game/engine.js"></script>
-    <script src="js/ai/ai.js"></script>
-    <script src="js/ai/levels.js"></script>
-    <script src="js/ai/strategy.js"></script>
-    <script src="js/ai/probability.js"></script>
-    <script src="js/network/websocket.js"></script>
-    <script src="js/network/api.js"></script>
-    <script src="js/multiplayer/room.js"></script>
-    <script src="js/multiplayer/matchmaking.js"></script>
-    <script src="js/multiplayer/sync.js"></script>
-    <script src="js/multiplayer/spectator.js"></script>
-    <script src="js/modes/quick.js"></script>
-    <script src="js/modes/classic.js"></script>
-    <script src="js/modes/ranked.js"></script>
-    <script src="js/modes/private.js"></script>
-    <script src="js/modes/practice.js"></script>
-    <script src="js/modes/tournament.js"></script>
-    <script src="js/league/league.js"></script>
-    <script src="js/league/season.js"></script>
-    <script src="js/league/ranking.js"></script>
-    <script src="js/league/rewards.js"></script>
-    <script src="js/missions/missions.js"></script>
-    <script src="js/missions/achievements.js"></script>
-    <script src="js/social/friends.js"></script>
-    <script src="js/social/chat.js"></script>
-    <script src="js/social/notifications.js"></script>
-    <script src="js/settings/settings.js"></script>
-    <script src="js/settings/preferences.js"></script>
-    <script src="js/security/anti-cheat.js"></script>
-    <script src="js/security/encryption.js"></script>
-    <script src="js/security/validation.js"></script>
-    <script src="js/analytics/analytics.js"></script>
-    <script src="js/ui/router.js"></script>
-    <script src="js/ui/screens.js"></script>
-    <script src="js/ui/modals.js"></script>
-    <script src="js/ui/toast.js"></script>
-    <script src="js/ui/animations.js"></script>
-    <script src="js/audio/sounds.js"></script>
-    <script src="js/audio/music.js"></script>
-    <script src="js/app.js"></script>
+
+    <!-- Simple JS for Testing -->
+    <script>
+        // Toast Notification System
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const bgColor = type === 'success' ? 'var(--color-success)' : type === 'error' ? 'var(--color-danger)' : 'var(--color-primary)';
+            toast.style.cssText = `display: flex; align-items: center; gap: 10px; padding: 12px 20px; background: ${bgColor}; color: white; border-radius: 8px; box-shadow: var(--shadow-dark-lg); margin-bottom: 8px; animation: fadeInUp 0.3s ease-out; font-weight: 500;`;
+            toast.innerHTML = `<span>${type === 'success' ? '✅' : 'ℹ️'}</span><span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(-10px)';
+                setTimeout(() => toast.remove(), 300);
+            }, 2500);
+        }
+
+        // Hide Loader on Load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('app-loader').classList.add('hidden');
+                showToast('به حکم مستر خوش آمدید! 🃏', 'success');
+            }, 800);
+        });
+
+        // Sidebar Toggle
+        const sidebar = document.getElementById('app-sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        function toggleSidebar() {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+        document.getElementById('btn-menu').addEventListener('click', toggleSidebar);
+        document.getElementById('btn-close-sidebar').addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
+
+        // Bottom Nav Active State
+        function setActiveNav(element) {
+            document.querySelectorAll('.bottom-nav-item').forEach(i => i.classList.remove('active'));
+            element.classList.add('active');
+        }
+    </script>
 </body>
 </html>
