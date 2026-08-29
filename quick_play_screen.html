@@ -1,0 +1,279 @@
+<div id="quick-play-screen" class="screen screen-quick-play" data-screen-name="quick-play">
+    <div class="screen-content">
+        <header class="screen-header">
+            <button class="btn-back" data-route="home" aria-label="بازگشت">
+                <span class="icon">→</span>
+            </button>
+            <h1 class="screen-title">بازی سریع</h1>
+            <div class="header-spacer"></div>
+        </header>
+
+        <section class="quick-play-intro">
+            <div class="intro-icon"></div>
+            <h2 class="intro-title">بازی سریع</h2>
+            <p class="intro-description">
+                فوراً وارد بازی شوید و با حریفان واقعی یا هوش مصنوعی رقابت کنید.
+                نیازی به تنظیمات پیچیده نیست!
+            </p>
+        </section>
+
+        <section class="quick-play-mode-selection" id="qp-mode-section">
+            <div class="section-header">
+                <h3 class="section-title">نوع بازی</h3>
+            </div>
+            <div class="mode-cards">
+                <label class="mode-card selected" data-mode="ai">
+                    <input type="radio" name="qp-mode" value="ai" class="mode-radio" checked>
+                    <div class="mode-card-content">
+                        <span class="mode-icon">🤖</span>
+                        <div class="mode-info">
+                            <h4 class="mode-title">در برابر AI</h4>
+                            <p class="mode-desc">بازی با هوش مصنوعی</p>
+                        </div>
+                        <span class="mode-check"></span>
+                    </div>
+                </label>
+                <label class="mode-card" data-mode="online">
+                    <input type="radio" name="qp-mode" value="online" class="mode-radio">
+                    <div class="mode-card-content">
+                        <span class="mode-icon">🌐</span>
+                        <div class="mode-info">
+                            <h4 class="mode-title">آنلاین</h4>
+                            <p class="mode-desc">بازی با بازیکنان واقعی</p>
+                        </div>
+                        <span class="mode-check"></span>
+                    </div>
+                </label>
+            </div>
+        </section>
+
+        <section class="quick-play-level-selection" id="qp-level-section">
+            <div class="section-header">
+                <h3 class="section-title">سطح هوش مصنوعی</h3>
+            </div>
+            <div class="level-grid">
+                <label class="level-card" data-level="beginner">
+                    <input type="radio" name="qp-level" value="beginner" class="level-radio">
+                    <div class="level-card-content">
+                        <span class="level-icon">🌱</span>
+                        <span class="level-name">مبتدی</span>
+                        <span class="level-desc">برای تازه‌کارها</span>
+                    </div>
+                </label>
+                <label class="level-card" data-level="easy">
+                    <input type="radio" name="qp-level" value="easy" class="level-radio">
+                    <div class="level-card-content">
+                        <span class="level-icon">😊</span>
+                        <span class="level-name">آسان</span>
+                        <span class="level-desc">بازی ساده</span>
+                    </div>
+                </label>
+                <label class="level-card selected" data-level="normal">
+                    <input type="radio" name="qp-level" value="normal" class="level-radio" checked>
+                    <div class="level-card-content">
+                        <span class="level-icon">😐</span>
+                        <span class="level-name">معمولی</span>
+                        <span class="level-desc">استاندارد</span>
+                    </div>
+                </label>
+                <label class="level-card" data-level="hard">
+                    <input type="radio" name="qp-level" value="hard" class="level-radio">
+                    <div class="level-card-content">
+                        <span class="level-icon">😤</span>
+                        <span class="level-name">سخت</span>
+                        <span class="level-desc">چالشی</span>
+                    </div>
+                </label>
+                <label class="level-card locked" data-level="expert">
+                    <input type="radio" name="qp-level" value="expert" class="level-radio" disabled>
+                    <div class="level-card-content">
+                        <span class="level-icon">🔥</span>
+                        <span class="level-name">حرفه‌ای</span>
+                        <span class="level-desc">سطح ۲۵ لازم است</span>
+                    </div>
+                </label>
+                <label class="level-card locked" data-level="master">
+                    <input type="radio" name="qp-level" value="master" class="level-radio" disabled>
+                    <div class="level-card-content">
+                        <span class="level-icon">👑</span>
+                        <span class="level-name">استاد</span>
+                        <span class="level-desc">سطح ۵۰ لازم است</span>
+                    </div>
+                </label>
+            </div>
+        </section>
+
+        <section class="quick-play-settings" id="qp-settings-section">
+            <div class="section-header">
+                <h3 class="section-title">تنظیمات بازی</h3>
+            </div>
+            <div class="settings-list">
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-icon">⏱️</span>
+                        <div class="setting-text">
+                            <span class="setting-title">تایمر نوبت</span>
+                            <span class="setting-desc">مدت زمان هر نوبت</span>
+                        </div>
+                    </div>
+                    <select id="qp-timer-select" class="setting-select">
+                        <option value="15">۱۵ ثانیه</option>
+                        <option value="30" selected>۳۰ ثانیه</option>
+                        <option value="60">۰ ثانیه</option>
+                        <option value="120">۱۲ ثانیه</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-icon">🏆</span>
+                        <div class="setting-text">
+                            <span class="setting-title">تعداد راند</span>
+                            <span class="setting-desc">تعداد راند برای پیروزی</span>
+                        </div>
+                    </div>
+                    <select id="qp-rounds-select" class="setting-select">
+                        <option value="1">۱ راند</option>
+                        <option value="2" selected>۲ راند</option>
+                        <option value="3">۳ راند</option>
+                        <option value="5">۵ راند</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-icon">👑</span>
+                        <div class="setting-text">
+                            <span class="setting-title">اجازه کت</span>
+                            <span class="setting-desc">امکان اعلام کت</span>
+                        </div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="qp-allow-kot" checked>
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-icon">🔊</span>
+                        <div class="setting-text">
+                            <span class="setting-title">صدای بازی</span>
+                            <span class="setting-desc">فعال کردن افکت‌های صوتی</span>
+                        </div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="qp-enable-sound" checked>
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <section class="quick-play-start" id="qp-start-section">
+            <div class="start-info">
+                <div class="info-row">
+                    <span class="info-label">حالت:</span>
+                    <span class="info-value" id="qp-info-mode">در برابر AI</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">سطح:</span>
+                    <span class="info-value" id="qp-info-level">معمولی</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">تایمر:</span>
+                    <span class="info-value" id="qp-info-timer">۰ ثانیه</span>
+                </div>
+            </div>
+            <button id="btn-start-quick-play" class="btn btn-primary btn-block btn-large btn-play">
+                <span class="btn-icon">⚡</span>
+                <span class="btn-text">شروع بازی سریع</span>
+            </button>
+        </section>
+
+        <section class="quick-play-searching" id="qp-searching-section" style="display: none;">
+            <div class="searching-container">
+                <div class="searching-animation">
+                    <div class="searching-circle">
+                        <div class="searching-ring"></div>
+                        <div class="searching-ring ring-2"></div>
+                        <div class="searching-ring ring-3"></div>
+                        <div class="searching-icon">🔍</div>
+                    </div>
+                </div>
+                <h3 class="searching-title">در حال جستجوی بازیکن...</h3>
+                <p class="searching-subtitle">لطفاً صبر کنید</p>
+                <div class="searching-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="search-progress-fill" style="width: 0%;"></div>
+                    </div>
+                    <span class="searching-time" id="searching-time">۰:۰۰</span>
+                </div>
+                <div class="searching-info">
+                    <div class="info-item">
+                        <span class="info-icon">🎯</span>
+                        <span class="info-text" id="search-mode-info">سطح: معمولی</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">👥</span>
+                        <span class="info-text" id="search-players-info">بازیکنان آنلاین: ۲۳</span>
+                    </div>
+                </div>
+                <button id="btn-cancel-search" class="btn btn-outline btn-block">
+                    <span class="btn-text">انصراف از جستجو</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="quick-play-match-found" id="qp-match-section" style="display: none;">
+            <div class="match-container">
+                <div class="match-animation">
+                    <span class="match-icon"></span>
+                </div>
+                <h3 class="match-title">بازیکن پیدا شد!</h3>
+                <p class="match-subtitle">بازی در حال آماده‌سازی است</p>
+                <div class="match-players">
+                    <div class="match-player">
+                        <span class="player-avatar">👤</span>
+                        <span class="player-name" id="match-player-name">شما</span>
+                        <span class="player-badge">تیم ۱</span>
+                    </div>
+                    <div class="match-vs">VS</div>
+                    <div class="match-player">
+                        <span class="player-avatar">🤖</span>
+                        <span class="player-name" id="match-opponent-name">AI معمولی</span>
+                        <span class="player-badge">تیم ۲</span>
+                    </div>
+                </div>
+                <div class="match-countdown">
+                    <span class="countdown-label">شروع بازی در</span>
+                    <span class="countdown-value" id="match-countdown"></span>
+                </div>
+                <button id="btn-cancel-match" class="btn btn-outline btn-small">
+                    انصراف
+                </button>
+            </div>
+        </section>
+
+        <section class="quick-play-tips" id="qp-tips-section">
+            <div class="section-header">
+                <h3 class="section-title">نکات بازی سریع</h3>
+            </div>
+            <div class="tips-list">
+                <div class="tip-item">
+                    <span class="tip-icon">💡</span>
+                    <p class="tip-text">در حالت AI می‌توانید سطح سختی را انتخاب کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">⚡</span>
+                    <p class="tip-text">بازی سریع بدون نیاز به اتاق و تنظیمات پیچیده شروع می‌شود</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon"></span>
+                    <p class="tip-text">با بردن بازی‌های سریع، امتیاز و سکه کسب کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🎯</span>
+                    <p class="tip-text">برای چالش بیشتر، سطح سخت‌تر را انتخاب کنید</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
