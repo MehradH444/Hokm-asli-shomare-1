@@ -1,0 +1,1537 @@
+/**
+ * ============================================================
+ * HOKM MASTER - Navigation
+ * استایل‌های ناوبری و منوها
+ * ============================================================
+ * 
+ * این فایل تمام استایل‌های مربوط به ناوبری شامل:
+ * Bottom Navigation، Sidebar، Tabs، Breadcrumbs، Pagination،
+ * Steppers، Menu Items و ... را تعریف می‌کند.
+ * 
+ * نسخه: 1.0.0
+ * ============================================================
+ */
+
+/* ============================================================
+   بخش ۱: Bottom Navigation (موبایل)
+   ============================================================ */
+
+.app-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--bottom-nav-height);
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    z-index: var(--z-index-sticky);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-bottom: var(--safe-area-bottom);
+    backdrop-filter: var(--blur-md);
+    -webkit-backdrop-filter: var(--blur-md);
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bottom-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-1);
+    padding: var(--spacing-2);
+    color: var(--text-tertiary);
+    transition: var(--transition-colors);
+    text-decoration: none;
+    position: relative;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    min-height: 44px;
+}
+
+.bottom-nav-item:hover {
+    color: var(--text-primary);
+}
+
+.bottom-nav-item.active {
+    color: var(--color-primary);
+}
+
+.bottom-nav-item.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 3px;
+    background-color: var(--color-primary);
+    border-radius: 0 0 var(--radius-full) var(--radius-full);
+    animation: navIndicatorIn var(--transition-normal) var(--easing-ease-out);
+}
+
+@keyframes navIndicatorIn {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 40px;
+        opacity: 1;
+    }
+}
+
+.bottom-nav-icon {
+    font-size: var(--font-size-xl);
+    transition: transform var(--transition-fast) var(--easing-ease-in-out);
+}
+
+.bottom-nav-item.active .bottom-nav-icon {
+    transform: scale(1.1);
+}
+
+.bottom-nav-item:active .bottom-nav-icon {
+    transform: scale(0.9);
+}
+
+.bottom-nav-text {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    line-height: 1;
+}
+
+.bottom-nav-badge {
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    transform: translateX(4px);
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    background-color: var(--color-danger);
+    color: var(--color-white);
+    font-size: 10px;
+    font-weight: var(--font-weight-bold);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--bg-secondary);
+}
+
+/* ============================================================
+   بخش ۲: Sidebar Navigation
+   ============================================================ */
+
+.app-sidebar {
+    position: fixed;
+    top: var(--header-height);
+    right: 0;
+    width: var(--sidebar-width);
+    height: calc(100vh - var(--header-height));
+    background-color: var(--bg-secondary);
+    border-left: 1px solid var(--border-color);
+    z-index: var(--z-index-fixed);
+    transform: translateX(100%);
+    transition: transform var(--transition-normal) var(--easing-ease-in-out);
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--bg-overlay);
+    z-index: calc(var(--z-index-fixed) - 1);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-normal) var(--easing-ease-in-out),
+                visibility var(--transition-normal) var(--easing-ease-in-out);
+    backdrop-filter: var(--blur-sm);
+    -webkit-backdrop-filter: var(--blur-sm);
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-4);
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-tertiary);
+}
+
+.sidebar-user {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+}
+
+.sidebar-user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-username {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+.sidebar-level {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+}
+
+.sidebar-content {
+    flex: 1;
+    padding: var(--spacing-4);
+    overflow-y: auto;
+}
+
+.sidebar-section {
+    margin-bottom: var(--spacing-6);
+}
+
+.sidebar-section:last-child {
+    margin-bottom: 0;
+}
+
+.sidebar-section-title {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+    margin-bottom: var(--spacing-2);
+    padding: 0 var(--spacing-2);
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3) var(--spacing-2);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    transition: var(--transition-colors);
+    margin-bottom: var(--spacing-1);
+    text-decoration: none;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    width: 100%;
+    text-align: right;
+}
+
+.sidebar-link:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.sidebar-link.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-weight: var(--font-weight-medium);
+}
+
+.sidebar-icon {
+    font-size: var(--font-size-xl);
+    width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.sidebar-text {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    flex: 1;
+}
+
+.sidebar-badge {
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    background-color: var(--color-danger);
+    color: var(--color-white);
+    font-size: 10px;
+    font-weight: var(--font-weight-bold);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-footer {
+    padding: var(--spacing-4);
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.sidebar-version {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+}
+
+/* ============================================================
+   بخش ۳: Tabs (افقی)
+   ============================================================ */
+
+.tabs-container {
+    display: flex;
+    gap: var(--spacing-1);
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: var(--spacing-1);
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-4);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.tabs-container::-webkit-scrollbar {
+    display: none;
+}
+
+.tab-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-3) var(--spacing-4);
+    background-color: transparent;
+    color: var(--text-secondary);
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: var(--transition-all);
+    white-space: nowrap;
+    min-height: 44px;
+    position: relative;
+}
+
+.tab-btn:hover {
+    background-color: var(--bg-elevated);
+    color: var(--text-primary);
+}
+
+.tab-btn.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-weight: var(--font-weight-semibold);
+    box-shadow: var(--shadow-primary);
+}
+
+.tab-icon {
+    font-size: var(--font-size-md);
+}
+
+.tab-text {
+    font-size: var(--font-size-sm);
+}
+
+.tab-badge {
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    background-color: var(--color-danger);
+    color: var(--color-white);
+    font-size: 10px;
+    font-weight: var(--font-weight-bold);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tab-btn.active .tab-badge {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+}
+
+/* Underline Tabs */
+.tabs-underline {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: var(--spacing-4);
+}
+
+.tabs-underline .tab-btn {
+    padding: var(--spacing-3) var(--spacing-4);
+    background-color: transparent;
+    border-radius: 0;
+    position: relative;
+}
+
+.tabs-underline .tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: transparent;
+    transition: background-color var(--transition-fast) var(--easing-ease-in-out);
+}
+
+.tabs-underline .tab-btn.active::after {
+    background-color: var(--color-primary);
+}
+
+.tabs-underline .tab-btn.active {
+    background-color: transparent;
+    color: var(--color-primary);
+    box-shadow: none;
+}
+
+/* ============================================================
+   بخش ۴: Tabs (عمودی)
+   ============================================================ */
+
+.tabs-vertical {
+    display: flex;
+    gap: var(--spacing-4);
+}
+
+.tabs-vertical-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+    min-width: 200px;
+    background-color: var(--bg-tertiary);
+    padding: var(--spacing-2);
+    border-radius: var(--radius-lg);
+}
+
+.tabs-vertical-nav .tab-btn {
+    justify-content: flex-start;
+    text-align: right;
+}
+
+.tabs-vertical-content {
+    flex: 1;
+}
+
+/* ============================================================
+   بخش ۵: Breadcrumbs
+   ============================================================ */
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) 0;
+    margin-bottom: var(--spacing-4);
+    font-size: var(--font-size-sm);
+    color: var(--text-tertiary);
+    flex-wrap: wrap;
+}
+
+.breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.breadcrumb-link {
+    color: var(--text-link);
+    text-decoration: none;
+    transition: var(--transition-colors);
+}
+
+.breadcrumb-link:hover {
+    color: var(--text-link-hover);
+    text-decoration: underline;
+}
+
+.breadcrumb-separator {
+    color: var(--text-tertiary);
+    font-size: var(--font-size-xs);
+}
+
+.breadcrumb-current {
+    color: var(--text-primary);
+    font-weight: var(--font-weight-medium);
+}
+
+/* ============================================================
+   بخش ۶: Pagination
+   ============================================================ */
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-1);
+    margin: var(--spacing-6) 0;
+}
+
+.pagination-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 var(--spacing-3);
+    background-color: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: var(--transition-all);
+    text-decoration: none;
+}
+
+.pagination-item:hover:not(.disabled):not(.active) {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    border-color: var(--border-color-strong);
+}
+
+.pagination-item.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+.pagination-item.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.pagination-ellipsis {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    color: var(--text-tertiary);
+}
+
+.pagination-info {
+    font-size: var(--font-size-sm);
+    color: var(--text-tertiary);
+    margin: 0 var(--spacing-3);
+}
+
+/* ============================================================
+   بخش ۷: Steppers
+   ============================================================ */
+
+.stepper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-6);
+    padding: var(--spacing-4);
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+}
+
+.stepper-horizontal {
+    flex-direction: row;
+}
+
+.stepper-vertical {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    position: relative;
+    flex: 1;
+}
+
+.step:not(:last-child)::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background-color: var(--border-color);
+    margin: 0 var(--spacing-3);
+}
+
+.step.completed:not(:last-child)::after {
+    background-color: var(--color-primary);
+}
+
+.step-number {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-elevated);
+    color: var(--text-tertiary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    flex-shrink: 0;
+    transition: var(--transition-all);
+}
+
+.step.active .step-number {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-primary);
+}
+
+.step.completed .step-number {
+    background-color: var(--color-success);
+    color: var(--color-white);
+    border-color: var(--color-success);
+}
+
+.step.completed .step-number::before {
+    content: '✓';
+}
+
+.step.completed .step-number > * {
+    display: none;
+}
+
+.step-label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-tertiary);
+    white-space: nowrap;
+}
+
+.step.active .step-label {
+    color: var(--text-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+.step.completed .step-label {
+    color: var(--color-success);
+}
+
+/* ============================================================
+   بخش ۸: Menu Items
+   ============================================================ */
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-dark-md);
+    min-width: 200px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3) var(--spacing-4);
+    color: var(--text-secondary);
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition-colors);
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: var(--font-size-base);
+    width: 100%;
+    text-align: right;
+}
+
+.menu-item:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.menu-item.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.menu-item.danger {
+    color: var(--color-danger);
+}
+
+.menu-item.danger:hover {
+    background-color: var(--color-danger-light);
+}
+
+.menu-item-icon {
+    font-size: var(--font-size-xl);
+    width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.menu-item-text {
+    flex: 1;
+    font-weight: var(--font-weight-medium);
+}
+
+.menu-item-shortcut {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+    font-family: var(--font-family-mono);
+}
+
+.menu-item-badge {
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    background-color: var(--color-danger);
+    color: var(--color-white);
+    font-size: 10px;
+    font-weight: var(--font-weight-bold);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: var(--spacing-1) 0;
+}
+
+.menu-header {
+    padding: var(--spacing-3) var(--spacing-4);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+}
+
+/* ============================================================
+   بخش ۹: Navigation Links
+   ============================================================ */
+
+.nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-3);
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    border-radius: var(--radius-md);
+    transition: var(--transition-all);
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    font-family: inherit;
+}
+
+.nav-link:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.nav-link.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.nav-link-icon {
+    font-size: var(--font-size-md);
+}
+
+/* ============================================================
+   بخش ۱۰: Category Filters
+   ============================================================ */
+
+.categories-scroll {
+    display: flex;
+    gap: var(--spacing-2);
+    overflow-x: auto;
+    padding: var(--spacing-2) 0;
+    margin-bottom: var(--spacing-4);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.categories-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.category-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-1);
+    padding: var(--spacing-3);
+    background-color: var(--card-bg);
+    color: var(--text-secondary);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: var(--transition-all);
+    min-width: 80px;
+    font-family: inherit;
+}
+
+.category-btn:hover {
+    background-color: var(--card-bg-hover);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+.category-btn.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-primary);
+}
+
+.category-icon {
+    font-size: var(--font-size-2xl);
+}
+
+.category-text {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    white-space: nowrap;
+}
+
+/* ============================================================
+   بخش ۱۱: Filter Chips
+   ============================================================ */
+
+.filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-2);
+    margin-bottom: var(--spacing-4);
+}
+
+.filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-3);
+    background-color: var(--card-bg);
+    color: var(--text-secondary);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-full);
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: var(--transition-all);
+}
+
+.filter-chip:hover {
+    background-color: var(--card-bg-hover);
+    color: var(--text-primary);
+}
+
+.filter-chip.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+}
+
+.filter-chip-icon {
+    font-size: var(--font-size-md);
+}
+
+.filter-chip-remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
+    font-size: 10px;
+    margin-right: var(--spacing-1);
+}
+
+.filter-chip.active .filter-chip-remove {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================================
+   بخش ۱۲: Quick Links
+   ============================================================ */
+
+.quick-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--spacing-3);
+    margin-bottom: var(--spacing-6);
+}
+
+.quick-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-4);
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition-all);
+    cursor: pointer;
+}
+
+.quick-link:hover {
+    background-color: var(--card-bg-hover);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-dark-md);
+}
+
+.quick-link-icon {
+    font-size: var(--font-size-3xl);
+}
+
+.quick-link-text {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    text-align: center;
+}
+
+/* ============================================================
+   بخش ۱۳: Back Button
+   ============================================================ */
+
+.btn-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: var(--transition-all);
+    font-family: inherit;
+}
+
+.btn-back:hover {
+    background-color: var(--bg-elevated);
+    transform: translateX(2px);
+}
+
+.btn-back:active {
+    transform: scale(0.95);
+}
+
+.btn-back .icon {
+    font-size: var(--font-size-xl);
+}
+
+.btn-back-small {
+    width: 32px;
+    height: 32px;
+}
+
+.btn-back-small .icon {
+    font-size: var(--font-size-lg);
+}
+
+/* ============================================================
+   بخش ۱۴: Header Actions
+   ============================================================ */
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.header-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    color: var(--text-primary);
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: var(--transition-all);
+    position: relative;
+}
+
+.header-action-btn:hover {
+    background-color: var(--bg-tertiary);
+}
+
+.header-action-btn:active {
+    transform: scale(0.95);
+}
+
+.header-action-btn .icon {
+    font-size: var(--font-size-xl);
+}
+
+.header-action-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    background-color: var(--color-danger);
+    color: var(--color-white);
+    font-size: 9px;
+    font-weight: var(--font-weight-bold);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--bg-secondary);
+}
+
+/* ============================================================
+   بخش ۱۵: Dropdown Menu
+   ============================================================ */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 200px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-dark-lg);
+    z-index: var(--z-index-dropdown);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: var(--transition-all);
+    margin-top: var(--spacing-2);
+    overflow: hidden;
+}
+
+.dropdown.open .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu-left {
+    right: auto;
+    left: 0;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3) var(--spacing-4);
+    color: var(--text-secondary);
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition-colors);
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+    width: 100%;
+    text-align: right;
+}
+
+.dropdown-item:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.dropdown-item.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.dropdown-item.danger {
+    color: var(--color-danger);
+}
+
+.dropdown-item.danger:hover {
+    background-color: var(--color-danger-light);
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: var(--spacing-1) 0;
+}
+
+.dropdown-header {
+    padding: var(--spacing-2) var(--spacing-4);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+}
+
+/* ============================================================
+   بخش ۱۶: Side Navigation (دسکتاپ)
+   ============================================================ */
+
+.side-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+    padding: var(--spacing-2);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    min-width: 200px;
+}
+
+.side-nav-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3) var(--spacing-4);
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: var(--transition-all);
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+    width: 100%;
+    text-align: right;
+}
+
+.side-nav-item:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.side-nav-item.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-weight: var(--font-weight-semibold);
+}
+
+.side-nav-icon {
+    font-size: var(--font-size-lg);
+    width: 20px;
+    text-align: center;
+}
+
+.side-nav-text {
+    flex: 1;
+}
+
+/* ============================================================
+   بخش ۱۷: Progress Navigation
+   ============================================================ */
+
+.progress-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-3);
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-4);
+}
+
+.progress-nav-bar {
+    flex: 1;
+    height: 4px;
+    background-color: var(--bg-elevated);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.progress-nav-fill {
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-full);
+    transition: width var(--transition-normal) var(--easing-ease-in-out);
+}
+
+.progress-nav-text {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+/* ============================================================
+   بخش ۱۸: Responsive Navigation
+   ============================================================ */
+
+/* موبایل */
+@media (max-width: 768px) {
+    .tabs-container {
+        padding: var(--spacing-1);
+    }
+    
+    .tab-btn {
+        padding: var(--spacing-2) var(--spacing-3);
+        font-size: var(--font-size-xs);
+    }
+    
+    .tab-icon {
+        font-size: var(--font-size-base);
+    }
+    
+    .stepper {
+        flex-direction: column;
+        gap: var(--spacing-3);
+    }
+    
+    .step {
+        flex-direction: column;
+        gap: var(--spacing-2);
+    }
+    
+    .step:not(:last-child)::after {
+        display: none;
+    }
+    
+    .tabs-vertical {
+        flex-direction: column;
+    }
+    
+    .tabs-vertical-nav {
+        min-width: 100%;
+    }
+    
+    .pagination-item {
+        min-width: 36px;
+        height: 36px;
+        padding: 0 var(--spacing-2);
+    }
+    
+    .category-btn {
+        min-width: 70px;
+        padding: var(--spacing-2);
+    }
+    
+    .category-icon {
+        font-size: var(--font-size-xl);
+    }
+}
+
+/* تبلت */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .quick-links {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* دسکتاپ */
+@media (min-width: 1024px) {
+    .app-sidebar {
+        transform: translateX(0);
+    }
+    
+    .sidebar-overlay {
+        display: none;
+    }
+    
+    .app-main {
+        margin-right: var(--sidebar-width);
+    }
+    
+    .app-bottom-nav {
+        display: none;
+    }
+    
+    .app-main {
+        margin-bottom: 0;
+    }
+    
+    .quick-links {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ============================================================
+   بخش ۱۹: Accessibility
+   ============================================================ */
+
+/* Focus states */
+.tab-btn:focus-visible,
+.sidebar-link:focus-visible,
+.menu-item:focus-visible,
+.nav-link:focus-visible,
+.filter-chip:focus-visible,
+.pagination-item:focus-visible,
+.bottom-nav-item:focus-visible,
+.category-btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Keyboard navigation indicator */
+.keyboard-nav .tab-btn:focus,
+.keyboard-nav .sidebar-link:focus,
+.keyboard-nav .menu-item:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Skip to main content */
+.skip-to-main {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--spacing-2) var(--spacing-4);
+    border-radius: var(--radius-md);
+    z-index: var(--z-index-max);
+    transition: top var(--transition-fast) var(--easing-ease-in-out);
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+}
+
+.skip-to-main:focus {
+    top: var(--spacing-2);
+}
+
+/* ============================================================
+   بخش ۲۰: Animations
+   ============================================================ */
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Navigation animations */
+.sidebar-link {
+    animation: fadeIn var(--transition-normal) var(--easing-ease-out);
+}
+
+.tab-btn.active {
+    animation: scaleIn var(--transition-fast) var(--easing-bounce);
+}
+
+/* ============================================================
+   بخش ۲۱: RTL Specific
+   ============================================================ */
+
+[dir="rtl"] .breadcrumb-separator {
+    transform: scaleX(-1);
+}
+
+[dir="rtl"] .btn-back .icon {
+    transform: rotate(180deg);
+}
+
+[dir="rtl"] .dropdown-menu {
+    right: 0;
+    left: auto;
+}
+
+[dir="rtl"] .dropdown-menu-left {
+    right: auto;
+    left: 0;
+}
+
+/* ============================================================
+   بخش ۲۲: Reduced Motion
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .tab-btn,
+    .sidebar-link,
+    .menu-item,
+    .nav-link,
+    .filter-chip,
+    .pagination-item,
+    .bottom-nav-item,
+    .category-btn,
+    .quick-link {
+        transition: none;
+    }
+    
+    .bottom-nav-item.active::before {
+        animation: none;
+    }
+    
+    .app-sidebar {
+        transition: none;
+    }
+    
+    .sidebar-overlay {
+        transition: none;
+    }
+    
+    .dropdown-menu {
+        transition: none;
+    }
+}
+
+/* ============================================================
+   بخش ۲۳: Dark Mode Specific
+   ============================================================ */
+
+.theme-dark .app-bottom-nav,
+.theme-dark .app-sidebar {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+.theme-dark .tab-btn.active {
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+/* ============================================================
+   بخش ۲۴: Print Navigation
+   ============================================================ */
+
+@media print {
+    .app-bottom-nav,
+    .app-sidebar,
+    .sidebar-overlay,
+    .tabs-container,
+    .pagination,
+    .stepper,
+    .breadcrumb,
+    .filter-chips,
+    .dropdown-menu {
+        display: none !important;
+    }
+}
+
+/* ============================================================
+   بخش ۲۵: High Contrast Mode
+   ============================================================ */
+
+@media (prefers-contrast: high) {
+    .tab-btn,
+    .sidebar-link,
+    .menu-item,
+    .nav-link,
+    .filter-chip,
+    .pagination-item,
+    .bottom-nav-item,
+    .category-btn {
+        border: 2px solid currentColor;
+    }
+    
+    .tab-btn.active,
+    .sidebar-link.active,
+    .menu-item.active,
+    .nav-link.active,
+    .filter-chip.active,
+    .pagination-item.active,
+    .bottom-nav-item.active,
+    .category-btn.active {
+        border-color: var(--color-white);
+    }
+}
+
+/* ============================================================
+   بخش ۲۶: Navigation Utilities
+   ============================================================ */
+
+.nav-sticky {
+    position: sticky;
+    top: var(--header-height);
+    z-index: var(--z-index-sticky);
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.nav-scrolled {
+    box-shadow: var(--shadow-dark-sm);
+}
+
+.nav-hidden {
+    transform: translateY(-100%);
+    transition: transform var(--transition-normal) var(--easing-ease-in-out);
+}
+
+.nav-visible {
+    transform: translateY(0);
+}
