@@ -1,0 +1,636 @@
+<div id="spectator-screen" class="screen screen-spectator" data-screen-name="spectator">
+    <div class="screen-content">
+        <header class="screen-header">
+            <button class="btn-back" id="btn-leave-spectator" aria-label="ترک تماشا">
+                <span class="icon">→</span>
+            </button>
+            <h1 class="screen-title">تماشای بازی</h1>
+            <div class="header-actions">
+                <button class="btn-icon btn-small" id="btn-spectator-settings" aria-label="تنظیمات تماشا">
+                    <span class="icon">⚙️</span>
+                </button>
+                <button class="btn-icon btn-small" id="btn-spectator-share" aria-label="اشتراک‌گذاری">
+                    <span class="icon">📤</span>
+                </button>
+            </div>
+        </header>
+
+        <section class="spectator-game-info">
+            <div class="game-info-bar">
+                <div class="info-item">
+                    <span class="info-icon">🎮</span>
+                    <span class="info-text" id="spectator-game-mode">کلاسیک</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">⏱️</span>
+                    <span class="info-text" id="spectator-game-duration">۱۲:۳۴</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">🃏</span>
+                    <span class="info-text" id="spectator-round-info">راند ۱ از ۲</span>
+                </div>
+                <div class="info-item live">
+                    <span class="live-dot"></span>
+                    <span class="info-text">زنده</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">👁️</span>
+                    <span class="info-text"><span id="spectator-viewers-count">۲۳</span> تماشاگر</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="spectator-table">
+            <div class="table-surface">
+                <div class="table-center">
+                    <div class="trump-indicator" id="spectator-trump-indicator">
+                        <span class="trump-label">حکم:</span>
+                        <span class="trump-suit" id="spectator-trump-suit">♠</span>
+                    </div>
+                    <div class="round-info" id="spectator-round-info-display">
+                        <span class="round-label">راند</span>
+                        <span class="round-value" id="spectator-round-number">۱</span>
+                    </div>
+                </div>
+
+                <div class="opponent-area opponent-top" id="spectator-opponent-top">
+                    <div class="player-info player-top">
+                        <div class="player-avatar-wrapper">
+                            <span class="avatar avatar-medium" id="spec-avatar-top">👨</span>
+                            <span class="player-status" id="spec-status-top"></span>
+                        </div>
+                        <div class="player-details">
+                            <span class="player-name" id="spec-name-top">بازیکن بالا</span>
+                            <span class="player-team" id="spec-team-top">تیم ۱</span>
+                        </div>
+                        <div class="player-cards-count">
+                            <span class="cards-icon">🃏</span>
+                            <span class="cards-count" id="spec-cards-top">۱۳</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="opponent-area opponent-right" id="spectator-opponent-right">
+                    <div class="player-info player-right">
+                        <div class="player-avatar-wrapper">
+                            <span class="avatar avatar-medium" id="spec-avatar-right">👩</span>
+                            <span class="player-status" id="spec-status-right"></span>
+                        </div>
+                        <div class="player-details">
+                            <span class="player-name" id="spec-name-right">بازیکن راست</span>
+                            <span class="player-team" id="spec-team-right">تیم ۲</span>
+                        </div>
+                        <div class="player-cards-count">
+                            <span class="cards-icon">🃏</span>
+                            <span class="cards-count" id="spec-cards-right">۱۳</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="opponent-area opponent-left" id="spectator-opponent-left">
+                    <div class="player-info player-left">
+                        <div class="player-avatar-wrapper">
+                            <span class="avatar avatar-medium" id="spec-avatar-left">👨</span>
+                            <span class="player-status" id="spec-status-left"></span>
+                        </div>
+                        <div class="player-details">
+                            <span class="player-name" id="spec-name-left">بازیکن چپ</span>
+                            <span class="player-team" id="spec-team-left">تیم ۱</span>
+                        </div>
+                        <div class="player-cards-count">
+                            <span class="cards-icon">🃏</span>
+                            <span class="cards-count" id="spec-cards-left">۱۳</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="opponent-area opponent-bottom friend" id="spectator-opponent-bottom">
+                    <div class="player-info player-bottom">
+                        <div class="player-avatar-wrapper">
+                            <span class="avatar avatar-medium" id="spec-avatar-bottom">👤</span>
+                            <span class="friend-badge">دوست شما</span>
+                        </div>
+                        <div class="player-details">
+                            <span class="player-name" id="spec-name-bottom">علی</span>
+                            <span class="player-team" id="spec-team-bottom">تیم ۲</span>
+                        </div>
+                        <div class="player-cards-count">
+                            <span class="cards-icon">🃏</span>
+                            <span class="cards-count" id="spec-cards-bottom">۱۳</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trick-area" id="spectator-trick-area">
+                    <div class="played-card-slot slot-top" id="spec-slot-top"></div>
+                    <div class="played-card-slot slot-right" id="spec-slot-right"></div>
+                    <div class="played-card-slot slot-bottom" id="spec-slot-bottom"></div>
+                    <div class="played-card-slot slot-left" id="spec-slot-left"></div>
+                    <div class="trick-winner-indicator" id="spec-trick-winner" style="display: none;">
+                        <span class="winner-icon">👑</span>
+                        <span class="winner-text" id="spec-winner-text"></span>
+                    </div>
+                </div>
+
+                <div class="dealer-indicator" id="spec-dealer-indicator">
+                    <span class="dealer-icon">🎴</span>
+                    <span class="dealer-text">دیلر</span>
+                </div>
+
+                <div class="hakem-indicator" id="spec-hakem-indicator">
+                    <span class="hakem-icon">👑</span>
+                    <span class="hakem-text">حاکم</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="spectator-scoreboard" id="spectator-scoreboard">
+            <div class="score-team team-1">
+                <div class="team-header">
+                    <span class="team-name" id="spec-team-1-name">تیم ۱</span>
+                    <span class="team-badge">تیم ۱</span>
+                </div>
+                <div class="team-score">
+                    <span class="score-value" id="spec-score-team-1">۰</span>
+                    <span class="score-label">امتیاز</span>
+                </div>
+                <div class="team-tricks">
+                    <span class="tricks-label">دست‌ها:</span>
+                    <span class="tricks-value" id="spec-tricks-team-1">۰</span>
+                </div>
+            </div>
+            <div class="score-divider">
+                <span class="divider-text">VS</span>
+            </div>
+            <div class="score-team team-2">
+                <div class="team-header">
+                    <span class="team-name" id="spec-team-2-name">تیم ۲</span>
+                    <span class="team-badge">تیم ۲</span>
+                </div>
+                <div class="team-score">
+                    <span class="score-value" id="spec-score-team-2">۰</span>
+                    <span class="score-label">امتیاز</span>
+                </div>
+                <div class="team-tricks">
+                    <span class="tricks-label">دست‌ها:</span>
+                    <span class="tricks-value" id="spec-tricks-team-2">۰</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="spectator-controls">
+            <div class="controls-bar">
+                <button class="control-btn" id="btn-spec-zoom-in" aria-label="بزرگ‌نمایی">
+                    <span class="icon">🔍+</span>
+                </button>
+                <button class="control-btn" id="btn-spec-zoom-out" aria-label="کوچک‌نمایی">
+                    <span class="icon">🔍-</span>
+                </button>
+                <button class="control-btn" id="btn-spec-reset-view" aria-label="بازنشانی نما">
+                    <span class="icon">🔄</span>
+                </button>
+                <button class="control-btn" id="btn-spec-fullscreen" aria-label="تمام صفحه">
+                    <span class="icon">⛶</span>
+                </button>
+                <button class="control-btn" id="btn-spec-toggle-cards" aria-label="نمایش کارت‌ها">
+                    <span class="icon">🃏</span>
+                </button>
+                <button class="control-btn" id="btn-spec-toggle-chat" aria-label="چت">
+                    <span class="icon">💬</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="spectator-chat-panel" id="spectator-chat-panel">
+            <div class="chat-panel-header">
+                <h4 class="chat-title">چت تماشاگران</h4>
+                <span class="chat-viewers" id="spec-chat-viewers">۲۳ نفر</span>
+                <button class="btn-icon btn-small" id="btn-close-spec-chat" aria-label="بستن">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+            <div class="chat-messages" id="spec-chat-messages">
+                <div class="chat-message other">
+                    <span class="msg-author">بازیکن ۱:</span>
+                    <span class="msg-text">بازی عالی‌ای شده!</span>
+                </div>
+                <div class="chat-message other">
+                    <span class="msg-author">بازیکن ۲:</span>
+                    <span class="msg-text">آره، خیلی هیجان‌انگیزه 🔥</span>
+                </div>
+                <div class="chat-message system">
+                    <span class="msg-text">بازیکن ۳ به تماشا پیوست</span>
+                </div>
+                <div class="chat-message other">
+                    <span class="msg-author">بازیکن ۴:</span>
+                    <span class="msg-text">فکر کنم تیم ۱ ببره</span>
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="spec-chat-input" class="input-field" placeholder="پیام خود را بنویسید..." maxlength="250">
+                <button class="btn btn-primary btn-small" id="btn-send-spec-chat">
+                    <span class="icon">📤</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="spectator-live-stats">
+            <div class="section-header">
+                <h3 class="section-title">آمار زنده بازی</h3>
+            </div>
+            <div class="live-stats-grid">
+                <div class="live-stat-card">
+                    <div class="stat-icon">🃏</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="spec-stat-tricks-played">۰</span>
+                        <span class="stat-label">دست‌های بازی شده</span>
+                    </div>
+                </div>
+                <div class="live-stat-card">
+                    <div class="stat-icon">👑</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="spec-stat-trumps-played">۰</span>
+                        <span class="stat-label">حکم‌های بازی شده</span>
+                    </div>
+                </div>
+                <div class="live-stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="spec-stat-avg-turn">۱۵s</span>
+                        <span class="stat-label">میانگین زمان نوبت</span>
+                    </div>
+                </div>
+                <div class="live-stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="spec-stat-streak">۰</span>
+                        <span class="stat-label">رشته فعلی</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="spectator-players-detail">
+            <div class="section-header">
+                <h3 class="section-title">جزئیات بازیکنان</h3>
+            </div>
+            <div class="players-detail-grid">
+                <div class="player-detail-card" data-player-id="p1">
+                    <div class="player-header">
+                        <span class="avatar avatar-medium" id="spec-detail-avatar-1">👨</span>
+                        <div class="player-info">
+                            <span class="player-name" id="spec-detail-name-1">بازیکن بالا</span>
+                            <span class="player-team-badge team-1">تیم ۱</span>
+                        </div>
+                        <span class="player-role" id="spec-detail-role-1">حاکم</span>
+                    </div>
+                    <div class="player-stats">
+                        <div class="stat-row">
+                            <span class="stat-label">امتیاز فصل:</span>
+                            <span class="stat-value">۱۲۰۰</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">نرخ برد:</span>
+                            <span class="stat-value">۵۸٪</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">لیگ:</span>
+                            <span class="stat-value">نقره</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline btn-small btn-view-profile" data-player-id="p1">
+                        مشاهده پروفایل
+                    </button>
+                </div>
+
+                <div class="player-detail-card" data-player-id="p2">
+                    <div class="player-header">
+                        <span class="avatar avatar-medium" id="spec-detail-avatar-2">👩</span>
+                        <div class="player-info">
+                            <span class="player-name" id="spec-detail-name-2">بازیکن راست</span>
+                            <span class="player-team-badge team-2">تیم ۲</span>
+                        </div>
+                        <span class="player-role" id="spec-detail-role-2">یار</span>
+                    </div>
+                    <div class="player-stats">
+                        <div class="stat-row">
+                            <span class="stat-label">امتیاز فصل:</span>
+                            <span class="stat-value">۱۴۵۰</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">نرخ برد:</span>
+                            <span class="stat-value">۶۲٪</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">لیگ:</span>
+                            <span class="stat-value">طلا</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline btn-small btn-view-profile" data-player-id="p2">
+                        مشاهده پروفایل
+                    </button>
+                </div>
+
+                <div class="player-detail-card friend-card" data-player-id="p3">
+                    <div class="player-header">
+                        <span class="avatar avatar-medium" id="spec-detail-avatar-3">👨</span>
+                        <div class="player-info">
+                            <span class="player-name" id="spec-detail-name-3">بازیکن چپ</span>
+                            <span class="player-team-badge team-1">تیم ۱</span>
+                        </div>
+                        <span class="player-role" id="spec-detail-role-3">یار</span>
+                    </div>
+                    <div class="player-stats">
+                        <div class="stat-row">
+                            <span class="stat-label">امتیاز فصل:</span>
+                            <span class="stat-value">۱۱۰۰</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">نرخ برد:</span>
+                            <span class="stat-value">۵۴٪</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">لیگ:</span>
+                            <span class="stat-value">نقره</span>
+                        </div>
+                    </div>
+                    <div class="friend-actions">
+                        <button class="btn btn-outline btn-small btn-view-profile" data-player-id="p3">
+                            پروفایل
+                        </button>
+                        <button class="btn btn-primary btn-small btn-add-friend" data-player-id="p3">
+                            افزودن دوست
+                        </button>
+                    </div>
+                </div>
+
+                <div class="player-detail-card friend-card highlighted" data-player-id="p4">
+                    <div class="player-header">
+                        <span class="avatar avatar-medium" id="spec-detail-avatar-4">👤</span>
+                        <div class="player-info">
+                            <span class="player-name" id="spec-detail-name-4">علی (دوست شما)</span>
+                            <span class="player-team-badge team-2">تیم ۲</span>
+                        </div>
+                        <span class="player-role" id="spec-detail-role-4">دیلر</span>
+                    </div>
+                    <div class="player-stats">
+                        <div class="stat-row">
+                            <span class="stat-label">امتیاز فصل:</span>
+                            <span class="stat-value">۱۳۵۰</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">نرخ برد:</span>
+                            <span class="stat-value">۶۰٪</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">لیگ:</span>
+                            <span class="stat-value">طلا</span>
+                        </div>
+                    </div>
+                    <div class="friend-actions">
+                        <button class="btn btn-outline btn-small btn-view-profile" data-player-id="p4">
+                            پروفایل
+                        </button>
+                        <button class="btn btn-success btn-small btn-send-message" data-player-id="p4">
+                            پیام
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="spectator-game-history">
+            <div class="section-header">
+                <h3 class="section-title">تاریخچه دست‌ها</h3>
+            </div>
+            <div id="spec-tricks-history" class="tricks-history-list">
+                <div class="trick-history-item won-team1">
+                    <span class="trick-number">دست ۱</span>
+                    <span class="trick-winner">تیم ۱ برد</span>
+                    <span class="trick-cards">A♠ K♥ Q♣ J♦</span>
+                </div>
+                <div class="trick-history-item won-team2">
+                    <span class="trick-number">دست ۲</span>
+                    <span class="trick-winner">تیم ۲ برد</span>
+                    <span class="trick-cards">10♠ 9♥ 8♣ 7♦</span>
+                </div>
+                <div class="trick-history-item won-team1">
+                    <span class="trick-number">دست ۳</span>
+                    <span class="trick-winner">تیم ۱ برد</span>
+                    <span class="trick-cards">A♥ K♠ Q♦ J♣</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="spectator-actions">
+            <div class="actions-card">
+                <div class="actions-header">
+                    <span class="actions-icon">🎮</span>
+                    <div class="actions-info">
+                        <h4 class="actions-title">می‌خواهید بازی کنید؟</h4>
+                        <p class="actions-desc">به دوست خود بپیوندید یا اتاق جدید بسازید</p>
+                    </div>
+                </div>
+                <div class="actions-buttons">
+                    <button class="btn btn-primary btn-block" id="btn-spec-join-friend">
+                        <span class="btn-icon">🎮</span>
+                        <span class="btn-text">پیوستن به بازی دوست</span>
+                    </button>
+                    <button class="btn btn-outline btn-block" id="btn-spec-create-room">
+                        <span class="btn-icon">🏠</span>
+                        <span class="btn-text">ساخت اتاق جدید</span>
+                    </button>
+                    <button class="btn btn-outline btn-block" id="btn-spec-quick-play">
+                        <span class="btn-icon">⚡</span>
+                        <span class="btn-text">بازی سریع</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="spectator-settings-panel" id="spectator-settings-panel" style="display: none;">
+            <div class="settings-overlay"></div>
+            <div class="settings-content">
+                <div class="settings-header">
+                    <h3 class="settings-title">تنظیمات تماشا</h3>
+                    <button class="btn-close-settings" id="btn-close-spec-settings" aria-label="بستن">
+                        <span class="icon">✕</span>
+                    </button>
+                </div>
+                <div class="settings-list">
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-icon">🃏</span>
+                            <div class="setting-text">
+                                <span class="setting-title">نمایش کارت‌های بازیکنان</span>
+                                <span class="setting-desc">نمایش کارت‌های همه بازیکنان</span>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="spec-setting-show-cards" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-icon">💬</span>
+                            <div class="setting-text">
+                                <span class="setting-title">چت تماشاگران</span>
+                                <span class="setting-desc">فعال/غیرفعال کردن چت</span>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="spec-setting-chat" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-icon">🔔</span>
+                            <div class="setting-text">
+                                <span class="setting-title">اعلان‌های بازی</span>
+                                <span class="setting-desc">دریافت اعلان برای رویدادهای مهم</span>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="spec-setting-notifications" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-icon">📊</span>
+                            <div class="setting-text">
+                                <span class="setting-title">نمایش آمار زنده</span>
+                                <span class="setting-desc">نمایش آمار بازی در حین تماشا</span>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="spec-setting-live-stats" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-icon">🎬</span>
+                            <div class="setting-text">
+                                <span class="setting-title">انیمیشن‌ها</span>
+                                <span class="setting-desc">نمایش انیمیشن‌های بازی</span>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="spec-setting-animations" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-icon">🔊</span>
+                            <div class="setting-text">
+                                <span class="setting-title">صدای بازی</span>
+                                <span class="setting-desc">پخش صدای بازی</span>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="spec-setting-sound" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-icon">🎥</span>
+                            <div class="setting-text">
+                                <span class="setting-title">دوربین خودکار</span>
+                                <span class="setting-desc">دوربین به صورت خودکار روی بازیکن فعال زوم می‌کند</span>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="spec-setting-auto-camera" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="spectator-share-modal" id="spectator-share-modal" style="display: none;">
+            <div class="modal-overlay"></div>
+            <div class="modal-content share-modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">اشتراک‌گذاری تماشا</h3>
+                    <button class="btn-icon btn-close-modal" id="btn-close-spec-share" aria-label="بستن">
+                        <span class="icon">✕</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="share-info">
+                        <p class="share-desc">این بازی را با دوستان خود به اشتراک بگذارید تا آنها هم تماشا کنند</p>
+                    </div>
+                    <div class="share-link-section">
+                        <label class="form-label">لینک تماشا</label>
+                        <div class="input-wrapper share-link-wrapper">
+                            <input type="text" id="spec-share-link" class="input-field" readonly value="https://hokmmaster.com/watch/abc123">
+                            <button class="btn btn-primary btn-small" id="btn-copy-share-link">
+                                <span class="icon">📋</span>
+                                <span class="btn-text">کپی</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="share-methods">
+                        <h4 class="methods-title">اشتراک‌گذاری از طریق:</h4>
+                        <div class="methods-grid">
+                            <button class="share-method-btn" data-method="telegram">
+                                <span class="method-icon">✈️</span>
+                                <span class="method-name">تلگرام</span>
+                            </button>
+                            <button class="share-method-btn" data-method="whatsapp">
+                                <span class="method-icon">💬</span>
+                                <span class="method-name">واتساپ</span>
+                            </button>
+                            <button class="share-method-btn" data-method="twitter">
+                                <span class="method-icon">🐦</span>
+                                <span class="method-name">توییتر</span>
+                            </button>
+                            <button class="share-method-btn" data-method="instagram">
+                                <span class="method-icon">📷</span>
+                                <span class="method-name">اینستاگرام</span>
+                            </button>
+                            <button class="share-method-btn" data-method="copy">
+                                <span class="method-icon">📋</span>
+                                <span class="method-name">کپی لینک</span>
+                            </button>
+                            <button class="share-method-btn" data-method="more">
+                                <span class="method-icon">⋯</span>
+                                <span class="method-name">بیشتر</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="spectator-tips">
+            <div class="section-header">
+                <h3 class="section-title">نکات تماشا</h3>
+            </div>
+            <div class="tips-list">
+                <div class="tip-item">
+                    <span class="tip-icon">💡</span>
+                    <p class="tip-text">با تماشا کردن بازی دوستان، استراتژی‌های جدید یاد بگیرید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">💬</span>
+                    <p class="tip-text">در چت تماشاگران با دیگر تماشاگران گفتگو کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🎮</span>
+                    <p class="tip-text">اگر می‌خواهید بازی کنید، می‌توانید به بازی دوست خود بپیوندید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">📤</span>
+                    <p class="tip-text">بازی را با دوستان خود به اشتراک بگذارید</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
