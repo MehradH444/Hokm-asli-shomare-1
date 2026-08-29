@@ -1,0 +1,247 @@
+<div id="profile-screen" class="screen screen-profile" data-screen-name="profile">
+    <div class="screen-content">
+        <section class="profile-header">
+            <div class="profile-cover"></div>
+            <div class="profile-info">
+                <div class="profile-avatar-wrapper">
+                    <span id="profile-avatar" class="avatar avatar-xlarge">👤</span>
+                    <button id="btn-change-avatar" class="btn-change-avatar" aria-label="تغییر آواتار">
+                        <span class="icon"></span>
+                    </button>
+                    <span id="profile-level-badge" class="level-badge">سطح ۱</span>
+                </div>
+                <div class="profile-details">
+                    <h1 id="profile-username" class="profile-username">بازیکن</h1>
+                    <p id="profile-display-name" class="profile-display-name"></p>
+                    <div class="profile-meta">
+                        <span id="profile-member-since" class="meta-item">
+                            <span class="meta-icon"></span>
+                            <span class="meta-text">عضو از ۱۰۳</span>
+                        </span>
+                        <span id="profile-country" class="meta-item">
+                            <span class="meta-icon">🌍</span>
+                            <span class="meta-text">ایران</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon-wrapper">
+                    <span class="stat-icon">🏆</span>
+                </div>
+                <div class="stat-content">
+                    <span id="profile-rating" class="stat-value">۱۰۰</span>
+                    <span class="stat-label">امتیاز</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon-wrapper">
+                    <span class="stat-icon">🎮</span>
+                </div>
+                <div class="stat-content">
+                    <span id="profile-games-played" class="stat-value">۰</span>
+                    <span class="stat-label">بازی انجام شده</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon-wrapper">
+                    <span class="stat-icon">⭐</span>
+                </div>
+                <div class="stat-content">
+                    <span id="profile-win-rate" class="stat-value">۰٪</span>
+                    <span class="stat-label">نرخ برد</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon-wrapper">
+                    <span class="stat-icon">🔥</span>
+                </div>
+                <div class="stat-content">
+                    <span id="profile-best-streak" class="stat-value">۰</span>
+                    <span class="stat-label">بهترین رشته برد</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-league-card">
+            <div class="league-card-header">
+                <span id="profile-league-icon" class="league-icon">🥉</span>
+                <div class="league-info">
+                    <h3 class="league-title">لیگ فعلی</h3>
+                    <p id="profile-league-name" class="league-name">برنز</p>
+                </div>
+                <button id="btn-view-league" class="btn btn-outline btn-small" data-route="league">
+                    مشاهده لیگ
+                </button>
+            </div>
+            <div class="league-progress-section">
+                <div class="progress-bar-large">
+                    <div id="profile-league-progress" class="progress-fill" style="width: 0%;"></div>
+                </div>
+                <div class="league-progress-info">
+                    <span id="profile-league-points" class="points-text">۰ / ۱۰۰۰ امتیاز</span>
+                    <span id="profile-league-next" class="next-text">۱۰۰ امتیاز تا نقره</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-currency-cards">
+            <div class="currency-card coins">
+                <div class="currency-icon">🪙</div>
+                <div class="currency-info">
+                    <span id="profile-coins" class="currency-value">۰</span>
+                    <span class="currency-label">سکه</span>
+                </div>
+                <button id="btn-buy-coins" class="btn-currency-action" data-route="shop">
+                    <span class="icon">+</span>
+                </button>
+            </div>
+            <div class="currency-card gems">
+                <div class="currency-icon"></div>
+                <div class="currency-info">
+                    <span id="profile-gems" class="currency-value">۰</span>
+                    <span class="currency-label">الماس</span>
+                </div>
+                <button id="btn-buy-gems" class="btn-currency-action" data-route="shop">
+                    <span class="icon">+</span>
+                </button>
+            </div>
+            <div class="currency-card xp">
+                <div class="currency-icon">⭐</div>
+                <div class="currency-info">
+                    <span id="profile-xp" class="currency-value">۰</span>
+                    <span class="currency-label">تجربه</span>
+                </div>
+                <button id="btn-view-level" class="btn-currency-action" data-route="achievements">
+                    <span class="icon">→</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="profile-bio-section">
+            <div class="section-header">
+                <h3 class="section-title">درباره من</h3>
+                <button id="btn-edit-bio" class="btn-icon btn-small" aria-label="ویرایش بیوگرافی">
+                    <span class="icon">✏️</span>
+                </button>
+            </div>
+            <div id="profile-bio" class="bio-content">
+                <p class="bio-text">هنوز بیوگرافی اضافه نکرده‌اید.</p>
+            </div>
+        </section>
+
+        <section class="profile-achievements-preview">
+            <div class="section-header">
+                <h3 class="section-title">دستاوردها</h3>
+                <a href="#/achievements" class="section-link" data-route="achievements">مشاهده همه</a>
+            </div>
+            <div id="profile-achievements-list" class="achievements-preview">
+                <div class="achievement-badge unlocked">
+                    <span class="badge-icon"></span>
+                    <span class="badge-name">اولین بازی</span>
+                </div>
+                <div class="achievement-badge unlocked">
+                    <span class="badge-icon"></span>
+                    <span class="badge-name">برنده</span>
+                </div>
+                <div class="achievement-badge locked">
+                    <span class="badge-icon"></span>
+                    <span class="badge-name">قفل</span>
+                </div>
+                <div class="achievement-badge locked">
+                    <span class="badge-icon"></span>
+                    <span class="badge-name">قفل</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-recent-matches">
+            <div class="section-header">
+                <h3 class="section-title">آخرین بازی‌ها</h3>
+                <a href="#/match-history" class="section-link" data-route="match-history">تاریخچه کامل</a>
+            </div>
+            <div id="profile-matches-list" class="matches-list-vertical">
+                <div class="match-item win">
+                    <div class="match-result-icon">🏆</div>
+                    <div class="match-details">
+                        <span class="match-mode">کلاسیک</span>
+                        <span class="match-score">۷ - ۳</span>
+                    </div>
+                    <div class="match-time">۵ دقیقه پیش</div>
+                </div>
+                <div class="match-item lose">
+                    <div class="match-result-icon">💔</div>
+                    <div class="match-details">
+                        <span class="match-mode">رقابتی</span>
+                        <span class="match-score">۵ - ۷</span>
+                    </div>
+                    <div class="match-time">۲۰ دقیقه پیش</div>
+                </div>
+                <div class="match-item win">
+                    <div class="match-result-icon">👑</div>
+                    <div class="match-details">
+                        <span class="match-mode">خصوصی</span>
+                        <span class="match-score">۷ - ۰</span>
+                    </div>
+                    <div class="match-time">۱ ساعت پیش</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-friends-preview">
+            <div class="section-header">
+                <h3 class="section-title">دوستان</h3>
+                <a href="#/friends" class="section-link" data-route="friends">مشاهده همه</a>
+            </div>
+            <div id="profile-friends-list" class="friends-list-horizontal">
+                <div class="friend-card">
+                    <div class="friend-avatar-wrapper">
+                        <span class="avatar avatar-medium"></span>
+                        <span class="online-indicator"></span>
+                    </div>
+                    <span class="friend-name">علی</span>
+                </div>
+                <div class="friend-card">
+                    <div class="friend-avatar-wrapper">
+                        <span class="avatar avatar-medium">👩</span>
+                        <span class="online-indicator"></span>
+                    </div>
+                    <span class="friend-name">مریم</span>
+                </div>
+                <div class="friend-card">
+                    <div class="friend-avatar-wrapper">
+                        <span class="avatar avatar-medium">👨</span>
+                        <span class="online-indicator offline"></span>
+                    </div>
+                    <span class="friend-name">رضا</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-actions">
+            <button id="btn-edit-profile" class="btn btn-primary btn-block" data-modal="profile-edit">
+                <span class="btn-icon">️</span>
+                <span class="btn-text">ویرایش پروفایل</span>
+            </button>
+            <button id="btn-view-inventory" class="btn btn-outline btn-block" data-route="inventory">
+                <span class="btn-icon">🎒</span>
+                <span class="btn-text">موجودی من</span>
+            </button>
+            <button id="btn-view-statistics" class="btn btn-outline btn-block" data-route="statistics">
+                <span class="btn-icon">📊</span>
+                <span class="btn-text">آمار کامل</span>
+            </button>
+            <button id="btn-share-profile" class="btn btn-outline btn-block">
+                <span class="btn-icon">📤</span>
+                <span class="btn-text">اشتراک‌گذاری پروفایل</span>
+            </button>
+            <button id="btn-logout" class="btn btn-danger btn-block">
+                <span class="btn-icon">🚪</span>
+                <span class="btn-text">خروج از حساب</span>
+            </button>
+        </section>
+    </div>
+</div>
