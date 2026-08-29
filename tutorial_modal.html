@@ -1,0 +1,1670 @@
+<div id="tutorial-modal" class="modal modal-large" data-modal-name="tutorial" style="display: none;">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-header-right">
+                <span class="modal-icon">📚</span>
+                <div class="modal-title-group">
+                    <h3 class="modal-title" id="tutorial-modal-title">آموزش حکم</h3>
+                    <span class="modal-subtitle" id="tutorial-modal-subtitle">آموزش گام به گام</span>
+                </div>
+            </div>
+            <div class="modal-header-left">
+                <div class="tutorial-progress-indicator" id="tutorial-progress-indicator">
+                    <span class="progress-text">مرحله <span id="current-step-number">۱</span> از <span id="total-steps-number">۱۰</span></span>
+                    <div class="progress-bar-mini">
+                        <div class="progress-fill" id="tutorial-progress-fill" style="width: 10%;"></div>
+                    </div>
+                </div>
+                <button class="btn-icon btn-small" id="btn-tutorial-skip" aria-label="رد شدن">
+                    <span class="icon">⏭️</span>
+                </button>
+                <button class="btn-icon btn-small btn-close-modal" id="btn-close-tutorial" aria-label="بستن">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="modal-body">
+            <div class="tutorial-layout">
+                <aside class="tutorial-sidebar">
+                    <div class="tutorial-chapters">
+                        <h4 class="chapters-title">فهرست آموزش</h4>
+                        <div class="chapters-list" id="tutorial-chapters-list">
+                            <button class="chapter-item active" data-chapter="1" data-step="1">
+                                <span class="chapter-number">۱</span>
+                                <span class="chapter-title">مقدمه</span>
+                                <span class="chapter-status completed">✅</span>
+                            </button>
+                            <button class="chapter-item" data-chapter="2" data-step="2">
+                                <span class="chapter-number">۲</span>
+                                <span class="chapter-title">کارت‌ها</span>
+                                <span class="chapter-status"></span>
+                            </button>
+                            <button class="chapter-item" data-chapter="3" data-step="3">
+                                <span class="chapter-number">۳</span>
+                                <span class="chapter-title">خال‌ها</span>
+                                <span class="chapter-status"></span>
+                            </button>
+                            <button class="chapter-item" data-chapter="4" data-step="4">
+                                <span class="chapter-number">۴</span>
+                                <span class="chapter-title">ارزش کارت‌ها</span>
+                                <span class="chapter-status"></span>
+                            </button>
+                            <button class="chapter-item" data-chapter="5" data-step="5">
+                                <span class="chapter-number">۵</span>
+                                <span class="chapter-title">حکم (Trump)</span>
+                                <span class="chapter-status"></span>
+                            </button>
+                            <button class="chapter-item" data-chapter="6" data-step="6">
+                                <span class="chapter-number">۶</span>
+                                <span class="chapter-title">Follow Suit</span>
+                                <span class="chapter-status"></span>
+                            </button>
+                            <button class="chapter-item" data-chapter="7" data-step="7">
+                                <span class="chapter-number">۷</span>
+                                <span class="chapter-title">بردن دست</span>
+                                <span class="chapter-status"></span>
+                            </button>
+                            <button class="chapter-item" data-chapter="8" data-step="8">
+                                <span class="chapter-number">۸</span>
+                                <span class="chapter-title">اعلام کت</span>
+                                <span class="chapter-status"></span>
+                            </button>
+                            <button class="chapter-item" data-chapter="9" data-step="9">
+                                <span class="chapter-number">۹</span>
+                                <span class="chapter-title">امتیازدهی</span>
+                                <span class="chapter-status"></span>
+                            </button>
+                            <button class="chapter-item" data-chapter="10" data-step="10">
+                                <span class="chapter-number">۱۰</span>
+                                <span class="chapter-title">استراتژی</span>
+                                <span class="chapter-status"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="tutorial-sidebar-footer">
+                        <div class="tutorial-stats">
+                            <div class="stat-item">
+                                <span class="stat-icon">⏱️</span>
+                                <span class="stat-text" id="tutorial-time-spent">۰:۰۰</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon">📊</span>
+                                <span class="stat-text" id="tutorial-completion-percent">۱۰٪</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <div class="tutorial-content-area">
+                    <!-- Step 1: Introduction -->
+                    <section class="tutorial-step active" id="tutorial-step-1" data-step="1">
+                        <div class="step-hero">
+                            <div class="step-hero-icon">🎴</div>
+                            <h2 class="step-hero-title">به آموزش حکم خوش آمدید!</h2>
+                            <p class="step-hero-desc">
+                                در این آموزش، شما با تمام قوانین و استراتژی‌های بازی حکم آشنا خواهید شد.
+                            </p>
+                        </div>
+
+                        <div class="step-content">
+                            <div class="intro-card">
+                                <h3 class="intro-title">حکم چیست؟</h3>
+                                <p class="intro-text">
+                                    حکم یک بازی کارتی ایرانی محبوب است که با ۴ بازیکن (دو تیم دو نفره)
+                                    و یک دست ۵۲ تایی کارت بازی می‌شود. یارها روبروی هم می‌نشینند.
+                                </p>
+                                <div class="intro-visual">
+                                    <div class="table-preview">
+                                        <div class="player-preview top">
+                                            <span class="player-avatar">🤖</span>
+                                            <span class="player-label">یار ۲</span>
+                                        </div>
+                                        <div class="player-preview left">
+                                            <span class="player-avatar">🤖</span>
+                                            <span class="player-label">حریف ۱</span>
+                                        </div>
+                                        <div class="player-preview center">
+                                            <span class="table-icon">🎴</span>
+                                            <span class="table-label">میز بازی</span>
+                                        </div>
+                                        <div class="player-preview right">
+                                            <span class="player-avatar">🤖</span>
+                                            <span class="player-label">حریف ۲</span>
+                                        </div>
+                                        <div class="player-preview bottom you">
+                                            <span class="player-avatar">👤</span>
+                                            <span class="player-label">شما</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-grid">
+                                <div class="info-card">
+                                    <span class="info-icon">👥</span>
+                                    <h4 class="info-title">تعداد بازیکنان</h4>
+                                    <p class="info-text">۴ بازیکن در ۲ تیم</p>
+                                </div>
+                                <div class="info-card">
+                                    <span class="info-icon">🎴</span>
+                                    <h4 class="info-title">تعداد کارت</h4>
+                                    <p class="info-text">۵۲ کارت استاندارد</p>
+                                </div>
+                                <div class="info-card">
+                                    <span class="info-icon">🎯</span>
+                                    <h4 class="info-title">هدف بازی</h4>
+                                    <p class="info-text">کسب ۷ دست قبل از حریف</p>
+                                </div>
+                                <div class="info-card">
+                                    <span class="info-icon">⏱️</span>
+                                    <h4 class="info-title">مدت بازی</h4>
+                                    <p class="info-text">حدود ۱۰-۱۵ دقیقه</p>
+                                </div>
+                            </div>
+
+                            <div class="key-points">
+                                <h4 class="points-title">نکات کلیدی</h4>
+                                <ul class="points-list">
+                                    <li>
+                                        <span class="point-icon">✅</span>
+                                        <span class="point-text">هر بازیکن ۱۳ کارت دریافت می‌کند</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">✅</span>
+                                        <span class="point-text">حاکم یک خال را به عنوان حکم انتخاب می‌کند</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">✅</span>
+                                        <span class="point-text">تیمی که زودتر به ۷ دست برسد، برنده است</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">✅</span>
+                                        <span class="point-text">اعلام کت پاداش دوبرابر دارد</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 2: Cards -->
+                    <section class="tutorial-step" id="tutorial-step-2" data-step="2" style="display: none;">
+                        <div class="step-hero">
+                            <div class="step-hero-icon">🎴</div>
+                            <h2 class="step-hero-title">کارت‌های بازی</h2>
+                            <p class="step-hero-desc">
+                                آشنایی با ساختار کارت‌های حکم
+                            </p>
+                        </div>
+
+                        <div class="step-content">
+                            <div class="cards-overview">
+                                <h3 class="section-title">یک دست کامل کارت</h3>
+                                <p class="section-desc">
+                                    یک دست استاندارد ۵۲ کارت دارد که در ۴ خال تقسیم می‌شود.
+                                    هر خال ۱۳ کارت دارد.
+                                </p>
+
+                                <div class="suits-grid">
+                                    <div class="suit-card spades">
+                                        <div class="suit-header">
+                                            <span class="suit-icon">♠</span>
+                                            <span class="suit-name">پیک (Spades)</span>
+                                        </div>
+                                        <div class="suit-cards">
+                                            <div class="mini-card">A</div>
+                                            <div class="mini-card">K</div>
+                                            <div class="mini-card">Q</div>
+                                            <div class="mini-card">J</div>
+                                            <div class="mini-card">10</div>
+                                            <div class="mini-card">9</div>
+                                            <div class="mini-card">...</div>
+                                            <div class="mini-card">2</div>
+                                        </div>
+                                        <span class="suit-count">۱۳ کارت</span>
+                                    </div>
+
+                                    <div class="suit-card hearts">
+                                        <div class="suit-header">
+                                            <span class="suit-icon">♥</span>
+                                            <span class="suit-name">دل (Hearts)</span>
+                                        </div>
+                                        <div class="suit-cards">
+                                            <div class="mini-card">A</div>
+                                            <div class="mini-card">K</div>
+                                            <div class="mini-card">Q</div>
+                                            <div class="mini-card">J</div>
+                                            <div class="mini-card">10</div>
+                                            <div class="mini-card">9</div>
+                                            <div class="mini-card">...</div>
+                                            <div class="mini-card">2</div>
+                                        </div>
+                                        <span class="suit-count">۱۳ کارت</span>
+                                    </div>
+
+                                    <div class="suit-card diamonds">
+                                        <div class="suit-header">
+                                            <span class="suit-icon">♦</span>
+                                            <span class="suit-name">خشت (Diamonds)</span>
+                                        </div>
+                                        <div class="suit-cards">
+                                            <div class="mini-card">A</div>
+                                            <div class="mini-card">K</div>
+                                            <div class="mini-card">Q</div>
+                                            <div class="mini-card">J</div>
+                                            <div class="mini-card">10</div>
+                                            <div class="mini-card">9</div>
+                                            <div class="mini-card">...</div>
+                                            <div class="mini-card">2</div>
+                                        </div>
+                                        <span class="suit-count">۱۳ کارت</span>
+                                    </div>
+
+                                    <div class="suit-card clubs">
+                                        <div class="suit-header">
+                                            <span class="suit-icon">♣</span>
+                                            <span class="suit-name">گشنیز (Clubs)</span>
+                                        </div>
+                                        <div class="suit-cards">
+                                            <div class="mini-card">A</div>
+                                            <div class="mini-card">K</div>
+                                            <div class="mini-card">Q</div>
+                                            <div class="mini-card">J</div>
+                                            <div class="mini-card">10</div>
+                                            <div class="mini-card">9</div>
+                                            <div class="mini-card">...</div>
+                                            <div class="mini-card">2</div>
+                                        </div>
+                                        <span class="suit-count">۱۳ کارت</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-anatomy">
+                                <h3 class="section-title">ساختار یک کارت</h3>
+                                <div class="anatomy-demo">
+                                    <div class="demo-card">
+                                        <div class="card-corner top-left">
+                                            <span class="card-rank">A</span>
+                                            <span class="card-suit">♠</span>
+                                        </div>
+                                        <div class="card-center">
+                                            <span class="card-suit-large">♠</span>
+                                        </div>
+                                        <div class="card-corner bottom-right">
+                                            <span class="card-rank">A</span>
+                                            <span class="card-suit">♠</span>
+                                        </div>
+                                    </div>
+                                    <div class="anatomy-labels">
+                                        <div class="label-item">
+                                            <span class="label-line"></span>
+                                            <span class="label-text">رتبه (Rank): A, K, Q, J, 10, ..., 2</span>
+                                        </div>
+                                        <div class="label-item">
+                                            <span class="label-line"></span>
+                                            <span class="label-text">خال (Suit): ♠ ♥ ♦ ♣</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="key-points">
+                                <h4 class="points-title">نکات مهم</h4>
+                                <ul class="points-list">
+                                    <li>
+                                        <span class="point-icon">🎴</span>
+                                        <span class="point-text">هر خال ۱۳ کارت دارد: A, K, Q, J, 10, 9, 8, 7, 6, 5, 4, 3, 2</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">🎨</span>
+                                        <span class="point-text">خال‌های قرمز: ♥ دل و ♦ خشت</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">⚫</span>
+                                        <span class="point-text">خال‌های سیاه: ♠ پیک و ♣ گشنیز</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">🔢</span>
+                                        <span class="point-text">مجموع: ۴ × ۱۳ = ۵۲ کارت</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 3: Suits -->
+                    <section class="tutorial-step" id="tutorial-step-3" data-step="3" style="display: none;">
+                        <div class="step-hero">
+                            <div class="step-hero-icon">🎨</div>
+                            <h2 class="step-hero-title">خال‌های کارت</h2>
+                            <p class="step-hero-desc">
+                                آشنایی با چهار خال بازی حکم
+                            </p>
+                        </div>
+
+                        <div class="step-content">
+                            <div class="suits-detail">
+                                <div class="suit-detail-card spades">
+                                    <div class="suit-detail-header">
+                                        <span class="suit-icon-large">♠</span>
+                                        <div class="suit-info">
+                                            <h3 class="suit-name">پیک (Spades)</h3>
+                                            <span class="suit-color">سیاه</span>
+                                        </div>
+                                    </div>
+                                    <p class="suit-description">
+                                        پیک یکی از دو خال سیاه بازی است. در حکم، پیک معمولاً به عنوان
+                                        یک خال قدرتمند شناخته می‌شود.
+                                    </p>
+                                    <div class="suit-examples">
+                                        <div class="example-card">A♠</div>
+                                        <div class="example-card">K♠</div>
+                                        <div class="example-card">Q♠</div>
+                                        <div class="example-card">J♠</div>
+                                    </div>
+                                </div>
+
+                                <div class="suit-detail-card hearts">
+                                    <div class="suit-detail-header">
+                                        <span class="suit-icon-large">♥</span>
+                                        <div class="suit-info">
+                                            <h3 class="suit-name">دل (Hearts)</h3>
+                                            <span class="suit-color">قرمز</span>
+                                        </div>
+                                    </div>
+                                    <p class="suit-description">
+                                        دل یکی از دو خال قرمز بازی است. نماد قلب و عشق است.
+                                    </p>
+                                    <div class="suit-examples">
+                                        <div class="example-card">A♥</div>
+                                        <div class="example-card">K♥</div>
+                                        <div class="example-card">Q♥</div>
+                                        <div class="example-card">J♥</div>
+                                    </div>
+                                </div>
+
+                                <div class="suit-detail-card diamonds">
+                                    <div class="suit-detail-header">
+                                        <span class="suit-icon-large">♦</span>
+                                        <div class="suit-info">
+                                            <h3 class="suit-name">خشت (Diamonds)</h3>
+                                            <span class="suit-color">قرمز</span>
+                                        </div>
+                                    </div>
+                                    <p class="suit-description">
+                                        خشت یکی از دو خال قرمز بازی است. نماد لوزی و ثروت است.
+                                    </p>
+                                    <div class="suit-examples">
+                                        <div class="example-card">A♦</div>
+                                        <div class="example-card">K♦</div>
+                                        <div class="example-card">Q♦</div>
+                                        <div class="example-card">J♦</div>
+                                    </div>
+                                </div>
+
+                                <div class="suit-detail-card clubs">
+                                    <div class="suit-detail-header">
+                                        <span class="suit-icon-large">♣</span>
+                                        <div class="suit-info">
+                                            <h3 class="suit-name">گشنیز (Clubs)</h3>
+                                            <span class="suit-color">سیاه</span>
+                                        </div>
+                                    </div>
+                                    <p class="suit-description">
+                                        گشنیز یکی از دو خال سیاه بازی است. نماد شبدر است.
+                                    </p>
+                                    <div class="suit-examples">
+                                        <div class="example-card">A♣</div>
+                                        <div class="example-card">K♣</div>
+                                        <div class="example-card">Q♣</div>
+                                        <div class="example-card">J♣</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="key-points">
+                                <h4 class="points-title">خلاصه خال‌ها</h4>
+                                <div class="summary-table">
+                                    <div class="table-row header">
+                                        <span class="cell">خال</span>
+                                        <span class="cell">نماد</span>
+                                        <span class="cell">رنگ</span>
+                                        <span class="cell">تعداد</span>
+                                    </div>
+                                    <div class="table-row">
+                                        <span class="cell">پیک</span>
+                                        <span class="cell">♠</span>
+                                        <span class="cell">سیاه</span>
+                                        <span class="cell">۱۳</span>
+                                    </div>
+                                    <div class="table-row">
+                                        <span class="cell">دل</span>
+                                        <span class="cell">♥</span>
+                                        <span class="cell">قرمز</span>
+                                        <span class="cell">۱۳</span>
+                                    </div>
+                                    <div class="table-row">
+                                        <span class="cell">خشت</span>
+                                        <span class="cell">♦</span>
+                                        <span class="cell">قرمز</span>
+                                        <span class="cell">۱۳</span>
+                                    </div>
+                                    <div class="table-row">
+                                        <span class="cell">گشنیز</span>
+                                        <span class="cell">♣</span>
+                                        <span class="cell">سیاه</span>
+                                        <span class="cell">۱۳</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 4: Card Values -->
+                    <section class="tutorial-step" id="tutorial-step-4" data-step="4" style="display: none;">
+                        <div class="step-hero">
+                            <div class="step-hero-icon">🔢</div>
+                            <h2 class="step-hero-title">ارزش کارت‌ها</h2>
+                            <p class="step-hero-desc">
+                                ترتیب قدرت کارت‌ها در حکم
+                            </p>
+                        </div>
+
+                        <div class="step-content">
+                            <div class="values-overview">
+                                <h3 class="section-title">ترتیب قدرت کارت‌ها</h3>
+                                <p class="section-desc">
+                                    در حکم، کارت‌ها بر اساس ارزش خود قدرت دارند. از قوی‌ترین به ضعیف‌ترین:
+                                </p>
+
+                                <div class="values-list">
+                                    <div class="value-item rank-1">
+                                        <div class="value-card">
+                                            <span class="card-rank">A</span>
+                                            <span class="card-suit">♠</span>
+                                        </div>
+                                        <div class="value-info">
+                                            <span class="value-name">آس (A)</span>
+                                            <span class="value-desc">قوی‌ترین کارت</span>
+                                        </div>
+                                        <span class="value-rank">۱</span>
+                                    </div>
+                                    <div class="value-item rank-2">
+                                        <div class="value-card">
+                                            <span class="card-rank">K</span>
+                                            <span class="card-suit">♠</span>
+                                        </div>
+                                        <div class="value-info">
+                                            <span class="value-name">شاه (K)</span>
+                                            <span class="value-desc">دومین کارت قوی</span>
+                                        </div>
+                                        <span class="value-rank">۲</span>
+                                    </div>
+                                    <div class="value-item rank-3">
+                                        <div class="value-card">
+                                            <span class="card-rank">Q</span>
+                                            <span class="card-suit">♠</span>
+                                        </div>
+                                        <div class="value-info">
+                                            <span class="value-name">بی‌بی (Q)</span>
+                                            <span class="value-desc">سومین کارت قوی</span>
+                                        </div>
+                                        <span class="value-rank">۳</span>
+                                    </div>
+                                    <div class="value-item rank-4">
+                                        <div class="value-card">
+                                            <span class="card-rank">J</span>
+                                            <span class="card-suit">♠</span>
+                                        </div>
+                                        <div class="value-info">
+                                            <span class="value-name">سرباز (J)</span>
+                                            <span class="value-desc">چهارمین کارت قوی</span>
+                                        </div>
+                                        <span class="value-rank">۴</span>
+                                    </div>
+                                    <div class="value-item rank-5">
+                                        <div class="value-card">
+                                            <span class="card-rank">10</span>
+                                            <span class="card-suit">♠</span>
+                                        </div>
+                                        <div class="value-info">
+                                            <span class="value-name">ده (10)</span>
+                                            <span class="value-desc">پنجمین کارت قوی</span>
+                                        </div>
+                                        <span class="value-rank">۵</span>
+                                    </div>
+                                    <div class="value-item rank-6">
+                                        <div class="value-card">
+                                            <span class="card-rank">9</span>
+                                            <span class="card-suit">♠</span>
+                                        </div>
+                                        <div class="value-info">
+                                            <span class="value-name">نه (9)</span>
+                                            <span class="value-desc">ششمین کارت</span>
+                                        </div>
+                                        <span class="value-rank">۶</span>
+                                    </div>
+                                    <div class="value-item rank-7">
+                                        <div class="value-card">
+                                            <span class="card-rank">...</span>
+                                            <span class="card-suit">♠</span>
+                                        </div>
+                                        <div class="value-info">
+                                            <span class="value-name">۸ تا ۳</span>
+                                            <span class="value-desc">کارت‌های میانی</span>
+                                        </div>
+                                        <span class="value-rank">۷-۱۲</span>
+                                    </div>
+                                    <div class="value-item rank-last">
+                                        <div class="value-card">
+                                            <span class="card-rank">2</span>
+                                            <span class="card-suit">♠</span>
+                                        </div>
+                                        <div class="value-info">
+                                            <span class="value-name">دو (2)</span>
+                                            <span class="value-desc">ضعیف‌ترین کارت (مگر حکم)</span>
+                                        </div>
+                                        <span class="value-rank">۱۳</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="special-case">
+                                <h3 class="section-title">استثنای مهم: کارت حکم</h3>
+                                <div class="special-card">
+                                    <div class="special-icon">👑</div>
+                                    <div class="special-info">
+                                        <h4 class="special-title">کارت ۲ حکم</h4>
+                                        <p class="special-desc">
+                                            وقتی خالی به عنوان حکم انتخاب می‌شود، کارت ۲ آن خال
+                                            <strong>قوی‌ترین کارت بازی</strong> می‌شود!
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="special-example">
+                                    <p class="example-title">مثال:</p>
+                                    <p class="example-text">
+                                        اگر <strong>♠ پیک</strong> به عنوان حکم انتخاب شود،
+                                        <strong>2♠</strong> از <strong>A♠</strong> قوی‌تر است!
+                                    </p>
+                                    <div class="example-visual">
+                                        <div class="example-card strong">
+                                            <span class="card-rank">2</span>
+                                            <span class="card-suit">♠</span>
+                                            <span class="crown-icon">👑</span>
+                                        </div>
+                                        <span class="vs-text">&gt;</span>
+                                        <div class="example-card">
+                                            <span class="card-rank">A</span>
+                                            <span class="card-suit">♠</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="key-points">
+                                <h4 class="points-title">خلاصه ارزش کارت‌ها</h4>
+                                <ul class="points-list">
+                                    <li>
+                                        <span class="point-icon">🥇</span>
+                                        <span class="point-text">A (آس) - قوی‌ترین کارت عادی</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">🥈</span>
+                                        <span class="point-text">K (شاه) - دومین کارت قوی</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">🥉</span>
+                                        <span class="point-text">Q (بی‌بی) - سومین کارت قوی</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">🎖️</span>
+                                        <span class="point-text">J (سرباز) - چهارمین کارت قوی</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">🔢</span>
+                                        <span class="point-text">10, 9, 8, ..., 3 - به ترتیب</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">⬇️</span>
+                                        <span class="point-text">2 (دو) - ضعیف‌ترین کارت (مگر حکم)</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">👑</span>
+                                        <span class="point-text">2 حکم - قوی‌ترین کارت بازی!</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 5: Trump -->
+                    <section class="tutorial-step" id="tutorial-step-5" data-step="5" style="display: none;">
+                        <div class="step-hero">
+                            <div class="step-hero-icon">👑</div>
+                            <h2 class="step-hero-title">حکم (Trump)</h2>
+                            <p class="step-hero-desc">
+                                مهم‌ترین مفهوم در بازی حکم
+                            </p>
+                        </div>
+
+                        <div class="step-content">
+                            <div class="trump-intro">
+                                <h3 class="section-title">حکم چیست؟</h3>
+                                <p class="section-desc">
+                                    حکم، خالی است که توسط حاکم انتخاب می‌شود و کارت‌های آن خال
+                                    از تمام کارت‌های دیگر خال‌ها قوی‌تر هستند.
+                                </p>
+
+                                <div class="trump-visual">
+                                    <div class="trump-selection-demo">
+                                        <div class="hakem-avatar">
+                                            <span class="avatar avatar-large">👤</span>
+                                            <span class="hakem-badge">حاکم</span>
+                                        </div>
+                                        <div class="trump-options">
+                                            <button class="trump-option-demo" data-suit="spades">
+                                                <span class="suit-icon">♠</span>
+                                                <span class="suit-name">پیک</span>
+                                            </button>
+                                            <button class="trump-option-demo selected" data-suit="hearts">
+                                                <span class="suit-icon">♥</span>
+                                                <span class="suit-name">دل</span>
+                                                <span class="selected-badge">✓</span>
+                                            </button>
+                                            <button class="trump-option-demo" data-suit="diamonds">
+                                                <span class="suit-icon">♦</span>
+                                                <span class="suit-name">خشت</span>
+                                            </button>
+                                            <button class="trump-option-demo" data-suit="clubs">
+                                                <span class="suit-icon">♣</span>
+                                                <span class="suit-name">گشنیز</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="trump-rules">
+                                <h3 class="section-title">قوانین حکم</h3>
+                                <div class="rules-grid">
+                                    <div class="rule-card">
+                                        <span class="rule-icon">👑</span>
+                                        <h4 class="rule-title">انتخاب حکم</h4>
+                                        <p class="rule-text">
+                                            حاکم (کارت دیلر) یکی از چهار خال را به عنوان حکم انتخاب می‌کند
+                                        </p>
+                                    </div>
+                                    <div class="rule-card">
+                                        <span class="rule-icon">⚔️</span>
+                                        <h4 class="rule-title">قدرت حکم</h4>
+                                        <p class="rule-text">
+                                            تمام کارت‌های خال حکم از کارت‌های سایر خال‌ها قوی‌ترند
+                                        </p>
+                                    </div>
+                                    <div class="rule-card">
+                                        <span class="rule-icon">🎯</span>
+                                        <h4 class="rule-title">بازی با حکم</h4>
+                                        <p class="rule-text">
+                                            اگر خال اصلی را ندارید، می‌توانید با کارت حکم دست را ببرید
+                                        </p>
+                                    </div>
+                                    <div class="rule-card">
+                                        <span class="rule-icon">🔢</span>
+                                        <h4 class="rule-title">ترتیب حکم‌ها</h4>
+                                        <p class="rule-text">
+                                            بین کارت‌های حکم هم ترتیب ارزش رعایت می‌شود (A &gt; K &gt; Q &gt; ...)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="trump-example">
+                                <h3 class="section-title">مثال عملی</h3>
+                                <div class="example-scenario">
+                                    <div class="scenario-info">
+                                        <span class="scenario-label">حکم:</span>
+                                        <span class="scenario-value trump">♥ دل</span>
+                                    </div>
+                                    <div class="scenario-cards">
+                                        <div class="played-card">
+                                            <span class="card-rank">A</span>
+                                            <span class="card-suit">♠</span>
+                                            <span class="card-owner">بازیکن ۱</span>
+                                        </div>
+                                        <div class="played-card">
+                                            <span class="card-rank">K</span>
+                                            <span class="card-suit">♠</span>
+                                            <span class="card-owner">بازیکن ۲</span>
+                                        </div>
+                                        <div class="played-card">
+                                            <span class="card-rank">5</span>
+                                            <span class="card-suit">♠</span>
+                                            <span class="card-owner">بازیکن ۳</span>
+                                        </div>
+                                        <div class="played-card winner">
+                                            <span class="card-rank">3</span>
+                                            <span class="card-suit">♥</span>
+                                            <span class="card-owner">شما</span>
+                                            <span class="winner-badge">برنده!</span>
+                                        </div>
+                                    </div>
+                                    <div class="scenario-explanation">
+                                        <p>
+                                            با اینکه <strong>A♠</strong> قوی‌ترین کارت پیک است،
+                                            <strong>3♥</strong> (یک کارت حکم) برنده می‌شود چون حکم از همه قوی‌تر است!
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="key-points">
+                                <h4 class="points-title">نکات کلیدی حکم</h4>
+                                <ul class="points-list">
+                                    <li>
+                                        <span class="point-icon">👑</span>
+                                        <span class="point-text">حاکم خال حکم را انتخاب می‌کند</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">⚔️</span>
+                                        <span class="point-text">کارت حکم از همه کارت‌های دیگر قوی‌تر است</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">🎯</span>
+                                        <span class="point-text">می‌توانید با حکم، دست‌های با خال دیگر را ببرید</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">🔢</span>
+                                        <span class="point-text">بین کارت‌های حکم، ترتیب ارزش رعایت می‌شود</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">💡</span>
+                                        <span class="point-text">حکم‌های خود را هوشمندانه استفاده کنید</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 6: Follow Suit -->
+                    <section class="tutorial-step" id="tutorial-step-6" data-step="6" style="display: none;">
+                        <div class="step-hero">
+                            <div class="step-hero-icon">🎯</div>
+                            <h2 class="step-hero-title">Follow Suit (رعایت خال)</h2>
+                            <p class="step-hero-desc">
+                                قانون مهم بازی حکم
+                            </p>
+                        </div>
+
+                        <div class="step-content">
+                            <div class="follow-suit-intro">
+                                <h3 class="section-title">قانون Follow Suit</h3>
+                                <p class="section-desc">
+                                    اگر بازیکن اول کارتی از یک خال بازی کرد، سایر بازیکنان
+                                    <strong>باید</strong> در صورت امکان، کارتی از همان خال بازی کنند.
+                                </p>
+                            </div>
+
+                            <div class="follow-suit-examples">
+                                <h3 class="section-title">مثال‌ها</h3>
+
+                                <div class="example-box correct">
+                                    <div class="example-header">
+                                        <span class="example-icon">✅</span>
+                                        <span class="example-title">مثال صحیح</span>
+                                    </div>
+                                    <div class="example-cards">
+                                        <div class="first-card">
+                                            <span class="card-rank">A</span>
+                                            <span class="card-suit">♠</span>
+                                            <span class="card-label">اول</span>
+                                        </div>
+                                        <div class="response-card correct">
+                                            <span class="card-rank">K</span>
+                                            <span class="card-suit">♠</span>
+                                            <span class="card-label">✓ صحیح</span>
+                                        </div>
+                                    </div>
+                                    <p class="example-desc">
+                                        بازیکن اول ♠ بازی کرد، شما هم ♠ بازی کردید. صحیح!
+                                    </p>
+                                </div>
+
+                                <div class="example-box wrong">
+                                    <div class="example-header">
+                                        <span class="example-icon">❌</span>
+                                        <span class="example-title">مثال غلط</span>
+                                    </div>
+                                    <div class="example-cards">
+                                        <div class="first-card">
+                                            <span class="card-rank">A</span>
+                                            <span class="card-suit">♠</span>
+                                            <span class="card-label">اول</span>
+                                        </div>
+                                        <div class="response-card wrong">
+                                            <span class="card-rank">K</span>
+                                            <span class="card-suit">♥</span>
+                                            <span class="card-label">✗ غلط</span>
+                                        </div>
+                                    </div>
+                                    <p class="example-desc">
+                                        بازیکن اول ♠ بازی کرد، شما ♥ بازی کردید. غلط! (اگر ♠ دارید)
+                                    </p>
+                                </div>
+
+                                <div class="example-box exception">
+                                    <div class="example-header">
+                                        <span class="example-icon">⚠️</span>
+                                        <span class="example-title">استثنا</span>
+                                    </div>
+                                    <div class="example-cards">
+                                        <div class="first-card">
+                                            <span class="card-rank">A</span>
+                                            <span class="card-suit">♠</span>
+                                            <span class="card-label">اول</span>
+                                        </div>
+                                        <div class="response-card exception">
+                                            <span class="card-rank">3</span>
+                                            <span class="card-suit">♥</span>
+                                            <span class="card-label">✓ مجاز</span>
+                                        </div>
+                                    </div>
+                                    <p class="example-desc">
+                                        اگر ♠ ندارید، می‌توانید هر کارتی بازی کنید (حتی حکم)
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="follow-suit-rules">
+                                <h3 class="section-title">قوانین Follow Suit</h3>
+                                <div class="rules-list">
+                                    <div class="rule-item">
+                                        <span class="rule-number">۱</span>
+                                        <div class="rule-content">
+                                            <h4 class="rule-title">اگر خال را دارید</h4>
+                                            <p class="rule-text">
+                                                باید کارتی از همان خال بازی کنید
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="rule-item">
+                                        <span class="rule-number">۲</span>
+                                        <div class="rule-content">
+                                            <h4 class="rule-title">اگر خال را ندارید</h4>
+                                            <p class="rule-text">
+                                                می‌توانید هر کارتی بازی کنید (حتی حکم)
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="rule-item">
+                                        <span class="rule-number">۳</span>
+                                        <div class="rule-content">
+                                            <h4 class="rule-title">بازی با حکم</h4>
+                                            <p class="rule-text">
+                                                اگر خال اصلی را ندارید، می‌توانید با حکم دست را ببرید
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="key-points">
+                                <h4 class="points-title">خلاصه Follow Suit</h4>
+                                <ul class="points-list">
+                                    <li>
+                                        <span class="point-icon">🎯</span>
+                                        <span class="point-text">اگر خال را دارید، باید همان خال را بازی کنید</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">❓</span>
+                                        <span class="point-text">اگر خال را ندارید، می‌توانید هر کارتی بازی کنید</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">⚔️</span>
+                                        <span class="point-text">با حکم می‌توانید دست را ببرید</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">💡</span>
+                                        <span class="point-text">هوشمندانه حکم‌های خود را استفاده کنید</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 7: Winning Tricks -->
+                    <section class="tutorial-step" id="tutorial-step-7" data-step="7" style="display: none;">
+                        <div class="step-hero">
+                            <div class="step-hero-icon">🏆</div>
+                            <h2 class="step-hero-title">بردن دست (Trick)</h2>
+                            <p class="step-hero-desc">
+                                چگونه برنده یک دست شویم
+                            </p>
+                        </div>
+
+                        <div class="step-content">
+                            <div class="trick-intro">
+                                <h3 class="section-title">دست چیست؟</h3>
+                                <p class="section-desc">
+                                    هر بار که ۴ بازیکن یک کارت بازی می‌کنند، یک دست (Trick) تشکیل می‌شود.
+                                    بازیکنی که قوی‌ترین کارت را بازی کند، دست را می‌برد.
+                                </p>
+                            </div>
+
+                            <div class="trick-rules">
+                                <h3 class="section-title">قوانین بردن دست</h3>
+                                <div class="rules-grid">
+                                    <div class="rule-card">
+                                        <span class="rule-icon">1️⃣</span>
+                                        <h4 class="rule-title">بدون حکم</h4>
+                                        <p class="rule-text">
+                                            اگر کسی حکم بازی نکند، قوی‌ترین کارت از خال اول برنده است
+                                        </p>
+                                    </div>
+                                    <div class="rule-card">
+                                        <span class="rule-icon">2️⃣</span>
+                                        <h4 class="rule-title">با حکم</h4>
+                                        <p class="rule-text">
+                                            اگر کسی حکم بازی کند، قوی‌ترین حکم برنده است
+                                        </p>
+                                    </div>
+                                    <div class="rule-card">
+                                        <span class="rule-icon">3️⃣</span>
+                                        <h4 class="rule-title">چند حکم</h4>
+                                        <p class="rule-text">
+                                            اگر چند نفر حکم بازی کنند، قوی‌ترین حکم برنده است
+                                        </p>
+                                    </div>
+                                    <div class="rule-card">
+                                        <span class="rule-icon">4️⃣</span>
+                                        <h4 class="rule-title">برنده بعدی</h4>
+                                        <p class="rule-text">
+                                            برنده دست، کارت اول دست بعدی را بازی می‌کند
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="trick-examples">
+                                <h3 class="section-title">مثال‌های عملی</h3>
+
+                                <div class="example-trick">
+                                    <div class="trick-header">
+                                        <span class="trick-label">حکم: ♥ دل</span>
+                                    </div>
+                                    <div class="trick-cards">
+                                        <div class="trick-card">
+                                            <span class="card-rank">A</span>
+                                            <span class="card-suit">♠</span>
+                                        </div>
+                                        <div class="trick-card">
+                                            <span class="card-rank">K</span>
+                                            <span class="card-suit">♠</span>
+                                        </div>
+                                        <div class="trick-card">
+                                            <span class="card-rank">5</span>
+                                            <span class="card-suit">♠</span>
+                                        </div>
+                                        <div class="trick-card winner">
+                                            <span class="card-rank">Q</span>
+                                            <span class="card-suit">♠</span>
+                                            <span class="winner-badge">🏆</span>
+                                        </div>
+                                    </div>
+                                    <p class="trick-explanation">
+                                        همه ♠ بازی کردند. Q♠ قوی‌ترین ♠ است (بعد از A و K که قبلاً بازی شده).
+                                        برنده: بازیکن ۴
+                                    </p>
+                                </div>
+
+                                <div class="example-trick">
+                                    <div class="trick-header">
+                                        <span class="trick-label">حکم: ♥ دل</span>
+                                    </div>
+                                    <div class="trick-cards">
+                                        <div class="trick-card">
+                                            <span class="card-rank">A</span>
+                                            <span class="card-suit">♠</span>
+                                        </div>
+                                        <div class="trick-card">
+                                            <span class="card-rank">K</span>
+                                            <span class="card-suit">♠</span>
+                                        </div>
+                                        <div class="trick-card">
+                                            <span class="card-rank">5</span>
+                                            <span class="card-suit">♠</span>
+                                        </div>
+                                        <div class="trick-card winner">
+                                            <span class="card-rank">3</span>
+                                            <span class="card-suit">♥</span>
+                                            <span class="winner-badge">🏆</span>
+                                        </div>
+                                    </div>
+                                    <p class="trick-explanation">
+                                        بازیکن ۴ ♠ نداشت و ♥ (حکم) بازی کرد. حکم از همه قوی‌تر است.
+                                        برنده: بازیکن ۴
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="key-points">
+                                <h4 class="points-title">خلاصه بردن دست</h4>
+                                <ul class="points-list">
+                                    <li>
+                                        <span class="point-icon">🏆</span>
+                                        <span class="point-text">قوی‌ترین کارت از خال اول برنده است</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">⚔️</span>
+                                        <span class="point-text">حکم از همه قوی‌تر است</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">🎯</span>
+                                        <span class="point-text">برنده دست، کارت اول دست بعدی را بازی می‌کند</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">🎮</span>
+                                        <span class="point-text">هدف: بردن ۷ دست قبل از حریف</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 8: Kot Declaration -->
+                    <section class="tutorial-step" id="tutorial-step-8" data-step="8" style="display: none;">
+                        <div class="step-hero">
+                            <div class="step-hero-icon">👑</div>
+                            <h2 class="step-hero-title">اعلام کت (Kot)</h2>
+                            <p class="step-hero-desc">
+                                یکی از هیجان‌انگیزترین بخش‌های حکم
+                            </p>
+                        </div>
+
+                        <div class="step-content">
+                            <div class="kot-intro">
+                                <h3 class="section-title">کت چیست؟</h3>
+                                <p class="section-desc">
+                                    کت یعنی اعلام اینکه تیم شما تمام ۱۳ دست را می‌برد!
+                                    اگر موفق شوید، پاداش دوبرابر دریافت می‌کنید.
+                                </p>
+                            </div>
+
+                            <div class="kot-rules">
+                                <h3 class="section-title">قوانین کت</h3>
+                                <div class="rules-grid">
+                                    <div class="rule-card">
+                                        <span class="rule-icon">📢</span>
+                                        <h4 class="rule-title">زمان اعلام</h4>
+                                        <p class="rule-text">
+                                            کت را می‌توان قبل از شروع دست اول یا در طول بازی اعلام کرد
+                                        </p>
+                                    </div>
+                                    <div class="rule-card">
+                                        <span class="rule-icon">👥</span>
+                                        <h4 class="rule-title">چه کسی می‌تواند</h4>
+                                        <p class="rule-text">
+                                            هر بازیکنی از هر تیم می‌تواند کت اعلام کند
+                                        </p>
+                                    </div>
+                                    <div class="rule-card">
+                                        <span class="rule-icon">✅</span>
+                                        <h4 class="rule-title">موفقیت</h4>
+                                        <p class="rule-text">
+                                            اگر تیم واقعاً همه دست‌ها را ببرد، پاداش دوبرابر
+                                        </p>
+                                    </div>
+                                    <div class="rule-card">
+                                        <span class="rule-icon">❌</span>
+                                        <h4 class="rule-title">شکست</h4>
+                                        <p class="rule-text">
+                                            اگر حتی یک دست را ببازد، تیم حریف پاداش دوبرابر می‌گیرد
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="kot-types">
+                                <h3 class="section-title">انواع کت</h3>
+                                <div class="kot-types-grid">
+                                    <div class="kot-type-card normal">
+                                        <div class="kot-type-icon">👑</div>
+                                        <h4 class="kot-type-title">کت معمولی</h4>
+                                        <p class="kot-type-desc">اعلام اینکه تیم همه دست‌ها را می‌برد</p>
+                                        <div class="kot-type-rewards">
+                                            <div class="reward-row success">
+                                                <span class="reward-label">موفقیت:</span>
+                                                <span class="reward-value">۲ امتیاز</span>
+                                            </div>
+                                            <div class="reward-row fail">
+                                                <span class="reward-label">شکست:</span>
+                                                <span class="reward-value">حریف ۲ امتیاز</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="kot-type-card double">
+                                        <div class="kot-type-icon">👑👑</div>
+                                        <h4 class="kot-type-title">کت دبل</h4>
+                                        <p class="kot-type-desc">اعلام کت با ریسک بیشتر و پاداش بیشتر</p>
+                                        <div class="kot-type-rewards">
+                                            <div class="reward-row success">
+                                                <span class="reward-label">موفقیت:</span>
+                                                <span class="reward-value">۴ امتیاز</span>
+                                            </div>
+                                            <div class="reward-row fail">
+                                                <span class="reward-label">شکست:</span>
+                                                <span class="reward-value">حریف ۴ امتیاز</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="kot-strategy">
+                                <h3 class="section-title">استراتژی کت</h3>
+                                <div class="strategy-tips">
+                                    <div class="strategy-tip good">
+                                        <span class="tip-icon">✅</span>
+                                        <div class="tip-content">
+                                            <h5 class="tip-title">کت اعلام کنید وقتی:</h5>
+                                            <ul class="tip-list">
+                                                <li>دست بسیار قوی دارید</li>
+                                                <li>حکم‌های زیادی دارید</li>
+                                                <li>کارت‌های بالایی دارید</li>
+                                                <li>تیم حریف ضعیف به نظر می‌رسد</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="strategy-tip bad">
+                                        <span class="tip-icon">❌</span>
+                                        <div class="tip-content">
+                                            <h5 class="tip-title">کت اعلام نکنید وقتی:</h5>
+                                            <ul class="tip-list">
+                                                <li>دست ضعیفی دارید</li>
+                                                <li>حکم کمی دارید</li>
+                                                <li>ریسک زیاد است</li>
+                                                <li>اطمینان ندارید</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="key-points">
+                                <h4 class="points-title">خلاصه کت</h4>
+                                <ul class="points-list">
+                                    <li>
+                                        <span class="point-icon">👑</span>
+                                        <span class="point-text">کت یعنی اعلام بردن همه ۱۳ دست</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">🎯</span>
+                                        <span class="point-text">موفقیت = پاداش دوبرابر</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">⚠️</span>
+                                        <span class="point-text">شکست = حریف پاداش دوبرابر می‌گیرد</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">💡</span>
+                                        <span class="point-text">فقط با دست قوی کت اعلام کنید</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 9: Scoring -->
+                    <section class="tutorial-step" id="tutorial-step-9" data-step="9" style="display: none;">
+                        <div class="step-hero">
+                            <div class="step-hero-icon">📊</div>
+                            <h2 class="step-hero-title">سیستم امتیازدهی</h2>
+                            <p class="step-hero-desc">
+                                چگونه امتیاز کسب کنیم
+                            </p>
+                        </div>
+
+                        <div class="step-content">
+                            <div class="scoring-intro">
+                                <h3 class="section-title">سیستم امتیاز حکم</h3>
+                                <p class="section-desc">
+                                    در حکم، امتیاز بر اساس تعداد دست‌های برده شده محاسبه می‌شود.
+                                    تیمی که زودتر به ۷ امتیاز برسد، برنده راند است.
+                                </p>
+                            </div>
+
+                            <div class="scoring-rules">
+                                <h3 class="section-title">قوانین امتیازدهی</h3>
+                                <div class="scoring-table">
+                                    <div class="table-row header">
+                                        <span class="cell">رویداد</span>
+                                        <span class="cell">امتیاز</span>
+                                        <span class="cell">توضیح</span>
+                                    </div>
+                                    <div class="table-row">
+                                        <span class="cell">بردن هر دست</span>
+                                        <span class="cell">۱ امتیاز</span>
+                                        <span class="cell">هر دست = ۱ امتیاز</span>
+                                    </div>
+                                    <div class="table-row">
+                                        <span class="cell">بردن راند</span>
+                                        <span class="cell">۱ راند</span>
+                                        <span class="cell">اولین تیم با ۷ دست</span>
+                                    </div>
+                                    <div class="table-row highlight">
+                                        <span class="cell">کت معمولی (موفق)</span>
+                                        <span class="cell">۲ امتیاز</span>
+                                        <span class="cell">پاداش دوبرابر</span>
+                                    </div>
+                                    <div class="table-row highlight">
+                                        <span class="cell">کت دبل (موفق)</span>
+                                        <span class="cell">۴ امتیاز</span>
+                                        <span class="cell">پاداش چهاربرابر</span>
+                                    </div>
+                                    <div class="table-row danger">
+                                        <span class="cell">کت معمولی (شکست)</span>
+                                        <span class="cell">-۲ حریف</span>
+                                        <span class="cell">حریف ۲ امتیاز می‌گیرد</span>
+                                    </div>
+                                    <div class="table-row danger">
+                                        <span class="cell">کت دبل (شکست)</span>
+                                        <span class="cell">-۴ حریف</span>
+                                        <span class="cell">حریف ۴ امتیاز می‌گیرد</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="match-structure">
+                                <h3 class="section-title">ساختار مسابقه</h3>
+                                <div class="structure-visual">
+                                    <div class="structure-item">
+                                        <span class="structure-icon">🎴</span>
+                                        <span class="structure-name">دست (Trick)</span>
+                                        <span class="structure-desc">۴ کارت بازی می‌شود</span>
+                                    </div>
+                                    <div class="structure-arrow">→</div>
+                                    <div class="structure-item">
+                                        <span class="structure-icon">🎯</span>
+                                        <span class="structure-name">راند (Round)</span>
+                                        <span class="structure-desc">۱۳ دست - تا ۷ امتیاز</span>
+                                    </div>
+                                    <div class="structure-arrow">→</div>
+                                    <div class="structure-item">
+                                        <span class="structure-icon">🏆</span>
+                                        <span class="structure-name">بازی (Match)</span>
+                                        <span class="structure-desc">۲ راند - برنده ۲ راند</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="scoring-examples">
+                                <h3 class="section-title">مثال‌های امتیازدهی</h3>
+                                <div class="examples-grid">
+                                    <div class="example-card">
+                                        <h5 class="example-title">مثال ۱: برد عادی</h5>
+                                        <div class="example-score">
+                                            <div class="team-score">
+                                                <span class="team-name">تیم شما</span>
+                                                <span class="score">۷</span>
+                                            </div>
+                                            <div class="team-score">
+                                                <span class="team-name">تیم حریف</span>
+                                                <span class="score">۵</span>
+                                            </div>
+                                        </div>
+                                        <p class="example-result">نتیجه: شما برنده راند</p>
+                                    </div>
+                                    <div class="example-card">
+                                        <h5 class="example-title">مثال ۲: کت موفق</h5>
+                                        <div class="example-score">
+                                            <div class="team-score kot">
+                                                <span class="team-name">تیم شما (کت)</span>
+                                                <span class="score">۱۳</span>
+                                            </div>
+                                            <div class="team-score">
+                                                <span class="team-name">تیم حریف</span>
+                                                <span class="score">۰</span>
+                                            </div>
+                                        </div>
+                                        <p class="example-result">نتیجه: شما ۲ امتیاز می‌گیرید</p>
+                                    </div>
+                                    <div class="example-card">
+                                        <h5 class="example-title">مثال ۳: کت ناموفق</h5>
+                                        <div class="example-score">
+                                            <div class="team-score kot-fail">
+                                                <span class="team-name">تیم شما (کت)</span>
+                                                <span class="score">۱۲</span>
+                                            </div>
+                                            <div class="team-score winner">
+                                                <span class="team-name">تیم حریف</span>
+                                                <span class="score">۱</span>
+                                            </div>
+                                        </div>
+                                        <p class="example-result">نتیجه: حریف ۲ امتیاز می‌گیرد!</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="key-points">
+                                <h4 class="points-title">خلاصه امتیازدهی</h4>
+                                <ul class="points-list">
+                                    <li>
+                                        <span class="point-icon">🎯</span>
+                                        <span class="point-text">هر دست = ۱ امتیاز</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">🏆</span>
+                                        <span class="point-text">اولین تیم با ۷ دست، برنده راند</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">👑</span>
+                                        <span class="point-text">کت موفق = ۲ امتیاز (یا ۴ برای دبل)</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">⚠️</span>
+                                        <span class="point-text">کت ناموفق = حریف امتیاز می‌گیرد</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">🎮</span>
+                                        <span class="point-text">برنده بازی = برنده ۲ راند</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 10: Strategy -->
+                    <section class="tutorial-step" id="tutorial-step-10" data-step="10" style="display: none;">
+                        <div class="step-hero">
+                            <div class="step-hero-icon">💡</div>
+                            <h2 class="step-hero-title">استراتژی و نکات حرفه‌ای</h2>
+                            <p class="step-hero-desc">
+                                برای حرفه‌ای شدن، این نکات را رعایت کنید
+                            </p>
+                        </div>
+
+                        <div class="step-content">
+                            <div class="strategy-intro">
+                                <h3 class="section-title">اصول استراتژی حکم</h3>
+                                <p class="section-desc">
+                                    حکم فقط یک بازی شانس نیست. با استراتژی درست، می‌توانید حتی با دست متوسط هم برنده شوید.
+                                </p>
+                            </div>
+
+                            <div class="strategy-tips-grid">
+                                <div class="strategy-card">
+                                    <div class="strategy-icon">👑</div>
+                                    <h4 class="strategy-title">انتخاب هوشمندانه حکم</h4>
+                                    <ul class="strategy-list">
+                                        <li>خال با کارت‌های قوی را حکم کنید</li>
+                                        <li>خال با تعداد بیشتر را ترجیح دهید</li>
+                                        <li>به دست یار خود هم توجه کنید</li>
+                                    </ul>
+                                </div>
+
+                                <div class="strategy-card">
+                                    <div class="strategy-icon">⚔️</div>
+                                    <h4 class="strategy-title">مدیریت حکم‌ها</h4>
+                                    <ul class="strategy-list">
+                                        <li>حکم‌های خود را هوشمندانه استفاده کنید</li>
+                                        <li>حکم‌های کوچک را زود بازی نکنید</li>
+                                        <li>حکم‌های بزرگ را برای لحظات مهم نگه دارید</li>
+                                    </ul>
+                                </div>
+
+                                <div class="strategy-card">
+                                    <div class="strategy-icon">🤝</div>
+                                    <h4 class="strategy-title">همکاری با یار</h4>
+                                    <ul class="strategy-list">
+                                        <li>به سیگنال‌های یار توجه کنید</li>
+                                        <li>اگر یار دست را می‌برد، کارت قوی بازی نکنید</li>
+                                        <li>با یار هماهنگ بازی کنید</li>
+                                    </ul>
+                                </div>
+
+                                <div class="strategy-card">
+                                    <div class="strategy-icon">🎯</div>
+                                    <h4 class="strategy-title">خواندن بازی</h4>
+                                    <ul class="strategy-list">
+                                        <li>کارت‌های بازی شده را به خاطر بسپارید</li>
+                                        <li>حدس بزنید حریف چه کارت‌هایی دارد</li>
+                                        <li>از روی بازی حریف، حکم او را حدس بزنید</li>
+                                    </ul>
+                                </div>
+
+                                <div class="strategy-card">
+                                    <div class="strategy-icon">🎲</div>
+                                    <h4 class="strategy-title">Follow Suit هوشمند</h4>
+                                    <ul class="strategy-list">
+                                        <li>اگر دست را نمی‌برید، کارت ضعیف بازی کنید</li>
+                                        <li>اگر یار در حال بردن است، کمک کنید</li>
+                                        <li>حکم را فقط وقتی لازم است استفاده کنید</li>
+                                    </ul>
+                                </div>
+
+                                <div class="strategy-card">
+                                    <div class="strategy-icon">👑</div>
+                                    <h4 class="strategy-title">اعلام کت</h4>
+                                    <ul class="strategy-list">
+                                        <li>فقط با دست قوی کت اعلام کنید</li>
+                                        <li>حکم‌های زیاد = شانس کت بیشتر</li>
+                                        <li>ریسک کت را با دقت محاسبه کنید</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="common-mistakes">
+                                <h3 class="section-title">اشتباهات رایج</h3>
+                                <div class="mistakes-list">
+                                    <div class="mistake-item">
+                                        <span class="mistake-icon">❌</span>
+                                        <div class="mistake-content">
+                                            <h5 class="mistake-title">استفاده زودهنگام از حکم</h5>
+                                            <p class="mistake-desc">
+                                                حکم‌های خود را برای لحظات مهم نگه دارید
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="mistake-item">
+                                        <span class="mistake-icon">❌</span>
+                                        <div class="mistake-content">
+                                            <h5 class="mistake-title">عدم توجه به بازی یار</h5>
+                                            <p class="mistake-desc">
+                                                حکم یک بازی تیمی است، با یار هماهنگ باشید
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="mistake-item">
+                                        <span class="mistake-icon">❌</span>
+                                        <div class="mistake-content">
+                                            <h5 class="mistake-title">اعلام کت با دست ضعیف</h5>
+                                            <p class="mistake-desc">
+                                                کت ریسک بالایی دارد، فقط با دست قوی اعلام کنید
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="mistake-item">
+                                        <span class="mistake-icon">❌</span>
+                                        <div class="mistake-content">
+                                            <h5 class="mistake-title">فراموش کردن کارت‌های بازی شده</h5>
+                                            <p class="mistake-desc">
+                                                کارت‌های بازی شده را به خاطر بسپارید تا بهتر تصمیم بگیرید
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pro-tips">
+                                <h3 class="section-title">نکات حرفه‌ای</h3>
+                                <div class="pro-tips-list">
+                                    <div class="pro-tip">
+                                        <span class="pro-icon">💎</span>
+                                        <div class="pro-content">
+                                            <h5 class="pro-title">شمارش کارت‌ها</h5>
+                                            <p class="pro-desc">
+                                                تعداد کارت‌های هر خال را که بازی شده‌اند بشمارید.
+                                                این به شما کمک می‌کند حدس بزنید حریف چه کارت‌هایی دارد.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="pro-tip">
+                                        <span class="pro-icon">💎</span>
+                                        <div class="pro-content">
+                                            <h5 class="pro-title">کنترل ریتم بازی</h5>
+                                            <p class="pro-desc">
+                                                گاهی بهتر است دست را عمدداً ببازید تا در دست‌های بعدی
+                                                موقعیت بهتری داشته باشید.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="pro-tip">
+                                        <span class="pro-icon">💎</span>
+                                        <div class="pro-content">
+                                            <h5 class="pro-title">تخلیه حکم حریف</h5>
+                                            <p class="pro-desc">
+                                                با بازی کارت‌های قوی، حریف را مجبور کنید حکم‌هایش را
+                                                زودتر استفاده کند.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tutorial-complete">
+                                <div class="complete-icon">🎉</div>
+                                <h3 class="complete-title">تبریک! آموزش کامل شد</h3>
+                                <p class="complete-desc">
+                                    شما اکنون با تمام قوانین و استراتژی‌های حکم آشنا هستید.
+                                    آماده‌اید برای بازی!
+                                </p>
+                                <div class="complete-rewards">
+                                    <div class="reward-item">
+                                        <span class="reward-icon">⭐</span>
+                                        <span class="reward-value">+۱۰۰ XP</span>
+                                    </div>
+                                    <div class="reward-item">
+                                        <span class="reward-icon">🏅</span>
+                                        <span class="reward-value">نشان آموزش</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="key-points">
+                                <h4 class="points-title">خلاصه نکات حرفه‌ای</h4>
+                                <ul class="points-list">
+                                    <li>
+                                        <span class="point-icon">🧠</span>
+                                        <span class="point-text">حکم یک بازی استراتژیک است</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">🤝</span>
+                                        <span class="point-text">با یار خود هماهنگ باشید</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">👑</span>
+                                        <span class="point-text">حکم‌ها را هوشمندانه استفاده کنید</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">🎯</span>
+                                        <span class="point-text">کارت‌های بازی شده را به خاطر بسپارید</span>
+                                    </li>
+                                    <li>
+                                        <span class="point-icon">💡</span>
+                                        <span class="point-text">تمرین، تمرین، تمرین!</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <div class="footer-info">
+                <div class="footer-progress">
+                    <div class="progress-dots" id="tutorial-progress-dots">
+                        <span class="progress-dot completed" data-step="1"></span>
+                        <span class="progress-dot active" data-step="2"></span>
+                        <span class="progress-dot" data-step="3"></span>
+                        <span class="progress-dot" data-step="4"></span>
+                        <span class="progress-dot" data-step="5"></span>
+                        <span class="progress-dot" data-step="6"></span>
+                        <span class="progress-dot" data-step="7"></span>
+                        <span class="progress-dot" data-step="8"></span>
+                        <span class="progress-dot" data-step="9"></span>
+                        <span class="progress-dot" data-step="10"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-actions">
+                <button class="btn btn-outline" id="btn-tutorial-prev" disabled>
+                    <span class="btn-icon">→</span>
+                    <span class="btn-text">قبلی</span>
+                </button>
+                <button class="btn btn-outline" id="btn-tutorial-skip-footer">
+                    <span class="btn-text">رد شدن</span>
+                </button>
+                <button class="btn btn-primary" id="btn-tutorial-next">
+                    <span class="btn-text">بعدی</span>
+                    <span class="btn-icon">←</span>
+                </button>
+                <button class="btn btn-success" id="btn-tutorial-finish" style="display: none;">
+                    <span class="btn-icon">🎉</span>
+                    <span class="btn-text">پایان آموزش</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Demo Overlay -->
+    <div class="tutorial-demo-overlay" id="tutorial-demo-overlay" style="display: none;">
+        <div class="demo-content">
+            <div class="demo-header">
+                <h4 class="demo-title" id="demo-title">نمایش تعاملی</h4>
+                <button class="btn-icon btn-small" id="btn-close-demo" aria-label="بستن">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+            <div class="demo-body" id="demo-body">
+                <div class="demo-table">
+                    <div class="demo-player top">
+                        <span class="player-avatar">🤖</span>
+                        <span class="player-label">حریف ۱</span>
+                    </div>
+                    <div class="demo-player left">
+                        <span class="player-avatar">🤖</span>
+                        <span class="player-label">یار</span>
+                    </div>
+                    <div class="demo-center">
+                        <div class="demo-trick-area" id="demo-trick-area"></div>
+                        <div class="demo-info" id="demo-info">
+                            <span class="info-text">کارت‌ها را بازی کنید</span>
+                        </div>
+                    </div>
+                    <div class="demo-player right">
+                        <span class="player-avatar">🤖</span>
+                        <span class="player-label">حریف ۲</span>
+                    </div>
+                    <div class="demo-player bottom you">
+                        <span class="player-avatar">👤</span>
+                        <span class="player-label">شما</span>
+                    </div>
+                </div>
+                <div class="demo-hand" id="demo-hand"></div>
+            </div>
+            <div class="demo-footer">
+                <button class="btn btn-outline" id="btn-demo-reset">
+                    <span class="btn-icon">🔄</span>
+                    <span class="btn-text">شروع مجدد</span>
+                </button>
+                <button class="btn btn-primary" id="btn-demo-continue">
+                    <span class="btn-text">ادامه آموزش</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
