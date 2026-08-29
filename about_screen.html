@@ -1,0 +1,455 @@
+<div id="about-screen" class="screen screen-about" data-screen-name="about">
+    <div class="screen-content">
+        <header class="screen-header">
+            <button class="btn-back" data-route="home" aria-label="بازگشت">
+                <span class="icon">→</span>
+            </button>
+            <h1 class="screen-title">درباره</h1>
+            <div class="header-spacer"></div>
+        </header>
+
+        <section class="about-hero">
+            <div class="hero-background"></div>
+            <div class="hero-content">
+                <div class="hero-logo">
+                    <span class="logo-icon">🃏</span>
+                </div>
+                <h2 class="hero-title">حکم مستر</h2>
+                <p class="hero-subtitle">Hokm Master</p>
+                <p class="hero-version">نسخه <span id="about-app-version">۱.۰.۰</span></p>
+            </div>
+        </section>
+
+        <section class="about-intro">
+            <div class="intro-card">
+                <div class="intro-icon">🎴</div>
+                <h3 class="intro-title">به حکم مستر خوش آمدید!</h3>
+                <p class="intro-description">
+                    حکم مستر یک بازی آنلاین حکم ایرانی است که با طراحی مدرن و گیم‌پلی روان،
+                    تجربه‌ای لذت‌بخش از این بازی محبوب را در اختیار شما قرار می‌دهد.
+                    با دوستان خود بازی کنید، در تورنمنت‌ها شرکت کنید و مهارت‌های خود را به چالش بکشید.
+                </p>
+                <div class="intro-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">🎮</span>
+                        <span class="feature-text">بازی آنلاین با بازیکنان واقعی</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🤖</span>
+                        <span class="feature-text">هوش مصنوعی پیشرفته</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🏆</span>
+                        <span class="feature-text">تورنمنت‌های هفتگی و ماهانه</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">👥</span>
+                        <span class="feature-text">بازی با دوستان</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🏅</span>
+                        <span class="feature-text">سیستم لیگ و رتبه‌بندی</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🎁</span>
+                        <span class="feature-text">جوایز و پاداش‌های روزانه</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-app-info">
+            <div class="section-header">
+                <h3 class="section-title">اطلاعات برنامه</h3>
+            </div>
+            <div class="info-list">
+                <div class="info-item">
+                    <span class="info-icon">📱</span>
+                    <div class="info-content">
+                        <span class="info-label">نام برنامه</span>
+                        <span class="info-value">حکم مستر</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">🔢</span>
+                    <div class="info-content">
+                        <span class="info-label">نسخه</span>
+                        <span class="info-value" id="about-version">۱.۰.۰</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">🏗️</span>
+                    <div class="info-content">
+                        <span class="info-label">شماره ساخت</span>
+                        <span class="info-value" id="about-build">۱۰۰</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">📅</span>
+                    <div class="info-content">
+                        <span class="info-label">تاریخ انتشار</span>
+                        <span class="info-value" id="about-release-date">۱۴۰۵/۰۶/۰۱</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">🌐</span>
+                    <div class="info-content">
+                        <span class="info-label">زبان</span>
+                        <span class="info-value" id="about-language">فارسی</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">👨‍💻</span>
+                    <div class="info-content">
+                        <span class="info-label">توسعه‌دهنده</span>
+                        <span class="info-value">Hokm Master Team</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">️</span>
+                    <div class="info-content">
+                        <span class="info-label">پلتفرم</span>
+                        <span class="info-value" id="about-platform">وب / PWA</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">📏</span>
+                    <div class="info-content">
+                        <span class="info-label">اندازه برنامه</span>
+                        <span class="info-value" id="about-size">۲.۵ MB</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-device-info">
+            <div class="section-header">
+                <h3 class="section-title">اطلاعات دستگاه</h3>
+            </div>
+            <div class="info-list">
+                <div class="info-item">
+                    <span class="info-icon">🖥️</span>
+                    <div class="info-content">
+                        <span class="info-label">مرورگر</span>
+                        <span class="info-value" id="about-browser">-</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">📐</span>
+                    <div class="info-content">
+                        <span class="info-label">وضوح صفحه</span>
+                        <span class="info-value" id="about-screen-resolution">-</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">📱</span>
+                    <div class="info-content">
+                        <span class="info-label">نوع دستگاه</span>
+                        <span class="info-value" id="about-device-type">-</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">🌐</span>
+                    <div class="info-content">
+                        <span class="info-label">وضعیت اتصال</span>
+                        <span class="info-value" id="about-connection-status">آنلاین</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">🔋</span>
+                    <div class="info-content">
+                        <span class="info-label">حالت ذخیره انرژی</span>
+                        <span class="info-value" id="about-battery-mode">غیرفعال</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-social">
+            <div class="section-header">
+                <h3 class="section-title">ما را دنبال کنید</h3>
+            </div>
+            <div class="social-grid">
+                <a href="https://t.me/hokmmaster" class="social-card telegram" target="_blank" rel="noopener">
+                    <span class="social-icon">✈️</span>
+                    <div class="social-info">
+                        <h4 class="social-name">تلگرام</h4>
+                        <p class="social-handle">@hokmmaster</p>
+                    </div>
+                    <span class="social-arrow">←</span>
+                </a>
+                <a href="https://instagram.com/hokmmaster" class="social-card instagram" target="_blank" rel="noopener">
+                    <span class="social-icon">📷</span>
+                    <div class="social-info">
+                        <h4 class="social-name">اینستاگرام</h4>
+                        <p class="social-handle">@hokmmaster</p>
+                    </div>
+                    <span class="social-arrow">←</span>
+                </a>
+                <a href="https://twitter.com/hokmmaster" class="social-card twitter" target="_blank" rel="noopener">
+                    <span class="social-icon">🐦</span>
+                    <div class="social-info">
+                        <h4 class="social-name">توییتر</h4>
+                        <p class="social-handle">@hokmmaster</p>
+                    </div>
+                    <span class="social-arrow">←</span>
+                </a>
+                <a href="https://youtube.com/@hokmmaster" class="social-card youtube" target="_blank" rel="noopener">
+                    <span class="social-icon">▶️</span>
+                    <div class="social-info">
+                        <h4 class="social-name">یوتیوب</h4>
+                        <p class="social-handle">Hokm Master</p>
+                    </div>
+                    <span class="social-arrow">←</span>
+                </a>
+                <a href="https://discord.gg/hokmmaster" class="social-card discord" target="_blank" rel="noopener">
+                    <span class="social-icon">💬</span>
+                    <div class="social-info">
+                        <h4 class="social-name">دیسکورد</h4>
+                        <p class="social-handle">Hokm Master</p>
+                    </div>
+                    <span class="social-arrow">←</span>
+                </a>
+                <a href="mailto:support@hokmmaster.com" class="social-card email">
+                    <span class="social-icon"></span>
+                    <div class="social-info">
+                        <h4 class="social-name">ایمیل</h4>
+                        <p class="social-handle">support@hokmmaster.com</p>
+                    </div>
+                    <span class="social-arrow">←</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="about-rate">
+            <div class="rate-card">
+                <div class="rate-header">
+                    <span class="rate-icon">⭐</span>
+                    <div class="rate-info">
+                        <h3 class="rate-title">از بازی لذت می‌برید؟</h3>
+                        <p class="rate-desc">با امتیاز دادن به ما، حمایت خود را نشان دهید</p>
+                    </div>
+                </div>
+                <div class="rate-stars" id="rate-stars">
+                    <button class="rate-star" data-rating="1" aria-label="۱ ستاره">⭐</button>
+                    <button class="rate-star" data-rating="2" aria-label="۲ ستاره">⭐</button>
+                    <button class="rate-star" data-rating="3" aria-label="۳ ستاره">⭐</button>
+                    <button class="rate-star" data-rating="4" aria-label="۴ ستاره">⭐</button>
+                    <button class="rate-star" data-rating="5" aria-label="۵ ستاره">⭐</button>
+                </div>
+                <p class="rate-thanks" id="rate-thanks" style="display: none;">
+                    از امتیاز شما متشکریم! ❤️
+                </p>
+            </div>
+        </section>
+
+        <section class="about-links">
+            <div class="section-header">
+                <h3 class="section-title">لینک‌های مفید</h3>
+            </div>
+            <div class="links-list">
+                <a href="#/help" class="link-item" data-route="help">
+                    <span class="link-icon">❓</span>
+                    <span class="link-text">راهنما و سوالات متداول</span>
+                    <span class="link-arrow">←</span>
+                </a>
+                <a href="#/terms" class="link-item" id="about-link-terms">
+                    <span class="link-icon">📜</span>
+                    <span class="link-text">قوانین و مقررات</span>
+                    <span class="link-arrow">←</span>
+                </a>
+                <a href="#/privacy" class="link-item" id="about-link-privacy">
+                    <span class="link-icon">🔒</span>
+                    <span class="link-text">حریم خصوصی</span>
+                    <span class="link-arrow">←</span>
+                </a>
+                <a href="#/licenses" class="link-item" id="about-link-licenses">
+                    <span class="link-icon">📄</span>
+                    <span class="link-text">مجوزهای متن‌باز</span>
+                    <span class="link-arrow">←</span>
+                </a>
+                <a href="#/changelog" class="link-item" id="about-link-changelog">
+                    <span class="link-icon">📝</span>
+                    <span class="link-text">تاریخچه تغییرات</span>
+                    <span class="link-arrow">←</span>
+                </a>
+                <a href="#/support" class="link-item" id="about-link-support">
+                    <span class="link-icon">📞</span>
+                    <span class="link-text">تماس با پشتیبانی</span>
+                    <span class="link-arrow">←</span>
+                </a>
+                <a href="#/credits" class="link-item" id="about-link-credits">
+                    <span class="link-icon">👥</span>
+                    <span class="link-text">دست‌اندرکاران</span>
+                    <span class="link-arrow">←</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="about-team">
+            <div class="section-header">
+                <h3 class="section-title">تیم توسعه</h3>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <span class="avatar avatar-large">👨‍💻</span>
+                    </div>
+                    <div class="member-info">
+                        <h4 class="member-name">توسعه‌دهنده اصلی</h4>
+                        <p class="member-role">Full Stack Developer</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <span class="avatar avatar-large">🎨</span>
+                    </div>
+                    <div class="member-info">
+                        <h4 class="member-name">طراح UI/UX</h4>
+                        <p class="member-role">UI/UX Designer</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <span class="avatar avatar-large">🤖</span>
+                    </div>
+                    <div class="member-info">
+                        <h4 class="member-name">توسعه‌دهنده AI</h4>
+                        <p class="member-role">AI Engineer</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <span class="avatar avatar-large">🛡️</span>
+                    </div>
+                    <div class="member-info">
+                        <h4 class="member-name">متخصص امنیت</h4>
+                        <p class="member-role">Security Engineer</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-credits">
+            <div class="section-header">
+                <h3 class="section-title">ساخته شده با</h3>
+            </div>
+            <div class="credits-list">
+                <div class="credit-item">
+                    <span class="credit-icon">❤️</span>
+                    <span class="credit-text">عشق و علاقه</span>
+                </div>
+                <div class="credit-item">
+                    <span class="credit-icon">☕</span>
+                    <span class="credit-text">قهوه فراوان</span>
+                </div>
+                <div class="credit-item">
+                    <span class="credit-icon">🎴</span>
+                    <span class="credit-text">بازی حکم ایرانی</span>
+                </div>
+                <div class="credit-item">
+                    <span class="credit-icon">💻</span>
+                    <span class="credit-text">HTML, CSS, JavaScript</span>
+                </div>
+                <div class="credit-item">
+                    <span class="credit-icon">🎨</span>
+                    <span class="credit-text">Font Vazirmatn</span>
+                </div>
+                <div class="credit-item">
+                    <span class="credit-icon">🔊</span>
+                    <span class="credit-text">صداهای اختصاصی</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-changelog-preview">
+            <div class="section-header">
+                <h3 class="section-title">آخرین به‌روزرسانی‌ها</h3>
+                <a href="#/changelog" class="section-link" id="about-link-full-changelog">مشاهده همه ←</a>
+            </div>
+            <div class="changelog-list">
+                <div class="changelog-item">
+                    <div class="changelog-header">
+                        <span class="version-badge">v۱.۰.۰</span>
+                        <span class="changelog-date">۱۴۰۵/۰۶/۰۱</span>
+                        <span class="changelog-type new">انتشار اولیه</span>
+                    </div>
+                    <ul class="changelog-changes">
+                        <li>✅ انتشار نسخه اولیه بازی</li>
+                        <li>✅ ۶ حالت بازی مختلف</li>
+                        <li>✅ سیستم لیگ و رتبه‌بندی</li>
+                        <li>✅ بازی با دوستان</li>
+                        <li>✅ تورنمنت‌های هفتگی</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-legal">
+            <div class="legal-card">
+                <div class="legal-header">
+                    <span class="legal-icon">⚖️</span>
+                    <h3 class="legal-title">اطلاعات حقوقی</h3>
+                </div>
+                <div class="legal-content">
+                    <p class="legal-text">
+                        حکم مستر یک محصول نرم‌افزاری است و تمامی حقوق مادی و معنوی آن محفوظ است.
+                        استفاده از این برنامه به منزله پذیرش
+                        <a href="#/terms" class="legal-link" id="about-terms-link">قوانین و مقررات</a>
+                        و
+                        <a href="#/privacy" class="legal-link" id="about-privacy-link">سیاست حریم خصوصی</a>
+                        ما می‌باشد.
+                    </p>
+                    <p class="legal-copyright">
+                        © ۱۴۰۵ حکم مستر - تمامی حقوق محفوظ است
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-age-rating">
+            <div class="age-card">
+                <div class="age-badge">
+                    <span class="age-number">+۱۲</span>
+                    <span class="age-label">سال</span>
+                </div>
+                <div class="age-info">
+                    <h4 class="age-title">رده‌بندی سنی</h4>
+                    <p class="age-desc">
+                        این بازی برای کاربران بالای ۱۲ سال مناسب است.
+                        شامل محتوای مناسب برای همه سنین می‌باشد.
+                    </p>
+                    <div class="age-tags">
+                        <span class="age-tag positive">✅ بدون خشونت</span>
+                        <span class="age-tag positive">✅ بدون خرید درون‌برنامه‌ای اجباری</span>
+                        <span class="age-tag positive">✅ مناسب خانواده</span>
+                        <span class="age-tag warning">⚠️ تعامل آنلاین</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-icon">🃏</span>
+                    <span class="logo-text">حکم مستر</span>
+                </div>
+                <p class="footer-slogan">بهترین تجربه بازی حکم آنلاین</p>
+                <div class="footer-links">
+                    <a href="#/terms" class="footer-link" id="about-footer-terms">قوانین</a>
+                    <span class="footer-separator">•</span>
+                    <a href="#/privacy" class="footer-link" id="about-footer-privacy">حریم خصوصی</a>
+                    <span class="footer-separator">•</span>
+                    <a href="#/support" class="footer-link" id="about-footer-support">پشتیبانی</a>
+                </div>
+                <p class="footer-copyright">
+                    © ۱۴۰۵ Hokm Master Team
+                </p>
+                <p class="footer-made-in">
+                    ساخته شده با ❤️ در ایران 🇮🇷
+                </p>
+            </div>
+        </section>
+    </div>
+</div>
