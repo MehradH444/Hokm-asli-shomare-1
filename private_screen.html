@@ -1,0 +1,401 @@
+<div id="private-screen" class="screen screen-private" data-screen-name="private">
+    <div class="screen-content">
+        <header class="screen-header">
+            <button class="btn-back" data-route="home" aria-label="بازگشت">
+                <span class="icon">→</span>
+            </button>
+            <h1 class="screen-title">اتاق خصوصی</h1>
+            <div class="header-spacer"></div>
+        </header>
+
+        <section class="private-intro">
+            <div class="intro-icon">🏠</div>
+            <h2 class="intro-title">اتاق خصوصی</h2>
+            <p class="intro-description">
+                اتاق خصوصی بسازید و با دوستان خود بازی کنید.
+                کد اتاق را به اشتراک بگذارید و از بازی لذت ببرید.
+            </p>
+        </section>
+
+        <section class="private-actions" id="private-main-section">
+            <div class="action-cards">
+                <button id="btn-create-room" class="action-card">
+                    <div class="action-icon"></div>
+                    <div class="action-info">
+                        <h3 class="action-title">ساخت اتاق جدید</h3>
+                        <p class="action-desc">اتاق خصوصی جدید بسازید</p>
+                    </div>
+                </button>
+                <button id="btn-join-room" class="action-card">
+                    <div class="action-icon">🔑</div>
+                    <div class="action-info">
+                        <h3 class="action-title">پیوستن به اتاق</h3>
+                        <p class="action-desc">با کد اتاق وارد شوید</p>
+                    </div>
+                </button>
+            </div>
+        </section>
+
+        <section class="private-create-room" id="private-create-section" style="display: none;">
+            <div class="section-header">
+                <button class="btn-back-small" id="btn-back-to-main" aria-label="بازگشت">
+                    <span class="icon">→</span>
+                </button>
+                <h3 class="section-title">ساخت اتاق جدید</h3>
+            </div>
+
+            <form id="form-create-room" class="create-room-form">
+                <div class="form-group">
+                    <label for="room-name" class="form-label">نام اتاق (اختیاری)</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon"></span>
+                        <input
+                            type="text"
+                            id="room-name"
+                            name="roomName"
+                            class="input-field"
+                            placeholder="نام اتاق را وارد کنید"
+                            maxlength="50"
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">نوع اتاق</label>
+                    <div class="option-cards">
+                        <label class="option-card selected">
+                            <input type="radio" name="room-type" value="public" checked>
+                            <div class="option-content">
+                                <span class="option-icon">🌐</span>
+                                <span class="option-value">عمومی</span>
+                                <span class="option-desc">همه می‌توانند ببینند</span>
+                            </div>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="room-type" value="private">
+                            <div class="option-content">
+                                <span class="option-icon">🔒</span>
+                                <span class="option-value">خصوصی</span>
+                                <span class="option-desc">فقط با کد</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group" id="room-password-group" style="display: none;">
+                    <label for="room-password" class="form-label">رمز عبور اتاق</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon"></span>
+                        <input
+                            type="password"
+                            id="room-password"
+                            name="roomPassword"
+                            class="input-field"
+                            placeholder="رمز عبور را وارد کنید"
+                            maxlength="20"
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">تنظیمات بازی</label>
+                    <div class="room-settings">
+                        <div class="setting-item">
+                            <span class="setting-icon">🎯</span>
+                            <div class="setting-info">
+                                <span class="setting-title">تعداد دست</span>
+                            </div>
+                            <select id="room-hands-select" class="setting-select">
+                                <option value="7" selected>۷ دست</option>
+                                <option value="13">۱ دست</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <span class="setting-icon">🏆</span>
+                            <div class="setting-info">
+                                <span class="setting-title">تعداد راند</span>
+                            </div>
+                            <select id="room-rounds-select" class="setting-select">
+                                <option value="1">۱ راند</option>
+                                <option value="2" selected>۲ راند</option>
+                                <option value="3">۳ راند</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <span class="setting-icon">🤖</span>
+                            <div class="setting-info">
+                                <span class="setting-title">سطح AI</span>
+                            </div>
+                            <select id="room-ai-level-select" class="setting-select">
+                                <option value="beginner">مبتدی</option>
+                                <option value="easy">آسان</option>
+                                <option value="normal" selected>معمولی</option>
+                                <option value="hard">سخت</option>
+                                <option value="expert">حرفه‌ای</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <span class="setting-icon">⏱️</span>
+                            <div class="setting-info">
+                                <span class="setting-title">تایمر</span>
+                            </div>
+                            <select id="room-timer-select" class="setting-select">
+                                <option value="15">۱۵ ثانیه</option>
+                                <option value="30" selected>۳۰ ثانیه</option>
+                                <option value="60">۰ ثانیه</option>
+                                <option value="0">بدون تایمر</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <span class="setting-icon"></span>
+                            <div class="setting-info">
+                                <span class="setting-title">اجازه کت</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="room-allow-kot" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <span class="setting-icon">💬</span>
+                            <div class="setting-info">
+                                <span class="setting-title">چت فعال</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="room-chat-enabled" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" id="btn-submit-create-room" class="btn btn-primary btn-block btn-large">
+                    <span class="btn-icon">➕</span>
+                    <span class="btn-text">ساخت اتاق</span>
+                </button>
+            </form>
+        </section>
+
+        <section class="private-join-room" id="private-join-section" style="display: none;">
+            <div class="section-header">
+                <button class="btn-back-small" id="btn-back-to-main-join" aria-label="بازگشت">
+                    <span class="icon">→</span>
+                </button>
+                <h3 class="section-title">پیوستن به اتاق</h3>
+            </div>
+
+            <form id="form-join-room" class="join-room-form">
+                <div class="form-group">
+                    <label for="room-code-input" class="form-label">کد اتاق</label>
+                    <div class="room-code-inputs" id="room-code-inputs">
+                        <input type="text" class="room-code-digit" maxlength="1" data-index="0" aria-label="رقم ۱">
+                        <input type="text" class="room-code-digit" maxlength="1" data-index="1" aria-label="رقم ۲">
+                        <input type="text" class="room-code-digit" maxlength="1" data-index="2" aria-label="رقم ">
+                        <input type="text" class="room-code-digit" maxlength="1" data-index="3" aria-label="رقم ۴">
+                        <input type="text" class="room-code-digit" maxlength="1" data-index="4" aria-label="رقم ۵">
+                    </div>
+                    <input type="hidden" id="room-code-input" name="roomCode">
+                    <span class="form-error" id="error-room-code"></span>
+                </div>
+
+                <div class="form-group" id="join-password-group" style="display: none;">
+                    <label for="join-room-password" class="form-label">رمز عبور اتاق</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🔒</span>
+                        <input
+                            type="password"
+                            id="join-room-password"
+                            name="joinPassword"
+                            class="input-field"
+                            placeholder="رمز عبور را وارد کنید"
+                        >
+                    </div>
+                </div>
+
+                <button type="submit" id="btn-submit-join-room" class="btn btn-primary btn-block btn-large">
+                    <span class="btn-icon">🔑</span>
+                    <span class="btn-text">پیوستن به اتاق</span>
+                </button>
+            </form>
+
+            <div class="join-room-tips">
+                <div class="tip-item">
+                    <span class="tip-icon">💡</span>
+                    <p class="tip-text">کد اتاق ۵ رقمی از سازنده اتاق دریافت کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🔒</span>
+                    <p class="tip-text">اگر اتاق رمز دارد، رمز را از سازنده بپرسید</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="private-room-lobby" id="private-lobby-section" style="display: none;">
+            <div class="lobby-header">
+                <div class="lobby-info">
+                    <h3 class="lobby-title" id="lobby-room-name">اتاق خصوصی</h3>
+                    <div class="lobby-code">
+                        <span class="code-label">کد اتاق:</span>
+                        <span class="code-value" id="lobby-room-code">۱۲۳۴۵</span>
+                        <button id="btn-copy-code" class="btn-icon btn-small" aria-label="کپی کد">
+                            <span class="icon">📋</span>
+                        </button>
+                    </div>
+                </div>
+                <button id="btn-leave-lobby" class="btn btn-outline btn-small">
+                    <span class="btn-text">ترک اتاق</span>
+                </button>
+            </div>
+
+            <div class="lobby-players" id="lobby-players-container">
+                <div class="player-slot host">
+                    <div class="player-avatar-wrapper">
+                        <span class="avatar avatar-large">👤</span>
+                        <span class="host-badge">میزبان</span>
+                    </div>
+                    <div class="player-info">
+                        <span class="player-name" id="lobby-host-name">شما</span>
+                        <span class="player-status ready">✅ آماده</span>
+                    </div>
+                    <button class="btn-ready-toggle ready" data-player-id="self">
+                        آماده‌ام
+                    </button>
+                </div>
+                <div class="player-slot empty" id="lobby-slot-2">
+                    <div class="player-avatar-wrapper">
+                        <span class="avatar avatar-large empty">➕</span>
+                    </div>
+                    <div class="player-info">
+                        <span class="player-name">منتظر بازیکن...</span>
+                    </div>
+                    <button class="btn-add-ai" data-slot="2">
+                        <span class="icon">🤖</span>
+                        <span class="text">افزودن AI</span>
+                    </button>
+                </div>
+                <div class="player-slot empty" id="lobby-slot-3">
+                    <div class="player-avatar-wrapper">
+                        <span class="avatar avatar-large empty">➕</span>
+                    </div>
+                    <div class="player-info">
+                        <span class="player-name">منتظر بازیکن...</span>
+                    </div>
+                    <button class="btn-add-ai" data-slot="3">
+                        <span class="icon"></span>
+                        <span class="text">افزودن AI</span>
+                    </button>
+                </div>
+                <div class="player-slot empty" id="lobby-slot-4">
+                    <div class="player-avatar-wrapper">
+                        <span class="avatar avatar-large empty">➕</span>
+                    </div>
+                    <div class="player-info">
+                        <span class="player-name">منتظر بازیکن...</span>
+                    </div>
+                    <button class="btn-add-ai" data-slot="4">
+                        <span class="icon"></span>
+                        <span class="text">افزودن AI</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="lobby-invite-section">
+                <h4 class="invite-title">دعوت دوستان</h4>
+                <div class="invite-options">
+                    <button id="btn-invite-friends" class="btn btn-outline btn-small">
+                        <span class="btn-icon"></span>
+                        <span class="btn-text">دعوت از لیست دوستان</span>
+                    </button>
+                    <button id="btn-share-code" class="btn btn-outline btn-small">
+                        <span class="btn-icon">📤</span>
+                        <span class="btn-text">اشتراک‌گذاری کد</span>
+                    </button>
+                </div>
+                <div id="friends-invite-list" class="friends-invite-list" style="display: none;">
+                    <div class="friend-invite-item" data-friend-id="1">
+                        <span class="avatar avatar-small">👨</span>
+                        <span class="friend-name">علی</span>
+                        <button class="btn-invite btn-small">دعوت</button>
+                    </div>
+                    <div class="friend-invite-item" data-friend-id="2">
+                        <span class="avatar avatar-small"></span>
+                        <span class="friend-name">مریم</span>
+                        <button class="btn-invite btn-small">دعوت</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lobby-settings" id="lobby-settings-panel">
+                <h4 class="settings-title">تنظیمات اتاق</h4>
+                <div class="settings-grid">
+                    <div class="setting-item">
+                        <span class="setting-label">تعداد دست:</span>
+                        <span class="setting-value" id="lobby-setting-hands">۷</span>
+                    </div>
+                    <div class="setting-item">
+                        <span class="setting-label">تعداد راند:</span>
+                        <span class="setting-value" id="lobby-setting-rounds">۲</span>
+                    </div>
+                    <div class="setting-item">
+                        <span class="setting-label">سطح AI:</span>
+                        <span class="setting-value" id="lobby-setting-ai">معمولی</span>
+                    </div>
+                    <div class="setting-item">
+                        <span class="setting-label">تایمر:</span>
+                        <span class="setting-value" id="lobby-setting-timer">۳۰ ثانیه</span>
+                    </div>
+                </div>
+                <button id="btn-edit-settings" class="btn btn-outline btn-small btn-block">
+                    <span class="btn-icon">⚙️</span>
+                    <span class="btn-text">ویرایش تنظیمات</span>
+                </button>
+            </div>
+
+            <div class="lobby-actions">
+                <button id="btn-start-private-game" class="btn btn-primary btn-block btn-large btn-play" disabled>
+                    <span class="btn-icon"></span>
+                    <span class="btn-text">شروع بازی</span>
+                </button>
+                <p class="start-hint" id="start-hint-text">همه بازیکنان باید آماده باشند</p>
+            </div>
+        </section>
+
+        <section class="private-recent-rooms" id="private-recent-section">
+            <div class="section-header">
+                <h3 class="section-title">اتاق‌های اخیر</h3>
+            </div>
+            <div id="recent-rooms-list" class="recent-rooms-list">
+                <div class="recent-room-card">
+                    <div class="room-info">
+                        <span class="room-icon">🏠</span>
+                        <div class="room-details">
+                            <span class="room-name">اتاق علی</span>
+                            <span class="room-meta">۲ ساعت پیش • ۴ بازیکن</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-small btn-primary" data-room-id="1">پیوستن</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="private-tips">
+            <div class="section-header">
+                <h3 class="section-title">نکات اتاق خصوصی</h3>
+            </div>
+            <div class="tips-list">
+                <div class="tip-item">
+                    <span class="tip-icon">🔑</span>
+                    <p class="tip-text">کد اتاق ۵ رقمی را با دوستان خود به اشتراک بگذارید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon"></span>
+                    <p class="tip-text">می‌توانید AI اضافه کنید تا بازی سریع‌تر شروع شود</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">⚙️</span>
+                    <p class="tip-text">تنظیمات بازی را قبل از شروع تغییر دهید</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
