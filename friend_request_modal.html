@@ -1,0 +1,579 @@
+<div id="friend-request-modal" class="modal modal-medium" data-modal-name="friend-request" style="display: none;">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-header-right">
+                <span class="modal-icon">👥</span>
+                <h3 class="modal-title">درخواست‌های دوستی</h3>
+                <span class="header-badge" id="friend-requests-badge">۳</span>
+            </div>
+            <div class="modal-header-left">
+                <button class="btn-icon btn-small" id="btn-friend-requests-refresh" aria-label="بروزرسانی">
+                    <span class="icon">🔄</span>
+                </button>
+                <button class="btn-icon btn-small btn-close-modal" id="btn-close-friend-request" aria-label="بستن">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="modal-body">
+            <div class="friend-request-tabs">
+                <button class="request-tab-btn active" data-tab="received" id="tab-requests-received">
+                    <span class="tab-icon">📥</span>
+                    <span class="tab-text">دریافت شده</span>
+                    <span class="tab-badge" id="badge-requests-received">۳</span>
+                </button>
+                <button class="request-tab-btn" data-tab="sent" id="tab-requests-sent">
+                    <span class="tab-icon">📤</span>
+                    <span class="tab-text">ارسال شده</span>
+                    <span class="tab-badge" id="badge-requests-sent">۲</span>
+                </button>
+                <button class="request-tab-btn" data-tab="blocked" id="tab-requests-blocked">
+                    <span class="tab-icon">🚫</span>
+                    <span class="tab-text">مسدود شده</span>
+                </button>
+            </div>
+
+            <section class="friend-request-section active" id="request-section-received" data-tab="received">
+                <div class="requests-summary">
+                    <div class="summary-card">
+                        <div class="summary-icon">📥</div>
+                        <div class="summary-info">
+                            <span class="summary-value" id="received-total-count">۳</span>
+                            <span class="summary-label">درخواست دریافتی</span>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon">⏰</div>
+                        <div class="summary-info">
+                            <span class="summary-value" id="received-pending-count">۲</span>
+                            <span class="summary-label">در انتظار پاسخ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="requests-list" id="received-requests-list">
+                    <div class="request-card new" data-request-id="req1">
+                        <div class="request-header">
+                            <div class="request-avatar-wrapper">
+                                <span class="avatar avatar-large">👨</span>
+                                <span class="new-badge">جدید</span>
+                            </div>
+                            <div class="request-info">
+                                <h4 class="request-name">علی رضایی</h4>
+                                <div class="request-meta">
+                                    <span class="meta-item">
+                                        <span class="meta-icon">⭐</span>
+                                        <span class="meta-text">سطح ۱۵</span>
+                                    </span>
+                                    <span class="meta-item">
+                                        <span class="meta-icon">🏅</span>
+                                        <span class="meta-text">نقره</span>
+                                    </span>
+                                    <span class="meta-item">
+                                        <span class="meta-icon">🎮</span>
+                                        <span class="meta-text">۱۲۰ بازی</span>
+                                    </span>
+                                </div>
+                                <p class="request-message">سلام! بیا با هم بازی کنیم 👋</p>
+                                <div class="request-time">
+                                    <span class="time-icon">🕐</span>
+                                    <span class="time-text">۵ دقیقه پیش</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="request-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">نرخ برد:</span>
+                                <span class="stat-value">۵۸٪</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">دوستان:</span>
+                                <span class="stat-value">۲۴</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">مشترک:</span>
+                                <span class="stat-value">۳ دوست</span>
+                            </div>
+                        </div>
+                        <div class="request-actions">
+                            <button class="btn btn-success btn-small btn-accept-request" data-request-id="req1">
+                                <span class="btn-icon">✅</span>
+                                <span class="btn-text">قبول</span>
+                            </button>
+                            <button class="btn btn-outline btn-small btn-view-profile" data-player-id="p1">
+                                <span class="btn-icon">👁️</span>
+                                <span class="btn-text">پروفایل</span>
+                            </button>
+                            <button class="btn btn-danger btn-outline btn-small btn-reject-request" data-request-id="req1">
+                                <span class="btn-icon">❌</span>
+                                <span class="btn-text">رد</span>
+                            </button>
+                        </div>
+                        <div class="request-quick-actions">
+                            <button class="quick-action-btn" data-action="accept-message" data-request-id="req1" title="قبول با پیام">
+                                <span class="icon">💬</span>
+                            </button>
+                            <button class="quick-action-btn" data-action="block" data-request-id="req1" title="مسدود کردن">
+                                <span class="icon">🚫</span>
+                            </button>
+                            <button class="quick-action-btn" data-action="report" data-request-id="req1" title="گزارش">
+                                <span class="icon">⚠️</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="request-card" data-request-id="req2">
+                        <div class="request-header">
+                            <div class="request-avatar-wrapper">
+                                <span class="avatar avatar-large">👩</span>
+                            </div>
+                            <div class="request-info">
+                                <h4 class="request-name">مریم احمدی</h4>
+                                <div class="request-meta">
+                                    <span class="meta-item">
+                                        <span class="meta-icon">⭐</span>
+                                        <span class="meta-text">سطح ۲۲</span>
+                                    </span>
+                                    <span class="meta-item">
+                                        <span class="meta-icon">🏅</span>
+                                        <span class="meta-text">طلا</span>
+                                    </span>
+                                </div>
+                                <div class="request-time">
+                                    <span class="time-icon">🕐</span>
+                                    <span class="time-text">۱ ساعت پیش</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="request-actions">
+                            <button class="btn btn-success btn-small btn-accept-request" data-request-id="req2">
+                                <span class="btn-icon">✅</span>
+                                <span class="btn-text">قبول</span>
+                            </button>
+                            <button class="btn btn-outline btn-small btn-view-profile" data-player-id="p2">
+                                <span class="btn-icon">👁️</span>
+                                <span class="btn-text">پروفایل</span>
+                            </button>
+                            <button class="btn btn-danger btn-outline btn-small btn-reject-request" data-request-id="req2">
+                                <span class="btn-icon">❌</span>
+                                <span class="btn-text">رد</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="request-card" data-request-id="req3">
+                        <div class="request-header">
+                            <div class="request-avatar-wrapper">
+                                <span class="avatar avatar-large">👨</span>
+                            </div>
+                            <div class="request-info">
+                                <h4 class="request-name">رضا محمدی</h4>
+                                <div class="request-meta">
+                                    <span class="meta-item">
+                                        <span class="meta-icon">⭐</span>
+                                        <span class="meta-text">سطح ۸</span>
+                                    </span>
+                                    <span class="meta-item">
+                                        <span class="meta-icon">🏅</span>
+                                        <span class="meta-text">برنز</span>
+                                    </span>
+                                </div>
+                                <p class="request-message">از بازی شما لذت بردم، دوست می‌شویم؟ 🎮</p>
+                                <div class="request-time">
+                                    <span class="time-icon">🕐</span>
+                                    <span class="time-text">۳ ساعت پیش</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="request-actions">
+                            <button class="btn btn-success btn-small btn-accept-request" data-request-id="req3">
+                                <span class="btn-icon">✅</span>
+                                <span class="btn-text">قبول</span>
+                            </button>
+                            <button class="btn btn-outline btn-small btn-view-profile" data-player-id="p3">
+                                <span class="btn-icon">👁️</span>
+                                <span class="btn-text">پروفایل</span>
+                            </button>
+                            <button class="btn btn-danger btn-outline btn-small btn-reject-request" data-request-id="req3">
+                                <span class="btn-icon">❌</span>
+                                <span class="btn-text">رد</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bulk-actions" id="received-bulk-actions">
+                    <button class="btn btn-success btn-small" id="btn-accept-all-requests">
+                        <span class="btn-icon">✅</span>
+                        <span class="btn-text">قبول همه</span>
+                    </button>
+                    <button class="btn btn-outline btn-small" id="btn-reject-all-requests">
+                        <span class="btn-icon">❌</span>
+                        <span class="btn-text">رد همه</span>
+                    </button>
+                </div>
+
+                <div class="empty-state" id="received-empty-state" style="display: none;">
+                    <span class="empty-icon">📥</span>
+                    <h4 class="empty-title">درخواست دوستی دریافت نکرده‌اید</h4>
+                    <p class="empty-desc">درخواست‌های دوستی در اینجا نمایش داده می‌شوند</p>
+                    <button class="btn btn-primary" id="btn-find-friends">
+                        <span class="btn-icon">🔍</span>
+                        <span class="btn-text">پیدا کردن دوستان</span>
+                    </button>
+                </div>
+            </section>
+
+            <section class="friend-request-section" id="request-section-sent" data-tab="sent" style="display: none;">
+                <div class="requests-summary">
+                    <div class="summary-card">
+                        <div class="summary-icon">📤</div>
+                        <div class="summary-info">
+                            <span class="summary-value" id="sent-total-count">۲</span>
+                            <span class="summary-label">درخواست ارسالی</span>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon">⏳</div>
+                        <div class="summary-info">
+                            <span class="summary-value" id="sent-pending-count">۲</span>
+                            <span class="summary-label">در انتظار</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="requests-list" id="sent-requests-list">
+                    <div class="request-card sent pending" data-request-id="sent1">
+                        <div class="request-header">
+                            <div class="request-avatar-wrapper">
+                                <span class="avatar avatar-large">👨</span>
+                            </div>
+                            <div class="request-info">
+                                <h4 class="request-name">حسین نوری</h4>
+                                <div class="request-meta">
+                                    <span class="meta-item">
+                                        <span class="meta-icon">⭐</span>
+                                        <span class="meta-text">سطح ۱۰</span>
+                                    </span>
+                                    <span class="meta-item">
+                                        <span class="meta-icon">🏅</span>
+                                        <span class="meta-text">نقره</span>
+                                    </span>
+                                </div>
+                                <div class="request-status pending">
+                                    <span class="status-icon">⏳</span>
+                                    <span class="status-text">در انتظار پاسخ</span>
+                                </div>
+                                <div class="request-time">
+                                    <span class="time-icon">🕐</span>
+                                    <span class="time-text">ارسال شده ۲ ساعت پیش</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="request-actions">
+                            <button class="btn btn-outline btn-small btn-view-profile" data-player-id="p5">
+                                <span class="btn-icon">👁️</span>
+                                <span class="btn-text">پروفایل</span>
+                            </button>
+                            <button class="btn btn-danger btn-outline btn-small btn-cancel-request" data-request-id="sent1">
+                                <span class="btn-icon">❌</span>
+                                <span class="btn-text">لغو درخواست</span>
+                            </button>
+                        </div>
+                        <div class="request-expiry">
+                            <span class="expiry-icon">⏰</span>
+                            <span class="expiry-text">انقضا در ۲۲ ساعت</span>
+                        </div>
+                    </div>
+
+                    <div class="request-card sent accepted" data-request-id="sent2">
+                        <div class="request-header">
+                            <div class="request-avatar-wrapper">
+                                <span class="avatar avatar-large">👩</span>
+                            </div>
+                            <div class="request-info">
+                                <h4 class="request-name">زهرا کریمی</h4>
+                                <div class="request-meta">
+                                    <span class="meta-item">
+                                        <span class="meta-icon">⭐</span>
+                                        <span class="meta-text">سطح ۱۸</span>
+                                    </span>
+                                    <span class="meta-item">
+                                        <span class="meta-icon">🏅</span>
+                                        <span class="meta-text">نقره</span>
+                                    </span>
+                                </div>
+                                <div class="request-status accepted">
+                                    <span class="status-icon">✅</span>
+                                    <span class="status-text">پذیرفته شد</span>
+                                </div>
+                                <div class="request-time">
+                                    <span class="time-icon">🕐</span>
+                                    <span class="time-text">دیروز</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="request-actions">
+                            <button class="btn btn-primary btn-small btn-view-profile" data-player-id="p4">
+                                <span class="btn-icon">👁️</span>
+                                <span class="btn-text">مشاهده پروفایل</span>
+                            </button>
+                            <button class="btn btn-success btn-small btn-send-message" data-player-id="p4">
+                                <span class="btn-icon">💬</span>
+                                <span class="btn-text">پیام</span>
+                            </button>
+                            <button class="btn btn-outline btn-small btn-invite-game" data-player-id="p4">
+                                <span class="btn-icon">🎮</span>
+                                <span class="btn-text">دعوت به بازی</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="request-card sent rejected" data-request-id="sent3">
+                        <div class="request-header">
+                            <div class="request-avatar-wrapper">
+                                <span class="avatar avatar-large">👨</span>
+                            </div>
+                            <div class="request-info">
+                                <h4 class="request-name">محمد حسینی</h4>
+                                <div class="request-meta">
+                                    <span class="meta-item">
+                                        <span class="meta-icon">⭐</span>
+                                        <span class="meta-text">سطح ۲۵</span>
+                                    </span>
+                                    <span class="meta-item">
+                                        <span class="meta-icon">🏅</span>
+                                        <span class="meta-text">طلا</span>
+                                    </span>
+                                </div>
+                                <div class="request-status rejected">
+                                    <span class="status-icon">❌</span>
+                                    <span class="status-text">رد شد</span>
+                                </div>
+                                <div class="request-time">
+                                    <span class="time-icon">🕐</span>
+                                    <span class="time-text">۳ روز پیش</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="request-actions">
+                            <button class="btn btn-outline btn-small btn-view-profile" data-player-id="p6">
+                                <span class="btn-icon">👁️</span>
+                                <span class="btn-text">پروفایل</span>
+                            </button>
+                            <button class="btn btn-primary btn-small btn-resend-request" data-player-id="p6">
+                                <span class="btn-icon">🔄</span>
+                                <span class="btn-text">ارسال مجدد</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="empty-state" id="sent-empty-state" style="display: none;">
+                    <span class="empty-icon">📤</span>
+                    <h4 class="empty-title">درخواست دوستی ارسال نکرده‌اید</h4>
+                    <p class="empty-desc">درخواست‌های ارسالی شما در اینجا نمایش داده می‌شوند</p>
+                    <button class="btn btn-primary" id="btn-add-friend">
+                        <span class="btn-icon">➕</span>
+                        <span class="btn-text">افزودن دوست</span>
+                    </button>
+                </div>
+            </section>
+
+            <section class="friend-request-section" id="request-section-blocked" data-tab="blocked" style="display: none;">
+                <div class="blocked-info">
+                    <div class="info-icon">🚫</div>
+                    <div class="info-content">
+                        <h4 class="info-title">لیست مسدود شده‌ها</h4>
+                        <p class="info-desc">کاربران مسدود شده نمی‌توانند برای شما درخواست دوستی ارسال کنند</p>
+                    </div>
+                </div>
+
+                <div class="requests-list" id="blocked-requests-list">
+                    <div class="request-card blocked" data-user-id="blocked1">
+                        <div class="request-header">
+                            <div class="request-avatar-wrapper">
+                                <span class="avatar avatar-large">👨</span>
+                                <span class="blocked-badge">مسدود</span>
+                            </div>
+                            <div class="request-info">
+                                <h4 class="request-name">کاربر مزاحم</h4>
+                                <div class="request-meta">
+                                    <span class="meta-item">
+                                        <span class="meta-icon">🚫</span>
+                                        <span class="meta-text">مسدود شده در ۱۴۰۵/۰۶/۰۱</span>
+                                    </span>
+                                </div>
+                                <p class="block-reason">دلیل: ارسال پیام‌های نامناسب</p>
+                            </div>
+                        </div>
+                        <div class="request-actions">
+                            <button class="btn btn-outline btn-small btn-unblock-user" data-user-id="blocked1">
+                                <span class="btn-icon">✅</span>
+                                <span class="btn-text">رفع مسدودیت</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="empty-state" id="blocked-empty-state" style="display: none;">
+                    <span class="empty-icon">✅</span>
+                    <h4 class="empty-title">لیست مسدود شده‌ها خالی است</h4>
+                    <p class="empty-desc">هیچ کاربری را مسدود نکرده‌اید</p>
+                </div>
+            </section>
+        </div>
+
+        <div class="modal-footer">
+            <div class="footer-info">
+                <span class="footer-text" id="friend-requests-status">۳ درخواست دریافتی</span>
+            </div>
+            <div class="footer-actions">
+                <button class="btn btn-outline" id="btn-close-friend-requests-modal">
+                    <span class="btn-text">بستن</span>
+                </button>
+                <button class="btn btn-primary" id="btn-find-new-friends">
+                    <span class="btn-icon">🔍</span>
+                    <span class="btn-text">پیدا کردن دوستان جدید</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accept with Message Sub-modal -->
+    <div class="accept-message-overlay" id="accept-message-overlay" style="display: none;">
+        <div class="message-content">
+            <div class="message-header">
+                <span class="message-icon">💬</span>
+                <h4 class="message-title">قبول با پیام</h4>
+                <button class="btn-icon btn-small" id="btn-close-accept-message" aria-label="بستن">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+            <div class="message-body">
+                <div class="accept-user-info">
+                    <span class="avatar avatar-medium" id="accept-user-avatar">👨</span>
+                    <div class="user-info">
+                        <span class="user-name" id="accept-user-name">علی رضایی</span>
+                        <span class="user-status">درخواست دوستی شما را پذیرفتید</span>
+                    </div>
+                </div>
+                <div class="quick-messages">
+                    <button class="quick-msg-btn" data-message="سلام! خوشحالم که دوست شدیم 👋">سلام! خوشحالم که دوست شدیم 👋</button>
+                    <button class="quick-msg-btn" data-message="بیا با هم بازی کنیم! 🎮">بیا با هم بازی کنیم! 🎮</button>
+                    <button class="quick-msg-btn" data-message="ممنون از درخواستت 🙏">ممنون از درخواستت 🙏</button>
+                </div>
+                <div class="input-wrapper textarea-wrapper">
+                    <textarea
+                        id="accept-message-text"
+                        class="input-field textarea-field"
+                        placeholder="پیام خود را بنویسید..."
+                        maxlength="200"
+                        rows="3"
+                    ></textarea>
+                    <span class="char-counter">
+                        <span id="accept-msg-char-count">0</span> / ۲۰۰
+                    </span>
+                </div>
+                <label class="checkbox-wrapper">
+                    <input type="checkbox" id="accept-invite-to-game">
+                    <span class="checkbox-label">همزمان دعوت به بازی ارسال شود</span>
+                </label>
+            </div>
+            <div class="message-footer">
+                <button class="btn btn-outline" id="btn-cancel-accept-message">
+                    <span class="btn-text">انصراف</span>
+                </button>
+                <button class="btn btn-primary" id="btn-send-accept-message">
+                    <span class="btn-icon">📤</span>
+                    <span class="btn-text">ارسال</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reject with Reason Sub-modal -->
+    <div class="reject-reason-overlay" id="reject-reason-overlay" style="display: none;">
+        <div class="reason-content">
+            <div class="reason-header">
+                <span class="reason-icon">❌</span>
+                <h4 class="reason-title">رد درخواست دوستی</h4>
+                <button class="btn-icon btn-small" id="btn-close-reject-reason" aria-label="بستن">
+                    <span class="icon">✕</span>
+                </button>
+            </div>
+            <div class="reason-body">
+                <div class="reject-user-info">
+                    <span class="avatar avatar-medium" id="reject-user-avatar">👨</span>
+                    <div class="user-info">
+                        <span class="user-name" id="reject-user-name">علی رضایی</span>
+                        <span class="user-status">درخواست دوستی را رد می‌کنید</span>
+                    </div>
+                </div>
+                <div class="reason-options">
+                    <h5 class="options-title">دلیل رد (اختیاری):</h5>
+                    <label class="reason-option">
+                        <input type="radio" name="reject-reason" value="not_interested">
+                        <span class="reason-text">علاقه‌ای به دوستی ندارم</span>
+                    </label>
+                    <label class="reason-option">
+                        <input type="radio" name="reject-reason" value="already_friends">
+                        <span class="reason-text">قبلاً دوست هستیم</span>
+                    </label>
+                    <label class="reason-option">
+                        <input type="radio" name="reject-reason" value="too_many">
+                        <span class="reason-text">دوستانم زیاد هستند</span>
+                    </label>
+                    <label class="reason-option">
+                        <input type="radio" name="reject-reason" value="inappropriate">
+                        <span class="reason-text">رفتار نامناسب</span>
+                    </label>
+                    <label class="reason-option">
+                        <input type="radio" name="reject-reason" value="other">
+                        <span class="reason-text">سایر</span>
+                    </label>
+                </div>
+                <label class="checkbox-wrapper">
+                    <input type="checkbox" id="reject-block-user">
+                    <span class="checkbox-label">این کاربر را مسدود کن</span>
+                </label>
+                <label class="checkbox-wrapper">
+                    <input type="checkbox" id="reject-report-user">
+                    <span class="checkbox-label">این کاربر را گزارش کن</span>
+                </label>
+            </div>
+            <div class="reason-footer">
+                <button class="btn btn-outline" id="btn-cancel-reject-reason">
+                    <span class="btn-text">انصراف</span>
+                </button>
+                <button class="btn btn-danger" id="btn-confirm-reject">
+                    <span class="btn-icon">❌</span>
+                    <span class="btn-text">تأیید رد</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Notification -->
+    <div class="friend-request-success" id="friend-request-success" style="display: none;">
+        <div class="success-icon-wrapper">
+            <span class="success-icon">✅</span>
+        </div>
+        <div class="success-info">
+            <h4 class="success-title" id="friend-success-title">درخواست پذیرفته شد!</h4>
+            <p class="success-desc" id="friend-success-desc">شما و علی رضایی اکنون دوست هستید</p>
+        </div>
+        <div class="success-actions">
+            <button class="btn btn-primary btn-small" id="btn-success-send-message">
+                <span class="btn-icon">💬</span>
+                <span class="btn-text">پیام</span>
+            </button>
+            <button class="btn btn-outline btn-small" id="btn-success-invite-game">
+                <span class="btn-icon">🎮</span>
+                <span class="btn-text">دعوت به بازی</span>
+            </button>
+        </div>
+    </div>
+</div>
