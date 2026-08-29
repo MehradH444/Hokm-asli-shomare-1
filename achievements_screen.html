@@ -1,0 +1,833 @@
+<div id="achievements-screen" class="screen screen-achievements" data-screen-name="achievements">
+    <div class="screen-content">
+        <header class="screen-header">
+            <button class="btn-back" data-route="home" aria-label="بازگشت">
+                <span class="icon">→</span>
+            </button>
+            <h1 class="screen-title">دستاوردها</h1>
+            <div class="header-spacer"></div>
+        </header>
+
+        <section class="achievements-hero">
+            <div class="hero-background"></div>
+            <div class="hero-content">
+                <div class="hero-icon">🏅</div>
+                <h2 class="hero-title">دستاوردهای شما</h2>
+                <p class="hero-subtitle">با تکمیل چالش‌ها، دستاوردهای ارزشمند کسب کنید</p>
+                <div class="hero-progress">
+                    <div class="progress-info">
+                        <span class="progress-label">پیشرفت کلی</span>
+                        <span class="progress-text"><span id="ach-overall-unlocked">۰</span> از <span id="ach-overall-total">۰</span></span>
+                    </div>
+                    <div class="progress-bar-large">
+                        <div class="progress-fill" id="ach-overall-bar" style="width: 0%;"></div>
+                    </div>
+                    <span class="progress-percent" id="ach-overall-percent">۰٪</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="achievements-stats">
+            <div class="stats-grid">
+                <div class="stat-card unlocked">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">✅</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="ach-unlocked-count" class="stat-value">۰</span>
+                        <span class="stat-label">باز شده</span>
+                    </div>
+                </div>
+                <div class="stat-card in-progress">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">⏳</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="ach-progress-count" class="stat-value">۰</span>
+                        <span class="stat-label">در حال پیشرفت</span>
+                    </div>
+                </div>
+                <div class="stat-card locked">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon">🔒</span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="ach-locked-count" class="stat-value">۵۰</span>
+                        <span class="stat-label">قفل</span>
+                    </div>
+                </div>
+                <div class="stat-card rarest">
+                    <div class="stat-icon-wrapper">
+                        <span class="stat-icon"></span>
+                    </div>
+                    <div class="stat-content">
+                        <span id="ach-rarest-name" class="stat-value stat-text">-</span>
+                        <span class="stat-label">کمیاب‌ترین</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="achievements-rewards-claimable" id="ach-rewards-section">
+            <div class="claimable-card">
+                <div class="claimable-header">
+                    <span class="claimable-icon"></span>
+                    <div class="claimable-info">
+                        <h4 class="claimable-title">پاداش‌های قابل دریافت</h4>
+                        <p class="claimable-desc" id="ach-claimable-count">۰ دستاورد پاداش دریافت نشده دارد</p>
+                    </div>
+                </div>
+                <div class="claimable-total" id="ach-claimable-total" style="display: none;">
+                    <div class="total-item">
+                        <span class="total-icon"></span>
+                        <span class="total-value" id="ach-claimable-coins"></span>
+                    </div>
+                    <div class="total-item">
+                        <span class="total-icon">⭐</span>
+                        <span class="total-value" id="ach-claimable-xp">۰</span>
+                    </div>
+                    <div class="total-item">
+                        <span class="total-icon">💎</span>
+                        <span class="total-value" id="ach-claimable-gems">۰</span>
+                    </div>
+                </div>
+                <button id="btn-claim-all-achievements" class="btn btn-primary btn-block" disabled>
+                    <span class="btn-icon"></span>
+                    <span class="btn-text">دریافت همه پاداش‌ها</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="achievements-tabs">
+            <div class="tabs-container">
+                <button class="tab-btn active" data-category="all" id="tab-ach-all">
+                    <span class="tab-icon">🏆</span>
+                    <span class="tab-text">همه</span>
+                    <span class="tab-badge" id="badge-ach-all">۵۰</span>
+                </button>
+                <button class="tab-btn" data-category="first_time" id="tab-ach-first">
+                    <span class="tab-icon">🌟</span>
+                    <span class="tab-text">اولین بار</span>
+                </button>
+                <button class="tab-btn" data-category="milestones" id="tab-ach-milestones">
+                    <span class="tab-icon">🎯</span>
+                    <span class="tab-text">نقاط عطف</span>
+                </button>
+                <button class="tab-btn" data-category="social" id="tab-ach-social">
+                    <span class="tab-icon">👥</span>
+                    <span class="tab-text">اجتماعی</span>
+                </button>
+                <button class="tab-btn" data-category="competitive" id="tab-ach-competitive">
+                    <span class="tab-icon">⚔️</span>
+                    <span class="tab-text">رقابتی</span>
+                </button>
+                <button class="tab-btn" data-category="collection" id="tab-ach-collection">
+                    <span class="tab-icon">🎭</span>
+                    <span class="tab-text">مجموعه</span>
+                </button>
+                <button class="tab-btn" data-category="special" id="tab-ach-special">
+                    <span class="tab-icon">✨</span>
+                    <span class="tab-text">ویژه</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="achievements-filters">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label for="ach-rarity-filter" class="filter-label">کمیابی:</label>
+                    <select id="ach-rarity-filter" class="filter-select">
+                        <option value="all">همه</option>
+                        <option value="common">معمولی</option>
+                        <option value="rare">کمیاب</option>
+                        <option value="epic">حماسی</option>
+                        <option value="legendary">افسانه‌ای</option>
+                        <option value="mythic">اسطوره‌ای</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="ach-status-filter" class="filter-label">وضعیت:</label>
+                    <select id="ach-status-filter" class="filter-select">
+                        <option value="all">همه</option>
+                        <option value="unlocked">باز شده</option>
+                        <option value="in_progress">در حال پیشرفت</option>
+                        <option value="locked">قفل</option>
+                    </select>
+                </div>
+                <button class="btn-icon btn-small" id="btn-refresh-achievements" aria-label="بروزرسانی">
+                    <span class="icon">🔄</span>
+                </button>
+            </div>
+            <div class="search-row">
+                <div class="input-wrapper search-wrapper">
+                    <span class="input-icon">🔍</span>
+                    <input
+                        type="text"
+                        id="ach-search-input"
+                        class="input-field"
+                        placeholder="جستجوی دستاورد..."
+                        maxlength="30"
+                    >
+                </div>
+            </div>
+        </section>
+
+        <section class="achievements-list-section">
+            <div class="section-header">
+                <h3 class="section-title" id="ach-list-title">همه دستاوردها</h3>
+                <span class="total-count" id="ach-list-count">۵۰ دستاورد</span>
+            </div>
+            <div id="achievements-list" class="achievements-list">
+                <div class="achievement-card unlocked" data-achievement-id="first_win" data-category="first_time" data-rarity="common">
+                    <div class="achievement-header">
+                        <div class="achievement-icon-wrapper unlocked">
+                            <span class="achievement-icon">🏆</span>
+                        </div>
+                        <div class="achievement-info">
+                            <h4 class="achievement-title">اولین پیروزی</h4>
+                            <p class="achievement-desc">اولین بازی خود را ببر</p>
+                            <div class="achievement-meta">
+                                <span class="rarity-badge common">معمولی</span>
+                                <span class="category-badge first_time">اولین بار</span>
+                            </div>
+                        </div>
+                        <div class="achievement-status">
+                            <span class="status-badge unlocked">✅ باز شده</span>
+                            <span class="unlocked-date">۱۴۰۵/۰۶/۰۵</span>
+                        </div>
+                    </div>
+                    <div class="achievement-reward">
+                        <div class="reward-item">
+                            <span class="reward-icon">🪙</span>
+                            <span class="reward-value">۱۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">⭐</span>
+                            <span class="reward-value">۰</span>
+                        </div>
+                    </div>
+                    <div class="achievement-actions">
+                        <button class="btn btn-primary btn-small btn-claim-achievement" data-achievement-id="first_win">
+                            <span class="btn-icon">🎁</span>
+                            <span class="btn-text">دریافت پاداش</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="achievement-card unlocked claimed" data-achievement-id="first_ranked" data-category="first_time" data-rarity="common">
+                    <div class="achievement-header">
+                        <div class="achievement-icon-wrapper unlocked">
+                            <span class="achievement-icon">⚔️</span>
+                        </div>
+                        <div class="achievement-info">
+                            <h4 class="achievement-title">اولین بازی رقابتی</h4>
+                            <p class="achievement-desc">اولین بازی Ranked خود را انجام بده</p>
+                            <div class="achievement-meta">
+                                <span class="rarity-badge common">معمولی</span>
+                                <span class="category-badge first_time">اولین بار</span>
+                            </div>
+                        </div>
+                        <div class="achievement-status">
+                            <span class="status-badge claimed">✅ دریافت شد</span>
+                            <span class="unlocked-date">۱۴۰۵/۰۶/۰۴</span>
+                        </div>
+                    </div>
+                    <div class="achievement-reward claimed">
+                        <div class="reward-item">
+                            <span class="reward-icon">🪙</span>
+                            <span class="reward-value">۲۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">⭐</span>
+                            <span class="reward-value">۰۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon"></span>
+                            <span class="reward-value">۵</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="achievement-card in-progress" data-achievement-id="win_10" data-category="milestones" data-rarity="common">
+                    <div class="achievement-header">
+                        <div class="achievement-icon-wrapper in-progress">
+                            <span class="achievement-icon"></span>
+                        </div>
+                        <div class="achievement-info">
+                            <h4 class="achievement-title">۱۰ پیروزی</h4>
+                            <p class="achievement-desc">۱۰ بازی ببر</p>
+                            <div class="achievement-meta">
+                                <span class="rarity-badge common">معمولی</span>
+                                <span class="category-badge milestones">نقاط عطف</span>
+                            </div>
+                        </div>
+                        <div class="achievement-status">
+                            <span class="status-badge in-progress">⏳ در حال پیشرفت</span>
+                        </div>
+                    </div>
+                    <div class="achievement-progress-section">
+                        <div class="progress-info">
+                            <span class="progress-label">پیشرفت</span>
+                            <span class="progress-text"><span id="ach-win10-progress">۷</span> از ۱۰</span>
+                        </div>
+                        <div class="progress-bar-large">
+                            <div class="progress-fill" id="ach-win10-bar" style="width: 70%;"></div>
+                        </div>
+                    </div>
+                    <div class="achievement-reward">
+                        <div class="reward-item">
+                            <span class="reward-icon">🪙</span>
+                            <span class="reward-value">۰۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">⭐</span>
+                            <span class="reward-value">۲۵۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">💎</span>
+                            <span class="reward-value">۱</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="achievement-card in-progress" data-achievement-id="win_50" data-category="milestones" data-rarity="rare">
+                    <div class="achievement-header">
+                        <div class="achievement-icon-wrapper in-progress">
+                            <span class="achievement-icon">🎯</span>
+                        </div>
+                        <div class="achievement-info">
+                            <h4 class="achievement-title">۵۰ پیروزی</h4>
+                            <p class="achievement-desc">۵۰ بازی ببر</p>
+                            <div class="achievement-meta">
+                                <span class="rarity-badge rare">کمیاب</span>
+                                <span class="category-badge milestones">نقاط عطف</span>
+                            </div>
+                        </div>
+                        <div class="achievement-status">
+                            <span class="status-badge in-progress">⏳ در حال پیشرفت</span>
+                        </div>
+                    </div>
+                    <div class="achievement-progress-section">
+                        <div class="progress-info">
+                            <span class="progress-label">پیشرفت</span>
+                            <span class="progress-text"><span id="ach-win50-progress">۷</span> از ۰</span>
+                        </div>
+                        <div class="progress-bar-large">
+                            <div class="progress-fill" id="ach-win50-bar" style="width: 14%;"></div>
+                        </div>
+                    </div>
+                    <div class="achievement-reward">
+                        <div class="reward-item">
+                            <span class="reward-icon">🪙</span>
+                            <span class="reward-value">۲,۰۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">⭐</span>
+                            <span class="reward-value">,۰۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">💎</span>
+                            <span class="reward-value">۵۰</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="achievement-card locked" data-achievement-id="win_100" data-category="milestones" data-rarity="epic">
+                    <div class="achievement-header">
+                        <div class="achievement-icon-wrapper locked">
+                            <span class="achievement-icon"></span>
+                        </div>
+                        <div class="achievement-info">
+                            <h4 class="achievement-title">۱۰۰ پیروزی</h4>
+                            <p class="achievement-desc">۱۰ بازی ببر</p>
+                            <div class="achievement-meta">
+                                <span class="rarity-badge epic">حماسی</span>
+                                <span class="category-badge milestones">نقاط عطف</span>
+                            </div>
+                        </div>
+                        <div class="achievement-status">
+                            <span class="status-badge locked">🔒 قفل</span>
+                        </div>
+                    </div>
+                    <div class="achievement-requirement">
+                        <span class="req-icon">🔒</span>
+                        <span class="req-text">نیاز به تکمیل دستاورد قبلی</span>
+                    </div>
+                    <div class="achievement-reward locked">
+                        <div class="reward-item">
+                            <span class="reward-icon">🪙</span>
+                            <span class="reward-value">,۰۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">⭐</span>
+                            <span class="reward-value">۲,۵۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon"></span>
+                            <span class="reward-value">۱۰۰</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="achievement-card locked" data-achievement-id="win_500" data-category="milestones" data-rarity="legendary">
+                    <div class="achievement-header">
+                        <div class="achievement-icon-wrapper locked">
+                            <span class="achievement-icon">🎯</span>
+                        </div>
+                        <div class="achievement-info">
+                            <h4 class="achievement-title">۵۰۰ پیروزی</h4>
+                            <p class="achievement-desc">۰۰ بازی ببر</p>
+                            <div class="achievement-meta">
+                                <span class="rarity-badge legendary">افسانه‌ای</span>
+                                <span class="category-badge milestones">نقاط عطف</span>
+                            </div>
+                        </div>
+                        <div class="achievement-status">
+                            <span class="status-badge locked">🔒 قفل</span>
+                        </div>
+                    </div>
+                    <div class="achievement-requirement">
+                        <span class="req-icon">🔒</span>
+                        <span class="req-text">نیاز به ۱۰۰ پیروزی</span>
+                    </div>
+                    <div class="achievement-reward locked">
+                        <div class="reward-item">
+                            <span class="reward-icon">🪙</span>
+                            <span class="reward-value">۲۰,۰۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">⭐</span>
+                            <span class="reward-value">۱۰,۰۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">💎</span>
+                            <span class="reward-value">۵۰۰</span>
+                        </div>
+                        <div class="reward-item special">
+                            <span class="reward-icon">👑</span>
+                            <span class="reward-value">عنوان استاد پیروزی</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="achievement-card locked mythic" data-achievement-id="win_1000" data-category="milestones" data-rarity="mythic">
+                    <div class="achievement-header">
+                        <div class="achievement-icon-wrapper locked mythic">
+                            <span class="achievement-icon">👑</span>
+                        </div>
+                        <div class="achievement-info">
+                            <h4 class="achievement-title">۱۰۰ پیروزی</h4>
+                            <p class="achievement-desc">۱۰۰ بازی ببر - افسانه حکم</p>
+                            <div class="achievement-meta">
+                                <span class="rarity-badge mythic">اسطوره‌ای</span>
+                                <span class="category-badge milestones">نقاط عطف</span>
+                            </div>
+                        </div>
+                        <div class="achievement-status">
+                            <span class="status-badge locked mythic">🔒 اسطوره‌ای</span>
+                        </div>
+                    </div>
+                    <div class="achievement-requirement">
+                        <span class="req-icon">🔒</span>
+                        <span class="req-text">نیاز به ۵۰۰ پیروزی</span>
+                    </div>
+                    <div class="achievement-reward locked mythic">
+                        <div class="reward-item">
+                            <span class="reward-icon">🪙</span>
+                            <span class="reward-value">۱۰,۰۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">⭐</span>
+                            <span class="reward-value">۵۰,۰۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">💎</span>
+                            <span class="reward-value">۲,۰۰</span>
+                        </div>
+                        <div class="reward-item special">
+                            <span class="reward-icon"></span>
+                            <span class="reward-value">عنوان افسانه حکم</span>
+                        </div>
+                        <div class="reward-item special">
+                            <span class="reward-icon">🏅</span>
+                            <span class="reward-value">نشان افسانه</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="achievement-card unlocked" data-achievement-id="friends_5" data-category="social" data-rarity="common">
+                    <div class="achievement-header">
+                        <div class="achievement-icon-wrapper unlocked">
+                            <span class="achievement-icon"></span>
+                        </div>
+                        <div class="achievement-info">
+                            <h4 class="achievement-title">۵ دوست</h4>
+                            <p class="achievement-desc">۵ دوست اضافه کن</p>
+                            <div class="achievement-meta">
+                                <span class="rarity-badge common">معمولی</span>
+                                <span class="category-badge social">اجتماعی</span>
+                            </div>
+                        </div>
+                        <div class="achievement-status">
+                            <span class="status-badge unlocked">✅ باز شده</span>
+                        </div>
+                    </div>
+                    <div class="achievement-reward">
+                        <div class="reward-item">
+                            <span class="reward-icon">🪙</span>
+                            <span class="reward-value">۵۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">⭐</span>
+                            <span class="reward-value">۵۰</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="achievement-card in-progress" data-achievement-id="reach_gold" data-category="competitive" data-rarity="epic">
+                    <div class="achievement-header">
+                        <div class="achievement-icon-wrapper in-progress">
+                            <span class="achievement-icon"></span>
+                        </div>
+                        <div class="achievement-info">
+                            <h4 class="achievement-title">رسیدن به طلا</h4>
+                            <p class="achievement-desc">به لیگ طلا برس</p>
+                            <div class="achievement-meta">
+                                <span class="rarity-badge epic">حماسی</span>
+                                <span class="category-badge competitive">رقابتی</span>
+                            </div>
+                        </div>
+                        <div class="achievement-status">
+                            <span class="status-badge in-progress">⏳ در حال پیشرفت</span>
+                        </div>
+                    </div>
+                    <div class="achievement-progress-section">
+                        <div class="progress-info">
+                            <span class="progress-label">امتیاز فعلی</span>
+                            <span class="progress-text">۱۰۰ از ۱۰۰</span>
+                        </div>
+                        <div class="progress-bar-large">
+                            <div class="progress-fill" style="width: 66%;"></div>
+                        </div>
+                    </div>
+                    <div class="achievement-reward">
+                        <div class="reward-item">
+                            <span class="reward-icon">🪙</span>
+                            <span class="reward-value">۵,۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">⭐</span>
+                            <span class="reward-value">۲,۵۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">💎</span>
+                            <span class="reward-value">۱۲۵</span>
+                        </div>
+                        <div class="reward-item special">
+                            <span class="reward-icon">️</span>
+                            <span class="reward-value">قاب طلا</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="achievement-card locked" data-achievement-id="reach_diamond" data-category="competitive" data-rarity="legendary">
+                    <div class="achievement-header">
+                        <div class="achievement-icon-wrapper locked">
+                            <span class="achievement-icon"></span>
+                        </div>
+                        <div class="achievement-info">
+                            <h4 class="achievement-title">رسیدن به الماس</h4>
+                            <p class="achievement-desc">به لیگ الماس برس</p>
+                            <div class="achievement-meta">
+                                <span class="rarity-badge legendary">افسانه‌ای</span>
+                                <span class="category-badge competitive">رقابتی</span>
+                            </div>
+                        </div>
+                        <div class="achievement-status">
+                            <span class="status-badge locked">🔒 قفل</span>
+                        </div>
+                    </div>
+                    <div class="achievement-requirement">
+                        <span class="req-icon">🔒</span>
+                        <span class="req-text">نیاز به رسیدن به لیگ طلا</span>
+                    </div>
+                    <div class="achievement-reward locked">
+                        <div class="reward-item">
+                            <span class="reward-icon">🪙</span>
+                            <span class="reward-value">۲۵,۰۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">⭐</span>
+                            <span class="reward-value">۱,۵۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">💎</span>
+                            <span class="reward-value">۶۲۵</span>
+                        </div>
+                        <div class="reward-item special">
+                            <span class="reward-icon">️</span>
+                            <span class="reward-value">قاب الماس</span>
+                        </div>
+                        <div class="reward-item special">
+                            <span class="reward-icon"></span>
+                            <span class="reward-value">عنوان الماس</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="achievement-card locked" data-achievement-id="collect_5_avatars" data-category="collection" data-rarity="common">
+                    <div class="achievement-header">
+                        <div class="achievement-icon-wrapper locked">
+                            <span class="achievement-icon">🎭</span>
+                        </div>
+                        <div class="achievement-info">
+                            <h4 class="achievement-title">۵ آواتار</h4>
+                            <p class="achievement-desc">۵ آواتار مختلف جمع کن</p>
+                            <div class="achievement-meta">
+                                <span class="rarity-badge common">معمولی</span>
+                                <span class="category-badge collection">مجموعه</span>
+                            </div>
+                        </div>
+                        <div class="achievement-status">
+                            <span class="status-badge locked">🔒 قفل</span>
+                        </div>
+                    </div>
+                    <div class="achievement-progress-section">
+                        <div class="progress-info">
+                            <span class="progress-label">پیشرفت</span>
+                            <span class="progress-text"> از ۵</span>
+                        </div>
+                        <div class="progress-bar-large">
+                            <div class="progress-fill" style="width: 20%;"></div>
+                        </div>
+                    </div>
+                    <div class="achievement-reward">
+                        <div class="reward-item">
+                            <span class="reward-icon">🪙</span>
+                            <span class="reward-value">۵۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">⭐</span>
+                            <span class="reward-value">۵۰</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="achievement-card locked" data-achievement-id="perfect_game" data-category="special" data-rarity="epic">
+                    <div class="achievement-header">
+                        <div class="achievement-icon-wrapper locked">
+                            <span class="achievement-icon">✨</span>
+                        </div>
+                        <div class="achievement-info">
+                            <h4 class="achievement-title">بازی کامل</h4>
+                            <p class="achievement-desc">یک بازی را بدون باختن هیچ دستی ببر</p>
+                            <div class="achievement-meta">
+                                <span class="rarity-badge epic">حماسی</span>
+                                <span class="category-badge special">ویژه</span>
+                            </div>
+                        </div>
+                        <div class="achievement-status">
+                            <span class="status-badge locked">🔒 قفل</span>
+                        </div>
+                    </div>
+                    <div class="achievement-requirement">
+                        <span class="req-icon">🔒</span>
+                        <span class="req-text">بسیار نادر - ۱۳-۰ ببر!</span>
+                    </div>
+                    <div class="achievement-reward locked">
+                        <div class="reward-item">
+                            <span class="reward-icon">🪙</span>
+                            <span class="reward-value">,۰۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">⭐</span>
+                            <span class="reward-value">۲,۵۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon"></span>
+                            <span class="reward-value">۱۲۵</span>
+                        </div>
+                        <div class="reward-item special">
+                            <span class="reward-icon">🏅</span>
+                            <span class="reward-value">نشان کامل</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="achievement-card locked" data-achievement-id="daily_login_365" data-category="special" data-rarity="mythic">
+                    <div class="achievement-header">
+                        <div class="achievement-icon-wrapper locked mythic">
+                            <span class="achievement-icon"></span>
+                        </div>
+                        <div class="achievement-info">
+                            <h4 class="achievement-title">۳۶۵ روز متوالی</h4>
+                            <p class="achievement-desc">۳۶ روز متوالی وارد بازی شو</p>
+                            <div class="achievement-meta">
+                                <span class="rarity-badge mythic">اسطوره‌ای</span>
+                                <span class="category-badge special">ویژه</span>
+                            </div>
+                        </div>
+                        <div class="achievement-status">
+                            <span class="status-badge locked mythic">🔒 اسطوره‌ای</span>
+                        </div>
+                    </div>
+                    <div class="achievement-progress-section">
+                        <div class="progress-info">
+                            <span class="progress-label">پیشرفت</span>
+                            <span class="progress-text"> از ۳۶۵</span>
+                        </div>
+                        <div class="progress-bar-large">
+                            <div class="progress-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <div class="achievement-reward locked mythic">
+                        <div class="reward-item">
+                            <span class="reward-icon">🪙</span>
+                            <span class="reward-value">۱۰۰,۰۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">⭐</span>
+                            <span class="reward-value">۵۰,۰۰</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon"></span>
+                            <span class="reward-value">۲,۵۰</span>
+                        </div>
+                        <div class="reward-item special">
+                            <span class="reward-icon">👑</span>
+                            <span class="reward-value">عنوان وفادار</span>
+                        </div>
+                        <div class="reward-item special">
+                            <span class="reward-icon"></span>
+                            <span class="reward-value">نشان افسانه</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="load-more-container" id="ach-load-more-container">
+                <button class="btn btn-outline btn-block" id="btn-load-more-achievements">
+                    <span class="btn-icon">⬇️</span>
+                    <span class="btn-text">بارگذاری بیشتر</span>
+                </button>
+            </div>
+
+            <div class="empty-state" id="ach-empty-state" style="display: none;">
+                <span class="empty-icon">🔍</span>
+                <h4 class="empty-title">دستاوردی یافت نشد</h4>
+                <p class="empty-desc">فیلترها را تغییر دهید یا عبارت جستجو را اصلاح کنید</p>
+            </div>
+        </section>
+
+        <section class="achievements-rarity-breakdown" id="ach-rarity-section">
+            <div class="section-header">
+                <h3 class="section-title">توزیع بر اساس کمیابی</h3>
+            </div>
+            <div class="rarity-breakdown">
+                <div class="rarity-item common">
+                    <div class="rarity-info">
+                        <span class="rarity-icon">⚪</span>
+                        <span class="rarity-name">معمولی</span>
+                    </div>
+                    <div class="rarity-bar-wrapper">
+                        <div class="rarity-bar" style="width: 100%;">
+                            <span class="rarity-count"><span id="ach-common-unlocked"></span> / <span id="ach-common-total">۱۵</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="rarity-item rare">
+                    <div class="rarity-info">
+                        <span class="rarity-icon"></span>
+                        <span class="rarity-name">کمیاب</span>
+                    </div>
+                    <div class="rarity-bar-wrapper">
+                        <div class="rarity-bar" style="width: 0%;">
+                            <span class="rarity-count"><span id="ach-rare-unlocked">۰</span> / <span id="ach-rare-total">۱۵</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="rarity-item epic">
+                    <div class="rarity-info">
+                        <span class="rarity-icon">🟣</span>
+                        <span class="rarity-name">حماسی</span>
+                    </div>
+                    <div class="rarity-bar-wrapper">
+                        <div class="rarity-bar" style="width: 0%;">
+                            <span class="rarity-count"><span id="ach-epic-unlocked">۰</span> / <span id="ach-epic-total">۱۰</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="rarity-item legendary">
+                    <div class="rarity-info">
+                        <span class="rarity-icon">🟡</span>
+                        <span class="rarity-name">افسانه‌ای</span>
+                    </div>
+                    <div class="rarity-bar-wrapper">
+                        <div class="rarity-bar" style="width: 0%;">
+                            <span class="rarity-count"><span id="ach-legendary-unlocked">۰</span> / <span id="ach-legendary-total">۷</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="rarity-item mythic">
+                    <div class="rarity-info">
+                        <span class="rarity-icon">🔴</span>
+                        <span class="rarity-name">اسطوره‌ای</span>
+                    </div>
+                    <div class="rarity-bar-wrapper">
+                        <div class="rarity-bar" style="width: 0%;">
+                            <span class="rarity-count"><span id="ach-mythic-unlocked">۰</span> / <span id="ach-mythic-total">۳</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="achievements-recently-unlocked" id="ach-recent-section">
+            <div class="section-header">
+                <h3 class="section-title">اخیراً باز شده</h3>
+            </div>
+            <div id="recently-unlocked-list" class="recently-unlocked-list">
+                <div class="recent-achievement">
+                    <span class="recent-icon"></span>
+                    <div class="recent-info">
+                        <span class="recent-name">اولین پیروزی</span>
+                        <span class="recent-date">۱۴۰۵/۰۶/۰۵</span>
+                    </div>
+                    <span class="recent-rarity common">معمولی</span>
+                </div>
+                <div class="recent-achievement">
+                    <span class="recent-icon">⚔️</span>
+                    <div class="recent-info">
+                        <span class="recent-name">اولین بازی رقابتی</span>
+                        <span class="recent-date">۱۴۰۵/۰۶/۰۴</span>
+                    </div>
+                    <span class="recent-rarity common">معمولی</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="achievements-tips">
+            <div class="section-header">
+                <h3 class="section-title">نکات دستاوردها</h3>
+            </div>
+            <div class="tips-list">
+                <div class="tip-item">
+                    <span class="tip-icon">💡</span>
+                    <p class="tip-text">دستاوردها به صورت خودکار بر اساس پیشرفت شما باز می‌شوند</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🎁</span>
+                    <p class="tip-text">پس از باز شدن هر دستاورد، پاداش آن را دریافت کنید</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">💎</span>
+                    <p class="tip-text">دستاوردهای کمیاب‌تر پاداش‌های ارزشمندتری دارند</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">👑</span>
+                    <p class="tip-text">برخی دستاوردها عنوان و نشان انحصاری می‌دهند</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
